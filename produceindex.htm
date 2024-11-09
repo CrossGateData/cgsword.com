@@ -1,0 +1,419 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>生產總覽</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript" src="js/collect_head.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" src="js/produce_head.js"></script>
+<br>
+<script type="text/javascript">menu()</script>
+<br>
+<script type="text/javascript">
+	function mouseact(id,col,row,act){
+		if(act=="over"){
+			document.getElementById(id+'_col_'+col).style.backgroundColor = document.getElementById(id+'_row_'+row).style.backgroundColor = '#886d5d';
+			document.getElementById(id+'_'+col+'_'+row).style.backgroundColor = '#7EB0E2';
+		}else{
+			document.getElementById(id+'_col_'+col).style.backgroundColor = '';
+			document.getElementById(id+'_row_'+row).style.backgroundColor = '';
+			document.getElementById(id+'_'+col+'_'+row).style.backgroundColor = '';
+		}
+	}
+	var usemp = new Array(10);
+	var colwidth = Math.floor((100-10)/usemp.length);
+	show = '<table class="style" id="usemp" align="center">';
+	show+= '<tr>';
+	show+= '<td class="head" colspan="'+(usemp.length+1)+'">製作物品所需魔力(精變即將技能等級+1)</td>';
+	show+= '</tr>';
+	show+= '<tr>';
+	show+= '<th width="10%">技能\\製作</th>';
+	for(i=1;i<=usemp.length;i++){
+		show+= '<th width="'+colwidth+'%" id="usemp_col_'+i+'">Lv'+i+'</th>';
+	}
+	show+= '</tr>';
+	for(i=1;i<=usemp.length;i++){
+		usemp[i-1] = i>1 ? 20-i : 20;
+		show+= '<tr>';
+		show+= '<th id="usemp_row_'+i+'">Lv'+i+'</th>';
+		for(j=1;j<=usemp.length;j++){
+			if(j<=i){
+				mp = usemp[i-1]*j + (j-1);
+				show+= '<td id="usemp_'+j+'_'+i+'" onmouseover="mouseact(\'usemp\','+j+','+i+',\'over\')" onmouseout="mouseact(\'usemp\','+j+','+i+',\'out\')">'+mp+'</td>';
+			}else show+= '<td>-</td>';
+		}
+		show+= '</tr>';
+	}
+	show+= '</table>';
+	document.write(show);
+</script>
+<br>
+
+<table class="style" align="center">
+	<tr>
+		<th>相關經驗變化<br>括號內為打卡經驗，非專門職業只有一半經驗甚至沒有經驗</th>
+	</tr>
+</table>
+<br>
+<table class="style" align="center" style="display:none">
+	<tr>
+		<td class="head" colspan="16">採集原料所得經驗<br>魔力生產鏈中，最基礎的一環。由樵夫、礦工、獵人及紡織四大職業所組成，所採集的原物料為玩家製作武 、防具或料理及藥品不可或缺的物品。</td>
+	</tr>
+	<tr>
+		<th width="8%">技能\採集</th>
+		<th width="8%">Lv1</th>
+		<th width="8%">Lv2</th>
+		<th width="8%">Lv3</th>
+		<th width="8%">Lv4</th>
+		<th width="8%">Lv5</th>
+		<th width="8%">Lv6</th>
+		<th width="8%">Lv7</th>
+		<th width="8%">Lv8</th>
+		<th width="8%">Lv9</th>
+		<th width="8%">Lv10</th>
+		<th width="8%">Lv11</th>
+		<th width="8%">Lv12</th>
+		<th width="8%">Lv13</th>
+		<th width="8%">Lv14</th>
+		<th width="8%">Lv15</th>
+	</tr>
+	<tr>
+		<th>Lv1</th>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv2</th>
+		<td>1(2)</td>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv3</th>
+		<td>1(1)</td>
+		<td>1(2)</td>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv4</th>
+		<td>1(1)</td>
+		<td>1(2)</td>
+		<td>1(3)</td>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv5</th>
+		<td>0(1)</td>
+		<td>1(1)</td>
+		<td>1(2)</td>
+		<td>1(3)</td>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv6</th>
+		<td>0(1)</td>
+		<td>1(1)</td>
+		<td>1(2)</td>
+		<td>1(2)</td>
+		<td>1(3)</td>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv7</th>
+		<td>-</td>
+		<td>1(1)</td>
+		<td>1(1)</td>
+		<td>1(2)</td>
+		<td>1(2)</td>
+		<td>1(3)</td>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv8</th>
+		<td>-</td>
+		<td>1(1)</td>
+		<td>1(1)</td>
+		<td>1(2)</td>
+		<td>1(2)</td>
+		<td>1(3)</td>
+		<td>1(3)</td>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv9</th>
+		<td>-</td>
+		<td>0(1)</td>
+		<td>1(1)</td>
+		<td>1(1)</td>
+		<td>1(2)</td>
+		<td>1(2)</td>
+		<td>1(3)</td>
+		<td>1(3)</td>
+		<td>2(4)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv10</th>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv11</th>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv12</th>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv13</th>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv14</th>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<th>Lv15</th>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+</table>
+<br>
+<script type="text/javascript">
+function exptable(id,intro,exp_card){
+	var produce = 15;
+	var colwidth = Math.floor((100-10)/produce);
+	show = '<table class="style" id="'+id+'" align="center">';
+	show+= '<tr>';
+	show+= '<td class="head" colspan="'+(produce+1)+'">'+intro+'</td>';
+	show+= '</tr>';
+	show+= '<tr>';
+	show+= '<th width="10%">技能\\製作</th>';
+	for(i=1;i<=produce;i++) show+= '<th width="'+colwidth+'%" id="'+id+'_col_'+i+'">Lv'+i+'</th>';
+	show+= '</tr>';
+	for(i=1;i<=produce;i++){
+		show+= '<tr>';
+		show+= '<th id="'+id+'_row_'+i+'">Lv'+i+'</th>';
+		for(j=1;j<=produce;j++){
+			if(j<=i && i<produce){
+				//var card_exp = //Math.round(exp_card*j/i) ;//exp_card*j/i > 4/7 ? Math.round(exp_card*j/i) : 0;
+                var exp = exp_card*j/i;
+                card_exp = exp >= 1 ? Math.floor(exp) : Math.round(exp);
+                exp /= 2;
+                var nonc_exp = exp >= 1 ? Math.floor(exp) : Math.round(exp);
+                nonc_exp = nonc_exp + '(' + card_exp + ')';
+				// if( card_exp > 0 ) var nonc_exp = Math.round(exp_card*j/i/2)+'('+card_exp+')';
+				// else nonc_exp = '-';
+				show+= '<td id="'+id+'_'+j+'_'+i+'" onmouseover="mouseact(\''+id+'\','+j+','+i+',\'over\')" onmouseout="mouseact(\''+id+'\','+j+','+i+',\'out\')">'+nonc_exp+'</td>';
+			}else show+= '<td>-</td>';
+		}
+		show+= '</tr>';
+	}
+	show+= '</table>';
+	return show;
+}
+	produce0 = exptable('produce0','採集原料所得經驗 (未驗證, e.g. 11技採8級打卡是+2,10技採7級打卡是+2)<br>魔力生產鏈中，最基礎的一環。由樵夫、礦工及獵人三大職業所組成，所採集的原物料為玩家製作武 、防具或料理及藥品不可或缺的物品。',4);
+	produce1 = exptable('produce1','製作劍、斧、槍、弓、杖、刀、鏢、鎧、服、袍所得經驗<br>算式：經驗 = 120(240)*製作物品等級/技能等級',240);
+	produce2 = exptable('produce2','製作盔、帽、靴、鞋、盾所得經驗<br>算式：經驗 = 90(180)*製作物品等級/技能等級',180);
+	produce3 = exptable('produce3','製作料理、藥品所得經驗<br>算式：經驗 = 20(40)*製作物品等級/技能等級',40);
+	produce4 = exptable('produce4','武器修理所得經驗<br>算式：經驗 = 45(90)*製作物品等級/技能等級',90);
+	produce5 = exptable('produce5','防修理及鑑定所得經驗<br>算式：經驗 = 30(60)*製作物品等級/技能等級',60);
+	document.write(produce0+'<br>'+produce1+'<br>'+produce2+'<br>'+produce3+'<br>'+produce4+'<br>'+produce5);
+	skillchable = Array(
+		Array('採集技能',5,1,-2),
+		Array('武、防具修理',3,3,-2),
+		Array('武、防具生產',2,4,-2),
+		Array('治療技能',1,-2,5),
+		Array('急救技能',3,-2,3),
+		Array('料理技能',-2,3,3),
+		Array('製藥技能',-2,2,4),
+		Array('鑑定技能',-2,1,5),
+		Array('飾品製作',-2,1,2)
+	);
+	show = '<br><table class="style"><tr><td class="head" colspan="4">工作技能對能力值變化<br>工作技能從五級開始，每次升級都會加減人物能力值，其變化如下表</td></tr><tr><th>技能類別</th><th>耐力</th><th>靈巧</th><th>智力</th></tr>';
+	for(i=0;i<skillchable.length;i++){
+		for(j=1;j<4;j++){
+			if(skillchable[i][j] <0) skillchable[i][j] = '<font color="#ff0000">'+skillchable[i][j]+'</font>';
+		}
+		show+= '<tr><th width="25%">'+skillchable[i][0]+'</th><td width="25%">'+skillchable[i][1]+'</td><td width="25%">'+skillchable[i][2]+'</td><td width="25%">'+skillchable[i][3]+'</td></tr>';
+	}
+	show+= '</table>';
+	document.write(show);
+</script>
+</body>
+
+</html>

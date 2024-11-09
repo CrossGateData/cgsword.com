@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 調教12 需要經驗511200</span><span class="time">2015-01-25 01:18 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>調教12 需要經驗511200</b></p>
+				調教12 需要經驗511200<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4713)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-01-25 09:54 AM 回覆<br><br>
+					<div style="padding-left: 10px">已更新<br />
+感謝</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4713</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2015-01-20 07:59 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>關於調教11級的效果</b></p>
+				調教11級的寵物耗魔量減少效果為78%<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4712)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-01-21 09:39 AM 回覆<br><br>
+					<div style="padding-left: 10px">感謝資訊<br />
+....也下降太多<br />
+1-10級時是每級提升效果7.5%<br />
+10級到11級時降到+3%</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4712</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 關於水龍袍一問</span><span class="time">2015-01-14 06:42 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>水幣收水龍袍</b></p>
+				現在傳教升超補都是用水龍袍的吧?<br />
+有不一樣的嗎?<br />
+還有現在那個魔頓手碗還有的嗎?<br />
+<br />
+謝謝<br />
+<br />
+還有水幣收水龍袍感謝<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4711)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2015-01-16 09:56 PM 回覆<br><br>
+					<div style="padding-left: 10px">我們現在說的「超補袍」是指「氤氳之袍」<br />
+R3，魔+100，耐10<br />
+超補魔力消耗-90%<br />
+卡蓮一件20~30W</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4711</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2015-01-04 10:55 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>鹿的資料：</b></p>
+				頂檔：37.37.37.37.22（體力強速魔）<br />
+倍率：1.1（或110）<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4710)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2015-01-07 05:42 PM 回覆<br><br>
+					<div style="padding-left: 10px">火箭牌計算機的倍率資料還是沒改QAQ<br />
+<br />
+話說為啥現在無法自定義寵物資料了？以前只要編輯config.ini就好啦？</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-01-07 05:45 PM 回覆<br><br>
+					<div style="padding-left: 10px">感謝提供資料, 我都忘了跟進鹿的檔次<br />
+雖然要齊整數據才會更新<br />
+但貌似沒有更多數據可分析了....那就先更新成這樣<br />
+<br />
+火箭牌的倍率無法設定大於95...<br />
+這是這計算器的限制<br />
+即使改成110, 他還是用20來算</div>
+					<p>[最後於 2015-01-07 05:55 PM 編輯]</p>									</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2015-01-10 05:18 PM 回覆<br><br>
+					<div style="padding-left: 10px">原來如此，抱歉是我誤會了&gt;&lt;<br />
+<br />
+辛苦了！</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4710</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 魔力寶貝</span><span class="time">2014-12-30 02:43 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>魔物分布</b></p>
+				請問魔物分布裡面的建議水晶 後面的數字是什麼意思?<br />
+<br />
+怎麼看?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4709)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">路過 於 2014-12-31 04:06 AM 回覆<br><br>
+					<div style="padding-left: 10px">數字是只屬性格 5就是5格  7就是7格 類推</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2014-12-31 12:30 PM 回覆<br><br>
+					<div style="padding-left: 10px">該數字是以 各屬(5:5) 與 純屬性(10)<br />
+與該區域魔物屬性相剋比對後的相剋數值<br />
+概括來說數字是1.2就是該屬性會有20%的傷害優勢<br />
+<br />
+計算時假設遇到每種魔物的機會為均等<br />
+是有點不嚴謹的...</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4709</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: tokyo_cc</span><span class="time">2014-12-29 08:27 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>聖誕節任務</b></p>
+				有人說聖誕節有任務 需要護士或醫生帶才可 <br />
+<br />
+請問有人解過嗎? 要去哪解<br />
+<br />
+可以拿福袋抽馴鹿和企鵝<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4708)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">路過 於 2014-12-31 04:06 AM 回覆<br><br>
+					<div style="padding-left: 10px">不用吧  是抽聖誕精靈 不是嗎</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4708</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 疑問</span><span class="time">2014-12-28 05:03 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問有人知道爆彈穿鼠裝會報及嗎<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4707)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">路過 於 2014-12-31 04:07 AM 回覆<br><br>
+					<div style="padding-left: 10px">聽說不會~</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4707</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 求QQ交流群</span><span class="time">2014-12-26 02:43 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>求QQ交流群</b></p>
+				求QQ交流群  求QQ交流群 求QQ交流群<br />
+<br />
+<br />
+新手剛來玩台服 已經快40及了<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4706)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2015-01-26 11:27 PM 回覆<br><br>
+					<div style="padding-left: 10px">台湾也开始主推QQ作为主要社交工具了吗？</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4706</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: chris</span><span class="time">2014-12-23 12:47 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				我有問題 紅色魔龍 跟邪龍 郝茲 ..兩隻圖案怎麼互換顏色了??? 我是指在遊戲中.....<br>
+				<br>
+				[最後於 2014-12-23 12:49 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4705)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">4705</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2014-12-17 11:00 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問大家為什麼大宇資訊的信都收不到 我要回鍋<br />
+需要送來的資料才能玩<br />
+(我用奇摩的 不要叫我換信箱) <br />
+沒開擋信剋星一樣收不到  <br />
+請問大家 有什麼方法能收到嗎? <br />
+<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4704)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">匿名者 於 2014-12-22 11:20 PM 回覆<br><br>
+					<div style="padding-left: 10px">等一年後大宇就會回你信了</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4704</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=21&amp;s=">上一頁</a>		<a href="guestbook.php?page=23&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

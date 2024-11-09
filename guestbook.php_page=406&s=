@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: Hing</span><span class="time">2008-09-07 12:00 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>皇后陵寢</b></p>
+				D怪係140~145先o岩 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,553)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">553</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 71lv既人</span><span class="time">2008-09-06 11:58 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>我唔知點去個個地方</b></p>
+				點去辛梅爾架．．有人可以答到我嗎？我要去換ｐｅｔ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,552)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Hing 於 2008-09-07 12:05 AM 回覆<br><br>
+					<div style="padding-left: 10px">入雪塔個地圖有隻飛象 坐去丘XXX 再搭船就去到 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">552</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: mifina</span><span class="time">2008-09-06 02:55 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>六等勳章-暗殺犯追跡 補充</b></p>
+				地下遺跡  有12層 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,551)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">551</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 71lv既人</span><span class="time">2008-09-06 10:11 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>我想問</b></p>
+				我想問黃銅怪出現個個地方係邊到架??有無人可以答我..急收架..快..但係如果你又c到我e個post..你又有黃銅怪既話..+我<a href="cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="84e9f7eaaaaae7ecedecedeae2f1eae3dbb5bdbdb2c4ecebf0e9e5ede8aae7ebe9">[email&#160;protected]</a>..快!!thx..呀!!係呀..岩岩我收到有人有呀..不過個隻係好大既黃銅怪．．咁拿去換第２隻ｐｅｔ得唔得架？ <br>
+				<br>
+				[最後於 2008-09-06 10:16 AM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,550)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Hing 於 2008-09-07 12:02 AM 回覆<br><br>
+					<div style="padding-left: 10px">1級黃銅怪出現係琥珀5<br />
+好大隻GE黃銅怪??係咪弗羅奇美拉?<br />
+可以無限次用1級黃銅怪去換 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">550</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 鋒嵐</span><span class="time">2008-09-06 08:16 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				碎蛋殼資料2<br />
+能力請看「記事本」<br />
+附圖片<br />
+<br />
+另外去埋cut圖= =畢竟個任既相關物品<br />
+有d cut得唔係咁靚<br />
+<br />
+http://share.ysk.cc/index-download-318389.html<br />
+<br />
+注意:物品欄最後六個為七夕任務獎品 非「碎蛋殼」任務<br />
+<br />
+耐久度:<br />
+三色帽 180~200<br />
+甜蜜回憶 150<br />
+其他全部250 <br>
+				<br>
+				[最後於 2008-09-06 02:17 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,549)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">549</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 路人</span><span class="time">2008-09-05 03:44 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>支持魔力 </b></p>
+				大家加油 <br>
+				<br>
+				[最後於 2008-09-05 03:46 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,548)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">548</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 小瀴</span><span class="time">2008-09-04 02:05 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>百里香採集點</b></p>
+				莎蓮娜魔法大學裡面(24.59)(混合朴、杉)<br />
+<br />
+如果我伐木七<br />
+<br />
+去那伐，會ｍｉｓｓ是正常　＝　＝”？<br />
+<br />
+因為我沒伐八嗎？　囧 <br>
+				<br>
+				[最後於 2008-09-04 02:08 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,547)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Hing 於 2008-09-07 12:03 AM 回覆<br><br>
+					<div style="padding-left: 10px">3級起D野 好似冇一種係唔MISS </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">547</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 逐波漪影</span><span class="time">2008-09-04 11:16 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>紅口臭資料更正</b></p>
+				紅色口臭鬼的圖鑑卡等級<br />
+5等銀卡  資料寫錯了喔 不是4普 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,546)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">546</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 我所在的世界</span><span class="time">2008-09-04 12:35 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>巴特溫的竊盜物</b></p>
+				食物？<br />
+鑑定後為　甜酒　等級５　種類　料理<br />
+正面說明　回復生命３００與魔力１００<br />
+反面說明　主要在冬天飲用的一種甜酒。其實對夏季中暑也有治療功效。<br />
+以下為圖檔<br />
+http://f9.wretch.yimg.com/pmush/1/1143926185.jpg<br />
+http://f9.wretch.yimg.com/pmush/1/1143926186.jpg <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,545)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">545</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 探索者</span><span class="time">2008-09-03 07:23 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>請問靈巧and地圖一些問題</b></p>
+				幫忙回答一些問題喔(一直無法找到答案)<br />
+1.靈巧除了會使武器防具素質變好以外 還有什麼作用<br />
+像是對獵人來說miss變低或者採集的更快 還是 對廚師或藥劑有合成速度變快?<br />
+2.關於魔法精神論 例如推動8法要的精神243<br />
+精神卻不到243附近 放出來的法術(不管魔攻)數字會很不起眼嗎?<br />
+3.像是新地圖雪拉威森塔阿 或者以前地圖比較不了解的像是白色方舟等等的 哪裡才有地圖0.0??<br />
+<br />
+ps.有回答的感謝解惑 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,544)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">544</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=405&amp;s=">上一頁</a>		<a href="guestbook.php?page=407&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+
+</html>

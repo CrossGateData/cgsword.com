@@ -1,0 +1,374 @@
+﻿<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>消失的王子</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/mission.js"></script>
+</head>
+
+<body>
+
+<div class="head">
+	消失的王子</div>
+<table class="style mission">
+	<tr>
+		<td width="11%" class="head">職業限定</td>
+		<td width="39%">無</td>
+		<td width="12%" class="head">備註</td>
+		<td width="38%">摩頓村的莉塔可以放棄任務並重新取得交換日記</td>
+	</tr>
+	<tr>
+		<td class="head">必要等級</td>
+		<td>Lv1</td>
+		<td class="head">推薦等級</td>
+		<td>Lv90up；5人組隊</td>
+	</tr>
+	<tr>
+		<td class="head">時間限制</td>
+		<td>無</td>
+		<td class="head">起始地點</td>
+		<td>亞諾曼城</td>
+	</tr>
+	<tr>
+		<td class="head">重複完成</td>
+		<td>可</td>
+		<td class="head">頭目戰</td>
+		<td>有</td>
+	</tr>
+	<tr>
+		<td class="head">任務獎賞</td>
+		<td colspan="3">偷襲密卷(等級1 護身符 耐久100 裝備後偷襲率上升20~35%)<br>
+		閃躲之策(等級1 護身符 耐久100 裝備後可以增加3~8閃躲)</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+		<div class="missionhead">魔弓再現！每個故事都會有個結局，魔弓傳奇終章開啟，「拉傑法爾」將陷入愛情的兩難習題。 
+		 
+		<br>
+		<br>
+		亞諾曼城宰相的女兒深愛著拉傑法爾，為了「拉傑法爾」的不告而別暗自傷心難過，因此在萬念俱灰下聽從了父親的意思，即將與亞諾曼城的望族竇丁家做政治連姻，偏偏在婚禮舉行時，成了落跑新娘。 
+		 
+		<br>
+		<br>
+		魔族公主凡妮莎，深深的愛上了拉傑法爾為了阻止父親囚禁拉傑法爾一路追到尼維爾海村，但是還是慢了一步，凡妮莎該如何才能拯救心愛的拉傑法爾呢？
+		</div>
+		<span class="missionhead">任務內容</span>
+         <span class="missionhead" id="logspan">對話內容(開/關)</span>
+		<ol>
+			<li>在 <span class="place">法蘭城</span> 西邊城門的傳送石旁找 <span class="npc">魔力小三菇莎芙特</span>(64.83) 對話獲得情報 <br>
+			  <span class="log">魔力小三菇莎芙特︰最近亞諾曼城流傳著許許多多的小道消息，<br>
+			　　　　　　　　　因此我特地跑去亞諾曼城打聽，你想聽聽看嗎？<br>
+			　　　　　　　　　[否]{沒反應}<br>
+			　　　　　　　　　[是]1.聽說亞諾曼城的拉傑法爾王子突然消失了，<br>
+			　　　　　　　　　　　　因此確定由安東尼奧順利繼承亞諾曼城國王。<br>
+			　　　　　　　　　　　2.亞諾曼城的宰相要嫁女兒囉！<br>
+			　　　　　　　　　　　　因此比魯忙著發送請帖邀請各路英雄好漢參加。<br>
+			　　　　　　　　　　　　據說對象是竇丁家族長子竇梓，<br>
+			　　　　　　　　　　　　竇丁家族在亞諾曼城可以說是有名的望族。[下一步]<br>
+			　　　　　　　　　　　3.據說最近有人在亞諾曼城內看到過魔族，<br>
+			　　　　　　　　　　　　似乎是一個妙齡的魔族女子在找尋著什麼？<br>
+			　　　　　　　　　　　　沒想到現在竟然還有魔族在亞諾曼城出現。[確定]</span></li>
+            <li>到 <span class="place">亞諾曼城</span> 與一個光頭小孩 <span class="npc">比魯</span>(148.122)對話獲得 <span class="item">婚禮邀請函</span><br>
+              <span class="log">比魯︰你好！我是亞諾曼王國宰相的家丁，<br>
+            　　　最近我家小姐即將與竇丁家族的長子竇梓結婚，<br>
+            　　　因此，宰相老爺特別派我來這邊發送邀請函，<br>
+            　　　到時候希望你能夠撥空前來。<br>
+            　　　婚禮舉辦的地點在亞諾曼城的克里特大教堂，<br>
+            　　　我們全體亞諾曼城的居民期待你的大駕光臨。[確定]<br>
+            [持婚禮邀請函]<br>
+            比魯︰歡迎歡迎！<br>
+            　　　這位客人已經有喜帖了啊！感謝您來參加我家小姐的婚禮，<br>
+            　　　麻煩請往克里特大教堂移動，老爺他們都已經準備好迎接你囉。[確定]</span></li>
+            <li>到 <span class="place">亞諾曼城</span> <span class="npc">克里特大教堂</span> 前的 <span class="npc">門侍</span>(195.69)對話進入參觀婚禮<br>
+              <span class="log">門侍︰啊！貴客！<br>
+            　　　歡迎光臨！<br>
+            　　　快進去吧，老爺等很久了，<br>
+            　　　婚禮要開始了。[確定]</span></li>
+            <li>進入後會看到 <span class="npc">莉塔</span>(15.10)  <span class="npc">竇梓</span>(16.10) <span class="npc">丁魯</span>(14.11) <span class="npc">牧師</span>(15.8) <span class="npc">宰相</span>(17.12)<br>
+              除了 <span class="npc">宰相</span> 之外與任一對話後會發生戰鬥，
+              新娘莉塔會給新郎竇梓一下重擊後逃去<br>
+              <span class="note">註︰莉塔LV70, 竇梓LV20, 戰鬥中只需不動等戰鬥完成<br>
+              註︰莉塔高閃,防禦極高及血量120000+, 用必殺才對她做出較大傷害</span><br>
+              <span class="log">牧師︰<br>
+              「我們現在以最誠摯的祝福來開始這場婚禮，<br>
+              竇梓你願意娶莉塔為妻一生一世照顧他，<br>
+              無論遇到任何困難都不離不棄照顧他一輩子嗎？」[下一步]<br>
+              竇梓︰<br>
+              「我願意！我願意！我願意！」[下一步]<br>
+              牧師︰<br>
+              「莉塔你願意嫁給竇梓為妻一生一世照顧他，<br>
+              無論遇到任何困難都不離不棄照顧他一輩子嗎？」[下一步]<br>
+              莉塔︰<br>
+              「‧‧‧‧‧‧」[下一步]<br>
+              竇梓︰<br>
+              「牧師，他願意！他願意！他願意！」[下一步]<br>
+              丁魯︰<br>
+              「小姐，打聽到拉傑法爾王子的下落了，<br>
+              據說曾經有人見到過一個穿著與王子很像的人，<br>
+              往摩頓村方向去了。」[下一步]<br>
+              莉塔︰<br>
+              「什麼！那我要去摩頓村找他。<br>
+              快點準備一下，我馬上就要出發。」[下一步]<br>
+              竇梓︰<br>
+              「可...可是...莉塔你不是要嫁給我嗎？」[下一步]<br>
+              莉塔︰<br>
+              「我什麼時候說要嫁給你啦？<br>
+              那是我老爸對你們家有所求才會逼我嫁給你的。<br>
+              不然你以為我會願意嫁給你？<br>
+              癩蝦蟆別想吃天鵝肉了。」[下一步]<br>
+              竇梓︰<br>
+              「我不管！我不管！<br>
+              我一定要你嫁給我，你不准走。」[下一步]<br>
+              莉塔︰<br>
+              「既然你阻止我去找拉傑法爾，<br>
+              那就不要怪我對你不客你啦！」[確定]</span>
+            </li>
+            <li>戰鬥結束後跟旁邊的 <span class="npc">宰相</span>(17.12) 說話會取得 <span class="item">給莉塔的信</span><br>
+              <span class="log">宰相︰慘了！我這個女兒就是這麼的叛逆，<br>
+            　　　誰都不喜歡就是偏偏喜歡上拉傑法爾那個壞蛋，<br>
+            　　　竟然將我費心幫他安排的好對象給打飛了。<br>
+            　　　雖然提出這個請求很突然，<br>
+            　　　但是我想委託你們幫我去把我的女兒找回來。<br>
+            　　　不知道你願不願意接受呢？<br>
+            　　　[否]你不願意阿！<br>
+            　　　　　那麼就這樣吧！<br>
+            　　　　　我會叫丁魯去找的！<br>
+            　　　　　丁魯，丁魯，快點給我去把小姐找回來！[確定]<br>
+            　　　　　我現在必須快點趕去竇丁家賠罪才行，<br>
+            　　　　　唉！怎麼會發生這種事情呢？[確定]<br>
+            　　　[是]真是太感謝你了，<br>
+            　　　　　根據丁魯的說法他應該會朝摩頓村前進，<br>
+            　　　　　那麼麻煩你務必將我的女兒找回來，<br>
+            　　　　　不要被拉傑法爾那麼壞蛋拐走了，<br>
+            　　　　　這封信就請你幫我交給他。[確定]</span></li>
+		</ol>
+		<span class="missionhead">人類路線</span>
+		<ol>
+		  <li>持 <span class="item">給莉塔的信</span> 到 <span class="place">摩頓村</span> <span class="place">村長的家</span> 外找 <span class="npc">莉塔</span>(58.47) 對話 選擇<span class="npc">「是」</span>取得 <span class="item">莉塔的髮飾</span><br>
+		    <span class="note">註：若與小豆對話中選擇&quot;否&quot;可以得到&quot;莉塔 的戒指&quot;，亞諾曼城的克里特大教堂 找宰相換取&quot;莉塔的布偶&quot; </span><br>
+		    <span class="log">莉塔︰你別想要我回去，我根本只是我父親的工具，<br>
+		  　　　他為了得到竇丁家的白癡兒子，<br>
+		  　　　還自以為是的說為了我好，<br>
+		  　　　並且將拉傑法爾說成十惡不赦的惡人。<br>
+		  　　　這封信根本就沒有看的必要。[下一步]<br>
+		  　　　那個‧‧‧‧<br>
+		  　　　我有一個不合理的請求，<br>
+		  　　　就是希望你可以幫我找拉傑法爾，<br>
+		  　　　不知道你願不願意幫我這個忙？<br>
+		  　　　[是]太感謝你了！<br>
+		  　　　　　有關於拉傑法爾的消息可以找包打聽小豆打聽，<br>
+		  　　　　　包打聽小豆可是有名的徵信社社長，<br>
+		  　　　　　不管想打聽什麼事情找他準沒錯。<br>
+		  　　　　　此外，還要小心巴克達呦！[下一步]<br>
+		  　　　　　聽說最近巴克達有東山再起的情勢，<br>
+		  　　　　　我覺得拉傑法爾逃跑的原因一定是因為巴克達，<br>
+		  　　　　　巴克達現在一定還在追尋著拉傑法爾，<br>
+		  　　　　　巴克達想到利用拉傑法爾的身份起義出兵，<br>
+		  　　　　　當上亞諾曼城的國王。[下一步]<br>
+		  　　　　　另外，當你見到拉傑法爾時，<br>
+		  　　　　　麻煩你將這個髮飾交給他，<br>
+		  　　　　　他就會知道是我在找他，<br>
+		  　　　　　還有，告訴他我很想他。<br>
+		  　　　　　萬一遇到巴克達就麻煩你將他打倒吧！[確定]</span></li>
+		  <li>在 <span class="place">摩頓村</span> 門口附近找 <span class="npc">包打聽小豆</span>(90.37) 對話獲得情報<br>
+		    <span class="log">包打聽小豆︰你也是來問那個年輕人的事情嗎？<br>
+		  　　　　　　最近可真多人來詢問他的事情，<br>
+		  　　　　　　那個年輕小伙子總是慌慌張張的，<br>
+		  　　　　　　彷彿有什麼人在追他似的。<br>
+		  　　　　　　因此，他沒有逗留很久就動身前往尼維爾海村了。[確定]</span></li>
+          <li>到 <span class="place">尼維爾海村</span> 與在村門口的 <span class="npc">魔族軍團</span>(32.62) 說話便展開戰鬥，戰鬥到第二回合便會紛紛逃跑<br>
+            <span class="note">註：魔族軍團(魔族伍長LV70、二等兵小瑪LV50、二等兵小塔LV50)</span> <br>
+            <span class="log">魔族小兵︰<br>
+            「報告曹長，<br>
+            我們已經確實的將族長所通緝的人包圍了，<br>
+            請曹長做進一步的指示。」[下一步]<br>
+            魔族曹長︰<br>
+            「做得太好了，<br>
+          族長一定會好好的獎勵我們的，<br>
+          把他押回去，準備領賞吧！」[下一步]<br>
+          魔族斥候︰<br>
+          「報告曹長，<br>
+          後方有不明人士蠢蠢欲動，<br>
+          似乎有著劫囚的意圖，試問曹長該如何處置？」[下一步]<br>
+          魔族曹長︰<br>
+          「由伍長先帶領兩個士兵去拖延住對方，<br>
+          其餘人全數撤退，儘速將犯人帶回去交差。」[下一步]<br>
+          魔族伍長︰<br>
+          「是！！<br>
+          我等將盡全力拖延敵人讓其餘弟兄安全撤離，<br>
+          二等兵小塔、二等兵小瑪跟我來。」[確定]</span></li>
+          <li>戰鬥結束後找 <span class="npc">重傷的凱中</span>(37.61) 對話獲得情報<br>
+            <span class="log">重傷的凱中︰拉傑法爾王子被抓走了！<br>
+            　　　　　　都怪我能力不足，無法保護王子的安全。<br>
+            　　　　　　不知道是哪裡出現的魔族一直追逐著我們，<br>
+            　　　　　　我本來建議王子到法蘭城尋求政治庇護，<br>
+            　　　　　　但是王子說什麼都不肯，我們只好逃到這個村子。<br>
+            　　　　　　沒想到最後王子還是被抓走了。[下一步]<br>
+            　　　　　　你說你是來找尋王子回去亞諾曼城的阿！<br>
+            　　　　　　真是太好了，根據我剛剛聽到魔族的對話內容，<br>
+            　　　　　　他們似乎要將王子帶回克瑞村。<br>
+            　　　　　　我已經拜託另一位隨從尼珥去打聽。<br>
+            　　　　　　他應該會在克瑞村門口等我。<br>
+            　　　　　　一切就麻煩你了，請務必將王子救回來。[確定]<br>
+            [再次對話]<br>
+            痛‧‧‧。[確定]</span>
+          </li>
+            <li>到 <span class="place">克瑞村</span> 外找 <span class="npc">尼珥</span>(468.90) 對話獲得情報<br>
+              <span class="log">尼珥︰是你！！！我認識你，是你救了凱中！<br>
+            　　　好險你即時出手相救，不然不知道會有什麼後果，<br>
+            　　　你說你要幫我們去救出王子嗎？真是太感謝你了！<br>
+            　　　我在這附近做了一些調查，希望能夠有些許的幫助。[下一步]<br>
+            　　　根據我打聽的結果，<br>
+            　　　克瑞村其實原本居住著一些魔族，<br>
+            　　　但是自從魔族公主可麗兒嫁給亞諾曼八世後，<br>
+            　　　魔族就從克瑞村消失了。<br>
+            　　　但是，似乎某處還隱藏著一些通往魔族的入口，<br>
+            　　　王子應該是被抓到魔族去了。[下一步]<br>
+            　　　尤其我懷疑亞丁、亞婌兩兄妹正是入口的守門人，<br>
+            　　　而入口就藏在他們那柬房子裡面。<br>
+            　　　為了安全起見，你可以有幾種應付他們的辦法︰[下一步]<br>
+            　　　1.帶他們最喜歡的10級紅寶石去賄賂他們，<br>
+            　　　　如此一來他們肯定會因為禮物直接讓你進去。<br>
+            　　　2.不然也可以帶著聖魔石去削弱他們的力量，<br>
+            　　　　如此一來就可以輕鬆的打敗他們。<br>
+            　　　3.當然你也可以硬碰硬直接打敗他們。<br>
+            　　　　相信以你的能力這對你而言可以說是輕而易舉。[確定]</span></li>
+            <li>在 <span class="place">克瑞村</span> 內找一對夫婦 <span class="npc">亞丁</span>(75.25)、<span class="npc">亞淑</span>(75.24)，與他們任一對話依以下情況以不同情況進入身後房間<br>
+              1.帶LV10的紅寶石給守門人，對話後直接進入房間(紅寶石一顆只能一個人進去)<br>
+              2.攜帶聖魔石，對話後就可進入輕鬆的戰鬥，戰勝後進入房間<br>
+               <span class="note">註︰亞丁、亞婌為Lv30血量約9000(技能：攻擊、連擊) </span><br>
+              3.直接對話，戰勝後進入房間<br>
+              <span class="note">註︰亞丁、亞婌LV60(亞丁血量約為15000、亞婌血量約為20000(技能：迅速果斷、魔法封印、諸刃、乾坤一擲、陽炎、單體恢復&quot;補3000以上&quot;) </span><br>
+              <span class="log">你說你想進去我們家！<br>
+              對不起呦！你是不可以隨便進入我們家的。<br>
+              你怎麼可以提出這麼無理的要求。<br>
+              我們沒有義務要讓你進去，你走吧！[下一步]<br>
+              [持聖魔石]<br>
+              你‧‧‧你手上拿的是聖魔石，<br>
+              我的力‧‧‧量在逐漸消退中。可惡阿！<br>
+              看我先把你給解決了！[確定]<br>
+              [直接對話]<br>
+              看來，你是打算硬闖是吧！<br>
+              那麼看來我們是沒什麼話好說的。[確定]</span>     </li>
+            <li>進入 <span class="place">亞丁的家</span> 後進入 <span class="place">黃色傳送水晶</span>(16.7) 到達 <span class="place">魔族領域第1領域</span></li>
+            <li>穿過20~25層的隨機迷宮，到達最底的 <span class="place">魔族地牢</span> 找 <span class="npc">修伯特</span>(23.2) 對話進入戰鬥<br>
+              <span class="note">註︰迷宮魔物為1-8隻Lv64-69 海盜骷髏及木乃伊，樓梯在小地圖上看不到<br>
+              註：修伯特LV75(血量約30000；技能：氣功彈、乾坤一擲、魔法封印、吸血魔法、超強風刃魔法、攻擊反彈、超級遺忘魔法) </span><br>
+              <span class="log">修伯特︰人類！！你怎麼會在這裡！<br>
+              　　　　什麼？你說你要將拉傑法爾帶走，<br>
+              　　　　哈哈哈！很久沒聽到這麼好笑的笑話了；<br>
+              　　　　這裡可是魔族的勢力範圍，<br>
+              　　　　你以為我會讓你為所欲為的嗎？<br>
+              　　　　想將人帶走就先打敗我吧！</span></li>
+            <li>戰勝後傳送至 <span class="place">魔族地牢</span> 與 <span class="npc">拉傑法爾</span>(22.36)對話<br>
+              <span class="log">拉傑法爾︰你是來救我出去的？<br>
+            　　　　　可是我現在不想出去了！<br>
+            　　　　　說來話長，我原本是亞諾曼城的王子，<br>
+            　　　　　原本在父王駕崩後應該由我來繼承王位；<br>
+            　　　　　可是由於我的母后是魔族的公主，<br>
+            　　　　　所以大臣們主張應該由我的弟弟繼承王位。[下一步]<br>
+            　　　　　這個時候，我的老師巴克達主張以我正統王室繼承人的名義發起討伐戰爭。<br>
+            　　　　　但是我不願意看到兄弟鬩牆的事情發生，<br>
+            　　　　　以及百姓們受到戰爭的迫害，<br>
+            　　　　　因此我選擇逃走，離開那傷心的地方。[下一步]<br>
+            　　　　　你手上那個不就是我小時候送給莉塔的髮飾嗎？<br>
+            　　　　　原來你是莉塔派來的阿！<br>
+            　　　　　說到這件事情更是複雜了，<br>
+            　　　　　我跟莉塔算是青梅竹馬，<br>
+            　　　　　而從小我就將莉塔視為我的未婚妻，<br>
+            　　　　　莉塔也確定長大後一定要嫁給我。[下一步]<br>
+            　　　　　直到我逃離亞諾曼城，遇到了凡妮莎，<br>
+            　　　　　我才發現雖然我一直喜歡著莉塔，<br>
+            　　　　　但是對凡妮莎卻有著另外一種不同的情感。<br>
+            　　　　　我無法抉擇，因此我選擇終身在這裡。[確定]</span></li>
+            <li>對話後 <span class="npc">莉塔</span> 出現，與 <span class="npc">莉塔</span> 或 <span class="npc">拉傑法爾</span> 對話後，交出 <span class="item">莉塔的髮飾</span> 換得 <span class="item">長老家的鑰匙</span> 和 <span class="item">偷襲密卷</span><br>
+              <span class="note">註︰長老家的鑰匙(不能丟地；無法使用寵物郵件傳送)<br>
+            註︰偷襲密卷(等級1   		護身符 耐久100 裝備後可以侯偷襲率上升20~35%)<br>
+              </span></li>
+            <li>之後 <span class="npc">凡妮莎</span>(23.35) 出現與之對話再進入戰鬥<br>
+              <span class="note">註︰拉傑法爾會逃走，之後2連戰出場的莉塔和凡妮莎會逃走</span><br>
+              <span class="log">凡妮莎︰等等‧‧‧拉傑法爾！<br>
+            　　　　那我呢？我對你的一片真心，<br>
+            　　　　我到處找尋你的下落，<br>
+            　　　　盡我所能的努力要救你，<br>
+            　　　　難道這些對你而言都沒有意義嗎？[下一步]<br>
+            　　　　真是太令人傷心了！我跟你拼了！！[確定]</span></li>
+		  </ol>
+			<span class="missionhead">魔族路線</span>
+			<ol><li>如果直接選擇傳送到<font color="#ff0000">摩頓村</font>的話，在<font color="#ff0000">亞諾曼城</font>城堡前會有一個女妖精的<font color="#ff0000">魔族少女</font>(141.77)，跟她對話時第一句選擇<font color="#0000ff">&quot;否&quot;</font>，接著會取得<font color="#008000">&quot;交換日記&quot;</font>			</li>
+			<li>到達<font color="#ff0000">摩頓村</font>後，與村門口的<font color="#ff0000">包打聽小豆</font>(90.37)說話，得知<font color="#ff0000">拉傑法爾</font>已去<font color="#ff0000">尼維爾海村</font>，於是便前往尼維爾海村</li>
+			<li>到達<font color="#ff0000">尼維爾海村</font>後，與村門口的<font color="#ff0000">魔族軍團</font>(32.62)說話便開啟戰鬥，戰鬥到第二回合便會紛紛逃跑 
+		，戰鬥結束後往右上走與魔族少女<font color="#ff0000">凡妮莎</font>(39.64)說話，得知<font color="#ff0000">拉傑法爾</font>被抓去<font color="#ff0000">克瑞村</font>的地下牢房並取得<font color="#008000">&quot;魔族火把&quot;
+			</font>於是便前往<font color="#ff0000">克瑞村<br>
+			</font><font color="#ff00ff">註：魔族軍團(魔族伍長LV70、二等兵小瑪LV50、二等兵小塔LV50)</font>	</li>
+			<li>到達克瑞村後，到醫院旁的<font color="#ff0000">雪人處</font>(43.72)，點取<font color="#ff0000">雪人</font>，便會自動使用<font color="#008000">&quot;魔族火把&quot;
+			</font>到地下房間，走到<font color="#ff0000">地下房間</font>(34.20)處便是<font color="#ff0000">魔族通道</font>的入口<br>
+			<font color="#ff00ff">魔族通道魔物分布：<br>
+			骷髏海盜LV65~69(攻擊、防禦、吸血攻擊、攻擊魔法防禦、即死魔法&quot;使用補血魔法情況下&quot;)<br>
+			木乃伊LV65~69(攻擊、防禦、乾坤一擲、攻擊魔法防禦)<br>
+			戰鬥出現1~8隻，43層隨機迷宮(B1~B9：LV65)(B10~B19：LV66)(B20~B26：LV67)(B27~B35：LV68)(B36~B43：LV69)</font></li>
+			<li>走完43層<font color="#ff0000">魔族通道</font>後便會到達<font color="#ff0000">魔族地牢</font>，再走到<font color="#ff0000">魔族地牢</font>(23.2)處，與<font color="#ff0000">修伯特</font>對話之後進入戰鬥<br>
+			<font color="#ff00ff">註：修伯特LV75(血量約3萬；技能：氣功彈、乾坤一擲、魔法封印、吸血魔法、超強風刃魔法、攻擊反彈、遺忘咒術)</font></li>
+			<li>戰勝後傳送至牢房與<font color="#ff0000">拉傑法爾</font>(22.36)對話，對話後<font color="#ff0000">凡妮莎</font>出現，與<font color="#ff0000">凡妮莎</font>和<font color="#ff0000">拉傑法爾對</font>話後，可以聽到<font color="#ff0000">魔弓巴克達</font>的情報，交出<font color="#008000">&quot;交換日記&quot;</font>，得到<font color="#008000">&quot;長老家的鑰匙&quot;</font>(不能丟地；無法使用寵物郵件傳送)以及<font color="#008000">&quot;閃躲之策&quot;</font>(等級1 護身符 耐久100 裝備後可以增加3~8)</li>
+			<li>這時候<font color="#ff0000">莉塔</font>突然出現，點選進入戰鬥，最後各自逃跑...<br>
+			<font color="#ff00ff">註：戰鬥中莉塔會攻擊凡妮莎，而拉傑法爾會挺身去護衛隨後就飛出去了，之後凡妮莎與莉塔會各自逃跑，戰鬥隨之結束</font></li>
+			<li>攜帶<font color="#008000">&quot;長老家的鑰匙&quot;</font>到<font color="#ff0000">雷歐娜村</font>的湯瑪斯家(69.53)找<font color="#ff0000">長老</font>，看門精靈會跟你說長老出門了...</li>
+		</ol>
+		</td>
+	</tr>
+</table>
+<table class="style">
+	<tr>
+		<td colspan="6" class="head">任務相關物品</td>
+	</tr>
+	<tr>
+		<td style="width: 124px">
+		<img src="image/mission/627/001.gif" width="32" height="27"></td>
+		<td style="width: 124px">
+		<img src="image/mission/627/002.gif" width="20" height="14"></td>
+		<td style="width: 125px">
+		<img src="image/mission/627/003.gif" width="24" height="25"></td>
+		<td style="width: 125px">
+		<img src="image/mission/627/004.gif" width="40" height="34"></td>
+		<td style="width: 125px">
+		<img src="image/mission/627/005.gif" width="28" height="23"></td>
+		<td style="width: 125px">
+		<img src="image/jewelry/001.gif" width="17" height="17"></td>
+	</tr>
+	<tr>
+		<td style="width: 124px">婚禮邀請函</td>
+		<td style="width: 124px">給莉塔的信</td>
+		<td style="width: 125px">莉塔的戒指</td>
+		<td style="width: 125px">莉塔的布偶</td>
+		<td style="width: 125px">莉塔的髮飾</td>
+		<td style="width: 125px">完全結晶的紅寶石</td>
+	</tr>
+	<tr>
+		<td style="width: 124px">
+		<img src="image/jewelry/006.gif" width="17" height="17"></td>
+		<td style="width: 124px">
+		<img src="image/mission/627/008.gif" width="20" height="19"></td>
+		<td style="width: 125px">
+		<img src="image/mission/627/009.gif" width="44" height="36"></td>
+		<td style="width: 125px">
+		<img src="image/mission/627/010.gif" width="28" height="26"></td>
+		<td style="width: 125px">
+		<img src="image/mission/627/011.gif" width="56" height="46"></td>
+		<td style="width: 125px">
+		<img src="image/mission/627/012.gif" width="44" height="36"></td>
+	</tr>
+	<tr>
+		<td style="width: 124px">聖魔石</td>
+		<td style="width: 124px">長老家的鑰匙</td>
+		<td style="width: 125px">偷襲密卷</td>
+		<td style="width: 125px">交換日記</td>
+		<td style="width: 125px">魔族火把</td>
+		<td style="width: 125px">閃躲之策</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

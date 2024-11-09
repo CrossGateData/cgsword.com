@@ -1,0 +1,435 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>物理傷害計算</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<style type="text/css">
+table {
+	width: 550px;
+	border-collapse: collapse;
+}
+table.border td, table.border th {
+	border: 1px solid #000000;
+}
+table.border td table td {
+	border-width: 0px;
+}
+</style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+function Phoenix()
+{
+	if ( (CheckATK(CG.attacker)) && (CheckATKed(CG.atked)) ){
+		atk=CG.attack.value;
+		def=CG.defence.value;
+		atkLV=CG.atkLV.value;
+		defLV=CG.defLV.value;
+		if (CG.attacker[3].status){		//崩擊
+			if (!CG.atked[0].status){		//不防禦
+				CG.damage90.value = "Miss";
+				CG.damage91.value = "Miss";
+				CG.damage92.value = "Miss";
+				CG.damage93.value = "Miss";
+				CG.damage94.value = "Miss";
+				CG.damage95.value = "Miss";
+				CG.damage96.value = "Miss";
+				CG.damage97.value = "Miss";
+				CG.damage98.value = "Miss";
+				CG.damage99.value = "Miss";
+				CG.damage100.value = "Miss";
+				CG.damage101.value = "Miss";
+				CG.damage102.value = "Miss";
+				CG.damage103.value = "Miss";
+				CG.damage104.value = "Miss";
+				CG.damage105.value = "Miss";
+				CG.damage106.value = "Miss";
+				CG.damage107.value = "Miss";
+				CG.damage108.value = "Miss";
+				CG.damage109.value = "Miss";
+				CG.damage110.value = "Miss";
+				alert("崩擊請站好給他崩");
+				return false;
+			}
+		}
+		if (CG.atked[1].status) def = def * (1-(CG.sdie.value) * 5 / 100);			//諸刃
+		if (CG.atked[2].status)	def = def * (1-(CG.bdie.value) * 7 / 100);			//陽炎
+		sdef = def / 2																//必殺用
+		if (CG.attacker[1].status) atk = atk * (1+(CG.small.value) * 7 / 100);		//諸刃
+		if (atk > 240 ) atk = 240 + (atk-240) * 3 / 10;								//240之後開始滅緩增值
+		if (def > 240 )	def = 240 + (def-240) * 3 / 10;
+		atk = atk * 1;																//字串轉數值
+		def = def * 1;
+		down = atk + 3 * def;
+		up = 3 * atk * atk;
+		result = up / down															//不相剋的結果
+
+		if (CG.weapon.value == "1")	result = result * 1.15;							//有拿武器
+
+		switch(CG.kind.value){														//種族
+			case "1":result = result * 1.2;break;
+			case "2":result = result * 10 / 9;break;								//猜測..不保証實錯誤後修可修正
+			case "4":result = result * 8 / 9;break;									//確定
+			case "5":result = result * 0.8;	break;
+		}
+
+		if (CG.porn.value == "1") result = result * (1+(CG.extn.value) * 3 / 1000);	//水晶
+		else result = result * (1-(CG.extn.value) * 3 / 1000);
+
+
+//		switch(CG.special.value){													//特殊 全屬性
+//		case "2": result = result * 5 / 6;break;									//全屬性(中) 法王 海盜王...等 一堆
+//		case "3":result = result * 0.4;	break;										//強 露比 F4 小柏 猶大 暗醫..等
+//		}
+
+		sresult = result + atkLV / defLV * sdef;									//必殺
+
+		if (CG.attacker[2].status){													//乾坤
+			result = result * (1+(CG.big.value) / 10);
+			sresult = sresult * (1+(CG.big.value) / 10);
+		}
+		if (CG.attacker[3].status){		//崩級
+			result = result * (  ( (10 + (CG.sbig.value) * 1) * (10 + (CG.sbig.value) * 1) - 1 ) / 100 );
+			sresult = sresult * (  ( (10 + (CG.sbig.value) * 1) * (10 + (CG.sbig.value) * 1) - 1 ) / 100 );
+		}
+
+							//結果
+		CG.damage90.value = Math.floor(result * 0.90);
+		CG.damage91.value = Math.floor(result * 0.91);
+		CG.damage92.value = Math.floor(result * 0.92);
+		CG.damage93.value = Math.floor(result * 0.93);
+		CG.damage94.value = Math.floor(result * 0.94);
+		CG.damage95.value = Math.floor(result * 0.95);
+		CG.damage96.value = Math.floor(result * 0.96);
+		CG.damage97.value = Math.floor(result * 0.97);
+		CG.damage98.value = Math.floor(result * 0.98);
+		CG.damage99.value = Math.floor(result * 0.99);
+		CG.damage100.value = Math.floor(result);
+		CG.damage101.value = Math.floor(result * 1.01);
+		CG.damage102.value = Math.floor(result * 1.02);
+		CG.damage103.value = Math.floor(result * 1.03);
+		CG.damage104.value = Math.floor(result * 1.04);
+		CG.damage105.value = Math.floor(result * 1.05);
+		CG.damage106.value = Math.floor(result * 1.06);
+		CG.damage107.value = Math.floor(result * 1.07);
+		CG.damage108.value = Math.floor(result * 1.08);
+		CG.damage109.value = Math.floor(result * 1.09);
+		CG.damage110.value = Math.floor(result * 1.10);
+//		CG.sdamage90.value = Math.floor(sresult * 0.90);	//必殺誤差過大 拿掉
+//		CG.sdamage91.value = Math.floor(sresult * 0.91);
+//		CG.sdamage92.value = Math.floor(sresult * 0.92);
+//		CG.sdamage93.value = Math.floor(sresult * 0.93);
+//		CG.sdamage94.value = Math.floor(sresult * 0.94);
+//		CG.sdamage95.value = Math.floor(sresult * 0.95);
+//		CG.sdamage96.value = Math.floor(sresult * 0.96);
+//		CG.sdamage97.value = Math.floor(sresult * 0.97);
+//		CG.sdamage98.value = Math.floor(sresult * 0.98);
+//		CG.sdamage99.value = Math.floor(sresult * 0.99);
+//		CG.sdamage100.value = Math.floor(sresult);
+//		CG.sdamage101.value = Math.floor(sresult * 1.01);
+//		CG.sdamage102.value = Math.floor(sresult * 1.02);
+//		CG.sdamage103.value = Math.floor(sresult * 1.03);
+//		CG.sdamage104.value = Math.floor(sresult * 1.04);
+//		CG.sdamage105.value = Math.floor(sresult * 1.05);
+//		CG.sdamage106.value = Math.floor(sresult * 1.06);
+//		CG.sdamage107.value = Math.floor(sresult * 1.07);
+//		CG.sdamage108.value = Math.floor(sresult * 1.08);
+//		CG.sdamage109.value = Math.floor(sresult * 1.09);
+//		CG.sdamage110.value = Math.floor(sresult * 1.10);
+
+	}
+}
+
+function CheckATK(UI){
+	for (i = 0; i < UI.length; i++){
+         	if (UI[i].checked) return(true);
+	}
+	alert ("請選攻擊者技能!");
+	return (false);
+}
+
+function CheckATKed(UI){
+	for (i = 0; i < UI.length; i++){
+         	if (UI[i].checked) return(true);
+	}
+	alert ("請選擇被攻擊者技能!");
+	return (false);
+}
+</script>
+<table class="style">
+	<tr>
+		<th>物理傷害計算</th>
+	</tr>
+	<tr>
+		<td align="center">
+		<form name="CG">
+			<table class="style" style="width:550px">
+				<tr class="head">
+				<td width="80"></td>
+					<td width="235">攻擊者</td>
+					<td width="235">被攻擊者</td>
+				</tr>
+				<tr>
+					<td class="head">等級</td>
+					<td><input size="4" value="50" name="atkLV"></td>
+					<td><input size="4" value="50" name="defLV"></td>
+				</tr>
+				<tr>
+					<td class="head">雙方能力</td>
+					<td><input size="4" name="attack"></td>
+					<td><input size="4" name="defence"></td>
+				</tr>
+				<tr>
+					<td class="head">使用技能種類</td>
+					<td>
+					<table style="width:100%">
+						<tr>
+							<td>
+							<input type="radio" checked value="1" name="attacker">
+							普通攻擊</td>
+						</tr>
+						<tr>
+							<td><input type="radio" value="2" name="attacker"> 諸刃等級
+							<select size="1" name="small">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><input type="radio" value="4" name="attacker"> 乾坤一擲
+							<select size="1" name="big">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><input type="radio" value="3" name="attacker"> 崩擊等級
+							<select size="1" name="sbig">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							</select></td>
+						</tr>
+					</table>
+					</td>
+					<td>
+					<table style="width: 100%">
+						<tr>
+							<td>
+							<input type="radio" checked value="1" name="atked">
+							普通(若對手崩擊指防禦)</td>
+						</tr>
+						<tr>
+							<td><input type="radio" value="2" name="atked"> 使用諸刃
+							<select size="1" name="sdie">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><input type="radio" value="3" name="atked"> 使用陽炎
+							<select size="1" name="bdie">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							</select></td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="head">武器狀態</td>
+					<td colspan="2"><select size="1" name="weapon">
+					<option value="1">有武器(玩家或格鬥士)</option>
+					<option value="2">無武器(非玩家或非格鬥士)</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td class="head">種族相對影響</td>
+					<td colspan="2"><select size="1" name="kind">
+					<option value="1">攻擊者全克被攻擊者</option>
+					<option value="2">攻擊者半克被攻擊者</option>
+					<option value="3" selected="">雙方不相剋</option>
+					<option value="4">被攻擊者半克攻擊者</option>
+					<option value="5">被攻擊者全克攻擊者</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td class="head">屬性影響</td>
+					<td colspan="2"><select size="1" name="porn">
+					<option value="1">攻擊者克被攻擊者</option>
+					<option value="2">被攻擊者克攻擊者</option>
+					</select> <input size="4" value="0" name="extn"> %</td>
+				</tr>
+				<tr>
+					<td class="head" colspan="3">
+					<input onclick="Phoenix()" type="button" value="點此計算理論傷害" name="calculate">
+					</td>
+				</tr>
+				<tr>
+					<td class="head">理論傷害值</td>
+					<td align="center" colspan="2">
+					<input size="4" name="damage90">
+					<input size="4" name="damage91">
+					<input size="4" name="damage92">
+					<input size="4" name="damage93">
+					<input size="4" name="damage94">
+					<input size="4" name="damage95">
+					<input size="4" name="damage96">
+					<input size="4" name="damage97">
+					<input size="4" name="damage98">
+					<input size="4" name="damage99"><br>
+					<input size="4" name="damage100"><br>
+					<input size="4" name="damage101">
+					<input size="4" name="damage102">
+					<input size="4" name="damage103">
+					<input size="4" name="damage104">
+					<input size="4" name="damage105">
+					<input size="4" name="damage106">
+					<input size="4" name="damage107">
+					<input size="4" name="damage108">
+					<input size="4" name="damage109">
+					<input size="4" name="damage110"></td>
+				</tr>
+			</table>
+		</form>
+		<table class="style" style="width: 550px">
+			<tr>
+				<th width="110">種族</th>
+				<th width="110">全剋</th>
+				<th width="110">半剋</th>
+				<th width="110">被全剋</th>
+				<th width="110">被半剋</th>
+			</tr>
+			<tr>
+				<td>龍系</td>
+				<td>飛行系</td>
+				<td>野獸系</td>
+				<td>金屬系</td>
+				<td>特殊系</td>
+			</tr>
+			<tr>
+				<td>飛行系</td>
+				<td>昆蟲系</td>
+				<td>不死系</td>
+				<td>龍系</td>
+				<td>野獸系</td>
+			</tr>
+			<tr>
+				<td>昆蟲系</td>
+				<td>特殊系</td>
+				<td>植物系</td>
+				<td>飛行系</td>
+				<td>人形系</td>
+			</tr>
+			<tr>
+				<td>特殊系</td>
+				<td>金屬系</td>
+				<td>龍系</td>
+				<td>昆蟲系</td>
+				<td>植物系</td>
+			</tr>
+			<tr>
+				<td>金屬系</td>
+				<td>龍系</td>
+				<td>人形系</td>
+				<td>特殊系</td>
+				<td>不死系</td>
+			</tr>
+			<tr>
+				<td>不死系</td>
+				<td>人形系</td>
+				<td>金屬系</td>
+				<td>植物系</td>
+				<td>飛行系</td>
+			</tr>
+			<tr>
+				<td>人形系</td>
+				<td>野獸系</td>
+				<td>昆蟲系</td>
+				<td>不死系</td>
+				<td>金屬系</td>
+			</tr>
+			<tr>
+				<td>野獸系</td>
+				<td>植物系</td>
+				<td>飛行系</td>
+				<td>人形系</td>
+				<td>龍系</td>
+			</tr>
+			<tr>
+				<td>植物系</td>
+				<td>不死系</td>
+				<td>特殊系</td>
+				<td>野獸系</td>
+				<td>昆蟲系</td>
+			</tr>
+		</table>
+		<br>
+		<table class="style" style="width: 550px">
+			<tr>
+				<th>
+				水晶屬性傷害值的計算式
+				</th>
+			</tr>
+			<tr>
+				<td>
+				<p>地→水→火→風→地</p>
+				<p>( 剋 x 被剋 )+( 被剋 x 剋) = 影響百分比</p>
+				<p>例：火3風7 → 風8地2<br>
+				火剋風︰3 x 8 = 24% <br>
+				風剋地：7 x 2 = 14% <br>
+				剛好兩種屬性都剋到，總水晶屬性百分比為 24% + 14% = 38%</p>
+				<p>火3風7 → 水6火4<br>
+				火被水剋：(-3) x 6 = -18%<br>
+				風被火剋：(-7) x 4 = -28%<br>
+				因為兩種屬性都被剋到，總水晶屬性百分比為 (-18%) - 28% = -46%</p>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

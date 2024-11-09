@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 銀</span><span class="time">2011-12-22 02:10 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問銀的純點在哪裡啊??<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3888)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2011-12-23 01:50 AM 回覆<br><br>
+					<div style="padding-left: 10px">國營第24坑道地下4樓(30.20)附近(西北)<br />
+<br />
+必須先去法蘭城內的地下堅牢拿鑰匙才能進去。</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">採花大盜 於 2011-12-24 11:58 PM 回覆<br><br>
+					<div style="padding-left: 10px">如果你是非礦工<br />
+銀的不miss純點只有在海賊洞窟有<br />
+可以用任意鑰匙傳鋼騎之礦過去<br />
+<br />
+其他的銀點都會miss<br />
+<br />
+低miss點在哈洞和高地</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3888</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: rex</span><span class="time">2011-12-20 01:06 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問武器壞掉了去哪修?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3887)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2011-12-21 02:27 PM 回覆<br><br>
+					<div style="padding-left: 10px">完全壞掉就消失了,可以找玩家修。通常都在伺服器1的東醫西醫附近。<br />
+要是沒人的話，就在東醫（伺服器1）的留言板求助吧。<br />
+<br />
+裝備中，應該只有飾品無法修理。</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3887</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 想知道的人</span><span class="time">2011-12-20 01:00 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				可以告訴我以下在哪嗎?<br />
+羅達特盆地<br />
+魯多特盆地<br />
+星之領域<br />
+紅.藍星考驗地<br />
+白色方舟<br />
+白色挪亞<br />
+星詠的宮殿<br />
+南恰拉山第一通道<br />
+伊利斯礦山<br />
+貝尼恰斯火山<br />
+野生雪人點<br>
+				<br>
+				[最後於 2011-12-20 01:01 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3886)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2011-12-24 07:37 PM 回覆<br><br>
+					<div style="padding-left: 10px">在魔力寶貝的奇妙世界中</div>
+					<p>[最後於 2011-12-24 07:37 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3886</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: rex</span><span class="time">2011-12-20 12:05 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問弓箭手要先學什麼技能?學哪些比較實用?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3885)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2011-12-21 07:20 PM 回覆<br><br>
+					<div style="padding-left: 10px">亂射  一擊必中  這兩樣就夠了<br />
+<br />
+清怪+打王</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">rex 於 2011-12-21 09:15 PM 回覆<br><br>
+					<div style="padding-left: 10px">一擊必中去哪學?0.0 御劍軒計能那邊的地點打???= = 還有幾等可學?</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3885</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 小寶</span><span class="time">2011-12-19 06:33 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問一下各位~<br />
+<br />
+要把未鑑定的東西 蓋印章~記得好像是微笑印章之類的<br />
+<br />
+那個東西 現在還有嗎? 要去哪裡買??<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3884)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2011-12-21 07:19 PM 回覆<br><br>
+					<div style="padding-left: 10px">冒險者旅館1樓  右上方時鐘下面有個npc  找他買</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3884</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: flo</span><span class="time">2011-12-19 05:36 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問練技打寵會扣名聲嗎? 還是把寵打死或死掉才會扣?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3883)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">11 於 2011-12-25 09:51 PM 回覆<br><br>
+					<div style="padding-left: 10px">打寵璫然會扣聲望<br />
+不過通常都是選擇打寵<br />
+因為時間上比較符合效益<br />
+不過通常在狂練技能的時候都是已經師範以後<br />
+因為師範跟S階差距不大<br />
+也就是能否拿11武的差別</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3883</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: JOEEE</span><span class="time">2011-12-18 08:27 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>請問雙子 鎧甲的市價</b></p>
+				鎧甲要怎麼賣阿!???  價錢都是怎麼定的??<br />
+ 有沒有 公式之類的???<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3880)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">採花大盜 於 2011-12-25 12:03 AM 回覆<br><br>
+					<div style="padding-left: 10px">9級以下的鎧基本上都是扣掉成本後<br />
+加上一件幾千塊的利潤就是售價<br />
+<br />
+如果是有含特殊材料(如甲殼)或10級寶<br />
+可以多加些利潤賣<br />
+<br />
+通常賣9級以下練功用鎧甲大家都是過渡用<br />
+不太願意花很多錢買太好</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3880</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: YIN</span><span class="time">2011-12-17 09:47 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>忍者配點...??</b></p>
+				忍者配點應該怎麼點?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3879)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">11 於 2011-12-18 08:17 PM 回覆<br><br>
+					<div style="padding-left: 10px">忍者配點的話有分很多種<br />
+雜忍(不點魔)<br />
+力忍(力滿)等<br />
+但無論怎點<br />
+<br />
+通常敏都是點到100就不點了<br />
+其他看你怎麼選擇<br />
+強大概點50以內就OK了<br />
+剩下的看你要體多還是力多隨意</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3879</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: rex</span><span class="time">2011-12-15 03:37 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問迴避最高的哪個職業? 格鬥的初始30點要怎麼點?<br />
+新手急求解答 希望大大們能指點一下<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3878)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2011-12-16 01:34 AM 回覆<br><br>
+					<div style="padding-left: 10px">體10 力滿 敏5<br />
+迴避率看閃躲值<br />
+每個職業都可以達到最高<br />
+除了一個技能陽炎 練到10技可以有70%的閃躲機率</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">11 於 2011-12-16 04:19 AM 回覆<br><br>
+					<div style="padding-left: 10px">通常職業只要敏最高點到100就夠用了<br />
+格鬥通常力滿其他體(因為沒有武器)</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3878</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2011-12-10 07:00 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				關於忍者的暗殺率<br />
+對於100等以上的暗殺率怎麼算呢?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3877)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">3877</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=95&amp;s=">上一頁</a>		<a href="guestbook.php?page=97&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

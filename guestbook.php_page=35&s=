@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 部份職業就職</span><span class="time">2013-12-03 11:56 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>部份職業就職</b></p>
+				站長你好<br />
+本人前幾天創了一隻弓箭手，想說來練，就職過程前面都一樣，進入試煉之洞窟 第1層 入口往上走(東方23 南方12)<br />
+有一位NPC 名字叫做&quot;戰鬥系就職輔助員&quot; 他會詢問是否快速傳到最底層 是 否 選是之後 就會到最底層士兵那邊了<br />
+可以的話把這方法寫在就職教學裡 相信可以減少一些玩家們的時間<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4551)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-04 09:23 PM 回覆<br><br>
+					<div style="padding-left: 10px">已重寫 劍士, 戰斧鬥士, 戰士, 弓箭手, 魔法師, 飼養師 及 馴獸師 的就職任務<br />
+感謝提供資訊</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2021-05-22 11:47 PM 回覆<br><br>
+					<div style="padding-left: 10px">站長你好 各位前輩好<br />
+<br />
+我是剛玩 魔力 永恆初心版的新人弓手<br />
+<br />
+我根據攻略去試煉洞找NPC &quot;戰鬥系就職輔助員&quot; 但似乎被改掉了 只能慢慢走下去到大廳<br />
+<br />
+還請站長修改一下攻略 不好意思</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4551</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2013-12-03 10:34 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>關於彩外練攻點</b></p>
+				請問彩外怎麼去呢？<br />
+<br />
+還有殷紅內的樓梯都被樹擋住了ˊˋ<br />
+<br />
+有沒有什麼技巧容易找到樓梯?<br>
+				<br>
+				[最後於 2013-12-04 10:04 AM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4550)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2013-12-04 10:23 PM 回覆<br><br>
+					<div style="padding-left: 10px">煙卷飛...地圖ㄉ話橘紅點因該多是樓梯</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4550</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2013-12-02 09:20 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>練功練技大全</b></p>
+				練功練技大全裡的維諾亞村練技處,村子門口處。<br />
+<br />
+怪只有1-4只,而不是最高7只,因為會隨機遇到1等黃色口臭鬼或紅帽哥不林,因此要挑怪練。<br />
+<br />
+看看站長需不需要備註一下挑怪練這個問題。<br>
+				<br>
+				[最後於 2013-12-02 09:23 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4549)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-03 09:18 AM 回覆<br><br>
+					<div style="padding-left: 10px">已作修正 感謝</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4549</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: xanxus</span><span class="time">2013-12-02 01:36 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>神秘地宮</b></p>
+				神秘地宮座標係邊到<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4548)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-02 09:40 AM 回覆<br><br>
+					<div style="padding-left: 10px">日耀之域 376.134<br />
+於絲米村傳送至日耀之域(需香草)的附近<br />
+也可由旭日村走去</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4548</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: xanxus</span><span class="time">2013-11-30 03:07 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>萬聖南瓜田的巫師</b></p>
+				現在還有別的地方出現嗎?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4547)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-01 09:54 PM 回覆<br><br>
+					<div style="padding-left: 10px">巫師是最近新增的 還沒有在其他地圖出現</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4547</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2013-11-30 07:14 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>爛裝任務</b></p>
+				請問爛裝任務是在哪張地圖呢?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4546)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-01 09:54 PM 回覆<br><br>
+					<div style="padding-left: 10px">米內葛爾島 時波之祀</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4546</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 雙子-祈鑠,特務J</span><span class="time">2013-11-28 10:41 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				站長你要不要新增一下 寵物零食的攻略<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4545)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-01 09:53 PM 回覆<br><br>
+					<div style="padding-left: 10px">是指家族寵物嗎？</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">雙子-祈鑠,特務J 於 2013-12-02 12:46 PM 回覆<br><br>
+					<div style="padding-left: 10px">對的</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-03 09:16 AM 回覆<br><br>
+					<div style="padding-left: 10px">可以...先搜集資料消化一下</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4545</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 雙子-祈鑠,特務J</span><span class="time">2013-11-27 01:21 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				怎麼沒有辦法編輯之前發的文呢0.0<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4544)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-01 09:57 PM 回覆<br><br>
+					<div style="padding-left: 10px">是指沒有了編輯的按鈕嗎？<br />
+如果是這樣<br />
+那是因為這裡沒有會員機制<br />
+網站無法永遠認證你就是發文者</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">雙子-祈鑠,特務J 於 2013-12-02 12:47 PM 回覆<br><br>
+					<div style="padding-left: 10px">是哦，要怎麼處理</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-03 09:20 AM 回覆<br><br>
+					<div style="padding-left: 10px">...沒有辦法</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4544</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 沒有魔力大會考的資料</span><span class="time">2013-11-22 08:10 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>沒有魔力大會考的資料</b></p>
+				沒有魔力大會考的資料<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4542)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-12-01 09:52 PM 回覆<br><br>
+					<div style="padding-left: 10px">將稍後補上 感謝提醒</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4542</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2013-11-21 01:52 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>2隻寵物檔次</b></p>
+				http://forum.gamer.com.tw/C.php?bsn=02577&amp;snA=148547&amp;tnum=1<br />
+<br />
+魔女翠兒<br />
+MAX 17 17 17 33 31   115 (初始倍率20)<br />
+MIN 13 13 14 29 27   96<br />
+------<br />
+<br />
+http://forum.gamer.com.tw/C.php?bsn=02577&amp;snA=148625&amp;tnum=1<br />
+<br />
+鈴蘭花妖<br />
+<br />
+MAX 16 28 15 27 34  120(初始倍率35)<br />
+MIN 12 24 11 23 30  100<br />
+------<br />
+<br />
+另外還有橙月和絳月<br />
+http://forum.gamer.com.tw/C.php?bsn=02577&amp;snA=148537&amp;tnum=11<br />
+<br />
+不過似乎沒有明確的寫出實際檔次為何<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4541)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-11-25 02:52 PM 回覆<br><br>
+					<div style="padding-left: 10px">已補上 魔女翠兒 及 鈴蘭花妖<br />
+<br />
+橙月 及 絳月 將稍後更新<br />
+<br />
+感謝</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2013-11-25 09:37 PM 回覆<br><br>
+					<div style="padding-left: 10px">已補上橙月 及 絳月檔次<br />
+<br />
+絳月已定檔</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4541</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=34&amp;s=">上一頁</a>		<a href="guestbook.php?page=36&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

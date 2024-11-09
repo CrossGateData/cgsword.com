@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 新手</span><span class="time">2010-08-28 06:55 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問萬用藥袋會出現什麼 ???<br />
+收到一個萬用藥袋<br />
+<br />
+謝謝您的回答<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2574)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2010-08-28 11:08 PM 回覆<br><br>
+					<div style="padding-left: 10px">萬用藥袋<br />
+要空出6個位置<br />
+使用後分別會出<br />
+再生劇藥-----人物配點重置<br />
+魔力之泉-----回5000魔<br />
+小護士家庭號-------回5000血<br />
+特級勇者藥水------回300血100魔<br />
+魅力藥水<br />
+忠誠藥水<br />
+使用後萬用藥袋消失</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">回鍋老手 於 2010-08-30 01:20 AM 回覆<br><br>
+					<div style="padding-left: 10px">請問一下<br />
+那萬用藥箱會有什麼?</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2574</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-08-28 03:45 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				我有一隻魔寵(兔耳 37等)它的能力如下:<br />
+  血 466 魔 1155 攻 167 防 178 敏 94 精神 171 回覆 77<br />
+  請問這樣的魔寵素質好嗎?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2573)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">2573</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 喬</span><span class="time">2010-08-28 12:43 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>力量巫師</b></p>
+				力量巫師配點怎麼配壓<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2572)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">2572</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 請幫我解答~</span><span class="time">2010-08-27 07:53 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>請幫我解答~</b></p>
+				請問 飾品鑄造1~10等經驗都是20而以嗎?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2571)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2010-08-28 11:08 PM 回覆<br><br>
+					<div style="padding-left: 10px">嗯</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2571</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: eve</span><span class="time">2010-08-27 07:10 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>攻擊能技可以更新小小</b></p>
+				諸刃LV1 10 0 減少防禦力和精神力5%，而提升攻擊力7% <br />
+<br />
+諸刃LV2 18 1800 減少防禦力和精神力10%，而提升攻擊力14% <br />
+<br />
+諸刃LV3 26 7200 減少防禦力和精神力15%，而提升攻擊力21% <br />
+<br />
+諸刃LV4 34 19800 減少防禦力和精神力20%，而提升攻擊力28% <br />
+<br />
+諸刃LV5 42 45000 減少防禦力和精神力25%，而提升攻擊力35% <br />
+<br />
+諸刃LV6 50 82800 減少防禦力和精神力30%，而提升攻擊力42% <br />
+<br />
+諸刃LV7 58 133200 減少防禦力和精神力35%，而提升攻擊力49% <br />
+<br />
+諸刃LV8 66 183600 減少防禦力和精神力40%，而提升攻擊力56% <br />
+<br />
+諸刃LV9 74 246600 減少防禦力和精神力45%，而提升攻擊力63% <br />
+<br />
+諸刃突擊 82 322200 減少防禦力和精神力50%，而提升攻擊力70% <br />
+<br />
+<br />
+乾坤一擲LV1 10 0 給予對象1.1倍的傷害，命中率降低3% <br />
+<br />
+乾坤一擲LV2 18 1800 給予對象1.2倍的傷害，命中率降低6% <br />
+<br />
+乾坤一擲LV3 26 7200 給予對象1.3倍的傷害，命中率降低9% <br />
+<br />
+乾坤一擲LV4 34 19800 給予對象1.4倍的傷害，命中率降低12% <br />
+<br />
+乾坤一擲LV5 42 45000 給予對象1.5倍的傷害，命中率降低15% <br />
+<br />
+乾坤一擲LV6 50 82800 給予對象1.6倍的傷害，命中率降低18% <br />
+<br />
+乾坤一擲LV7 58 133200 給予對象1.7倍的傷害，命中率降低21% <br />
+<br />
+備註 8 乾坤一擲LV8 66 183600 給予對象1.8倍的傷害，命中率降低24% <br />
+<br />
+乾坤一擲LV9 74 246600 給予對象1.9倍的傷害，命中率降低27% <br />
+<br />
+乾坤一擲點睛 82 322200 給予對象2倍的傷害，命中率降低30% <br />
+<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2570)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">2570</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-08-27 02:31 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問一下騎士的技能要怎麼配會比較好 因為後期還想學追月 順便問一下騎士學追月可以學到幾?<br />
+<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2569)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">. 於 2010-08-27 05:59 PM 回覆<br><br>
+					<div style="padding-left: 10px">騎士可以到追8 <br />
+ 配點力滿  敏100-150  剩下體<br />
+或是力敏也行</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2569</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-08-26 11:55 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問後期還有人在用盾嗎<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2568)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">. 於 2010-08-27 06:01 PM 回覆<br><br>
+					<div style="padding-left: 10px">如果你是說11武房的話<br />
+大多都是有Q剛<br />
+所以沒辦法用噸<br />
+<br />
+騎士類就有可能用盾<br />
+當然如果你有聖盾技能的話就必須要有盾才能放</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2568</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 幫幫忙</span><span class="time">2010-08-26 07:29 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				小弟正要解精變4..準備ㄌ綠羽  直接飛過去(之後怎麼走)<br />
+沒去過ㄉ地圖 因為只有1跟 不敢亂嘗試 所以先問問各位有經驗ㄉ朋友們<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2567)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">無名氏 於 2010-08-28 12:58 PM 回覆<br><br>
+					<div style="padding-left: 10px">飛過去就知道怎麼走了= =~反正就在亞繼裡面~看任務吧!<br />
+記得找打手~陸上的怪很多</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2567</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-08-26 05:40 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問一下目前哪些星系人比較多<br />
+又請問一下目前有星系合併的可能嗎<br />
+我是心美的 總覺得人越來越少了 招人練功都很難...<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2566)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Husky 於 2010-08-26 06:30 PM 回覆<br><br>
+					<div style="padding-left: 10px">現在較多人的是 雙子和獅子星系，目前猜測應該是不會有～</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2566</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 獅子歌歌</span><span class="time">2010-08-26 03:06 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>測試伺服器</b></p>
+				聽說人物在測服會刪檔<br />
+請問是多久一次<br />
+<br />
+<br />
+我練起來了<br />
+還包月<br />
+<br />
+卻是這種結果<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2565)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Juna 於 2010-08-26 05:53 AM 回覆<br><br>
+					<div style="padding-left: 10px">沒記錯兩個月<br />
+<br />
+之前玩了兩次...</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">. 於 2010-08-26 06:40 PM 回覆<br><br>
+					<div style="padding-left: 10px">測試本來就會刪檔=  =<br />
+包月之前請深思 <br />
+至於要刪除前  都會先公告<br />
+所以被刪掉  你該檢討</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2565</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=220&amp;s=">上一頁</a>		<a href="guestbook.php?page=222&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

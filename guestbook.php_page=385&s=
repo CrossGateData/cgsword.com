@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 雪~~@@</span><span class="time">2008-12-16 09:59 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>^^~~~</b></p>
+				請問一下&quot;魔族的水晶&quot;可以做啥麼?     我聽別人說可以用&quot;魔族的水晶&quot;來換&quot;晶靈的水鏡&quot;去打牛對ㄇ?如果有我不懂的地方請各位大大幫我一個忙~~謝謝大家0.0                                          <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,826)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">寂寞淚痕 於 2008-12-16 12:42 PM 回覆<br><br>
+					<div style="padding-left: 10px">&quot;魔族的水晶&quot;可以換&quot;精靈的水鏡&quot;去打牛<br />
+也可以用來製作裝備喔(請參考生產製作...產品製作)<br />
+<br />
+拿8等劍來比喻好了<br />
+護身短劍   單手武器  需要材料:銅條*15  白金條*16  幻之鋼條*13 	杉*20  魔族的水晶*1   <br />
+<br />
+另外也可以拿來賣錢 (只是現在氾濫的沒價值了= =)	 </div>
+					<p>[最後於 2008-12-16 12:45 PM 編輯]</p>									</div>
+				<hr>
+				<div style="padding-left: 7px">無言 於 2009-01-12 03:23 AM 回覆<br><br>
+					<div style="padding-left: 10px">因為逆興開放 很多摩水<br />
+甚至送人 自用<br />
+<br />
+所以如果你是60等我建議你去水動 <br />
+比打牛好練<br />
+又不用走很長 0.0 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">826</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 雪~~@@</span><span class="time">2008-12-16 09:44 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				好想打阿卡~~~拿水鏡 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,825)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">825</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: QQ</span><span class="time">2008-12-14 10:27 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問鑑定士有沒有快捷的方法升技的?謝謝 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,824)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">寂寞淚痕 於 2008-12-15 12:54 PM 回覆<br><br>
+					<div style="padding-left: 10px">= =<br />
+<br />
+先到拿潘食品店(東醫上面)鑑定魚到2等<br />
+再來去3.0在 艾夏島 的 哈絲塔的家(167，102) 找 哈絲塔<br />
+拿「家具？」或「垃圾？」<br />
+垃圾可以無限拿取，鑑定後的垃圾分為「垃圾１」、「垃圾２」、「垃圾３」三種，可就近在下方的克羅利的店(150，125)賣掉換取魔幣貼補鑑定所消耗的魔力。<br />
+※身上持有已鑑及未鑑的垃圾都不能拿取<br />
+法蘭城收取價格：<br />
+「垃圾１」：等級1，店收取價格 20G<br />
+「垃圾２」：等級2，店收取價格 150G<br />
+「垃圾３」：等級6，店收取價格 600G<br />
+<br />
+一職衝到4等  在去自己狩獵魚?鑑定到5等  在去打改圖衝到6等 然後就看你要擺攤還是繼續鑑定改圖了<br />
+<br />
+不然就按照鑑定等級請盜賊幫你偷怪物圖卡給你鑑定<br />
+<br />
+<br />
+魚?   5等獵物 4等鑑定物	索奇亞(282.404)附近<br />
+相關任務：魔族改造計劃(請參考任務詳解) </div>
+					<p>[最後於 2008-12-16 12:41 PM 編輯]</p>									</div>
+				<hr>
+				<div style="padding-left: 7px">QQ 於 2008-12-15 08:48 PM 回覆<br><br>
+					<div style="padding-left: 10px">謝謝!那麼魚?在哪裡狩獵到的? </div>
+					<p>[最後於 2008-12-15 08:49 PM 編輯]</p>									</div>
+				<hr>
+				<div style="padding-left: 7px">路人甲 於 2008-12-22 03:05 PM 回覆<br><br>
+					<div style="padding-left: 10px"> </div>
+					<p>[最後於 2008-12-23 02:48 AM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">824</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 路人</span><span class="time">2008-12-14 12:12 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>長老鑰匙</b></p>
+				請問長老鑰匙是哪一個任務 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,823)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">寂寞淚痕 於 2008-12-15 12:48 PM 回覆<br><br>
+					<div style="padding-left: 10px">消失的王子<br />
+任務內容<br />
+<br />
+   1. 首先到法蘭城西邊城門的傳送石旁邊找魔力小三菇莎芙特(64.83)對話<br />
+   2. 然後走到亞諾曼城與一個光頭小孩比魯(148.122)對話，會給你&quot;婚禮邀請函&quot;<br />
+   3. 接下來便要你到亞諾曼城的克里特大教堂與門侍(195.69)對話，進入參觀婚禮<br />
+      註：與牧師、丁魯、莉塔、竇梓；任一個對話都會進入戰鬥<br />
+   4. 進入後走到(15.11)會看到新娘莉塔跟新郎竇梓，問話完畢後會發生戰鬥，新娘莉塔會給新郎竇梓一下重擊後逃去，戰鬥結束後跟旁邊的宰相(17.12)說話會取得&quot;給莉塔的信&quot;<br />
+<br />
+人類路線<br />
+<br />
+   1. 取得&quot;給莉塔的信&quot;直接到摩頓村， 然後找村長家的右下方的莉塔(58.47)對話 時選擇&quot;是&quot;取得&quot;莉塔的髮飾&quot;，與村門口的包打聽小豆(90.37)說話 選擇&quot;是&quot;，得知拉傑法爾已去尼維爾海村，於是便前往尼維爾海村<br />
+      註：若與小豆對話中選擇&quot;否&quot;可以得到&quot;莉塔 的戒指&quot;，亞諾曼城的克里特大教堂 找宰相換取&quot;莉塔的布偶&quot;<br />
+   2. 到達尼維爾海村後，與村門口的魔族軍團(32.62)說話便開啟戰鬥，戰鬥到第二回合便會紛紛逃跑，戰鬥結束後發現重傷的凱中，對話得知拉傑法爾被抓到的村子是克瑞村，於是便 趕快前往克瑞村找尼珥<br />
+      註：魔族軍團(魔族伍長LV70、二等兵小瑪LV50、二等兵小塔LV50)<br />
+   3. 到達克瑞村後與村外跟尼珥(468.90)對話，發現克瑞村內有一處可疑的民居，而門口有一對夫婦亞丁(75.25)、亞淑(75.24)，牠們是魔族入口的守門人，不肯讓玩家進去。<br />
+      註：與尼珥對話他有說3種方法：1.帶LV10的紅寶石給守門人，對話後直接進入房間(紅寶石一顆只能一個人進去)<br />
+      　　　　　　　　　　　　　 　 2.攜帶聖魔石，對話後就可進入輕鬆的戰鬥，戰勝後進入房間<br />
+      　　　　　　　　　　　　　　  3.直接對話，戰勝後進入房間<br />
+   4. 與亞丁 或亞淑對話進入戰鬥(食屍鬼外型)<br />
+      註：身上有聖魔石時；亞丁、亞淑為LV30(技能：攻擊、連擊)<br />
+      註：亞丁、亞淑LV60(亞丁血量約為15000、亞淑血量約為20000；技能：迅速果斷、魔法封印、諸刃、乾坤一擲、陽炎、單體恢復&quot;補3000以上&quot;)<br />
+   5. 戰鬥之後進入20~25層的隨機迷宮，到達最底的魔族地牢，再走到魔族地牢(23.2)處，與 魔族族長修伯特對話之後進入戰鬥<br />
+      註：修伯特LV75(血量約30000；技能：氣功彈、乾坤一擲、魔法封印、吸血魔法、超強風刃魔法、攻擊反彈、超級遺忘魔法)<br />
+   6. 戰勝後傳送至牢房與拉傑法爾(22.36)對話，對話後莉塔出現，與莉塔和拉傑法爾對話後，交出&quot;莉塔的髮飾&quot;，得到&quot;長老家的鑰匙&quot;(不能丟地；無法使用寵物郵件傳送)以及&quot;偷襲密卷&quot;(等級1 護身符 耐久100 裝備後可以侯偷襲率上升20~35%)<br />
+   7. 但拉傑法爾並不想跟莉塔回去，就在此時凡妮莎突然出現，結果拉傑法爾又再逃去...<br />
+   8. 攜帶&quot;長老家的鑰匙&quot;到雷歐娜村的湯瑪斯家(69.53)找長老，看門精靈會跟你說長老出門了，&quot;12月7日&quot;才會回來...任務待續(未開放)<br />
+<br />
+魔族路線<br />
+<br />
+   1. 如果直接選擇傳送到摩頓村的話，在亞諾曼城城堡前會有一個女妖精的魔族少女(141.77)，跟她對話時第一句選擇&quot;否&quot;，接著會取得&quot;交換日記&quot;<br />
+   2. 到達摩頓村後，與村門口的包打聽小豆(90.37)說話，得知拉傑法爾已去尼維爾海村，於是便前往尼維爾海村<br />
+   3. 到達尼維爾海村後，與村門口的魔族軍團(32.62)說話便開啟戰鬥，戰鬥到第二回合便會紛紛逃跑 ，戰鬥結束後往右上走與魔族少女凡妮莎(39.64)說話，得知拉傑法爾被抓去克瑞村的地下牢房並取得&quot;魔族火把&quot; 於是便前往克瑞村<br />
+      註：魔族軍團(魔族伍長LV70、二等兵小瑪LV50、二等兵小塔LV50)<br />
+   4. 到達克瑞村後，到醫院旁的雪人處(43.72)，點取雪人，便會自動使用&quot;魔族火把&quot; 到地下房間，走到地下房間(34.20)處便是魔族通道的入口<br />
+      註：魔族通道：骷髏海盜LV65~69(攻擊、防禦、吸血攻擊、即死魔法&quot;使用補血魔法情況下&quot;)、木乃伊LV65~69(攻擊、防禦、乾坤一擲)；戰鬥出現 1~8隻，43層隨機迷宮(B1~B9：LV65)(B10~B19：LV66)(B20~B26：LV67)(B27~B35：LV68) (B36~B43：LV69)<br />
+   5. 走完43層魔族通道後便會到達魔族地牢，再走到魔族地牢(23.2)處，與修伯特對話之後進入戰鬥<br />
+      註：修伯特LV75(血量約3萬；技能：氣功彈、乾坤一擲、魔法封印、吸血魔法、超強風刃魔法、攻擊反彈、遺忘咒術)<br />
+   6. 戰勝後傳送至牢房與拉傑法爾(22.36)對話，對話後凡妮莎出現，與凡妮莎和拉傑法爾對話後，可以聽到魔弓巴克達的情報，交出&quot;交換日記&quot;，得到&quot;長老家的鑰匙&quot;(不能丟地；無法使用寵物郵件傳送)以及&quot;閃躲之策&quot;(等級1 護身符 耐久100 裝備後可以增加3~8)<br />
+   7. 這時候莉塔突然出現，點選進入戰鬥，最後各自逃跑...<br />
+      註：戰鬥中莉塔會攻擊凡妮莎，而拉傑法爾會挺身去護衛隨後就飛出去了，之後凡妮莎與莉塔會各自逃跑，戰鬥隨之結束<br />
+   8. 攜帶&quot;長老家的鑰匙&quot;到雷歐娜村的湯瑪斯家(69.53)找長老，看門精靈會跟你說長老出門了...<br />
+ </div>
+					<p>[最後於 2008-12-15 12:48 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">823</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: qq</span><span class="time">2008-12-13 10:37 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>騎寵</b></p>
+				任務技能騎寵要去哪學 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,822)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">寂寞淚痕 於 2008-12-15 12:47 PM 回覆<br><br>
+					<div style="padding-left: 10px">   1.  第一天由丘斯特村坐鯨魚飛船(131.88)到達辛梅爾的公寓(181.81)找 針山教官 (火焰舞者樣的NPC)<br />
+      選&quot;是&quot;後得到&quot;騎乘學習手冊&quot; - 置地會消失，無法用寵物郵件傳送<br />
+   2. 第二天24小時後再找 針山教官 ，他會要求給他一支神聖油，給他後再等24小時<br />
+   3. 第三天帶蘋果薄荷(1個)給 針山教官 後再等24小時<br />
+      註：蘋果薄荷可以使用伐木技能R1在芙蕾雅(500.85)採集取得<br />
+   4. 第四天帶地的水晶碎片(3粒)找 針山教官 對話後等24小時<br />
+   5. 第五天帶水的水晶碎片(3粒)找 針山教官 對話後等24小時<br />
+   6. 第六天帶火的水晶碎片(3粒)找 針山教官 對話後等24小時<br />
+   7. 第七天帶風的水晶碎片(3粒)找 針山教官 對話後等24小時<br />
+   8. 持有任何屬性的寵物水晶LV1與 針山教官 對話進入戰鬥<br />
+      針山教官 LV10 HP約700 使用技能：攻擊、防禦、連擊(2)、反擊、戒驕戒躁、迅速果斷(二次行動)<br />
+      註：寵物水晶得到方法請參考任務姬姬團任務<br />
+   9. 第九天同樣在公寓，與 溜五郎教官 說話，取得&quot;舞蹈花妖LV1&quot;<br />
+      註：請記得空出寵物欄位<br />
+  10. 第十天到 針山教官 旁的 溜五郎教官 說話後得到寵物&quot;舞蹈花妖&quot;並練到2級，24小時後再回來<br />
+  11. 第十一天和 溜五郎教官 說話後把&quot;舞蹈花妖&quot;並練到4級，24小時後再回來<br />
+  12. 第十二天和 溜五郎教官 說話後把&quot;舞蹈花妖&quot;並練到6級，24小時後再回來<br />
+  13. 第十三天和 溜五郎教官 說話後把&quot;舞蹈花妖&quot;並練到8級，24小時後再回來<br />
+  14. 第十四天和 溜五郎教官 說話後把&quot;舞蹈花妖&quot;並練到9級，24小時後再回來<br />
+  15. 第十五天和 溜五郎教官 說話後把&quot;舞蹈花妖&quot;並練到10級，和溜五郎教官說話後交出&quot;騎乘學習手冊&quot;和&quot;舞蹈花妖&quot;傳送到&quot;???&quot;和人馬一體說話，給6000G習得騎乘技能<br />
+      註：可以一次升到Lv10，但每次同樣要隔24小時找一次溜五郎教官<br />
+ </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">822</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 果凍</span><span class="time">2008-12-12 03:52 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>M幣</b></p>
+				請問一個笨問題<br />
+我玩盜賊<br />
+可是卻不知道ｍ幣去哪偷<br />
+麻煩您 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,821)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">寂寞淚痕 於 2008-12-15 12:45 PM 回覆<br><br>
+					<div style="padding-left: 10px">你應該知道4.0吧<br />
+<br />
+就是在雪塔那座大象過去邱村再座鯨魚船過去的地方<br />
+<br />
+然後到打公主團那裡之前可以偷盜1M打完公主團過去走到底有一個傳送石(不是烏龜那個) 可以偷5M(怪物是布卡)<br />
+你如果有打過世界改革者應該知道這裡<br />
+就是要走到???迷宮之前會有烏賊怪那些的(3X等) 可以偷到10M<br />
+<br />
+依你等級去偷吧...建議開一隻主教一起去 </div>
+					<p>[最後於 2008-12-15 12:56 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">821</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 巧弓</span><span class="time">2008-12-10 02:28 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>請問</b></p>
+				哈瓜的效果<br />
+<br />
+是時間制還是步數制的？ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,820)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">§楓嵐§ 於 2008-12-10 09:02 PM 回覆<br><br>
+					<div style="padding-left: 10px">以步數為準 約90~110步 精變做出來的感覺上效果比較好一點點 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">820</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 時間鎖有半法減短時間ㄇ</span><span class="time">2008-12-09 10:19 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>時間鎖有半法減短時間ㄇ</b></p>
+				戰鬥係時間鎖有半法減短時間ㄇ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,819)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">封之介 於 2008-12-10 11:23 PM 回覆<br><br>
+					<div style="padding-left: 10px">沒辦法減的 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">819</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-12-06 04:24 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				骷髏戰士<br />
+<br />
+確定可以座騎~ ~本人親自看過 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,802)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">802</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-12-06 12:49 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,801)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">淡薄人生 於 2008-12-06 07:36 PM 回覆<br><br>
+					<div style="padding-left: 10px">做帽子的5級稱號幾天能到 </div>
+					<p>[最後於 2008-12-06 07:38 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">801</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=384&amp;s=">上一頁</a>		<a href="guestbook.php?page=386&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

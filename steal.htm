@@ -1,0 +1,57 @@
+﻿<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>盜竊天書</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<style type="text/css">
+#steal, #steal td {
+	padding: 1px;
+	color: #FF0000;
+	cursor: pointer;
+}
+#steal td:hover{background-color:#d8cca8}
+table.style th, table.style td {
+	padding: 1px;
+}
+</style>
+<script type="text/javascript" src="js/cookie.js"></script>
+<script type="text/javascript" src="js/steal.js"></script>
+</head>
+
+<body>
+<div class="head">盜竊全書</div>
+<table class="style" id="steal" width="100%">
+	<tr>
+		<script data-cfasync="false">
+		function idn(n){n+='';while(n.length<3)n='0'+n;return n;}
+		var show='';
+		for(var i=0;i<21;i++){
+			var j=i*15,p=i*15+1,q=p+14;
+			show+='<td onclick="norlist(0,\''+idn(p)+'\',\''+idn(q)+'\')">'+idn(p)+'~'+idn(q)+'</td>';
+			if(i==6 || i==13) show+='</tr><tr>';
+		}
+		show+='</tr><tr><td onclick="bookmark(\'print\')">書籤</td>';
+		for(i=1;i<=5;i++) show+='<td onclick="norlist(1,'+i+')">Boss'+i+'</td>';
+		document.write(show);
+		</script>
+		<td onclick="lastsearch()">
+		搜尋</td>
+	</tr>
+</table>
+<hr>
+<div id="search_div" style="display: none" onkeydown="if(event.keyCode==13)search()">
+	搜尋︰<input type="text" name="search_btn">
+	<label for="bosssearch_check" onclick="search_btn.focus();if(search_btn.value)search()" style="cursor: hand">
+	<input type="checkbox" id="bosssearch_check" value="1" style="border-width: 0px;background-color: transparent">BossSearch</label> 輸入 
+	編號/物品名稱/盜取對象 後按下 Enter, 若要搜尋數項資料 請用空格代表一項(例︰100 甲蟲 刀羽)<hr></div>
+<div id="itemlist_div" style="text-align: center; color: #ff0000"></div>
+<script type="text/javascript">
+var search_btn = document.getElementsByName('search_btn')[0];
+if(s_bk!='null') bookmark('print');
+else lastsearch();
+if(!itemlist_div.innerHTML) norlist(0,'001','015');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>寵物圖鑑</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<link rel="stylesheet" type="text/css" href="petbook.css" id="petbookstyle">
+<script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/function.js"></script>
+</head>
+
+<body>
+<script type="text/javascript" src="js/petbook.js"></script>
+
+<div id="index" style="text-align: left; display: block; width: 750px;margin: auto">
+	<div align="center" style="color: #FF0000">
+		<b>寵物系統的特點說明</b></div>
+	<p>　　寵物的數值分成兩個部分，第一部分是明細，也就是我們常說的BP，另外一個就是實際值，其關係為明細會決定實際值<br>
+	詳細見下面的表格：</p>
+	<table class="style" align="center">
+		<tr>
+			<td class="head" colspan="8">BP值對寵物各項能力影響</td>
+		</tr>
+		<tr>
+			<th width="12%">　</th>
+			<th width="12%">生命</th>
+			<th width="12%">魔力</th>
+			<th width="12%">攻擊</th>
+			<th width="13%">防禦</th>
+			<th width="13%">敏捷</th>
+			<th width="13%">精神</th>
+			<th width="13%">回復</th>
+		</tr>
+		<tr>
+			<th>體力</th>
+			<td>+8</td>
+			<td>+1</td>
+			<td>+0.2</td>
+			<td>+0.2</td>
+			<td>+0.1</td>
+			<td>-0.3</td>
+			<td>+0.8</td>
+		</tr>
+		<tr>
+			<th>力量</th>
+			<td>+2</td>
+			<td>+2</td>
+			<td>+2.7</td>
+			<td>+0.3</td>
+			<td>+0.2</td>
+			<td>-0.1</td>
+			<td>-0.1</td>
+		</tr>
+		<tr>
+			<th>強度</th>
+			<td>+3</td>
+			<td>+2</td>
+			<td>+0.3</td>
+			<td>+3</td>
+			<td>+0.2</td>
+			<td>+0.2</td>
+			<td>-0.1</td>
+		</tr>
+		<tr>
+			<th>速度</th>
+			<td>+3</td>
+			<td>+2</td>
+			<td>+0.3</td>
+			<td>+0.3</td>
+			<td>+2</td>
+			<td>-0.1</td>
+			<td>+0.2</td>
+		</tr>
+		<tr>
+			<th>魔法</th>
+			<td>+1</td>
+			<td>+10</td>
+			<td>+0.2</td>
+			<td>+0.2</td>
+			<td>+0.1</td>
+			<td>+0.8</td>
+			<td>-0.3</td>
+		</tr>
+	</table>
+	<p>　　魔力新增的另外一個系統是個性化系統，就是每升一級都有1點可以讓玩家自由加，當不是隨意加的，寵物的BP其中一項不能超過總的一半，如果超過，就出現不能加點的情況，就是平時我們說的暴敏暴魔之類的。這個情況有兩個因素，一是總BP太低，二是單項BP太高，所以不能單單因為暴了就說一個寵物垃圾。</p>
+	<p>　　以上是魔力新增加的2個重要系統，下面說說其他和石器比較相似的：</p>
+	<p>　　忠誠系統：寵物會因種類的情況，如果你創建人物的前期去使用，就算等級一樣，甚至稍高，也會忠誠很低的，當然如果人物超過了10級以上，基本就沒有這個情況，這裡就請拿好寵物給新人用的朋友注意點，小心寵物不小心死了一次就跑了，以後新開的好寵會更加突出這個問題。寵物的忠誠會因你的魅力而決定，魅力太低小心你的心愛寵物不理你哦，提高魅力忠誠會增加。如果人物或者寵物死亡，忠誠會降低，人物或寵物升級，忠誠就增加等等，這些就不多說了，詳細見其他關於寵物忠誠的專著。另外，值得說明的是魔力的忠誠分兩個部分，一個是實際值，另外一個是隱藏值。實際值的最大限度取決與調教的等級和寵物的等級，而隱藏值的最大限度是255，也就是為什麼經常寵物死了好多次忠誠不變的原因。魔力中寵物NONO是家常便飯，一個是忠誠的關係，另外一個是調教的關係，有人認為戰士的調教低，沒有作用，不如不學，那個是錯誤的，沒有調教的60忠誠和2級調教的60忠誠是差別很大的，調教還有附加值，不要為了一個技能格而刪掉調教，除非你不用寵物了。</p>
+	<p>　　成長系統：寵物的成長一開始就決定了，而且不會改變，你怎麼對待它都好，成長不變，無論死了幾次，受傷升級還是跳升都不會影響，你可以自己去試試（寵物跑了別找我）。寵物的成長數值雖然會有時加多有時加少，如果你把每級的成長記錄下來，就發現是個循環的變化，不會是雜亂無序的，如敏蜂可能長7、可能長6、可能長5，但是長過7的絕對不會長5(你加錯點就另外一回事)，成長的多少，由寵物的一出現就決定的了，沒有任何辦法改變，所以不要花時間去用各種方法以求成長好。</p>
+	<table class="style" align="center">
+		<tr>
+			<td colspan="6" class="head">使魔種族相剋表</td>
+		</tr>
+		<tr>
+			<th width="14%">使魔種族</th>
+			<th width="14%">全剋</th>
+			<th width="14%">半剋</th>
+			<th width="14%">使魔種族</th>
+			<th width="14%">全剋</th>
+			<th width="14%">半剋</th>
+		</tr>
+		<tr>
+			<td><b>龍系</b></td>
+			<td>飛行系</td>
+			<td>野獸系</td>
+			<td><b>不死系</b></td>
+			<td>人型系</td>
+			<td>金屬系</td>
+		</tr>
+		<tr>
+			<td><b>飛行系</b></td>
+			<td>昆蟲系</td>
+			<td>不死系</td>
+			<td><b>人型系</b></td>
+			<td>野獸系</td>
+			<td>昆蟲系</td>
+		</tr>
+		<tr>
+			<td><b>昆蟲系</b></td>
+			<td>特殊系</td>
+			<td>植物系</td>
+			<td><b>野獸系</b></td>
+			<td>植物系</td>
+			<td>飛行系</td>
+		</tr>
+		<tr>
+			<td><b>特殊系</b></td>
+			<td>金屬系</td>
+			<td>龍系</td>
+			<td><b>植物系</b></td>
+			<td>不死系</td>
+			<td>特殊系</td>
+		</tr>
+		<tr>
+			<td><b>金屬系</b></td>
+			<td>龍系</td>
+			<td>人型系</td>
+			<td><b>邪魔系</b></td>
+			<td>各種族(被攻擊時)</td>
+			<td>各種族(攻擊時)</td>
+		</tr>
+		<tr>
+		  <td colspan="6" style="color: #800080"><b>以攻擊方角度︰<br>
+	      全剋方 攻擊傷害加成20%，半剋方 攻擊傷害加成10%<br>
+		    被全剋方 攻擊傷害下降20%，被半剋方 攻擊傷害下降15%<br>
+		    <br>
+	邪魔系對其餘種族︰<br>
+	攻擊時傷害加成10%，被攻擊時受傷害下降20%</b></td>
+	  </tr>
+	</table>
+	
+	<table class="style" align="center">
+  <tr>
+			<th width="100%" colspan="2">寵物能力計算表</th>
+		</tr>
+		<tr>
+			<th width="12%">生命</th>
+			<td style="text-align: left; color: #ff0000" width="88%">20+體力*8+力量*2+強度*3+速度*3+魔法*1</td>
+		</tr>
+		<tr>
+			<th>魔力</th>
+			<td style="text-align: left; color: #ff0000">20+體力*1+力量*2+強度*2+速度*2+魔法*10</td>
+		</tr>
+		<tr>
+			<th>攻擊</th>
+			<td style="text-align: left; color: #ff0000">20+體力*0.2+力量*2.7+強度*0.3+速度*0.3+魔法*0.2</td>
+		</tr>
+		<tr>
+			<th>防禦</th>
+			<td style="text-align: left; color: #ff0000">20+體力*0.2+力量*0.3+強度*3+速度*0.3+魔法*0.2</td>
+		</tr>
+		<tr>
+			<th>敏捷</th>
+			<td style="text-align: left; color: #ff0000">20+體力*0.1+力量*0.2+強度*0.2+速度*2+魔法*0.1</td>
+		</tr>
+		<tr>
+			<th>精神</th>
+			<td style="text-align: left; color: #ff0000">100+體力*-0.3+力量*-0.1+強度*0.2+速度*-0.1+魔法*0.8</td>
+		</tr>
+		<tr>
+			<th>回復</th>
+			<td style="text-align: left; color: #ff0000">100+體力*0.8+力量*0.1+強度*-0.1+速度*0.2+魔法*-0.3</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; color: #808000" colspan="2" bgcolor="#FFFFCC">
+			<b>能力小數位為隱藏數值，以上數據僅供參考。</b></td>
+		</tr>
+	</table>
+	<p style="color: #ff0000"><b>捕捉寵物的步驟：</b></p>
+	<ol>
+		<li>獲得你想捉的寵物的圖鑑(鑑定過)，可以去打此種寵物，直到掉落圖鑑；或找人購買、偷竊、開箱子得到取得</li>
+		<li>使用鼠標左鍵雙擊卡片兩次，會出現窗口詢問用戶時候要將其登錄在圖鑑中</li>
+		<li>登錄之後您就可以直接在圖鑑裡看到該寵物的能力和種族以及是否銀卡，能否捕捉等資料了</li>
+		<li>仔細看圖鑑資料，確定它的種族，然後去法蘭城西邊達美姐妹的店(東94南78)，買封印該種族寵物的封印卡。例如想捉大地鼠，而大地鼠屬於野獸系，就要買野獸系的封印卡。請注意圖鑑當中卡片打圈才表示可以捉，交叉的表示不能捉；在其他各個地方也有販賣封印卡片的，等級越高的，封印成功的幾率越大。不過對於普通卡片的寵物，封印師都能用1級的封印卡，在1~2張內捕捉到。</li>
+		<li>然後就是遇到想捉的寵物了，對於想捉的寵物(比如1級的)，將它的血打到越低越好(例如戰士用魔法，或者換一隻等級低的寵物上來慢慢打，此外強烈推薦學一個單體中毒，一直使用可以毒到最後一點血)，然後打開物品欄，雙擊封印卡，再指定要捉的寵物，就可以封印它了，如果一張不行，可以多嘗試幾次。</li>
+		<li>封印失敗的幾種可能，請務必關注，即使是高級封印有時候也能犯類似錯誤；單純的失敗，多丟幾次卡就可以了；身上有5個寵物了；沒有要捉的寵物的圖鑑；使用了錯誤種族的封印卡；要捉的寵物還是滿血（滿血不可封印）；要捉的寵物是銀卡或者金卡，如果盟約級別低的話，沒有幾組卡片是不可能捉到的；封印寵物大於封印者等級5級，也是不可能成功的。</li>
+	</ol>
+	<p style="color: #ff0000"><b>封印的成功概率與以下條件有關：</b></p>
+	<ol>
+		<li>要封印寵物的等級。越低越容易（但是1級特殊，反而難）。</li>
+		<li>要封印寵物的生命值。越低越容易。</li>
+		<li>封印者的精靈盟約技能等級。越高越容易。</li>
+		<li>封印者的職業。封印師比其它職業容易。</li>
+		<li>封印卡的等級。越高越容易。</li>
+		<li>寵物圖鑑卡片的等級，越低越好捉。金卡寵與銀卡寵必須靠封印師才能捉到，非封印師只有1%的機會。</li>
+	</ol>
+	<table class="style" style="width: 90%" align="center">
+		<tr>
+			<th width="19%">封印卡等級</th>
+			<th width="47%">封印卡購買地點</th>
+			<th width="34%">價格/張</th>
+		</tr>
+		<tr>
+			<td>Lv1</td>
+			<td>法蘭城：達美姊妹的家(94.78)</td>
+			<td>75G</td>
+		</tr>
+		<tr>
+			<td>Lv2</td>
+			<td>維諾亞村：醫院(61.53)二樓</td>
+			<td>300G</td>
+		</tr>
+		<tr>
+			<td>Lv3</td>
+			<td>奇利村：裝備店(66.77)地下二樓</td>
+			<td>675G</td>
+		</tr>
+		<tr>
+			<td>Lv4</td>
+			<td>傑諾瓦鎮：飾品店(43.23)</td>
+			<td>1200G</td>
+		</tr>
+		<tr>
+			<td>Lv5</td>
+			<td>坎那貝拉村：貝德莉奴卡片屋(35.86)、(35.88)</td>
+			<td>1875G</td>
+		</tr>
+	</table>
+</div>
+<script type="text/javascript">
+document.write(showdiv);
+if(window.location.hash){
+    pet(window.location.hash.substr(1));
+}
+</script>
+</body>
+</html>

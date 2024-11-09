@@ -1,0 +1,329 @@
+﻿<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>魔力寶貝檔案結構分析 ── 圖像、地圖</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<style type="text/css">
+* {
+	font-family: Calibri, Tahoma;
+	font-size: 9pt;
+}
+p, fieldset {
+	line-height: 20px;
+	text-align: left;
+	border: 1px solid #908860;
+	padding: 7px;
+	background-color: #f8f4e0;
+	margin-bottom: 10px;
+}
+legend {
+	font-weight: bold;
+	font-size: 18pt;
+	line-height: 25px;
+	color: #3366CC;
+}
+table.style1, table.style1 td, table.style1 th {
+	border: 1px #908860 solid;
+	border-collapse: collapse;
+	padding: 4px;
+}
+table.style1 th {
+	border-bottom-width: 2px;
+	text-align: left;
+}
+table.style1 tr.style3 td {
+	background-color: #D8CCA8;
+}
+.style1 {
+	border-style: solid;
+	border-width: 2px;
+}
+.style2 {
+	background-color: #F8F4E0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	魔力寶貝檔案結構分析 ── 圖像、地圖</div>
+<div style="width: 800px">
+	<p>　　早前製作魔物分布時打算再次製作實景地圖，剛巧找到這個網站中(<a target="_blank" href="http://www.fanicer.com/">梦见坡</a>)的一篇文章 
+	<a target="_blank" href="http://www.fanicer.com/gallery/FileFmt.htm">CrossGate文件分析</a>，並開始研究。所以以下對檔案的結構分析內容均來自這篇文章，有些亦是自行研究時的發現。(若無法登入網站請點擊 
+	<a href="fanicer.htm" target="_blank">此網頁</a> 或 
+	<a href="image/filesystem/map/fanicer.gif" target="_blank">此圖</a>)</p>
+	<fieldset>
+	<legend>導覽</legend>
+	<ul>
+	<li><a href="filesystem_graphicmap.htm#intro">簡介</a></li>
+	<li><a href="filesystem_graphicmap.htm#graphicinfo">圖片索引檔案(GraphicInfo*_*.bin)</a></li>
+	<li><a href="filesystem_graphicmap.htm#graphic">圖像檔案(Graphic*_*.bin)</a></li>
+	<li><a href="filesystem_graphicmap.htm#unzip">解壓算法(Run-Length)</a></li>
+	<li><a href="filesystem_graphicmap.htm#palet">調色板檔案palet_*.cgp</a></li>
+	<li><a href="filesystem_graphicmap.htm#mapdat">地圖檔案 *.dat</a></li>
+	<li>續後版本的改動</li>
+	<li>　<a href="filesystem_graphicmap.htm#Puk_graphic_palet">﹂圖像檔案(Graphic*_*.bin), 調色板檔案palet_*.cgp</a></li>
+	<li>　<a href="filesystem_graphicmap.htm#Puk_mapdat">﹂地圖檔案 *.dat</a></li>
+	<li>　<a href="filesystem_graphicmap.htm#Puk_relate">﹂其他關聯檔案</a></li>
+	<li><a href="filesystem_graphicmap.htm#result">製作成果</a></li>
+	<li><a href="filesystem_graphicmap.htm#other">其他資料</a></li>
+	</ul>
+	</fieldset>
+	<fieldset>
+	<legend><a name="intro"></a>簡介</legend>
+	<div style="float: right">
+	<img src="image/filesystem/map/graphbin.jpg" width="421" height="208"><br>
+	<img src="image/filesystem/map/version.gif" width="458" height="180"></div>　　若有截過圖或找Log檔的人都會會留意到整個魔力寶貝目錄有 
+	bin, data, Log, map, screenshot, Upl 子目錄。Log 及 screenshot 的作用顯然是儲存Log對話檔案及BMP格式截圖，data 
+	是儲存玩家登入的訊息。這篇文章集中介紹儲存 bin 目錄下的 Graphic*_*.bin, GraphicInfo*_*.bin, palet_*.cgp 
+	以及 map 目錄下的 *.dat 檔案。這些檔案均需以二進制方式讀取，否則使用類似記筆本等軟件開啟只會看到一堆沒意義的空白和符號。<br>
+	　　使用過 See4CG 的人大約了解魔力場景是由無數的小圖片組合而成，儲存這些圖片數據的便是 Graphic*_*.bin 檔案。由於此檔案只是儲存圖片的數據，這樣相等於桌面上的一大堆沒命名的文件，為這些圖片名命的索引檔案就是 
+	GraphicInfo*_*.bin。每次這些檔案有更新時，檔案名稱尾部的數字均會改變。<br>
+	　　並非所有圖像數據都儲存在同一個檔案中，每個大版本均有其專屬的名稱，索引檔案與數據檔案的檔名是相應的。 </fieldset><fieldset>
+	<legend><a name="graphicinfo"></a>圖片索引檔案(GraphicInfo*_*.bin)</legend>
+	　　那麼 GraphicInfo*_*.bin 這個索引檔案會儲存甚麼資訊呢？<br>
+	它是由每塊長度為 40 字節 (40bytes) 的數據組成，這 40 字節結構如下<br>
+	<img src="image/filesystem/map/graphicinfo.gif" width="509" height="373"><br>
+	<br>
+	　　這些被索引編號的均包含所有圖像，如地面、建築物、物件、技能、人物、人物大頭照、寵物及遊戲界面，<br>
+	即是 1.0 及 2.0 的界面均能找到。編號在各版本的索引中都以 0 順序編號，地圖編號則不是，只有有關人物及寵物的動畫的畫格地圖編號才一概為 0。<br>
+	在版本神獸傳奇+魔弓傳奇及龍之沙漏的地圖中，所有地面圖像均寬x高 64像素 x 47 像素，偏移量X 為&nbsp; -32 偏移量Y 為 -24。 
+	</fieldset> <fieldset>
+	<legend><a name="graphic"></a>圖像檔案(Graphic*_*.bin)</legend>
+	　　為提取圖像，一般都會先讀取 GraphicInfo*_*.bin 索引檔案內容獲得圖像的地址，然後讀取相應版本的 Graphic_*.bin 圖片數據檔案。<br>
+	圖片數據檔案與索引檔案不同，它儲存了所有圖像的原始數據，而且沒有固定大小的數據塊，<br>
+	但每個數據塊均由兩部分組成︰標頭+數據。每個標頭均長16字節，結構如下︰<br>
+	<img src="image/filesystem/map/graphicdata1.gif" width="427" height="181"><br>
+	<br>
+	　　長度為 16 字節的標頭後面便是長度為 (數據長度-16) 字節的圖像原始數據，絕大部分均已壓縮的。<br>
+	簡單來說若要讀取龍之沙漏的第 100 張圖像數據，先在 GraphicInfo Ex_*.bin 找出第 100 項記錄，<br>
+	即起始位置為 (40*100) 字節，讀取地址 address 後便在 GraphicEx_*.bin&nbsp; 中第 address 字節開始讀取 
+	16 字節的標頭數據，<br>
+	確認圖像為已壓縮後便可以開始在第 (address+16) 字節讀取數據，並以以下解壓方式得出圖像。</fieldset> <fieldset>
+	<legend><a name="unzip"></a>解壓算法(Run-Length)</legend>
+	　　魔力寶貝圖像數據的壓縮方法為 Run-Length 算法，即將重複的數據以特定方法壓縮，<br>
+	所以只需根據以下數項定義改變取讀數據的方式便可以。<br>
+	首先由起始地址讀取第1字節稱為首字節(00)︰<br>
+	<img src="image/filesystem/map/unzip.gif" width="567" height="255"><br>
+	<br>
+	　　請注意表格上的首字節中的數字及大楷字母均用作標示解壓方法，不需納入運算。<br>
+	細楷a, bb, cc, xx均為十六進制的字符，運算前必需轉化成十進制，當中xx代表甚麼稍後解說。<br>
+	先以神獸傳奇版本中第1個圖像「空」為例解說這個解壓運算。<img src="image/filesystem/map/CG0000000.gif" width="64" height="47"><br>
+	讀取數據首9字節: d0 1f 02 41 41 d0 3c 86 41<br>
+	首字節00: d0，根據上表需多讀1字節組成d0 1f 解成重複 0x01f次透明色，化成十進制為31點透明色，<br>
+	然後到02字節為02, 即需讀取多2字節的數據為02 41 41, 0x41 即十進制65，解成 65 65<br>
+	繼續讀取為: d0, 組合 d0 3c……60點透明色<br>
+	續續便是07字節: 86, 組合成 86 41, 即6次0x41 =&gt; 65 65 65 65 65 65<br>
+	<br>
+	「 C9 表示填充 9 個背景色，D1 10 表示填充 0x110 個背景色，<br>
+	　12 50 表示後面跟著一個長度為 0x250 的字符串，91 02 30 則表示將 0x02 重複 0x130遍」 <br>
+	順序解讀出來的數據並不可以按順序由左上至右下繪圖，否則會輸出上下倒置的結果。<br>
+	＊對於這個解壓算法解釋可能有些含糊，若有不明白請留言或提出更好的解釋方法。＊</fieldset> <fieldset>
+	<legend><a name="palet"></a>調色板檔案palet_*.cgp</legend>
+	　　現在便解釋一下 xx 到底代表甚麼。<br>
+	　　魔力寶貝的每一幀圖像結構與 gif 相同，均是以一調色板控制色彩，一般來說 gif 的調色板有 256 種顏色，xx 則代表調色板上第 xx 種顏色。<br>
+	這色板的來源就是 bin 目錄下的 pal 內的 palet_*.cgp 檔案，它亦是需以二進制方式開啟，結構為每 3 字節代表一種顏色，pal 目錄內所有檔案大小均為 
+	708bytes(字節)，即它儲存了 236 種顏色，但它第一種顏色是代表調色板的第 16 種顏色，所以檔案是代表第 16-252種顏色。不過檔案由第 
+	241 種顏色開始已沒有使用，其實際上只用了第16-240種顏色，前16及後16種顏色均是預設的。<br>
+	　　另外一提的是每3字節順序所代表的RGB值是BGR(剛好相反的)，值亦是以十六進制代表，即網頁設計所使用的方式(FF, FF, FF 代表白色)。所以將xx化為十進制後，若xx&gt;=16及xx&lt;240，便可在palet_*.cgp檔案中以(xx-16)*3為起始位址讀取3字節獲得顏色，否則xx便代表以下顏色號。<br>
+	<img src="image/filesystem/map/default.gif" width="684" height="220"><br>
+	<br>
+	　　基於這理論，魔力寶貝的場景變換其實是轉換了調色板而非大量的轉換圖像數據，而且最多只使用256種顏色。這可證明使用gif或png-8儲存魔力相片也不失任何一種色彩，不需要使用耗資源的bmp檔案。<br>
+	常用的調色板有︰白天palet_00.cgp, 傍晚palet_01.cgp, 晚上palet_02.cgp, 凌晨palet_03.cgp及部分室內場景palet_12.cgp</fieldset>
+	<fieldset>
+	<legend><a name="mapdat"></a>地圖檔案 *.dat</legend>
+	　　花了極大的篇幅解釋圖像的顯示，終於來到地圖的部分，地圖的製成的先決條件是必須先到過該地方，因為所到之地的地圖數據會儲存在目錄map之下。依目前研究，目錄map\0為儲存固定地圖如芙蕾雅島、法蘭城等。目錄map\1則為儲存迷宮地圖如map\1\1為里歐波多的洞窟、城內的地下迷宮等。地圖檔案*.dat整個檔案共分四大領域。<br>
+	<ol>
+		<li>首20字節為檔頭，檔頭的頭3字節為固定字符MAP，隨後9字節均為0/空白，<br>
+		然後為分別2個DWORD(4字節)的數據，第1個表示地圖長度-東(W)，第2個表示地圖長度-南(H)。</li>
+		<li>隨後W*H*2字節為地面數據，每2字節為1數據塊，表示地面的地圖編號，以製成基本地形。</li>
+		<li>再隨後W*H*2字節為地上物件/建築物數據，每2字節為1數據塊，表示該點上的物件/建築物地圖編號。</li>
+		<li>再隨後 W*H*2 字節為地圖標誌，每 2 字節為 1 數據塊，<br>
+		數據塊第 1 字節為 0 或 10，10 表示該坐標能引發場景轉換，否則為 0<br>
+		數據塊第 2 字節為 0、192 或 193，193 表示不能穿越該坐標，反之為 192，0 表示沒地圖。<br>
+		所以讀取這2字節成十進制得出 0、49408、49152及49162</li>
+	</ol>
+	基於魔力寶貝的視角為45∘，(W*H*2)的數據中順序排列如下<br>
+	<img src="image/filesystem/map/map.gif" width="384" height="278"><br>
+	<br>
+	　　因前期地圖大小全為 64 像素 x 47 像素，偏移量x -32, y -24，所以可直接計算其 x, y 坐標。<br>
+	但相同算法應用在建築物上會移位，這必須自行根據情況而調控。<br>
+	本人製作情況︰若方塊 6 的 w 和 h 均設為 1, 方塊 7 的分別設為 2 及 1，方塊6的x坐標為 (w+h)*32，<br>
+	那麼在方塊 6 上的建築x坐標為 (w+h)*32 + 偏移量x + 96<br>
+	<br>
+	　　由於編號只由 2 字節組成，無法直接指向龍之沙漏的地圖 (地圖編號 &gt; 200000)，在製作地圖時地面編號 &gt;=20000 則需加 200000，<br>
+	　　建築物編號 200-265 均不需顯示，25290 及 &gt;= 30000 均需加上 200000 </fieldset>
+	<p style="font-size: 18px; color: #ff0000; text-align: center; font-weight: bold;">
+	以上理論全只適合神獸傳奇, 魔弓傳奇及龍之沙漏，往後版本均有些少改動</p>
+	<div class="head">
+		續後版本的改動</div>
+	<fieldset>
+	<legend><a name="Puk_graphic_palet"></a>圖像檔案(Graphic*_*.bin), 調色板檔案palet_*.cgp</legend>
+	　　自樂園之卵開始圖像均由全局調色板轉為自帶調色板，所以不會使用palet_*.cgp，圖片自帶色彩可令場景顏色更多元化。<br>
+	圖像的解壓方法不變，圖像檔案結構擴大至20字節，如下<table class="style1">
+		<tr>
+			<th>類型(長度)</th>
+			<th>描述</th>
+			<th>說明</th>
+		</tr>
+		<tr class="style3">
+			<td>BYTE[2](2字節)</td>
+			<td>不明</td>
+			<td>內容固定為RD</td>
+		</tr>
+		<tr>
+			<td>BYTE(1字節)</td>
+			<td>版本</td>
+			<td><span style="color: red">0 及 2 </span>為未壓縮的位圖數據，單數表代數據為已壓縮<br>
+			( 1 為神獸傳奇+魔弓傳奇+龍之沙漏)<br>
+			<span style="color: red">( 3 為樂園之卵)</span></td>
+		</tr>
+		<tr class="style3">
+			<td>BYTE(1字節)</td>
+			<td>Unknown</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>LONG(4字節)</td>
+			<td>寬度</td>
+			<td></td>
+		</tr>
+		<tr class="style3">
+			<td>LONG(4字節)</td>
+			<td>高度</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>LONG(4字節)</td>
+			<td>數據長度</td>
+			<td>本節數據塊的長度，包含標頭的長度(16字節)</td>
+		</tr>
+		<tr class="style3" style="color: red">
+			<td>LONG(4字節)</td>
+			<td>調色板長度</td>
+			<td>自帶調色板長度，通常為768字節</td>
+		</tr>
+	</table>
+	自帶調色板必需將圖像解壓後才能讀取，圖像數據將分為兩部分: 圖像數據+調色板數據。<br>
+	由於調色板長度為 768，即 256 種色彩，所以亦沒有之前的預設的色彩編號。<br>
+	製作地圖時亦不能直接使用圖像，是需要分割圖像，推斷有關操作牽涉檔案 Puk2\cutdat\*.cut<br>
+	cutdat 下的檔案與 map\0 下的 *.dat 對應 ( * &gt; 50000 ) 全為樂園之卵的地圖</fieldset> <fieldset>
+	<legend><a name="Puk_mapdat"></a>地圖檔案 *.dat</legend>
+	結構基本上沒有改動，但地圖編號卻並非直接查找圖像編號，<br>
+	而是查找分割檔案 *.cut 的編號，分割檔案的描述在以下說明。</fieldset> <fieldset>
+	<legend><a name="Puk_relate"></a>其他關聯檔案</legend>
+	尚未鑽究成功 暫時只發現<br>
+	以下兩者均與頭飾系統有關，檔案被移開只會使頭飾顯示位置不正常。<br>
+	coordinate*.bin 每8字節為一數據塊<br>
+	coordinateinfo*.bin 每10字節為一數據塊，結構推斷如下。
+	<table class="style1">
+		<tr>
+			<th>長度</th>
+			<th>描述</th>
+			<th>說明</th>
+		</tr>
+		<tr class="style3">
+			<td>BYTE(1字節)</td>
+			<td>不明</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>BYTE(1字節)</td>
+			<td>不明</td>
+			<td></td>
+		</tr>
+		<tr class="style3">
+			<td>BYTE(1字節)</td>
+			<td>不明</td>
+			<td>固定數值1</td>
+		</tr>
+		<tr>
+			<td>BYTE(1字節)</td>
+			<td>不明</td>
+			<td>固定數值0</td>
+		</tr>
+		<tr class="style3">
+			<td>DWORD(4字節)</td>
+			<td>地址</td>
+			<td>指向 coordinate*.bin 的位置</td>
+		</tr>
+		<tr>
+			<td>WORD(2字節)</td>
+			<td>數據塊數</td>
+			<td>在 coordinate*.bin 中含數據塊數目( 8 字節為 1 塊)</td>
+		</tr>
+		</table>
+	<br>
+	Puk2<span class="style2">\</span>cutdat 的 *.cut 檔案頭三字節為CUT 隨後 9 字節除有記錄數據塊數目外作用不明，<br>
+	然後所有數據為18字節為一數據塊 數據塊結構推斷為下 
+	<table class="style1">
+		<tr>
+			<th>長度</th>
+			<th>描述</th>
+			<th>說明</th>
+		</tr>
+		<tr class="style3">
+			<td>DWORD(4字節)</td>
+			<td>地圖編號</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>BYTE[2](2字節)</td>
+			<td>不明</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr class="style3">
+			<td>WORD(2字節)</td>
+			<td>X 坐標</td>
+			<td>在地圖編號圖片上由 X 坐標開始複製大小為寬度的圖像</td>
+		</tr>
+		<tr>
+			<td>WORD(2字節)</td>
+			<td>Y 坐標</td>
+			<td>在地圖編號圖片上由Y坐標開始複製大小為高度的圖像</td>
+		</tr>
+		<tr class="style3">
+			<td>WORD(2字節)</td>
+			<td>寬度</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>WORD(2字節)</td>
+			<td>高度</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr class="style3">
+			<td>WORD(2字節)</td>
+			<td>偏移量 X</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>WORD(2字節)</td>
+			<td>偏移量 Y</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table><br>
+	Puk2\cutdat 的 *.Aut 檔案並沒有檔頭，其大小剛好為 (相應的地圖檔案大小 - 20)/2<br>
+	這表示這檔案沒有檔頭而一直以 3 字節為一數據塊。<br>
+	這 3 字節代表一 RGB 顏色，讀取地圖檔案記錄的寬和高後便製作成小地圖。<br>
+	這只限於 3.0 類地圖。</fieldset> <fieldset>
+	<legend><a name="result"></a>製作成果</legend>
+	根據理論只能製作除樂園之卵, 辛梅爾等地除外的地圖<br>
+	以烏克蘭村及逆星馬斯城作為範例<br>
+	<br>
+	烏克蘭村 縮圖 640x490 95.4kb　　　　<a href="image/filesystem/map/demo/2200.jpg" target="_blank">原圖 4704x3599 4.31MB 點擊觀看</a><br>
+	<img src="image/filesystem/map/demo/2200_thumb.jpg" width="640" height="490"><br>
+	<br>
+	馬斯城 縮圖 640x478 78.1kb　　　　<a href="image/filesystem/map/demo/31922.jpg" target="_blank">原圖 5959x4450 5.26MB 點擊觀看</a><br>
+	<img src="image/filesystem/map/demo/31922_thumb.jpg" width="640" height="478"><br>
+	更多作品將於稍後發布 </fieldset><fieldset>
+<legend><a name="other"></a>其他資料</legend>
+目錄 map\0 下dat檔對應地方名稱<br>
+<a href="filesystem_mapdatlist.htm">點擊進入 filesystem_mapdatlist.htm</a>
+</fieldset>
+ </div>
+</body>
+
+</html>

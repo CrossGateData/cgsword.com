@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>寵物技能</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<link rel="stylesheet" type="text/css" href="petskill.css">
+<style type="text/css">
+table#petskilltable td:hover {
+	background-color: #d8cca8;
+}
+</style>
+</head>
+
+<body onkeydown="if(event.keyCode == 8){getskill('history');return false}">
+<script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/skill.js"></script>
+<table id="petskilltable" class="style" align="center">
+	<tr>
+		<th colspan="5">寵物技能</th>
+	</tr>
+	<tr style="cursor: pointer;color: #0000FF">
+		<td onclick="getskill('skill1','PetSkill1')">寵物一般技能</td>
+		<td onclick="getskill('skill2','PetSkill2')">寵物戰鬥技能</td>
+		<td onclick="getskill('skill3','PetSkill3')">寵物魔法技能</td>
+		<td onclick="getskill('skill4','PetSkill4')">狀態攻擊技能</td>
+		<td onclick="getskill('skill5','PetSkill5')">狀態抵抗技能</td>
+	</tr>
+</table>
+<br>
+<div id="index">
+	<table class="style" align="center">
+		<tr>
+			<td class="head" style="text-align: left; padding: 5px">寵物技能分魔法技能、戰鬥技能、狀態攻擊、咒術技能、狀態抵抗<br>
+			<font color="#ff0000">魔法技能</font>　I ~ X 級<br>
+			I 級技能需要寵物 Lv1~9　II 級則 Lv10~19　III 級則 Lv20~29 以上才能使用，如此類推。<br>
+			<font color="#ff0000">戰鬥技能 狀態攻擊 咒術技能 狀態抵抗</font>　I ~ V 級<br>
+			I 級技能需要寵物 Lv1~19　II 級則 Lv20~39　III 級則 Lv40~59 以上才能使用，如此類推。<br>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<table class="style" align="center">
+		<tr>
+			<th colspan="2">技能詳解</th>
+		</tr>
+		<tr height="35">
+			<td colspan="2" class="head">寵物技能</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill1','PetSkill1')" style="cursor: pointer">
+			<td width="15%"><a>寵物一般技能</a></td>
+			<td width="85%" style="text-align: left">&nbsp;攻擊 | 防禦 | 攻擊魔法防禦 | 什麼也不做 
+			| 定點移動 | 寵物郵件</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill2','PetSkill2')" style="cursor: pointer">
+			<td><a>寵物戰鬥技能</a></td>
+			<td style="text-align: left">&nbsp;連擊 | 乾坤一擲 | 諸刃 | 崩擊 | 陽炎 | 反擊 | 戰慄襲心 
+			| 護衛 | 聖盾 | 明鏡止水<br>
+			</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill3','PetSkill3')" style="cursor: pointer">
+			<td><a>寵物魔法技能</a></td>
+			<td style="text-align: left">&nbsp;隕石魔法 | 冰雹魔法 | 火焰魔法 | 風刃魔法 | 強力隕石魔法 
+			| 強力冰凍魔法 | 強力火焰魔法 | 強力風刃魔法</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill4','PetSkill4')" style="cursor: pointer">
+			<td><a>狀態攻擊技能</a></td>
+			<td style="text-align: left">&nbsp;毒性攻擊 | 昏睡攻擊 | 石化攻擊 | 酒醉攻擊 | 混亂攻擊 
+			| 遺忘攻擊 | 吸血攻擊</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill5','PetSkill5')" style="cursor: pointer">
+			<td><a>狀態抵抗技能</a></td>
+			<td style="text-align: left">&nbsp;抗毒性 | 抗昏睡 | 抗石化 | 抗酒醉 | 抗混亂 | 抗遺忘 
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="skill1"></div>
+<div id="skill2"></div>
+<div id="skill3"></div>
+<div id="skill4"></div>
+<div id="skill5"></div>
+
+</body>
+
+</html>

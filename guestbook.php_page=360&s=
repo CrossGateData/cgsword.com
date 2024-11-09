@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: No-Name</span><span class="time">2009-03-31 03:49 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				一元復始!頭香啦!1001<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1107)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">1107</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: Miracle嵐</span><span class="time">2009-03-31 02:30 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				來亂的第1000個謠言<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1106)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-03-31 09:32 PM 回覆<br><br>
+					<div style="padding-left: 10px">來亂的第1000個回覆? (逃...</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-02 05:36 PM 回覆<br><br>
+					<div style="padding-left: 10px">你這個應該不是第1000個回覆吧xD</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2009-04-04 08:50 AM 回覆<br><br>
+					<div style="padding-left: 10px">事實上你這個都不是第1000個謠言 XD<br />
+試試把全頁反白 XD<br />
+右邊看不看到一組數字 XD</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-04 10:59 AM 回覆<br><br>
+					<div style="padding-left: 10px">!!!!!!!可惡阿!!明明右邊留言總數就沒有這麼多嘛</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2009-04-04 03:28 PM 回覆<br><br>
+					<div style="padding-left: 10px">呢個世界有樣野叫刪除 囧</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1106</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2009-03-31 09:53 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				    長老勳要怎解阿 ? <br>
+				<br>
+				[最後於 2009-03-31 09:58 AM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1105)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-03-31 02:12 PM 回覆<br><br>
+					<div style="padding-left: 10px">請看任務詳解→傑諾姆島→彩葉草之戀</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1105</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: *gillian～靜兒</span><span class="time">2009-03-30 08:38 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>學習追月問題</b></p>
+				我想問問追月真的是要師範才學得嗎?<br />
+如果我現在正職去會學不到嗎?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1104)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-03-30 11:12 PM 回覆<br><br>
+					<div style="padding-left: 10px">無錯 必要師範級或以上</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-03-31 09:49 AM 回覆<br><br>
+					<div style="padding-left: 10px">可以先去解 先打殘書碎片 到師範後在去學0.0</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1104</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 雙子星玩家    DAN</span><span class="time">2009-03-30 06:19 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>挖掘情報修正</b></p>
+				6級礦幻之銀的採集點有誤<br />
+<br />
+網站上面寫的挖掘點是 B2(40,5)經過測試後 <br />
+發現一直挖不到&gt;&lt;<br />
+<br />
+在各大網路討論區爬文後<br />
+大家都有推薦的一個挖點 B2(19,07)<br />
+就在2樓樓梯口旁而已 機率比較高<br />
+<br />
+可以的話麻煩做個修正^^<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1103)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2009-04-04 03:29 PM 回覆<br><br>
+					<div style="padding-left: 10px">嗯 修改好嚕<br />
+(迷音: 這是八級礦唷~_~)</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1103</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: *gillian～靜兒</span><span class="time">2009-03-30 01:49 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>採集卷飛點問題</b></p>
+				試過採集卷摩斯蜥蜴,但飛唔到<br />
+係咪無呢個點飛嫁? -.-<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1102)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">1102</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: *gillian～靜兒</span><span class="time">2009-03-30 01:46 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>劍士技能</b></p>
+				想問劍士應該學咩技能..<br />
+連擊,乾擲,明水,氣回,調教,迅果,追月,攻反,騎譽,攻吸<br />
+這樣好嗎?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1101)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-03-30 06:17 PM 回覆<br><br>
+					<div style="padding-left: 10px">騎士之譽在劍士身上用處不大<br />
+<br />
+建議學一下戒驕戒躁，除了加王提高必殺外，還可配點PK時的戰術<br />
+<br />
+如無必要調教也可以不學，可改學魔吸或魔無</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">*gillian～靜兒 於 2009-03-30 06:40 PM 回覆<br><br>
+					<div style="padding-left: 10px">其實我係從技能上限方面考慮<br />
+例如聖盾,陽炎,諸刃都係可以去到10<br />
+不過用處唔大而且不利戰鬥<br />
+崩擊好些,但只去到7級<br />
+所以我就係係崩擊同騎譽2招之間煩緊...<br />
+究竟那招比較好<br />
+調教反而留住好d<br />
+我平時好少玩pk同打王,多數練技多<br />
+所以先考慮騎譽</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-03-30 11:27 PM 回覆<br><br>
+					<div style="padding-left: 10px">我本來想提議學諸刃，但兩招學齊只係一般完美主義玩家會升，個人認為乾坤已經足夠<br />
+<br />
+如果只用作升級升技的話其實攻反的作用好像看不出很大.. 如果王都不打的話.. 氣回都好像沒太大需要..<br />
+<br />
+只用作升等的話，崩擊7級其實已經很足夠<br />
+如果只為技能上限能到10去選技的話..直接吧所有能達10級的技能都升就好..<br />
+<br />
+陽炎跟聖盾都是主用作PK的技能可以不理，聖盾可以用作打王，但不打王的話也可以不理..<br />
+<br />
+如果純為升技的話就真的全學就好.. 但這劍士升起來好像沒甚麼用..<br />
+<br />
+其實不PK不打王的話，很多技能已不是必要，學了反而無用武之地，浪費了升和學技能的時間，但又要升10級的話，就要在兩者之間取捨，要看你比較想是技能有用還是技能到10級了</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">*gillian～靜兒 於 2009-03-31 05:05 PM 回覆<br><br>
+					<div style="padding-left: 10px">嗯,多謝嵐的意見^^<br />
+pk就一定唔會,但打王就真的需要技能<br />
+我個人比較喜歡把技練到頂尖先去升級同打王<br />
+就係這個問題所以先需要專業意見看看什麼技能適合<br />
+因為劍士技能經驗打卡+20,練起來時間比較長久<br />
+至會出現很少打王這個情況,到真是練到了才去打王<br />
+那麼你所學的技能究竟哪招適合呢?<br />
+通常都會打改波卡,帕靈什至好多王,如果所練的技能不適用於這些王,那麼這個劍士真的是無用武之地.<br />
+乾擲怕打不中,所以考慮諸刃,剛巧可以到10級<br />
+聖盾也可以,不過唔明白為何適用於打王,如果要2者選擇1,那個會好些?<br />
+還是2者也無需要?<br />
+<br />
+</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-01 07:25 PM 回覆<br><br>
+					<div style="padding-left: 10px">首先回答有關選乾坤或諸刃的問題，如果不PK的話，乾坤其實已經夠用，打怪打王miss的情況不算嚴重。相反如果使用諸刃打王，防禦方便真的會降低很多，很多人說在240攻防論之下，只要防禦剩240以上就好，但事實真的如此？我這樣說當然就是想指出使用諸刃並不是上策，畢竟防扣得多就變得容易死了。當然，如果時間許可或技能欄充足的話可以兩招都學，看情況出招，但個人認為乾坤實用性較高。<br />
+<br />
+接下來就是聖盾的問題，首先簡單說一下聖盾這招技能，在裝備盾的情況下才能發動，對物理攻擊或魔法攻擊也有防禦功效，而且防禦效果極佳(尤指10級)。<br />
+排除鼠裝及完晶等強勁裝備的話，在打較強的王的時候，同時物理攻擊和魔法轟炸的情況亦很普遍，使用聖盾定大大降低損傷。<br />
+另一情況就是在人物血量剩下很少，擔心挨不下幾招來等傳教補血的時候發動技能，保持不扣光血量等待傳教補血。例如打波羅卡斯的時候被魔法圍攻或打帕靈被他乾個爽的話，但傳教速度不夠的時候就可以發動。當然也可以掉水，要看不同情況選擇用藥水還是聖盾了。<br />
+再另一個情況就是保持血量打王，收寵配合第1回攻第2回聖盾，減低每回合的損傷。這招比較適用於1~3P王，在快被滅團的時候可能就用聖盾來重燃勝利的希望。(不是亂說的，確實有試過這個情況)<br />
+聖盾這招主要是較偏向戰術的技能，在今時今日的魔力世界裡的確漸漸被淘汰，配合閃避高的裝備、鼠裝及等級漸漸升高，這招技能的用處已比以前大大縮小，而且並不重要。<br />
+<br />
+最後就是回答如果二者選一的話，選聖盾來練會好些吧。因為攻擊技能有乾坤已經足夠，而且要升技的話聖盾比諸刃好升。認真說，我選的時候都想了一會，需要又不能說是無需要，但又沒偏向哪招較有用，如果看了上面的回覆後你覺得無需要學的話，那就兩招都不學就好。</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">*gillian～靜兒 於 2009-04-04 12:30 PM 回覆<br><br>
+					<div style="padding-left: 10px">其實我都欣賞聖盾,只是我的看法是一般戰鬥場面,每個玩家都忙於清怪,即使王戰亦都忙於清身邊的隨從<br />
+完全沒有機會用到聖盾<br />
+對戰鬥似乎毫無幫助<br />
+再加上有d王會崩擊<br />
+另外想問下用聖盾情況下被攻擊<br />
+裝備耐久會否扣減?<br />
+而且聖盾是否不能抵禦即死魔法?</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-04 02:45 PM 回覆<br><br>
+					<div style="padding-left: 10px">一般戰鬥當然就不會使用聖盾了，但王戰並不是全部有隨從喔，聖盾通常都在危緊時保命用，平日看不出什麼效果。<br />
+<br />
+在聖盾情況下被攻擊裝備耐久當然也會點減了<br />
+<br />
+無錯，聖轉不能抵禦即死魔法，其實並沒有技能能抵禦即死魔法喔，精變也不例外，要抗衡即死魔法就只有進攻嚕</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">*gillian～靜兒 於 2009-04-09 10:37 PM 回覆<br><br>
+					<div style="padding-left: 10px">聖盾已學,現在提昇中<br />
+感覺好像消錢哩!^^&quot;<br />
+最後一問了,我幾招都在考慮中<br />
+崩擊,騎譽學好還是不學好...<br />
+騎譽是幫助隊友的<br />
+雪塔使用很明顯<br />
+但是學埋便要犧牲攻反或攻無<br />
+或者氣回</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1101</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: `;BABY_SIUH0</span><span class="time">2009-03-29 05:22 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>有關追月的</b></p>
+				追月隊伍果到~<br />
+<br />
+建議3p去~<br />
+吾需要學追月的身上一定要無位<br />
+而且最好係弓格就最好清<br />
+<br />
+個人經驗<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1100)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-03-29 05:48 PM 回覆<br><br>
+					<div style="padding-left: 10px">我比較建議2p去<br />
+除弓格之外 高技追月都好好清<br />
+因為可以睇位置放技只要較好位置殺蜂就好易打</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-03-29 06:45 PM 回覆<br><br>
+					<div style="padding-left: 10px">Miracle嵐<br />
+請問你2p意思是一支會追月的<br />
+帶一個學追月的人去嗎？<br />
+要麼這樣清怪都好像集中在會追月的人身上嘛<br />
+感覺不夠力快速清怪的說</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-03-29 08:18 PM 回覆<br><br>
+					<div style="padding-left: 10px">對，就是1個會追月 1個學追月<br />
+<br />
+雖然清怪速度不及3P，但打到殘書的速度就比3P快了<br />
+清怪能力並不集中在一個人身上<br />
+只是會追月的人帶升就能更準確瞄準異蜂來打<br />
+<br />
+另外要學追月的人大部份都有王宮或師範級以上，有時候追月未能瞄準所有蜂的話就由要學追月的放乾坤等技能，還有除了人物以外還有寵物幫忙清怪，對兩個近戰來說，要清一場實在並不是難事<br />
+<br />
+順帶一提，多次幫打的經驗所得，異蜂跟仙人掌很常攻擊體力較多的目標，配合血攻寵反擊也是很容易清怪的方法，但寵物血和魔量也會消耗得快<br />
+<br />
+若兩人已經足夠清怪的話，就沒有三人的必要了</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1100</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 超級新手</span><span class="time">2009-03-29 03:05 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>寵物吸血技能</b></p>
+				請問一下高手 我的小寵已經40級<br />
+道 地納村學吸血 卻沒 看到 請問 要去哪學呢<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1099)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-03-29 03:32 PM 回覆<br><br>
+					<div style="padding-left: 10px">莎蓮娜阿巴尼斯村，酒吧(67，64)。</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1099</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: ☆無心戀戰☆</span><span class="time">2009-03-29 12:42 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>雪塔94f的地圖</b></p>
+				如提94f的&quot;上下樓&quot; 標相反囉 麻煩請修改一下 以免誤導新手^^<br>
+				<br>
+				[最後於 2009-03-29 12:43 AM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1098)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">1098</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=359&amp;s=">上一頁</a>		<a href="guestbook.php?page=361&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,358 @@
+﻿<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>一級寵的能力產生與挑選</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+</head>
+
+<body>
+
+<table class="style">
+	<tr>
+		<td width="21%"><a href="PetCalc1.htm">理論基礎</a></td>
+		<td width="22%"><a href="PetCalc2.htm">寵物能力理論</a></td>
+		<td width="22%"><a href="PetCalc3.htm">野生寵物理論</a></td>
+		<td width="35%"><a href="PetCalc4.htm">一級與野生寵物導論</a></td>
+	</tr>
+</table>
+<br>
+<table class="style">
+	<tr>
+		<th>一級寵的能力產生與挑選</th>
+	</tr>
+	<tr>
+		<td class="head">(1)公式 - 成長檔次與隨機配檔</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="left">每一隻一級寵的能力是由以下公式產生的：單項BP能力 = 0.2 * (該能力成長檔次)<br>
+		<br>
+		五項BP都產生以後，系統會再配上<font color="#FF0000">0.2BP * 十檔</font>，配的位置是隨機的，配上的這十檔只對一級能力有影響，而完全不影響成長。<br>
+		螳螂的全頂檔次是: <font color="#FF0000">(16 44 22 27 11)</font>，所以一隻成長全頂的綠螳，能力可以是：<br>
+		<font color="#FF0000">(16 + a, 44 + b, 22 + c, 27 + d, 11 + e) , a + b + 
+		c + d + e = 10<br>
+		<br>
+		</font>例如說<font color="#FF0000">(16+7 44+3 22+0 27+0 11+0)</font>可得出BP是：<br>
+		<font color="#FF0000">0.2 * (23 47 22 27 11)</font> =
+		<font color="#FF0000">(4.6, 9.4, 4.4, 5.4, 2.2)</font></p>
+		配上這個表<table class="style" style="width: 86%">
+			<tr class="head">
+				<td width="12%"></td>
+				<td width="12%">生命</td>
+				<td width="12%">魔力</td>
+				<td width="12%">攻擊</td>
+				<td width="13%">防禦</td>
+				<td width="13%">敏捷</td>
+				<td width="13%">精神</td>
+				<td width="13%">回復</td>
+			</tr>
+			<tr>
+				<td class="head">+體力</td>
+				<td>8</td>
+				<td>1</td>
+				<td>0.2</td>
+				<td>0.2</td>
+				<td>0.1</td>
+				<td>-0.3</td>
+				<td>0.8</td>
+			</tr>
+			<tr>
+				<td class="head">+力量</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2.7</td>
+				<td>0.3</td>
+				<td>0.2</td>
+				<td>-0.1</td>
+				<td>-0.1</td>
+			</tr>
+			<tr>
+				<td class="head">+強度</td>
+				<td>3</td>
+				<td>2</td>
+				<td>0.3</td>
+				<td>3</td>
+				<td>0.2</td>
+				<td>0.2</td>
+				<td>-0.1</td>
+			</tr>
+			<tr>
+				<td class="head">+速度</td>
+				<td>3</td>
+				<td>2</td>
+				<td>0.3</td>
+				<td>0.3</td>
+				<td>2</td>
+				<td>-0.1</td>
+				<td>0.2</td>
+			</tr>
+			<tr>
+				<td class="head">+魔法</td>
+				<td>1</td>
+				<td>10</td>
+				<td>0.2</td>
+				<td>0.2</td>
+				<td>0.1</td>
+				<td>0.8</td>
+				<td>-0.3</td>
+			</tr>
+			<tr>
+				<td colspan="8" class="head"><font color="#FF0000">
+				＊寵物所有能力在遊戲中只會顯示整數位</font></td>
+			</tr>
+		</table>
+		<p>跟五圍20點/精回100點的基本值, 可算出生命是:<br>
+		<font color="#FF0000">20 + 8 * 4.6 + 2 * 9.4 + 3 * 4.4 + 3 * 5.4 + 1 * 
+		2.2 = 107.2<br>
+		血107.2 魔85 攻49.68 防39 敏34.24 精99.78 回102.72</font><br>
+		<br>
+		在遊戲中的可見能力是<font color="#FF0000">107 85 49 39 34 99 102 BP 4 9 4 5 2</font></p>
+		<table class="style" style="width: 75%">
+			<tr>
+				<td>(16+2 44+2 22+2 27+2 11+2) =&gt; 101 89 49 40 35 100 101 BP 3 9 
+				4 5 2</td>
+			</tr>
+			<tr>
+				<td>(16+0 44+0 22+0 27+0 11+10) =&gt; 96 102 48 38 34 101 101 BP 3 
+				8 4 5 4</td>
+			</tr>
+			<tr>
+				<td>(16+1 44+3 22+4 27+2 11+0) =&gt; 101 86 49 41 35 100 101 BP 3 9 
+				5 5 2</td>
+			</tr>
+			<tr>
+				<td>(16+3 44+2 22+1 27+2 11+2) =&gt; 102 89 49 39 35 100 102 BP 3 9 
+				4 5 2</td>
+			</tr>
+		</table>
+		<p align="left">等等都是成長全頂螳有機會出現的能力之一<br>
+		<br>
+		要注意的是這幾種螳之間的能力差距並不會隨著等級而變多<br>
+		例如說上面這隻血107的螳血比101只多6點，練到了120級一樣只會差6點，血101這兩隻在魔防敏的能力上也會比107這隻維持略高。<br>
+		<br>
+		相對來說，如果有一隻近頂螳只在體BP掉了一檔，到了120級的差距是：<br>
+		<font color="#FF0000">(0.67 - 0.625) * 8HP * 119級 = 42.84</font>，而且除了精神以外，全能力都會低落一些些。<br>
+		掉檔的影響比一級時隨機配檔的位置多很多。</p>
+		</td>
+	</tr>
+	<tr>
+		<td class="head">(2)掉檔位置的不可預測性，螳螂的全頂檔次是：(16 44 22 27 11)</td>
+	</tr>
+	<tr>
+		<td>一隻魔掉一檔的綠螳，能力可以是<font color="#FF0000">(16+2 44+2 22+2 27+2 10+2)</font><br>
+		一隻攻掉一檔的綠螳，能力可以是<font color="#FF0000">(16+2 43+3 22+2 27+2 11+1)<br>
+		</font><br>
+		有注意到嗎? 這兩隻螳的一級能力是完完全全一樣的，都是<font color="#FF0000">101 87 49 40 35 100 101 
+		BP 3 9 4 5 2</font><br>
+		<br>
+		所以幾乎所有的情況下，我們只能判斷一隻寵掉了幾檔，而不能判斷說檔次是掉在哪裡。</td>
+	</tr>
+	<tr>
+		<td class="head">(3)掉幾檔的不可預測性，在某些不常見的情況下, 我們將無法判斷一隻寵是否掉了檔, 或是掉了多少檔</td>
+	</tr>
+	<tr>
+		<td style="text-align: left">舉過這個例子：鬼靈頂檔次<font color="#FF0000">(9 21 27 
+		25 33)</font><br>
+		<br>
+		鬼靈A的敏掉一檔：<font color="#0000FF">(9+0 21+3 27+2 24+4 33+1) =&gt; 85 122.2 
+		38.1 42.24 34.18 105.02 99.46 1.8 4.8 5.8 5.6 6.8 24.8</font><br>
+		鬼靈B全頂不掉檔：<font color="#FF0000">(9+0 21+3 27+2 25+4 33+1) =&gt; 85.6 122.6 
+		38.16 42.3 34.58 105 99.5 1.8 4.8 5.8 5.8 6.8 25</font><br>
+		<br>
+		這兩隻寵的一級能力分別是<font color="#FF0000">(9 24 29 28 34)</font>跟<font color="#FF0000">(9 
+		24 29 29 34)<br>
+		</font>可是遊戲中五圍跟BP看起來完全一樣，都是<font color="#FF0000">85 122 38 42 34 105 99 
+		1 4 5 5 6</font></td>
+	</tr>
+	<tr>
+		<td>(4)頂寵的產生機率，視你的財力與時間還有對寵的需求，挑寵的目標就不會一樣</td>
+	</tr>
+	<tr>
+		<td>下表列出掉不同檔寵物的產生機率以供參考<table class="style" style="width: 54%">
+			<tr class="head">
+				<td colspan="2">掉檔數值 / 3125</td>
+				<td>比例</td>
+				<td>累計比例</td>
+				<td>平均採樣數</td>
+			</tr>
+			<tr>
+				<td width="20%">0</td>
+				<td width="20%">1</td>
+				<td width="20%">0.032%</td>
+				<td width="20%">0.032%</td>
+				<td width="20%">3125</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>5</td>
+				<td>0.160%</td>
+				<td>0.192%</td>
+				<td>521</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>15</td>
+				<td>0.480%</td>
+				<td>0.672%</td>
+				<td>149</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>35</td>
+				<td>1.120%</td>
+				<td>1.792%</td>
+				<td>56</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>70</td>
+				<td>2.240%</td>
+				<td>4.032%</td>
+				<td>25</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>121</td>
+				<td>3.872%</td>
+				<td>7.904%</td>
+				<td>7</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>185</td>
+				<td>5.920%</td>
+				<td>13.824%</td>
+				<td>5</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>225</td>
+				<td>8.160%</td>
+				<td>21.984%</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>320</td>
+				<td>10.240%</td>
+				<td>32.224%</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>365</td>
+				<td>11.680%</td>
+				<td>43.904%</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td>381</td>
+				<td>12.192%</td>
+				<td>56.096%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td>365</td>
+				<td>11.680%</td>
+				<td>67.776%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>12</td>
+				<td>320</td>
+				<td>10.240%</td>
+				<td>78.016%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>13</td>
+				<td>225</td>
+				<td>8.160%</td>
+				<td>86.176%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>14</td>
+				<td>185</td>
+				<td>5.920%</td>
+				<td>92.096%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>15</td>
+				<td>121</td>
+				<td>3.872%</td>
+				<td>95.968%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>16</td>
+				<td>70</td>
+				<td>2.240%</td>
+				<td>98.208%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>17</td>
+				<td>35</td>
+				<td>1.120%</td>
+				<td>99.328%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>18</td>
+				<td>15</td>
+				<td>0.480%</td>
+				<td>99.808%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>19</td>
+				<td>5</td>
+				<td>0.160%</td>
+				<td>99.968%</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>20</td>
+				<td>1</td>
+				<td>0.032%</td>
+				<td>100.000%</td>
+				<td>1</td>
+			</tr>
+		</table>
+		例如說要找一隻成長全頂寵<font color="#FF0000">(掉0檔)</font>，每3125隻才會有一隻，比例是<font color="#FF0000">0.032%</font>，平均要抓3125隻才會有一隻。<br>
+		<br>
+		如果要找一隻掉4檔或以下的寵，每3125隻會有<font color="#FF0000">(1 + 5 + 15 + 35 + 70) = 
+		126隻</font>，比例是<font color="#FF0000">4.032%</font>，平均每抓25隻就會有一隻。</td>
+	</tr>
+	<tr>
+		<td class="head">(5)理論在挑寵上的應用</td>
+	</tr>
+	<tr>
+		<td style="text-align: left">螳螂的全頂檔次是：(16 44 22 27 11)<br>
+		所以一隻頂螳每項BP至少有<font color="#FF0000">0.2 * (16 44 22 27 11) = (3.2 8.8 4.4 
+		5.4 2.2)</font><br>
+		遊戲中看起來是<font color="#FF0000">3 8 4 5 2</font>，有任何一項未達成，就必定不是全頂螳。<br>
+		<br>
+		也可以用全頂檔次再配上加某能力最少的隨機檔去判斷全頂寵的最低能力要求，例如說一級全頂螳血最糟的情況是隨機檔全都掉在魔上：<font color="#FF0000">(16+0 
+		44+0 22+0 27+0 11+10)(8 2 3 3 1)*(3.2 8.8 4.4 5.4 4.2) + 20 = 96.8</font>，可知血未滿96的綠螳必定沒有全頂。<br>
+		<br>
+		以此可推出剩下的能力要求是：<font color="#FF0000">96 84 48 38 34 99 101 3 8 4 5 2 BP22<br>
+		</font>血+魔184以上(血+魔的部份是用<font color="#FF0000">0 10 0 0 0</font>作計算，因為加力所升的血與魔總合最低)</td>
+	</tr>
+	<tr>
+		<td class="head">整理：寵物成長全頂最低個別能力要求為<font color="#FF0000">14</font></td>
+	</tr>
+	<tr>
+		<td style="text-align: left">
+		如果目標只是力BP成長頂的話，可以把注意力放在力BP上面，雖然隨機檔完全沒配在力上面的話頂力螳是可以有8點力BP，可是這機會相對不高，所以可以挑選9或以上的。或是反過來看，一隻敏BP只有4的螳，敏一定掉了3檔以上，因為只掉2檔的話，敏至少會有5。如果有Excel或寵物計檔器，也可以用五圍反推算出可能的檔次分配，跟掉了幾檔。</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

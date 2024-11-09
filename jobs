@@ -1,0 +1,441 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>職業總覽::魔力寶貝 - 御劍軒</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<style type="text/css">
+table.style td {
+	padding: 3px;
+}
+table.style td.name div {
+	float: left;
+	line-height: 30px;
+	border: 1px solid #908860;
+}
+table.style td.name div.level {
+	width: 40px;
+	color: #FFFFFF;
+	margin-left: 5px;
+	border-right-width: 0px;
+	background-color: #663300;
+}
+table.style td.name div.name {
+	width: 100px;
+}
+table.rise {
+	margin: auto;
+}
+table.rise th {
+	width: 40px;
+	background-color: #663300;
+}
+table.rise td {
+	text-align: left;
+}
+table.rise td.sub {
+	width: 100px;
+	line-height: 20px;
+	text-align: center;
+	background-color: #737373;
+	text-shadow: 1px 1px #000;
+	color: #FF0;
+	font-size: 9pt;
+}
+div#menu {
+	position: fixed;
+	width: 600px;
+	height: 85px;
+	left: 50px;
+	top: 0px;
+}
+div#joblist {
+	position: relative;
+	width: 600px;
+	height: 60px;
+	left: 0px;
+	top: 0px;
+	background-image: url('image/job/menu.gif');
+	z-index: 1;
+}
+div#joblist div.joblist {
+	margin: 0px auto 0px auto;
+	width: 580px;
+	display: none;
+}
+div#joblist div.joblist div {
+	width: 540px;
+	margin: 0px auto 0px auto;
+	padding-top: 3px;
+}
+div#menu table, div#menu td {
+	margin: 0px auto 0px auto;
+	border-collapse: collapse;
+	padding: 0px;
+}
+div#menu td.job {
+}
+div#menu td.job a {
+	display: inline-block;
+	color: #FFFFFF;
+	width: 80px;
+	height: 20px;
+	background-image: url('image/job/menu.gif');
+	background-position: -480px -60px;
+	cursor: url('alink.cur'),auto;
+	line-height: 20px;
+}
+div#menu td.job a:hover {
+	background-position: -480px -80px;
+	border-bottom: none;
+}
+div.button {
+	float: left;
+	width: 80px;
+	height: 25px;
+	background-image: url('image/job/menu.gif');
+	cursor: pointer;
+}
+#button1{background-position: 0px -60px;}
+#button1:hover, #button1.selected{background-position: 0px -85px;}
+#button2{background-position: -80px -60px;}
+#button2:hover, #button2.selected{background-position: -80px -85px;}
+#button3{background-position: -160px -60px;}
+#button3:hover, #button3.selected{background-position: -160px -85px;}
+#button4{background-position: -240px -60px;}
+#button4:hover, #button4.selected{background-position: -240px -85px;}
+#button5{background-position: -320px -60px;}
+#button5:hover, #button5.selected{background-position: -320px -85px;}
+#button6{background-position: -400px -60px;}
+#button6:hover, #button6.selected{background-position: -400px -85px;}
+</style>
+<script type="text/javascript">
+var historylist = new Array();
+var defaultpage = 1;
+historylist['menu'] = 'button'+(defaultpage);
+historylist['interval'] = null;
+historylist['menutop'] = 0;
+function chmenu(id,fact){
+	orgh = 60;
+	h = historylist['menutop'];
+	if(fact > 0){
+		h+= fact;
+		document.getElementById('menu').style.top = -h+'px';
+		if(h == orgh){
+			clearInterval(historylist['interval']);
+			var dom = document.getElementById(historylist['menu']);
+			if(!dom.classList) {dom.className=dom.className.replace('selected','').split(' ').join(' ')}
+			else dom.classList.remove('selected');
+			dom = document.getElementById(id);
+			if(!dom.classList) {dom.className=dom.className.replace('selected','').split(' ').join(' ')}
+			else dom.classList.remove('selected');
+			document.getElementById(historylist['menu']+'_joblist').style.display = 'none';
+			document.getElementById(id+'_joblist').style.display = 'block';
+			historylist['menu'] = id;
+			historylist['interval'] = setInterval('chmenu(\''+id+'\',-'+fact+')',1);
+		}
+	}else if(fact <0){
+		h+= fact;
+		document.getElementById('menu').style.top = -h+'px';
+		if(h == 0) clearInterval(historylist['interval']);
+	}else historylist['interval'] = setInterval('chmenu(\''+id+'\',10)',1);
+	historylist['menutop'] = h;
+}
+function showjob(id){
+	document.location = '/jobs'+id.replace('job','');
+}
+</script>
+</head>
+
+<body oncopy="return false">
+
+<div id="menu">
+	<div id="joblist">
+		<div id="button1_joblist" class="joblist">
+			<div>
+				<table style="width: 100%">
+					<tr>
+						<td id="job01" class="job"><a href="jobs01">劍士</a></td>
+						<td>&nbsp;</td>
+						<td id="job02" class="job"><a href="jobs02">戰斧鬥士</a></td>
+						<td>&nbsp;</td>
+						<td id="job03" class="job"><a href="jobs03">騎士</a></td>
+						<td>&nbsp;</td>
+						<td id="job04" class="job"><a href="jobs04">弓箭手</a></td>
+						<td>&nbsp;</td>
+						<td id="job05" class="job"><a href="jobs05">士兵</a></td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-left: 40px">
+				<table style="width: 100%">
+					<tr>
+						<td id="job06" class="job"><a href="jobs06">忍者</a></td>
+						<td>&nbsp;</td>
+						<td id="job07" class="job"><a href="jobs07">格鬥家</a></td>
+						<td>&nbsp;</td>
+						<td id="job08" class="job"><a href="jobs08">盜賊</a></td>
+						<td>&nbsp;</td>
+						<td id="job09" class="job"><a href="jobs09">舞者</a></td>
+						<td>&nbsp;</td>
+						<td id="job10" class="job"><a href="jobs10">爆彈師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button2_joblist" class="joblist">
+			<div style="padding-top: 15px">
+				<table style="width: 100%">
+					<tr>
+						<td id="job11" class="job"><a href="jobs11">魔術師</a></td>
+						<td>&nbsp;</td>
+						<td id="job12" class="job"><a href="jobs12">傳教士</a></td>
+						<td>&nbsp;</td>
+						<td id="job13" class="job"><a href="jobs13">巫師</a></td>
+						<td>&nbsp;</td>
+						<td id="job14" class="job"><a href="jobs14">咒術師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button3_joblist" class="joblist">
+			<div style="padding-top: 15px">
+				<table style="width: 80%">
+					<tr>
+						<td id="job15" class="job"><a href="jobs15">封印師</a></td>
+						<td>&nbsp;</td>
+						<td id="job16" class="job"><a href="jobs16">飼養師</a></td>
+						<td>&nbsp;</td>
+						<td id="job17" class="job"><a href="jobs17">馴獸師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button4_joblist" class="joblist">
+			<div style="padding-top: 15px">
+				<table style="width: 100%">
+					<tr>
+						<td id="job18" class="job"><a href="jobs18">樵夫</a></td>
+						<td>&nbsp;</td>
+						<td id="job19" class="job"><a href="jobs19">獵人</a></td>
+						<td>&nbsp;</td>
+						<td id="job20" class="job"><a href="jobs20">礦工</a></td>
+						<td>&nbsp;</td>
+						<td id="job21" class="job"><a href="jobs21">紡織工</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button5_joblist" class="joblist">
+			<div style="padding-top: 15px">
+				<table style="width: 100%">
+					<tr>
+						<td class="job" onmouseover="document.getElementById('makeweapon').style.display = 'block'" onmouseout="document.getElementById('makeweapon').style.display = 'none'">
+						<a>武器製造</a></td>
+						<td>&nbsp;</td>
+						<td class="job" onmouseover="document.getElementById('makedef').style.display = 'block'" onmouseout="document.getElementById('makedef').style.display = 'none'">
+						<a>防具製造</a></td>
+						<td>&nbsp;</td>
+						<td id="job37" class="job"><a href="jobs37">藥劑師</a></td>
+						<td>&nbsp;</td>
+						<td id="job38" class="job"><a href="jobs38">廚　師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button6_joblist" class="joblist">
+			<div>
+				<table style="width: 100%">
+					<tr>
+						<td id="job39" class="job"><a href="jobs39">醫師</a></td>
+						<td>&nbsp;</td>
+						<td id="job40" class="job"><a href="jobs40">護士</a></td>
+						<td>&nbsp;</td>
+						<td id="job41" class="job"><a href="jobs41">仙人</a></td>
+						<td>&nbsp;</td>
+						<td id="job42" class="job"><a href="jobs42">偵探</a></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<table style="width: 80%">
+					<tr>
+						<td id="job43" class="job"><a href="jobs43">武器修理師</a></td>
+						<td>&nbsp;</td>
+						<td id="job44" class="job"><a href="jobs44">防具修理師</a></td>
+						<td>&nbsp;</td>
+						<td id="job45" class="job"><a href="jobs45">鑑定師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div style="position: relative; width: 600px; height: 25px; z-index: 2; left: 30px; top: -1px;" id="button">
+		<div id="button1" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button2" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button3" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button4" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button5" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button6" class="button" onclick="chmenu(this.id,0)"></div>
+	</div>
+	<div style="position: absolute; width: 80px; left: 55px; top: 35px; display: none; z-index: 3" id="makeweapon" onmouseover="this.style.display = 'block'" onmouseout="this.style.display = 'none'">
+		<table style="width: 100%">
+			<tr>
+				<td id="job22" class="job"><a href="jobs22">鑄劍師</a></td>
+			</tr>
+			<tr>
+				<td id="job23" class="job"><a href="jobs23">造斧師</a></td>
+			</tr>
+			<tr>
+				<td id="job24" class="job"><a href="jobs24">造槍師</a></td>
+			</tr>
+			<tr>
+				<td id="job25" class="job"><a href="jobs25">造弓師</a></td>
+			</tr>
+			<tr>
+				<td id="job26" class="job"><a href="jobs26">造杖師</a></td>
+			</tr>
+			<tr>
+				<td id="job27" class="job"><a href="jobs27">小刀師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job28" class="job"><a href="jobs28">投擲武器師傅</a></td>
+			</tr>
+		</table>
+	</div>
+	<div style="position: absolute; width: 80px; left: 191px; top: 35px; display: none; z-index: 3" id="makedef" onmouseover="this.style.display = 'block'" onmouseout="this.style.display = 'none'">
+		<table style="width: 100%">
+			<tr>
+				<td id="job29" class="job"><a href="jobs29">頭盔師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job30" class="job"><a href="jobs30">帽子師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job31" class="job"><a href="jobs31">鎧甲師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job32" class="job"><a href="jobs32">裁縫師</a></td>
+			</tr>
+			<tr>
+				<td id="job33" class="job"><a href="jobs33">長袍師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job34" class="job"><a href="jobs34">製靴師</a></td>
+			</tr>
+			<tr>
+				<td id="job35" class="job"><a href="jobs35">製鞋師</a></td>
+			</tr>
+			<tr>
+				<td id="job36" class="job"><a href="jobs36">造盾師</a></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div style="height: 80px"></div>
+<script type="text/javascript">
+document.getElementById('button'+defaultpage+'_joblist').style.display = 'block';
+if(!document.getElementById('button'+defaultpage).classList) {document.getElementById('button'+defaultpage).className+=' selected';}
+else document.getElementById('button'+defaultpage).classList.add('selected');
+</script>
+<div id="job0_div" style="text-align: left">
+	<div class="head">
+&nbsp; 職業分類</div>
+	<div class="sub_head">
+　　豐富的職業設定是遊戲的特色之一，魔力寶貝現有45種職業，通常都會各別有不同的就職任務，只要完成條件任務，就可以獲得推薦信函。拿著推薦信函去找該門職業就職者(NPC)，便可就職完成。</div>
+	<div class="head">
+&nbsp; 職業升階</div>
+	<div class="sub_head">
+		　　選定職業取得見習生資格後，當專職技能等級或人物等級達到進階標準，再完成該職業指定的晉階任務，便可以晉陞該職業的階級，來提高該職業等級的技能限制。<table class="style" style="width: 600px">
+			<tr>
+				<td width="20%">見習或實習→</td>
+				<td width="20%">正職→</td>
+				<td width="20%">王宮或資深→</td>
+				<td width="20%">師範或御用→</td>
+				<td width="20%">大師或名師</td>
+			</tr>
+		</table>
+	</div>
+	<div class="head">
+&nbsp; 職業稱號</div>
+	<div class="sub_head">
+		　　不同性質的職業有不同的職業階段專屬稱號，當名聲提升至某一階段時，便可提高職業稱號，來作為提升職業階級的資格之一。
+		<table class="style" style="width: 600px">
+			<tr class="head">
+				<td width="20%">階段稱號 </td>
+				<td width="40%">戰鬥職業稱號 </td>
+				<td width="40%">工作職業稱號 </td>
+			</tr>
+			<tr>
+				<td>開始階段</td>
+				<td>無名的旅人</td>
+				<td>無名的旅人</td>
+			</tr>
+			<tr>
+				<td>第一階段</td>
+				<td>路旁的落葉</td>
+				<td>邁步前進者</td>
+			</tr>
+			<tr>
+				<td>第二階段</td>
+				<td>水面上的小草</td>
+				<td>追求技巧的人</td>
+			</tr>
+			<tr>
+				<td>第三階段</td>
+				<td>呢喃的歌聲（晉階資格）</td>
+				<td>刻於新月之銘（晉階資格）</td>
+			</tr>
+			<tr>
+				<td>第四階段</td>
+				<td>地上的月影</td>
+				<td>掌上的明珠</td>
+			</tr>
+			<tr>
+				<td>第五階段</td>
+				<td>奔跑的春風</td>
+				<td>敬虔的技巧</td>
+			</tr>
+			<tr>
+				<td>第六階段</td>
+				<td>蒼之風雲（晉階資格）</td>
+				<td>踏入神的領域（晉階資格）</td>
+			</tr>
+			<tr>
+				<td>第七階段</td>
+				<td>搖曳的金星</td>
+				<td>賢者</td>
+			</tr>
+			<tr>
+				<td>第八階段</td>
+				<td>歡喜的慈雨（晉階資格）</td>
+				<td>神匠（晉階資格）</td>
+			</tr>
+			<tr>
+				<td>第九階段</td>
+				<td>蘊含的太陽</td>
+				<td>摘星的技巧</td>
+			</tr>
+			<tr>
+				<td>第十階段</td>
+				<td>敬畏的寂靜（晉階資格）</td>
+				<td>萬物創造者（晉階資格）</td>
+			</tr>
+			<tr>
+				<td>第十一階段</td>
+				<td>無際的青空</td>
+				<td>賢者之石擁有者</td>
+			</tr>
+		</table>
+	</div>
+	<div class="head">
+&nbsp; 轉職、回復遊民</div>
+	<div class="sub_head">
+		　　當對原本職業不滿意或想體驗其它職業，可以選擇付費轉職，但會因新職業的技能上限或特殊限制，而降低或取消已經練成的技能，且名聲及稱號會降至開始階段，因此轉職前最好三思。<br>
+		　　也可以到法蘭城內的遊民申請處(東85南44)，不需任何花費便可以成為遊民，不過所有的技能及階段稱號都會消失，要變為遊民在去就其它職業的玩家更要三思。</div>
+</div>
+
+</body>
+
+</html>

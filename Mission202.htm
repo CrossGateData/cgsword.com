@@ -1,0 +1,164 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>巫師就職任務</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/mission.js"></script>
+</head>
+
+<body>
+
+<div class="head">
+	巫師就職任務(奇利村之巫師襲擊事件)</div>
+<table class="style mission">
+	<tr>
+		<td width="15%" class="head">職業限定</td>
+		<td width="30%">--</td>
+		<td width="15%" class="head">備註</td>
+		<td width="40%">無</td>
+	</tr>
+	<tr>
+		<td class="head">必要等級</td>
+		<td>&nbsp;</td>
+		<td class="head">推薦等級</td>
+		<td>Lv 30、5人 </td>
+	</tr>
+	<tr>
+		<td class="head">時間限制</td>
+		<td>取得蠟燭60分鐘內需打完露比</td>
+		<td class="head">起始地點</td>
+		<td>奇利村酒吧</td>
+	</tr>
+	<tr>
+		<td class="head">重複完成</td>
+		<td>可</td>
+		<td class="head">頭目戰</td>
+		<td>有</td>
+	</tr>
+	<tr>
+		<td class="head">任務獎賞</td>
+		<td colspan="3">巫師就職；技能習得︰攻擊吸收、魔法吸收</td>
+	</tr>
+	<tr>
+	  <td colspan="4">
+        <div class="missionhead">如人物未曾完成任務(步驟1時對話第一句不是&quot;你是冒險家嗎&quot;)<br>
+          請先到馮奴的家與亞莉耶魯對話放棄任務才能重新開始</div>
+        <span class="missionhead">任務內容</span>
+        <span class="missionhead" id="logspan">對話內容(開/關)</span>
+        <div style="float:right;text-align:right"><img src="image/mission/202/map1.png" width="311" height="246" align="top"></div>
+		<ol>
+    <li>到 <span class="place">奇利村</span> 的 <span class="place">酒吧</span>(46.78) 找 <span class="npc">雷歐尼</span>(10.14)
+      對話選<span class="npc">「是」</span>獲得 <span class="item">給亞莉耶魯的信</span><br>
+      <span class="note">註︰隊中每人都要拿</span><br>
+      <span class="log">雷歐尼︰你是冒險家嗎？<br>
+　　　　[否]不是啊‧‧‧[確定]<br>
+　　　　[是]真的嗎！請聽聽我的請求好嗎？<br>
+　　　　　　[否]‧‧‧那算了‧‧‧[確定]<br>
+　　　　　　[是]喔喔！真是太好了！其實是我們巫師長老馮奴的兩位孫子失蹤了。雖然大家拼命的找，卻還是找不到。最近好像發生了不少巫師被襲擊的事件，而去找的人也都沒有回來‧‧‧因此我只好在這裡尋找厲害的冒險者幫忙。[下一步]<br>
+　　　　　　　　如果可以的話，請你幫幫忙好嗎？<br>
+　　　　　　　　[否]    這樣啊‧‧‧唉‧‧‧[確定]<br>
+　　　　　　　　[是,物品欄滿時]你的物品欄已經滿了‧‧‧<br>
+　　　　　　　　[是]真的嗎！那請你拿這封信去見馮奴吧！她就在奇利村外的東北邊。[確定]<br>
+[持有信時]<br>
+雷歐尼︰那就拜託你了。[確定]<br>
+[持蠟燭/消任前]<br>
+      雷歐尼︰謝謝你。雖然我不知道瑪琪和亞莉安娜在哪裡，不過聽說在海底洞窟裡似乎有他們的足跡‧‧‧會不會是那裡呢？[確定]</span></li>
+    <li>持 <span class="item">給亞莉耶魯的信</span> 到 <span class="place">索奇亞</span> 的 <span class="place">馮奴的家</span>(349.261)<br>
+      找 <span class="npc">亞莉耶魯</span>(12.4) 對話選<span class="npc">「是」</span>換得 <span class="item">希望的蠟燭</span><br>
+      <span class="note">註︰拿到希望的蠟燭後需在60分鐘內完成任務</span><br>
+      <span class="log">[未完成任務時]<br>
+    亞莉耶魯︰你要放棄嗎？<br>
+    　　　　　[否]    亞莉耶魯︰謝謝你。不過沒有『希望的蠟蠋』是無法救孩子們的‧‧‧[確定]<br>
+    　　　　　[是]這樣啊[確定]<br>
+    [成功完成任務時]<br>
+    亞莉耶魯︰啊！你沒事嗎？有見到孩子們嗎？[下一步]<br>
+    　　　　　這樣啊‧‧‧但是我不會放棄的！謝謝你‧‧‧[確定]<br>
+    [沒有任務時]<br>
+    亞莉耶魯︰對不起，巫師馮奴現在不能出來見客‧‧‧很抱歉。[確定]<br>
+    [接受任務時]<br>
+    亞莉耶魯︰這不是雷歐尼寫的信嗎？原來如此，你接受了這個任務嗎‧‧‧失蹤的是我的雙胞胎兒女，名字是瑪其和亞莉安娜。他們失蹤已有好一陣子了，但是去找他們的人卻一個也沒回來。明知很危險，你還願意幫我嗎？<br>
+    　　　　　[否]這樣啊‧‧‧辛苦你了‧‧‧[確定]{交出信}<br>
+    　　　　　[是]真的嗎！？我真的好感動‧‧‧謝謝你！我每親馮奴身為巫師之長，本應出來與各位打招呼的。但她還在房間裡為孩子祈禱‧‧‧若孩子們能平安歸來，她一定會很高興的。[下一步]<br>
+    　　　　　　這個蠟燭請你收下吧！這是擁有我母親魔力的蠟燭。只要在那力量消失之前，任何巫師都可以在一瞬間回到原來的出發地點‧‧‧瑪其和亞莉安娜應該也有這種力量的。[確定]<br>
+    　　　　　　雖然我不知道要去哪裡才找的到他們，但我相信那蠟燭會引導你們的。請小心。另外，這蠟燭的效力只有60分鐘而已，請記住。<br>
+    　　　　　　那就拜託你們了。[確定]</span></li>
+    <li>到 <span class="place">索奇亞海底洞窟 地下2樓</span> 找 <span class="place">可疑的岩石</span>(35.7)<br>
+      調查進入後再走向 <span class="place">黃色傳送水晶</span> 到達 <span class="place">黑色的祈禱</span><br>
+      <span class="log">可疑的岩石︰手上的蠟燭晃了一下，從岩石下方出現了隱密的樓梯。要下去嗎？<br>
+      　　　　　　[是,組隊時]這樓梯太狹窄，一次只容一個人過去。[確定]<br>
+      　　　　　　[是]{直接傳送}<br>
+      　　　　　　[否]{對話框消失}</span><br>
+<img src="image/mission/202/map2.png" width="432" height="242">
+          </li>
+    <li>在約6層的 <span class="place">黑色的祈禱</span> 迷宮中尋找隨機出現的 <span class="item">萌子</span> 對話獲得 <span class="item">恐怖旅團之證</span><br>
+      <span class="note">註︰隊中每人都要拿，登出消失、丟地消失、無法使用寵物郵件，消失後可重覆拿</span><br>
+      <span class="log">萌子︰啊‧‧‧那是巫師的蠟燭‧‧‧你是來救孩子們的人吧！但是你真的能救的了他們嗎‧‧‧<br>
+    　　　對了！這給你！[確定]<br>
+    　　　想救孩子的話，一定少不了這個東西。那你加油吧！<br>
+    <br>
+    　　　對了！你有沒有看到一位名叫漢克的男人！<br>
+    　　　　[否]是嗎‧‧‧我還以為他一定在這裡的說‧‧‧[確定]<br>
+    　　　　[是]真的嗎？！<br>
+    　　　　　　他果然在這裡‧‧‧<br>
+    　　　　　　謝謝你！你可別死啊！<br>
+    [持有恐怖旅團之證時]<br>
+    萌子︰千萬別弄丟了哦！<br>
+    [滿物品欄]<br>
+    萌子︰啊‧‧‧那是巫師的蠟燭‧‧‧你是來救孩子們的人吧！你是你真的能救的了他們嗎‧‧‧對了！我給你一個東西‧‧‧但是你的物品欄已經滿了‧‧‧[確定]</span></li>
+    <li>在 <span class="place">黑之祈禱</span> 與 <span class="npc">守門人</span>(24.32)對話選<span class="npc">「是」</span>傳送至後方區域<br>
+      <span class="log">[組隊時]<br>
+      守門人︰不行不行，你們一個一個來吧！[確定]<br>
+      [未持有恐怖旅團之證時]<br>
+      守門人︰你的識別證呢？不見了？那可是很重要的東西耶！沒有識別證就不能過去。而且如果你找不回來的話，我們將以背叛組織的罪名來制裁你。[確定]<br>
+      [持有恐怖旅團之證時]<br>
+      守門人︰過去吧！通行證在你回去時再還你。<br>
+      　　　　[否]不進去嗎？[確定]    </span></li>
+    <li>穿過 <span class="place">黑色的祈禱</span> 到最底層打倒50等的 <span class="npc">露比</span><br>
+      <span class="note">註︰戰鬥中小怪小於三隻時露比會開始施放超強隕石魔法、超強冰凍魔法及超強混亂魔法</span></li>
+    <li>打倒 <span class="npc">露比</span> 後<br>
+      跟左下方的 <span class="npc">巫師亞莉安娜</span>(22.16) 說話進入 <span class="place">馮奴的家</span> 後調查地上的 <span class="npc">天書</span>(9.4) 可用5000G習得技能 <span class="item">攻擊吸收</span><br>
+      跟右上方的 <span class="npc">巫師瑪其</span>(25.16) 說話進入 <span class="place">馮奴的家</span> 後調查地上的 <span class="npc">天書</span>(9.4) 可用5000G習得技能 <span class="item">魔法吸收</span><br>
+      如過了時限，則交出 <span class="item">希望的蠟燭</span> 並傳回 <span class="place">索奇亞</span> 上的 <span class="place">馮奴的家</span><br>
+      <span class="note">註︰進入房間後無法返回，請小心選擇<br>
+      註︰蠟燭的60分鐘限時這步才結束</span><br>
+      <span class="log">[限時內]<br>
+    巫師亞莉安娜︰好強好強喔！你居然能在『希望的蠟燭』還未失去魔力之前來到這裡耶！哈哈哈！但我可不回去哦！<br>
+　　　　　　　亞莉安娜我要永遠陪在露比大人的身邊。[下一步]<br>
+　　　　　　　了獎勵你辛苦來到這裡，我送你去一個好地方吧！你可要睜大眼睛找找看哦！再見啦！嘻嘻嘻！[確定]<br>
+巫師瑪其︰好厲害好厲害喔！你居然能在『希望的蠟燭』還未失去魔力之前來到這裡！哈哈哈！但我可不回去哦！<br>
+　　　　　瑪其我要永遠陪在露比大人的身邊。[下一步]<br>
+　　　　　為了獎勵你辛苦來到這裡，我送你去一個好地方吧！你可要睜大眼睛找找看哦！再見啦！嘿嘿嘿！[確定]<br>
+    [限時過後]<br>
+    巫師亞莉安娜︰嘻嘻嘻！真可惜！你那『希望的蠟燭』已經失去所有的魔力了。真是的，我只好用我的力量讓你回去了。再見啦！嘻嘻嘻！[確定]<br>
+    巫師瑪其︰嘿嘿嘿！真可惜！你那『希望的蠟燭』已經失去所有的魔力了。真是的，我只好用我的力量讓你回去了。再見啦！嘿嘿嘿！[確定]</span></li>
+    <li>繼續前行和 <span class="npc">巫師卡莫西</span>(14.9) 對話後傳送到 <span class="place">馮奴的家</span> 便可與 <span class="npc">巫師馮奴</span> 說話便能就職巫師<br>
+      <span class="note">註︰提升階級可以直接到馮奴的家通過守衛進入找他。</span><br><span class="log">巫師卡莫西︰你是從哪裡鑽進來的？這裡可是馮奴大人的書房！快滾出去！</span></li>
+    <li>再走前可返回 <span class="place">馮奴的家</span> 與 <span class="npc">亞莉耶魯</span> 對話完成任務(不完成任務無法重做步驟1)。</li>
+</ol>
+		</td>
+	</tr>
+</table>
+<table class="style">
+	<tr>
+		<td colspan="3" class="head">任務相關物品</td>
+  </tr>
+	<tr>
+		<td width="33%">
+		<img src="image/mission/mail.gif" width="47" height="47"></td>
+		<td width="34%">
+		<img src="image/mission/laduo.gif" width="47" height="47"></td>
+		<td width="33%">
+		<img src="image/mission/kolusn.gif" width="48" height="47"></td>
+	</tr>
+	<tr>
+		<td>給亞莉耶魯的信</td>
+		<td>希望的蠟燭</td>
+		<td>恐怖旅團之證</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

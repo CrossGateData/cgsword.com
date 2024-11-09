@@ -1,0 +1,145 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>人物技能</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<style type="text/css">
+table.style td {
+	padding: 3px;
+}
+table#skilltable td:hover {
+	background-color: #d8cca8;
+}
+</style>
+<script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript">
+var i=0
+var show = "index";
+var divlist = new Array();
+var historylist = new Array();
+function getskill(id,page){
+	if(id == "history"){
+		i = i-1;
+		showrestore();
+		document.getElementById(show).style.display = 'none';
+		document.getElementById(historylist[i]).style.display = '';
+		show = historylist[i];
+	}else{
+	if(id != show){
+		document.getElementById(id).style.display = 'block';
+		if(divlist[id] != 1){
+			getfile(id,'skill',page);
+			divlist[id] = 1;
+		}else showrestore();
+		document.getElementById(show).style.display = 'none';
+		historylist[i] = show;
+		i++;
+		show = id;
+	}}
+}
+</script>
+</head>
+
+<body onkeydown="if(event.keyCode == 8){getskill('history');return false}">
+<table id="skilltable" class="style" align="center">
+	<tr>
+		<th colspan="4">人物技能</th>
+	</tr>
+	<tr style="cursor: pointer">
+		<td width="25%" onclick="getskill('skill1','skill1')"><a>戰鬥攻擊技能</a></td>
+		<td width="25%" onclick="getskill('skill2','skill2')"><a>戰鬥防禦技能</a></td>
+		<td width="25%" onclick="getskill('skill3','skill3')"><a>戰鬥輔助技能</a></td>
+		<td width="25%" onclick="getskill('skill4','skill4')"><a>屬性攻擊魔法</a></td>
+	</tr>
+	<tr style="cursor: pointer">
+		<td onclick="getskill('skill5','skill5')"><a>狀態變化魔法</a></td>
+		<td onclick="getskill('skill6','skill6')"><a>戰鬥輔助魔法</a></td>
+		<td onclick="getskill('skill7','skill7')"><a>其他特殊技能</a></td>
+		<td onclick="getskill('skill8','skill8')"><a>生產製作技能</a></td>
+	</tr>
+</table>
+<br>
+<div id="index">
+	<table class="style" align="center">
+		<tr>
+			<th>在魔力寶貝的世界中，所有的職業都有自己的專長技能，慎重選擇職業之後，才來挑選自己所要學習的技能<br>
+			透過每個人不同的技能組合以及技能等級，才能充分發揮個人與職業的特色。<br>
+			人物戰鬥技能跟裝備一樣，二級技能需10級後才能使用，三級技能需20級後才能使用，如此類推。<br>
+			所消耗魔力若非專職技能將有可能會消耗2倍的魔力。</th>
+		</tr>
+	</table>
+	<br>
+	<table class="style" align="center">
+		<tr>
+			<td class="head" colspan="2">技能詳解</td>
+		</tr>
+		<tr height="35">
+			<th colspan="2">人物技能</th>
+		</tr>
+		<tr height="35" onclick="getskill('skill1','skill1')" style="cursor: pointer">
+			<td width="14%"><a>戰鬥攻擊技能</a></td>
+			<td width="86%" style="text-align: left">連擊 | 諸刃 | 反擊 | 崩擊 | 亂射 | 氣功彈 
+			| 乾坤一擲 | 混亂攻擊 | 一石二鳥 | 戒驕戒躁 | 迅速果斷 
+			<p>毒擊 | 一擊必中 | 因果報應｜追月</p>
+			</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill2','skill2')" style="cursor: pointer">
+			<td><a>戰鬥防禦技能</a></td>
+			<td style="text-align: left">陽炎 | 護衛 | 聖盾 | 攻擊魔法防禦 | 屬性反轉 | 大地的祈禱 | 
+			海洋的祈禱 | 火焰的祈禱 | 雲群的祈禱｜騎士之譽 </td>
+		</tr>
+		<tr height="35" onclick="getskill('skill3','skill3')" style="cursor: pointer">
+			<td><a>戰鬥輔助技能</a></td>
+			<td style="text-align: left">暗殺 | 跳舞 | 偷竊 | 戰慄襲心 | 明鏡止水 | 抗毒 | 抗昏睡 
+			| 抗石化 | 抗酒醉 
+			<p>抗混亂 | 抗遺忘 | 黏巴達舞 | 捷舞 | 啪啦啪啦舞 | 騎乘 | 虛死為上 | 羊頭狗肉</p>
+			</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill4','skill4')" style="cursor: pointer">
+			<td><a>屬性攻擊魔法</a></td>
+			<td style="text-align: left">隕石魔法 | 冰凍魔法 | 火焰魔法 | 風刃魔法 | 強力隕石魔法 | 強力冰凍魔法 
+			| 強力火焰魔法<p>強力風刃魔法 | 超強隕石魔法 | 超強冰凍魔法 | 超強火焰魔法 | 超強風刃魔法 | 吸血魔法 | 精神衝擊波</p>
+			</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill5','skill5')" style="cursor: pointer">
+			<td><a>狀態變化魔法</a></td>
+			<td style="text-align: left">中毒魔法 | 昏睡魔法 | 石化魔法 | 酒醉魔法 | 混亂魔法 | 遺忘魔法<p>
+			強力中毒魔法 | 強力昏睡魔法 | 強力石化魔法 | 強力酒醉魔法 | 強力混亂魔法 | 強力遺忘魔法</p>
+			<p>超強中毒魔法 | 超強昏睡魔法 | 超強石化魔法 | 超強酒醉魔法 | 超強混亂魔法 | 超強遺忘魔法</p>
+			</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill6','skill6')" style="cursor: pointer">
+			<td><a>戰鬥輔助魔法</a></td>
+			<td style="text-align: left">補血魔法 | 強力補血魔法 | 超強補血魔法 | 氣絕回復 | 潔淨魔法 | 
+			恢復魔法 | 強力恢復魔法<p>超強恢復魔法 | 攻擊吸收 | 魔法吸收 | 攻擊反彈 | 魔法反彈 | 攻擊無效 | 魔法無效</p>
+			</td>
+		</tr>
+		<tr height="35" onclick="getskill('skill7','skill7')" style="cursor: pointer">
+			<td><a>其他特殊技能</a></td>
+			<td style="text-align: left">調教 | 寵物強化 | 精靈的盟約 | 治療 | 急救 | 鑑定 | 刻印 | 
+			武器修理 | 防具修理 | 變身 | 變裝 | 竊盜 | 裝飾</td>
+		</tr>
+	</table>
+</div>
+<div id="skill1">
+</div>
+<div id="skill2">
+</div>
+<div id="skill3">
+</div>
+<div id="skill4">
+</div>
+<div id="skill5">
+</div>
+<div id="skill6">
+</div>
+<div id="skill7">
+</div>
+<div id="skill8">
+</div>
+
+</body>
+
+</html>

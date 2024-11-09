@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 竊盜</span><span class="time">2015-03-27 03:39 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>請問竊盜全書 </b></p>
+				請問竊盜全書可以創一個 寵物硬幣的嗎 <br />
+新手剛回鍋不知道要去哪裡偷寵物硬幣<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4735)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2015-03-31 04:09 PM 回覆<br><br>
+					<div style="padding-left: 10px">基本上光之路全域都偷的到, 怪物等級越高面額就越大</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4735</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: yo</span><span class="time">2015-03-25 10:23 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問下載後要怎麼安裝才可以玩?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4734)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">leo 於 2015-04-08 10:52 PM 回覆<br><br>
+					<div style="padding-left: 10px">這我也弄很久~ <br />
+弄了快一個月才安裝成功的....<br />
+大宇寫得很簡單,但很不簡單<br />
+<br />
+多嘗試幾次吧~</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4734</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2015-03-24 01:30 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>茱萸木傳送點</b></p>
+				茱萸木傳送點<br />
+德威特島 275,460<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4733)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">4733</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: min</span><span class="time">2015-03-20 02:50 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>可以加入改造樹精嗎</b></p>
+				寵物的檔次計算成長模擬<br />
+可以新增改造樹精或改造烈風歌部林嗎<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4731)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-20 07:18 PM 回覆<br><br>
+					<div style="padding-left: 10px">已開放<br />
+寵物能力計算(測試)<br />
+請試用</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2015-03-27 11:25 AM 回覆<br><br>
+					<div style="padding-left: 10px">寵物能力計算是可以使用 謝謝大大<br />
+可是一樣沒有改造樹精的項目</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4731</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: yu</span><span class="time">2015-03-16 11:01 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				護士就職是不是可以寫詳細一點..第5步驟，換完推薦信後到亞里城堡2樓西邊房間(18,71)內找...就職，寫通道都以為在路邊而已，等好久= =<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4730)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-17 10:09 AM 回覆<br><br>
+					<div style="padding-left: 10px">已作修改<br />
+感謝指出</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">yu 於 2015-03-18 07:24 PM 回覆<br><br>
+					<div style="padding-left: 10px">你好，不知道蘭5方不方便，迷宮後到大樹，然後大樹1F-4F到阿爾傑斯神的使徒的路上之間樓梯也加上座標。→<br />
+1樓樓梯：座標(41,8)、2樓樓梯：座標(29,28)、3樓樓梯：座標(10,37)、4樓樓梯：座標(24,16)，不好意思，因為比較習慣看御劍軒，加上對任務有點不靈敏，希望可以加上摟，謝謝~</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-19 12:08 PM 回覆<br><br>
+					<div style="padding-left: 10px">已補上座標至蘭國路線<br />
+感謝指出</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4730</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 同一位路人</span><span class="time">2015-03-15 07:31 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>鼠國之后頂檔</b></p>
+				鼠后總檔165<br />
+37 12 32 32 52<br />
+<br />
+另外<br />
+有沒有人能告訴我<br />
+Widows 8.1 環境下<br />
+火箭計算機的檔次表存在哪QQ<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4729)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-17 10:09 AM 回覆<br><br>
+					<div style="padding-left: 10px">檔次表跟程式存放於同一位置<br />
+鼠后檔次請提供寵物能力值校對</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">同一位路人 於 2015-03-19 06:49 PM 回覆<br><br>
+					<div style="padding-left: 10px">那個頂檔資料是從別站看來的<br />
+（我不確定這邊能不能貼網址）<br />
+<br />
+我自己是有一隻<br />
+35 12 28 31 51<br />
+（45 等全加魔 1328 2083 189 298 213 209 122）<br />
+跟火箭當前版本檔次相比是<br />
+-2 +3 -4 +3 0<br />
+推算那個頂檔資料挺合理的<br />
+想說就轉過來給你們更新<br />
+<br />
+關於檔次表的問題<br />
+我在 Windows 7 看是同個資料夾沒錯<br />
+裡面有 cgcalculator.ini 和 config.ini 兩個設定檔<br />
+但 Windows 8.1 的資料夾只有後者<br />
+而且無論我怎麼更新檔次表<br />
+那個 config.ini 的修改日期始終沒變<br />
+<br />
+打開一看<br />
+最底下那筆資料是「吳剛(缺)」<br />
+計算機內的檔次表確實變了<br />
+最底下的資料是「治癒者‧薇妮(缺)」<br />
+隨意修改裡面的參數都無法影響計算機<br />
+不然我這邊統計出來的檔次也可以上傳分享ˊˋ</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-20 07:49 PM 回覆<br><br>
+					<div style="padding-left: 10px">有關火箭牌計算器在WIN8.1下的問題<br />
+可把該程式資料夾複製至桌面再試試<br />
+WIN8.1對program files 的權限有點嚴謹<br />
+<br />
+有關鼠后的檔次 已更新至 37 11 32 32 51<br />
+(根據所提供的能力值得出的結果)<br />
+感謝提供數據<br />
+<br />
+本站歡迎提供能力值用作檔次更新<br />
+雖然會有不近人情的感覺<br />
+但目前以能力值作依據<br />
+所得的最高檔次作結論<br />
+用意為鼓勵玩家提供更多數據<br />
+亦能肯定數據準確</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">同一位路人 於 2015-03-22 06:47 AM 回覆<br><br>
+					<div style="padding-left: 10px">站長大大英明<br />
+我重新安裝到別的資料夾<br />
+果然設定檔跑了兩個出來<br />
+而且更新過後內容也變了！<br />
+<br />
+另外關於我的鼠后<br />
+少提供一級數據：<br />
+304 376 57 79 63 115 108<br />
+這樣對照起來力檔就是 12 了！<br />
+<br />
+謝謝你<br />
+辛苦了！</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4729</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 獅子玩家</span><span class="time">2015-03-14 09:35 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>裝備能力計算</b></p>
+				11a帽的耐久有錯誤<br />
+好像沒有到350<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4728)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-17 10:07 AM 回覆<br><br>
+					<div style="padding-left: 10px">已下降至250<br />
+感謝指出</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4728</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2015-03-13 05:24 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>補充</b></p>
+				烈風牛頭怪-補充<br />
+原始技能，除了攻擊跟防禦之外，還有吸血攻擊I<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4727)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-17 10:07 AM 回覆<br><br>
+					<div style="padding-left: 10px">已補上 感謝</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4727</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 斬龍者杰特</span><span class="time">2015-03-10 01:30 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>檔次分布</b></p>
+				總檔190<br />
+40 49 35 41 25  <br />
+應該是這樣 我算過三隻了<br />
+一隻187檔 -3    -03000<br />
+一隻174檔--16  -32434<br />
+官網素質那隻182檔   -8     -03140<br />
+<br />
+應該是這樣<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4726)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-10 04:14 PM 回覆<br><br>
+					<div style="padding-left: 10px">感謝提供資料<br />
+<br />
+如只用1等能力計算檔次<br />
+那計算結果並非該寵的成長檔次<br />
+1等寵物只能算出總檔次資料<br />
+<br />
+如要提供最高成長檔資料<br />
+請附上已升等後的能力</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4726</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 瞳</span><span class="time">2015-02-28 05:57 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>有錯字XD</b></p>
+				站務大大您好^^<br />
+剛剛在貴站找資料時，不小心發現有錯字^^&quot;<br />
+在&lt;熱門練技區&gt;<br />
+傑諾瓦村-幻&quot;哥&quot;妖、風龍&quot;溪&quot;<br />
+<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4724)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2015-03-05 11:54 AM 回覆<br><br>
+					<div style="padding-left: 10px">已修正 感謝</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4724</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=19&amp;s=">上一頁</a>		<a href="guestbook.php?page=21&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

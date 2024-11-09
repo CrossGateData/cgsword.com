@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 請問生產係如何衝名聲</span><span class="time">2009-10-09 11:08 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				如題~造弓的 因為才剛轉值後 <br />
+<br />
+造弓已衝到四技但是名聲還是無名的旅人<br />
+<br />
+如何衝名聲呢<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1818)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-10-09 01:05 PM 回覆<br><br>
+					<div style="padding-left: 10px">也一直造吧.. 即使沒經驗名聲仍會增加<br />
+<br />
+就當是賺點碎錢吧..</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">請問生產係如何衝名聲 於 2009-10-10 06:15 AM 回覆<br><br>
+					<div style="padding-left: 10px">謝謝~</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1818</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2009-10-09 07:15 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問打吉拉放技能會加經驗嗎!?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1817)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-10-09 01:04 PM 回覆<br><br>
+					<div style="padding-left: 10px">不會</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1817</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 盜賊問題</span><span class="time">2009-10-08 01:48 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>雙子</b></p>
+				請問有人有控可以帶我就職 盜賊嘛 <br />
+給路費<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1816)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-10-11 02:00 PM 回覆<br><br>
+					<div style="padding-left: 10px">不要</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1816</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 心美</span><span class="time">2009-10-08 11:47 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問一下，精神衝擊波跟屬性四體法比較起來哪一個練功實用呢？@@不知道到底該不該學精神衝擊波耶！<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1815)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">邪晶鈴 於 2009-10-09 05:59 AM 回覆<br><br>
+					<div style="padding-left: 10px">精波是等同是物理攻擊的一種..跟4色魔法是不一樣的啦.<br />
+加上精波在練功時可以打一整排的怪物..魔法的話除了是超法外..最多只能打一個T位..^^</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-10-09 01:06 PM 回覆<br><br>
+					<div style="padding-left: 10px">練功上其實屬性四法較實用<br />
+<br />
+因為一般來說精神衝擊波的攻擊的不太強，而且耗魔量高<br />
+<br />
+但在PK時的效果不錯，練功打王有時出來玩玩都不錯</div>
+					<p>[最後於 2009-10-09 01:07 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1815</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 心美</span><span class="time">2009-10-08 11:46 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問45級要去哪哪練呢？雪塔？炎洞？炎洞怎麼去呢？<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1814)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">...... 於 2009-10-08 10:25 PM 回覆<br><br>
+					<div style="padding-left: 10px">推薦炎洞<br />
+<br />
+去炎洞要有維村點<br />
+<br />
+喊完團自然有人會帶你走</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-10-09 01:08 PM 回覆<br><br>
+					<div style="padding-left: 10px">45級好像去雪塔50樓好一點<br />
+回補應該算方便...?<br />
+炎洞的怪等級不太高，想快一點的話應該50樓比較適合</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">呆狼 於 2009-10-09 09:27 PM 回覆<br><br>
+					<div style="padding-left: 10px">你可以找看看有沒有高等一點的弓手或格鬥(約6~70等就可)~<br />
+帶你去崁村門外練~~<br />
+2個人練的話~<br />
+一次打卡大概你可以吸到快1W經驗~~<br />
+練到50就可以去跟冰樹團(55等怪)了~~<br />
+或是去打召3~~那裡怪弱又多~~</div>
+					<p>[最後於 2009-10-10 02:04 AM 編輯]</p>									</div>
+				<hr>
+				<div style="padding-left: 7px">心美 於 2009-10-12 07:12 PM 回覆<br><br>
+					<div style="padding-left: 10px">ok~好！謝謝你們~<br />
+那…冰樹在哪裡= =&quot;&quot;</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1814</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 心美</span><span class="time">2009-10-08 11:13 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問過樹海學技能是不是要士兵帶？<br />
+樹海在哪裡？<br />
+四級技也是一樣要士兵帶嗎？<br>
+				<br>
+				[最後於 2009-10-08 11:20 AM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1813)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-10-09 07:14 AM 回覆<br><br>
+					<div style="padding-left: 10px">樹海不用士兵帶<br />
+<br />
+四技要</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-10-09 01:14 PM 回覆<br><br>
+					<div style="padding-left: 10px">想到樹海的話可以參考任務：<br />
+任務詳解→芙蕾雅島→森羅萬象</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1813</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 雙子 碎云</span><span class="time">2009-10-06 08:10 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				家族創立 精4卵 拿不到資格<br />
+<br />
+不確定是不是 人物等級 1 的問題<br />
+<br />
+<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1812)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">封修 於 2009-10-07 06:45 PM 回覆<br><br>
+					<div style="padding-left: 10px">給你算黨?幾102到130等 http://myweb.hinet.net/service/download.html?http://ghl.sg1004.myweb.hinet.net/petcal/cgcalculator.zip<br />
+</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-10-09 01:10 PM 回覆<br><br>
+					<div style="padding-left: 10px">精4卵應該沒在創族任那邊更新<br />
+創族任暫時只接受精卵1~3<br />
+如果身上有精4卵的話可以帶著幣4卵去解精1<br />
+精4卵不會被回收</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1812</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 雙子 小仙人</span><span class="time">2009-10-06 12:11 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問生產系打吉拉一樣可以加名聲嗎?<br>
+				<br>
+				[最後於 2009-10-06 01:04 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1811)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">路過 於 2009-10-06 01:39 PM 回覆<br><br>
+					<div style="padding-left: 10px">可以的<br />
+<br />
+只要打死她的角色都可以加(合擊不算)<br />
+<br />
+建議收寵迅果她</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">雙子 小仙人 於 2009-10-07 01:00 PM 回覆<br><br>
+					<div style="padding-left: 10px">謝謝  因為剛轉鑑定  都鑑4了  可是稱號還在邁步向前<br />
+都不知道怎辦了XD</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1811</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 鋼人的疑問</span><span class="time">2009-10-04 11:59 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問要怎ㄇ算黨次ㄋ?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1810)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">路過 於 2009-10-06 01:38 PM 回覆<br><br>
+					<div style="padding-left: 10px">52 12 12 12 22<br />
+<br />
+要自己新增</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">封修 於 2009-10-07 06:42 PM 回覆<br><br>
+					<div style="padding-left: 10px">給你算黨?幾102到130等                                  http://myweb.hinet.net/service/download.html?http://ghl.sg1004.myweb.hinet.net/petcal/cgcalculator.zip</div>
+					<p>[最後於 2009-10-07 06:44 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1810</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 魔力玩家</span><span class="time">2009-10-04 11:25 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				海賊港灣怎去 血窟1等點 明明在村外=ˇ=<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1809)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">路過 於 2009-10-06 01:37 PM 回覆<br><br>
+					<div style="padding-left: 10px">你要解打海賊王的任務才能到達喔<br />
+<br />
+要最後進入打頭目的門前(不要進去)一直右走<br />
+<br />
+就可以到達了</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1809</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=291&amp;s=">上一頁</a>		<a href="guestbook.php?page=293&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

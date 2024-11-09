@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 123</span><span class="time">2008-09-07 10:21 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				我記得魔力是有一個快捷鍵可以叫出一個對話記錄視窗<br />
+好似叫冒險者日誌  個快捷鍵係咩? <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,563)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2008-09-08 12:28 PM 回覆<br><br>
+					<div style="padding-left: 10px">係f9 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">563</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 源~</span><span class="time">2008-09-07 07:27 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>小石象怪偷竊物名錯左=3=</b></p>
+				http://www.2000fun.com/bbs/viewthread.php?tid=3151506&amp;extra=page%3D1 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,562)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">562</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 芙蕾雅北邊花園要怎麼過去?</span><span class="time">2008-09-07 03:49 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>芙蕾雅北邊花園要怎麼過去?</b></p>
+				芙蕾雅北邊花園要怎麼過去?<br />
+採蘋果薄荷那裡要怎樣過去 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,561)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2008-09-07 06:42 PM 回覆<br><br>
+					<div style="padding-left: 10px">從西門出去<br />
+然後往上走@@&quot;<br />
+ </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">561</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: Tommy</span><span class="time">2008-09-07 09:18 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>傑村雜貨店 有木賣?</b></p>
+				原本去買布的，點知以前的布變左木，旁邊多左個npc才是賣布...<br />
+<br />
+竹子: $36<br />
+孟宗竹: $42 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,560)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">560</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-09-07 07:37 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>中秋節任務之3 2008年</b></p>
+				推薦等級：1.日月組織路線：Lv80<br />
+　　　　　2.法蘭反抗軍路線：Lv60<br />
+<br />
+任務獎賞：1.日月組織路線：飛奔之劍 雙點後傳送至法蘭城登入點<br />
+　　　　　2.法蘭反抗軍路線：柚子(雙點變為柚子帽) 魅力+20<br />
+　　　　　　　　　　　　　　玉兔藥盅 靈巧+5~10<br />
+　　　　　　　　　　　　　　嫦娥紗巾 敏+18<br />
+　　　　　　　　　　　　　　吳剛之斧 抵擋採集傷害50次<br />
+<br />
+任務解法：1.於法蘭城東醫旁、銀行旁、西醫旁傳送石，找月餅工讀生說話<br />
+　　　　　　取得月餅，左鍵雙擊，選是，取得紙條<br />
+<br />
+　　　　　2.持有紙條，找月餅工讀生說話，取得月餅，左鍵雙擊，選是<br />
+　　　　　　取得日月組織團員證書、物品收集單、暗號紙條<br />
+<br />
+　　　　　3.左鍵雙擊暗號紙條，得知暗號為八月十五大慶典<br />
+　　　　　　左鍵雙擊物品收集單，得知要收集五個綠頭盔<br />
+<br />
+　　　　　4.持有日月組織團員證書時，帶著1000元和五個綠頭盔<br />
+　　　　　　至法蘭城安其摩酒吧(102.131)找小朱(23.18)<br />
+　　　　　　輸入八月十五大慶典，交出錢、綠頭盔和日月組織團員證書<br />
+　　　　　　得到烈風哥不林服飾和日月組織團員卡。<br />
+<br />
+　　　　　5.左鍵雙擊烈風哥不林服飾，變身成為烈風哥不林<br />
+　　　　　　至法蘭城劇院(184.151)2樓，與看門的團員(10.32)說話<br />
+　　　　　　進入秘密聚會房間。<br />
+<br />
+　　　　　6.與小元(11.8)說話，交出日月組織團員卡<br />
+　　　　　　取得日月組織團員銀卡和物品收集單。<br />
+　　　　　　左鍵雙擊物品收集單，得知要收集樹精卡片3張<br />
+<br />
+　　　　　7.持有日月組織團員銀卡時，帶著1000元與樹精卡片3張(無須鑑定)<br />
+　　　　　　至法蘭城科特利亞酒吧(219.136)找小章(24.8)<br />
+　　　　　　取得暗號紙條和藍魔寶箱套裝。<br />
+<br />
+　　　　　8.左鍵雙擊暗號紙條，得知暗號為日月團主千秋萬世一統法蘭<br />
+　　　　　　左鍵雙擊藍魔寶箱套裝，變身成為藍魔嚇人箱<br />
+<br />
+　　　　　9.至法蘭城競技場(123.161)的後台，找看門的團員(27.12)<br />
+　　　　　　輸入日月團主千秋萬世一統法蘭，進入秘密聚會房間。<br />
+　　　　　　與小朱(11.8)說話，交出銀卡，取得日月組織團員金卡<br />
+<br />
+　　　　　10.至法蘭城冒險者旅館(238.64)的2F，找小元(44.8)<br />
+　　　　　　取得團員躲藏位置圖，傳送至法蘭城。<br />
+<br />
+　　　　　11.請由下面兩條路選一進行：<br />
+　　　　　　(一)日月組織路線：<br />
+　　　　　　1.前往法蘭城(153.103)，與接待員說話，選是<br />
+　　　　　　　進入里謝里雅堡2F，與近衛隊長凱魯(175.205)說話，進入戰鬥<br />
+<br />
+　　　　　　2.擊敗後與小朱說話，取得飛奔之劍，任務結束。<br />
+<br />
+　　　　　　(二)法蘭反抗軍路線：<br />
+　　　　　　1.左鍵雙擊團員躲藏位置圖可以得到團員躲藏位置：<br />
+<br />
+　　　　　　　熊弟－銀行內(14.6)，露比－飼養師之家內(7.3)，<br />
+　　　　　　　心美－工會旁邊倉庫內(5.7)，阿梅－豪宅內(23.9)，<br />
+　　　　　　　阿蒙－研究家真中的家內(6.2)<br />
+<br />
+　　　　　　　找到每個人，說話後選是，進入戰鬥<br />
+<br />
+　　　　　　2.擊敗後，分別取得每個人的團員金卡<br />
+　　　　　　　前往法蘭城(153.103)，與接待員說話，選是<br />
+　　　　　　　進入里謝里雅堡2F，與小朱、小元、小章任一人說話，進入戰鬥<br />
+　　　　　　　將三人擊敗後，直接進入第二場戰鬥：VS 朱元章<br />
+<br />
+　　　　　　3.擊敗朱元章，交出日月組織團員金卡，隨機取得任務獎品<br />
+　　　　　　　任務結束。<br />
+<br />
+頭目資訊：<br />
+　　　　　近衛隊長凱魯 Lv100 HP10000<br />
+　　　　　　戒驕戒躁、一石二鳥、連擊<br />
+<br />
+　　　　　發霉的熊弟<br />
+　　　　　　發霉的熊弟 Lv40<br />
+　　　　　　紅傷的穴熊*5 Lv40<br />
+　　　　　　掉魂的穴熊*4 Lv40<br />
+<br />
+　　　　　露比<br />
+　　　　　　露比 Lv60 召喚-火焰鼠或大地鼠(Lv60)、乾坤一擲<br />
+<br />
+　　　　　復仇的心美 Lv60 召喚-復仇的心美<br />
+<br />
+　　　　　憤怒的阿梅(米牛外型) Lv40 一石二鳥<br />
+<br />
+　　　　　瘋掉的阿蒙(火牛外型) Lv40 戒驕戒躁<br />
+<br />
+　　　　　朱元章<br />
+　　　　　　小朱<br />
+　　　　　　小元<br />
+　　　　　　小章<br />
+　　　　　　朱元章 Lv60 諸刃、恢復魔法、陽炎、魔法封印<br />
+<br />
+ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,559)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">559</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-09-07 07:36 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>中秋節任務之2 2008年</b></p>
+				任務限制：無<br />
+<br />
+   任務獎賞：生日蛋糕：魅力+10 稱號：CrossGate擁護者<br />
+             各種月餅<br />
+<br />
+   任務流程：1.到亞諾曼城東門外，尋找黃色傳送石(329.334)單身公路一段<br />
+               於單身公路內，擊敗怪物，隨機取得獸肉<br />
+<br />
+             2.在單身公路迷宮中，尋找隨機NPC旅之商人<br />
+               對著旅之商人輸入魔力寶貝生日快樂，得到生日蛋糕<br />
+<br />
+             3.走到王團長團練教室，與王團長(23.22)說話<br />
+<br />
+               ●選「否」，進入戰鬥<br />
+               ●戰鬥結束後，與王團長說話，取得團圓許可證<br />
+<br />
+             3.到亞諾曼城(137.115)與工作人員說話，傳送到烤肉公園<br />
+               在持有許可證的情況下，與公園內的單身女性NPC說話，取得月餅<br />
+<br />
+               ●少女小娟－蓮蓉月餅<br />
+               ●少女小梅－豆沙月餅<br />
+               ●少女雪莉－黑糖月餅<br />
+               ●少女小英－棗泥月餅<br />
+               ●少女小惠－伍仁金腿月餅<br />
+<br />
+             4.在持有獸肉的情況下，調查公園內的烤肉爐，取得盤子<br />
+               依照時間不同，調查烤肉爐拿回的烤肉也不同<br />
+<br />
+               ●時間剛好：生燒獸肉<br />
+               ●時間稍久：燒焦的肉<br />
+               ●時間太久：黑碳<br />
+<br />
+<br />
+   怪物資訊：單身公路  Lv6-9<br />
+<br />
+             地獄看門犬  水6火4<br />
+             赤熊        火8風<br />
+--<br />
+ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,558)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">558</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-09-07 07:34 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>中秋節任務之1 2008年</b></p>
+				簡略解法:                                       編輯者:bahamut2003<br />
+<br />
+1.法蘭城(159.148)有個尋寶協會會員跟他對話可以用1000G得&quot;鏟子&quot;<br />
+  (耐久10/10  使用一次耐久扣1)<br />
+　或者克瑞村內也有個尋寶協會會員(42.58),也可跟他花1000G購買<br />
+　<br />
+2.持有鏟子的情況下,可以在克瑞村內雙點道具欄的鏟子進行挖掘<br />
+  (非克瑞村的話只能挖到碎石頭)<br />
+<br />
+3.挖到冰塊的話可以在火把附近雙點使之溶化<br />
+<br />
+4.挖到的東西有:星型雪餅   Lv1料理 HP/MP各回覆100 可連續食用   堆疊上限40<br />
+               脫兔雪餅   活動用 見(註1)                      堆疊上限999<br />
+               中秋月兔頭 頭飾 耐久100/100)<br />
+               冰塊       在克瑞村(39.54)的火堆附近雙點使溶化 隨機取得下列物品<br />
+<br />
+冰塊溶化取得的:各種口味的月餅(棗泥、蓮蓉、黑糖) 魔力回覆20    不可堆疊<br />
+               各種小瓶藥水  HP回覆10.20.30.40.50.60          堆疊上限不定<br />
+               櫻桃          HP回復200 MP回復50 可連續食用    堆疊上限10<br />
+               水晶<br />
+               蕃茄、印度輕木、銅<br />
+               國民裝隨機一件<br />
+<br />
+註1:各星系收集量最高的前幾名 可得獎品-實體雪餅一盒<br />
+ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,557)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">557</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: sing</span><span class="time">2008-09-07 01:30 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				火焰之魂<br />
+妖草的血<br />
+草皮<br />
+風龍皮<br />
+點先有-3- <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,556)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">556</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: hello</span><span class="time">2008-09-07 12:20 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				弓手用明鏡<br />
+打卡一次+幾多<br />
+20  40?<br />
+<br />
+thx*v* <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,555)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">hello 於 2008-09-07 12:22 AM 回覆<br><br>
+					<div style="padding-left: 10px">弓手除左亂射有咩技係打卡+40= = </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">555</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 71lv既人</span><span class="time">2008-09-07 12:03 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b> 鋒嵐哥</b></p>
+				 鋒嵐哥．．答答我/_..點去換pet個個地方..姐係:辛梅爾 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,554)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">554</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=404&amp;s=">上一頁</a>		<a href="guestbook.php?page=406&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

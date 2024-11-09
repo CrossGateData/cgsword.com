@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>裝備計算::魔力寶貝 - 御劍軒</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script src="js/jquery-1.10.2.min.js"></script>
+<script>
+var propNameList = '攻擊,防禦,敏捷,精神,回復,抗毒,抗昏睡,抗石,抗酒醉,抗混,抗遺忘,必殺,反擊,命中,閃躲,生命,魔力,魅力,魔攻,抗魔,耐久'.split(',');
+function getPropData(t,text){
+	var a = [],text=text||false;
+	$.each($('input.prop-data', t), function(i){
+		var s=$(this).val();
+		if(s==0) return;
+		a.push(text?propNameList[$(this).data('id')]+(s[0]=='-'?s:'+'+s):[$(this).data('id'),s,propNameList[$(this).data('id')],propNameList[$(this).data('id')]+(s>0?'+'+s:s)]);
+	});
+	return a;
+}
+function getPropArray(t){var a = [];$.each($('input.prop-data', t), function(){a.push($(this).val());});return a;}
+$(function(){
+	var propItem = $('#propItem').clone(true).removeAttr('id');
+	var rowEffector = [];
+	$('#propItem').remove();
+	propNameList.forEach(function(item,i){
+		var label = propItem.clone(true).appendTo('#propList');
+		$('span',label).text(item);
+		$('input',label).data('id', i);
+		if(i%3==2) $('<br>').appendTo('#propList');
+	});
+	var propList = $('#propList').clone(true).removeAttr('id').insertAfter('#propList');
+	$('#propList').remove();
+	var propBoard = $('#propBoard').clone(true).removeAttr('id');
+	$('#propBoard').remove();
+	propBoard.on('change', function(e){
+		$('div.propText', this).text(getPropData(this,true).join(' '));
+	});
+	
+	var calItem = $('#calItem').clone(true).removeAttr('id');
+	calItem.find('button.selectArmor').on({
+		click: function(e){
+			$('#armorsSelector').trigger('show', [$(this).closest('tr')]);
+		}
+	});
+	calItem.find('button.selectJewellery').on({
+		click: function(e){
+			$('#jewellerySelector').trigger('show', [$(this).closest('tr')]);
+		}
+	});
+	calItem.find('.selectedArmor button.cancelbtn').on({
+		click: function(e){
+			$(this).closest('.selectedArmor').css('display', 'none');
+			$(this).closest('td').find('input.prop-data').val('');
+			$(this).closest('td').find('.propBoard').trigger('change');
+		}
+	});
+	calItem.find('.selectedJewellery button.cancelbtn').on({
+		click: function(e){
+			$(this).closest('.selectedJewellery').css('display', 'none');
+			$(this).closest('td').find('input.prop-data').val('');
+			$(this).closest('tr').data('jewelleryData',false);
+			$(this).closest('td').find('.propBoard').trigger('change');
+		}
+	});
+	calItem.on({
+		selectArmor: function(e, armorData){
+			var ds = armorData.v.split(',');
+            ds[20] = ds[23];
+			var pd = $('div.propBoard', this).eq(0).find('input.prop-data');
+			$.each(pd,function(i){$(this).val(ds[i]==0?'':ds[i])});
+			//14-22,weapon,51-58,armor
+			var t = -1;
+			if( armorData.t >= 7 && armorData.t <= 15 ) t = 0;
+			else if( armorData.t >= 43 && armorData.t <= 50 ) t = 1;
+			$('.selectedArmor', this).css('display', '');
+			if( armorData.i )
+				$('.selectedArmor img', this).attr('src', '//ig2.cgs.hk/g/'+armorData.i.substr(0,1)+'/'+armorData.i+'.png');
+			$('.selectedArmor .text', this).text(armorData.n);
+			$('input[name=minor_boost_type][value='+t+']').prop('checked', true);
+			$('div.propBoard', this).eq(0).trigger('change');
+		},
+		selectJewellery: function(e, jewelleryData){
+			var ds = jewelleryData.data.split(';');
+			var t = $('input[name=minor_boost_type]:checked').val();
+			if( t == -1 ) t = 2;
+			ds=ds[t].split(',');
+            ds[20] = ds[23];
+			var pd = $('div.propBoard', this).eq(1).find('input.prop-data');
+			$.each(pd,function(i){$(this).val(ds[i]==0?'':ds[i])});
+			$('div.propBoard', this).eq(1).trigger('change');
+			$('.selectedJewellery', this).css('display', '');
+			if( jewelleryData.i )
+				$('.selectedJewellery img', this).attr('src', '//ig2.cgs.hk/g/'+jewelleryData.i.substr(0,1)+'/'+jewelleryData.i+'.png');
+			$('.selectedJewellery .text', this).text(jewelleryData.n);
+			$(this).data('jewelleryData', jewelleryData);
+		},
+		change: function(e){
+			var tnl = "\n";
+			var effector = rowEffector[$(this).data('id')];
+			var produced = $('input[name=produced]:checked', effector.calItem).length > 0;
+			switch(e.target.name){
+				case 'minor_boost_type':
+					var jewelleryData = $(this).data('jewelleryData');
+					if( !jewelleryData ) return;
+					$(this).trigger('selectJewellery', jewelleryData);
+				break;
+				case 'jewellery':
+					if( $('input[name=jewellery]:checked', effector.calItem).val() == 1 ) {
+						$('input[name=boost2]', effector.calItem).attr('disabled', true);
+					} else {
+						$('input[name=boost2]', effector.calItem).removeAttr('disabled');
+					}
+				break;
+				case 'produced':
+					if( produced ) {
+						$('input[name=boost1]', effector.calItem).attr('disabled', true);
+						$('input[name=jewellery][value=1]', effector.calItem).attr('disabled', true);
+					} else {
+						$('input[name=boost1]', effector.calItem).removeAttr('disabled');
+						$('input[name=jewellery][value=1]', effector.calItem).removeAttr('disabled');
+					}
+				break;
+			}
+			var b1 = getPropArray(effector.b1);
+			var b2 = getPropArray(effector.b2);
+			var jewellery = $('input[name=jewellery]:checked', effector.calItem).val();
+			var boost1 = $('input[name=boost1]:checked', effector.calItem).val() * 1;
+			var boost2 = $('input[name=boost2]:checked', effector.calItem).val() * 1;
+			var minor_boost = $('input[name=minor_boost]', effector.calItem).val() * 1;
+			var minor_boost_type = $('input[name=minor_boost_type]:checked', effector.calItem).val();
+			
+			var b3 = [],b4=[];
+			for(var i=0;i<b1.length;i++) {
+				var val = b1[i]*1,result=0,formula='';
+				var factor = b2[i].replace(/\s/g,'');
+				var isPercent = factor.substr(-1) == '%';
+				if( factor.length == 0 ) factor=0;
+				factor = isPercent?(factor.substr(0,factor.length-1)/100):factor*1;
+				var minor_boost_f = minor_boost_type!=i?1:(minor_boost+(boost1-1)/10);
+				if( !produced ) {
+					if( jewellery == 1 ) {
+						var vf = isPercent?val*factor:factor;
+						// if( i == 11 || i == 18 || i== 20 ) result = (val+vf)|0; //必殺,魔攻,耐久
+                        if( i == 18 || i == 19 || i== 20 ) result = (val+vf)|0; //魔攻,抗魔,耐久
+						else if( i >= 5 && i <= 10 ) result = (val+vf)|0; //抗
+						else if(boost1>0) result = ((((val+vf)|0)*minor_boost_f)|0)*boost1;
+						else result = (val+vf)*minor_boost_f;
+					} else {
+						//if( i == 11 || i == 18 || i== 20 ) result = val; //必殺,魔攻,耐久
+                        if( i == 18 || i == 19 || i== 20 ) result = val; //魔攻,抗魔,耐久
+						else if(boost1>0) result = ((val*minor_boost_f)|0)*boost1;
+						else result = val*minor_boost_f;
+					}
+					result = Math.round(result.toFixed(5));
+					b4.push({value:result,formula:formula});
+				} else result = val;
+				if( jewellery == 2 ) {
+					var sb = (((factor*boost2).toFixed(5)*100)|0)/100;
+					if( i == 20 ) { //裝飾耐久
+						var rss = [];
+						[0.9,0.85,0.8,0.75].forEach(function(dep){
+							var rs = isPercent?(result*(1+sb)*dep):((result+sb)*dep);//(result*dep+sb);
+							rss.push( (rs.toFixed(5))|0);
+						});
+						result = rss.join('/');
+					} else {
+						var rs = isPercent?(result*sb):sb;
+						result = result + (rs.toFixed(5)|0);
+					}
+				}
+				b3.push({value:result,formula:formula});
+			}
+			var cell = effector.calItem.find('td').eq(3).empty();
+			if( !produced ) {
+				$('<div>').text('製作後').css({'border-bottom':'1px #C0C0C0 solid','font-weight':'bold','margin-top':'5px'}).appendTo(cell);
+				for(var i=0,p;p=b4[i];i++) {
+					if(p.value==0)continue;
+					$('<span>').text(propNameList[i]+(p.value>0?'+'+p.value:p.value)).attr('title', p.formula).appendTo(cell);
+				}
+			}
+			if( jewellery == 2 ) {
+				$('<div>').text('裝飾後').css({'border-bottom':'1px #C0C0C0 solid','font-weight':'bold','margin-top':'5px'}).appendTo(cell);
+				for(var i=0,p;p=b3[i];i++) {
+					if(p.value==0)continue;
+					$('<span>').text(propNameList[i]+(p.value>0?'+'+p.value:p.value)).attr('title', p.formula).appendTo(cell);
+				}
+			}
+		}
+	});
+	$('#calItem').remove();
+	$('#calTable').on({
+		'addRow': function(e){
+			var id = rowEffector.length;
+			var row = calItem.clone(true).insertBefore($(this).find('tr').last()).data('id', id);
+			var b1 = propBoard.clone(true);
+			b1.prependTo(row.find('td').eq(0));
+			var b2 = propBoard.clone(true);
+			b2.prependTo(row.find('td').eq(1));
+			rowEffector[id] = {calItem:row,b1:b1,b2:b2};
+			
+			row.find('button.showMoreRatio').on('click', function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				
+				var panel = $(this).closest('.boostPanel');
+				panel.removeClass('hideMoreRatio');
+				panel.addClass('showMoreRatio');
+			})
+		}
+	}).trigger('addRow');
+	$('#addRow').on('click', function(e){
+		$('#calTable').trigger('addRow');
+	});
+});
+$(function(){
+	var armorObjT = $('#armor').clone(true).removeAttr('id');
+	$('#armor').remove();
+	armorObjT.on({click: function(e){$('#armorsSelector').trigger('select', [$(this)]);}});
+	var jewelleryObjT = $('#jewellery').clone(true).removeAttr('id');
+	$('#jewellery').remove();
+	jewelleryObjT.on({click: function(e){$('#jewellerySelector').trigger('select', [$(this)]);}});
+	$.ajax({
+		url: 'produceCal.php', data:{act:'data'}, type:'post', dataType: 'json', success: function(data){
+			data.a.forEach(function(item){
+				var armorObj = armorObjT.clone(true).appendTo('#armorsList');
+				armorObj.addClass('lv-'+item.l).addClass('t-'+item.t);
+				if( item.i )
+					armorObj.find('img').attr('src', '//ig2.cgs.hk/g/'+item.i.substr(0,1)+'/'+item.i+'.png');
+				armorObj.find('.text').text(item.n);
+				armorObj.data('data', item);
+			});
+			data.jT.forEach(function(item,i){
+				var row = $('<tr>').appendTo('#jewelleryTable');
+				$('<td>').text(item).appendTo(row);
+				for(var j=10;j>=1;j--) {
+					$('<td>').addClass('jTcell t-'+i+'-lv-'+j).text('Lv.'+j).appendTo(row);
+				}
+			});
+			$('#jewelleryTable .jTcell').on({click: function(e){$('#jewellerySelector').trigger('select', [$(this)]);}});
+			data.j.forEach(function(item){
+				if( item.g==-1){
+					var jewelleryObj = jewelleryObjT.clone(true).appendTo('#jewelleryList');
+					jewelleryObj.find('img').attr('src', '//ig2.cgs.hk/g/'+item.i.substr(0,1)+'/'+item.i+'.png');
+					jewelleryObj.find('.text').text(item.n);
+					jewelleryObj.data('data', item);
+				} else {
+					$('td.jTcell.t-'+item.g+'-lv-'+item.l,'#jewelleryTable').data('data', item);
+				}
+			});
+		}
+	});
+	$('#armorsSelector').on({
+		'show': function(e, calItem){
+			$(this).data('calItem', calItem);
+			$(this).show();
+			$(this).css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()));
+			$(this).css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()));
+		},
+		'select': function(e, armorObj){
+			var calItem = $(this).data('calItem');
+			if(!calItem) return;
+			calItem.trigger('selectArmor', armorObj.data('data'));
+			$(this).hide();
+		}
+	});
+	$('#jewellerySelector').on({
+		'show': function(e, calItem){
+			$(this).data('calItem', calItem);
+			$(this).show();
+			$(this).css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()));
+			$(this).css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()));
+		},
+		'select': function(e, jewelleryObj){
+			var calItem = $(this).data('calItem');
+			if(!calItem) return;
+			calItem.trigger('selectJewellery', jewelleryObj.data('data'));
+			$(this).hide();
+		}
+	});
+	var sheet = document.styleSheets[0];
+	for(var i=1;i<=15;i++){
+		$('<span>').addClass('level').text('Lv'+i).appendTo('#armorLevelList').data('id', i);
+		sheet.insertRule('#armorsList.lv-'+i+' .armor.lv-'+i+'{display:inline-block}',sheet.rules.length);
+	}
+	$('#armorLevelList span.level').on('click', function(e){
+		var cur = $('#armorLevelList span.level.current');
+		var nex = $(this);//.addClass('current');
+		var curI = cur.data('id'), nexI=nex.data('id');
+		cur.removeClass('current');
+		$('#armorsList').removeClass('lv-'+curI);
+		if( cur.length > 0 && curI == nexI ) {
+			$('#armorsList').removeClass('filter');
+			return;
+		}
+		$('#armorsList').addClass('filter');
+		nex.addClass('current');
+		$('#armorsList').addClass('lv-'+nexI);
+	});
+	$('#armorLevelList .closebtn').on('click', function(e){
+		$('#armorsSelector').hide();
+	});
+	$('#jewellerySelector .closebtn').on('click', function(e){
+		$('#jewellerySelector').hide();
+	});
+});
+</script>
+<style>
+.propBoard{width: 230px;}
+.prop-data{width: 26px;}
+.prop-tag{display:inline-block;width:37px;text-align:left}
+
+.radiogroup label{margin:0px}
+.radiogroup input[type=radio]{display:none}
+.radiogroup input[type=radio]~span{border:1px solid silver;cursor:pointer;display:inline-block;padding:2px;}
+.radiogroup label:first-child~label input[type=radio]~span{border-left:none}
+.radiogroup input[type=radio]:checked~span{background-color: #604C40;color:white;}
+
+#armorsSelector{display: none;position: fixed;width: 600px;height: 440px;background: #FEF7E7;border: 1px solid #908860;}
+#armorLevelList .level{cursor: pointer;display: inline-block;height: 40px;line-height: 40px;width: 36px;color:white}
+#armorLevelList .level.current {background: #FEF7E7;color:black}
+#armorsList {overflow:auto;height:400px}
+#armorsList .armor{display:inline-block;width: 80px;cursor:pointer}
+#armorsList .armor:hover{background: #D8CCA8;}
+#armorsList.filter .armor{display:none}
+
+#jewellerySelector{display: none;position: fixed;width: 600px;background: #FEF7E7;border: 1px solid #908860;}
+#jewelleryCon{height: 440px;overflow:auto}
+#jewellerySelector .jewellery{display:inline-block;width: 90px;cursor:pointer}
+#jewellerySelector .jewellery:hover{background: #D8CCA8;}
+#jewelleryTable{width: 100%;border-collapse:collapse}
+#jewelleryTable tr:hover td{background: #D8CCA8}
+#jewelleryTable tr:hover td:first-child~td:hover{background-color: #604C40;color:white;cursor:pointer}
+
+.closebtn:hover{background:#A09A86}
+.produce span {display: inline-block;margin-right:3px}
+
+.boostPanel {}
+.boostPanel>div{display:flex}
+.boostPanel>div>div{flex:1}
+.boostPanel.showMoreRatio .moreRatioHide {display:none}
+.boostPanel.hideMoreRatio .moreRatioShow {display:none}
+.boostPanel label { display: flex; align-items: center; }
+</style>
+</head>
+<body>
+<div class="head">裝備能力計算</div>
+<div class="sub_head" style="background-color: #FFFFCC;border: 1px #FF0000 solid;">
+	請注意數據均來自玩家於公開公佈/回報所得，部分裝備數值會基於稀有度或未有足夠討論而不完整。<br>
+	本計算器裝備資料預設使用已知的最高數值，如有不準確 請到 <a href="guestbook.php">留言板</a> 提出。
+</div>
+<div id="propBoard" class="propBoard">
+	<div id="propList">
+		<label id="propItem" style="margin-right:2px">
+			<span class="prop-tag"></span>
+			<input type="text" class="prop-data">
+		</label>
+	</div>
+	<div class="propText"></div>
+</div>
+<table id="calTable" class="style">
+	<tr>
+		<th style="width:230px">原武</th>
+		<th style="width:230px">寶石</th>
+		<th style="width:130px">設定</th>
+		<th>成品</th>
+	</tr>
+	<tr id="calItem" valign="top">
+		<td>
+			<div>
+				<button class="selectArmor">選擇裝備</button> <label title="如以上數值為已製作的成品,請勾選"><input type="checkbox" name="produced" value="1"><span>只運算裝飾部分</span></label>
+				<div class="selectedArmor" style="display:none"><img><div class="text"></div><button class="cancelbtn">取消</button></div>
+			</div>
+		</td>
+		<td>
+			<div>
+				<button class="selectJewellery">選擇寶石</button>
+				<div class="selectedJewellery" style="display:none"><img><div class="text"></div><button class="cancelbtn">取消</button></div>
+			</div>
+		</td>
+		<td>
+			<form>
+				靈耐加成: <input type="text" name="minor_boost" value="1.0499" style="width:32px"><br>
+				<div class="radiogroup" style="margin: 5px">
+					<label><input type="radio" name="minor_boost_type" value="0" checked><span>製武</span></label><label><input type="radio" name="minor_boost_type" value="1"><span>製防</span></label><label><input type="radio" name="minor_boost_type" value="-1"><span>飾品</span></label>
+				</div>
+				<div class="boostPanel hideMoreRatio">
+					<div>
+						<div><b>製作</b></div>
+						<div><b>裝飾</b></div>
+					</div>
+					<div>
+						<div><hr></div>
+						<div><hr></div>
+					</div>
+					<div>
+						<div><label><input type="radio" name="boost1" value="1"><span>沒精變</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1"><span>沒精變</span></label></div>
+					</div>
+					<div class="moreRatioHide">
+						<div style="padding: 5px">
+							<button class="showMoreRatio">顯示更多</button>
+						</div>
+					</div>
+					<div class="moreRatioShow">
+						<div><label><input type="radio" name="boost1" value="1.1"><span>精變一</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.1"><span>精變一</span></label></div>
+					</div>
+					<div class="moreRatioShow">
+						<div><label><input type="radio" name="boost1" value="1.12"><span>精變二</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.12"><span>精變二</span></label></div>
+					</div>
+					<div class="moreRatioShow">
+						<div><label><input type="radio" name="boost1" value="1.14"><span>精變三</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.14"><span>精變三</span></label></div>
+					</div>
+					<div class="moreRatioShow">
+						<div><label><input type="radio" name="boost1" value="1.16"><span>精變四</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.16"><span>精變四</span></label></div>
+					</div>
+					<div class="moreRatioShow">
+						<div><label><input type="radio" name="boost1" value="1.18"><span>精變五</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.18"><span>精變五</span></label></div>
+					</div>
+					<div class="moreRatioShow">
+						<div><label><input type="radio" name="boost1" value="1.2"><span>精變六</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.2"><span>精變六</span></label></div>
+					</div>
+					<div class="moreRatioShow">
+						<div><label><input type="radio" name="boost1" value="1.22"><span>精變七</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.22"><span>精變七</span></label></div>
+					</div>
+					<div class="moreRatioShow">
+						<div><label><input type="radio" name="boost1" value="1.24"><span>精變八</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.24"><span>精變八</span></label></div>
+					</div>
+					<div>
+						<div><label><input type="radio" name="boost1" value="1.26"><span>精變九</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.26"><span>精變九</span></label></div>
+					</div>
+					<div>
+						<div><label><input type="radio" name="boost1" value="1.28" checked><span>精變十</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.28" checked><span>精變十</span></label></div>
+					</div>
+					<div>
+						<div><label><input type="radio" name="boost1" value="1.30"><span>精變11</span></label></div>
+						<div><label><input type="radio" name="boost2" value="1.30"><span>精變11</span></label></div>
+					</div>
+					<div>
+						<div><hr></div>
+						<div><hr></div>
+					</div>
+					<div>
+						<div><label><input type="radio" name="jewellery" value="1"><span>加寶石</span></label></div>
+						<div><label><input type="radio" name="jewellery" value="2" checked><span>加寶石</span></label></div>
+					</div>
+				</div>
+			</form>
+		</td>
+		<td class="produce"></td>
+	</tr>
+	<tr>
+		<td colspan="4"><button id="addRow">+增加一列</button></td>
+	</tr>
+</table>
+<div id="armorsSelector">
+	<div id="armorLevelList" style="height:40px;line-height:40px;background:#604C40">
+		<span class="closebtn" style="cursor: pointer;display: inline-block;height: 40px;line-height: 40px;width: 50px;float:right;color:white">X</span>
+	</div>
+	<div id="armorsList"><span id="armor" class="armor"><img><div class="text"></div></span></div>
+</div>
+<div id="jewellerySelector">
+	<div style="height:40px;line-height:40px;background:#604C40">
+		<span class="closebtn" style="cursor: pointer;display: inline-block;height: 40px;line-height: 40px;width: 50px;float:right;color:white">X</span>
+		<div style="text-align:left;color:white;font-size:20px;font-weight:bold;padding: 0px 10px">寶石</div>
+	</div>
+	<div style="clear:both"></div>
+	<div id="jewelleryCon">
+		<div id="jewelleryList"><span id="jewellery" class="jewellery"><img><div class="text"></div></span></div>
+		<table id="jewelleryTable"></table>
+	</div>
+</div>
+<div class="head" style="width:auto;margin-top: 20px">參考資料/小記/附註/雜項</div>
+<div class="sub_head" style="text-align:left;padding-left: 10px;width:auto">
+	魔攻在製作時不受精變影響<br>
+	必殺: 製作及裝飾時均會影響(2016-04-01更新後由製作時不影響改成受影響)<br>
+	靈耐只對製作時有影響<br>
+	【心得】裝飾技能解說及扣耐變化<a href="http://forum.gamer.com.tw/C.php?bsn=02577&snA=116574" target="_blank">http://forum.gamer.com.tw/C.php?bsn=02577&snA=116574</a>
+	(裝飾時耐久隨機減去以下固定值: -10%,-15%,-20%,-25%)<br>
+	生產精變能力 <a href="http://forum.gamer.com.tw/Co.php?bsn=02577&sn=680601" target="_blank">http://forum.gamer.com.tw/Co.php?bsn=02577&sn=680601</a><br>
+	小數點: 製作時數值四捨五入,裝飾時無條件捨去<br>
+	精變裝飾時寶石效果要先無條件捨至第二位<br>
+	靈耐,精變倍率公式 <a href="http://forum.gamer.com.tw/C.php?bsn=02577&snA=152025" target="_blank">http://forum.gamer.com.tw/C.php?bsn=02577&snA=152025</a><br>
+	頂11武+Q資料:
+	<a href="http://forum.gamer.com.tw/C.php?bsn=02577&snA=150333" target="_blank">http://forum.gamer.com.tw/C.php?bsn=02577&snA=150333</a>,
+	<a href="http://forum.gamer.com.tw/C.php?bsn=02577&snA=94246" target="_blank">http://forum.gamer.com.tw/C.php?bsn=02577&snA=94246</a><br>
+	劍: 彎勾522,剛毅625<br>
+	槍: 痛擊479,刺穿522<br>
+	斧: 高速522,重擊687<br>
+	弓: 調和479,月弓522<br>
+	杖: 星錘375<br>
+	鏢: 節制522<br>
+	小刀: 破滅457,兇殘417<br>
+	10榴水龍衣290耐<br>
+	10榴水龍小刀435耐<br>
+	精6效果<br>
+	<a href="https://forum.gamer.com.tw/C.php?bsn=2577&snA=159861" target="_blank">https://forum.gamer.com.tw/C.php?bsn=2577&snA=159861</a><br>
+	精6地卵：防禦、反擊加乘(1.22)其他1.2<br>
+	精6水卵：精神、閃避加乘(1.22)其他1.2<br>
+	精6火卵：攻擊、命中加乘(1.22)其他1.2<br>
+	精6風卵：敏捷、必殺加乘(1.22)其他1.2<br>
+	制裁者之斧 (精5)頂攻應為645<br>
+</div>
+</body>
+</html>

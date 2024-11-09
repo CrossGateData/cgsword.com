@@ -1,0 +1,101 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>爸爸的新鬧鐘</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/mission.js"></script>
+</head>
+
+<body>
+
+<div class="head">爸爸的新鬧鐘</div>
+<table class="style mission">
+	<tr>
+		<td width="11%" class="head">職業限定</td>
+		<td width="39%">無</td>
+		<td width="12%" class="head">備註</td>
+		<td width="38%">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="head">必要等級</td>
+		<td>Lv1</td>
+		<td class="head">推薦等級</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="head">時間限制</td>
+		<td>無</td>
+		<td class="head">起始地點</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="head">重複完成</td>
+		<td>可</td>
+		<td class="head">頭目戰</td>
+		<td>無</td>
+	</tr>
+	<tr>
+		<td class="head">任務獎賞</td>
+		<td colspan="3">雛鳥的卡片, 鴨嘴獸的卡片, 小鴨子的卡片, 小兔子的卡片<br>
+卡時小撲滿(10 min), 卡時小鬧鐘(不可交易)<br>
+鬧鐘小叮(雙點獲得寵物鬧鐘小叮)</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+        <div class="missionhead">可先準備純銀條(20), 鐵杉(20), 大豆(20)</div>
+        <span class="missionhead">任務內容</span>
+        <span class="missionhead" id="logspan">對話內容(開/關)</span>
+        <span class="missionhead" style="float:right">相關資訊:<br>
+        <a href="http://home.gamer.com.tw/creationDetail.php?sn=1749714" target="_blank">巴哈姆創作室</a></span>
+		<ol>
+			<li>在 <span class="place">法蘭城</span> 的 <span class="place">陶歐食品店</span> 外找 <span class="npc">頑皮的凱爾</span>(78.108) 對話得知鬧鐘壞了<br>
+			  <span class="note">註︰可省略</span><br>
+			  <span class="log">[持有鬧鐘時]<br>
+			頑皮的凱爾︰謝謝你～～<br>
+			　　　　　　這個壞掉的鬧鐘你拿去吧。[確定]<br>
+			[未持有鬧鐘時]<br>
+			頑皮的凱爾︰嗚～～<br>
+			　　　　　　我把把拔的鬧鐘弄壞了～～<br>
+			　　　　　　怎麼辦～[下一步]<br>
+			　　　　　　我想拜託製時鐘的爺爺，<br> 
+			　　　　　　可是我不知道怎麼去亞諾曼城找他耶。[確定]</span></li>
+			<li>在 <span class="place">亞諾曼城</span> 的 <span class="place">艾莉的家</span>(114.104) 裡找 <span class="place">樓梯</span>(10.13) 到達 <span class="place">艾莉的家</span>(8.16)</li>
+			<li>在這裡打倒魔族隨機獲得 <span class="item">翠玉轉輪</span><br>
+			  <span class="note">註︰魔族為1~10隻Lv30~35的土蜘蛛及鬧鐘小叮(超強混亂魔法)</span></li>
+			<li>上樓梯返回 <span class="place">艾莉的家</span> 找 <span class="npc">退休鐘錶師</span>(17.12) 換得 <span class="item">鬧鐘</span><br>
+			  <span class="log">[持有足夠道具時]<br>
+			  退休鐘錶師︰
+			  呵～～<br>
+			  　　　　　　你真的找到材料呀～～[下一步]<br>
+			  　　　　　　新鬧鐘做好了，別弄壞了～～[確定]<br>
+			  [未持有足夠道具時]<br>
+			退休鐘錶師︰喔～～<br>
+			　　　　　　做時鐘呀~~<br>
+			　　　　　　如果有純銀條與鐵杉各一組，<br>
+			　　　　　　外加大豆一組做的油就可以了。[下一步]<br>
+			　　　　　　但是鬧鐘最重要的機心，<br>
+			　　　　　　我最愛用的翠玉轉輪，掉在地下室，<br>
+			　　　　　　你可以找回來就可以作新鬧鐘了。[確定]</span></li>
+			<li>持有 <span class="item">鬧鐘</span> 到 <span class="place">法蘭城</span> 的 <span class="place">陶歐食品店</span> 外找 <span class="npc">頑皮的凱爾</span>(78.108) 對話換得 <span class="item">壞掉的鬧鐘</span><br>
+			  <span class="log">[持有鬧鐘時]<br>
+			頑皮的凱爾︰謝謝你～～<br>
+			　　　　　　這個壞掉的鬧鐘你拿去吧。[確定]<br>
+			[未持有鬧鐘時]<br>
+			頑皮的凱爾︰嗚～～<br>
+			　　　　　　我把把拔的鬧鐘弄壞了～～<br>
+			　　　　　　怎麼辦～[下一步]<br>
+			　　　　　　我想拜託製時鐘的爺爺，<br> 
+			　　　　　　可是我不知道怎麼去亞諾曼城找他耶。[確定]</span></li>
+			<li>雙點 <span class="item">壞掉的鬧鐘</span> 可隨機換得之下獎品之一<br>
+		    雛鳥的卡片, 鴨嘴獸的卡片, 小鴨子的卡片, 小兔子的卡片<br>
+		    卡時小撲滿(10 min), 卡時小鬧鐘(不可交易)<br>
+		    鬧鐘小叮(雙點獲得寵物鬧鐘小叮)</li>
+		</ol></td>
+	</tr>
+</table>
+
+</body>
+
+</html>

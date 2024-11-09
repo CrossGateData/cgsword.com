@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: Rubio</span><span class="time">2010-01-20 11:18 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>優紀斷堐</b></p>
+				有誰可以教我.優紀斷堐.因該怎麼走~~或是有地圖~~告訴我那有地圖~~一直遇怪(撐不住)<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2026)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2010-01-21 03:09 AM 回覆<br><br>
+					<div style="padding-left: 10px">一直向地圖西方走就可以到出口了</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2026</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 人類</span><span class="time">2010-01-20 09:07 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>換臉任務卡住?</b></p>
+				為什麼我明明已經有齊3樣任務物品,在晚上跟荷特普交談卻得不到混沌之珠呢?<br />
+我剛完整解完琥珀之卵1,3,4<br />
+會不會有關係?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2025)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">七威 於 2010-01-21 03:17 AM 回覆<br><br>
+					<div style="padding-left: 10px">請去艾夏島冒館重置任務<br />
+方可解決</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2025</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 蘿</span><span class="time">2010-01-18 09:22 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>生產製作</b></p>
+				7A與7B斧的圖示顛倒了。<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2024)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">2024</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 水流"</span><span class="time">2010-01-18 08:22 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>追月</b></p>
+				請問現在獅子星系可用火鼠幣或其他物品(非逆星打殘書)<br />
+換取學追月技能書嗎&quot;?<br />
+及紅利招待所的位置在&quot;?<br />
+<br>
+				<br>
+				[最後於 2010-01-18 08:25 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2023)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">小噗 於 2010-01-20 04:18 AM 回覆<br><br>
+					<div style="padding-left: 10px">除了打殘書，就是用50火幣去換<br />
+<br />
+帶著火鼠幣到亞諾曼城的旅館<br />
+一進門看到的NPC就是了<br />
+找到兌換50枚火幣的NPC<br />
+對話一直選否<br />
+直到最後他問你是不是要劍氣家家書為止<br />
+</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2023</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-01-18 02:44 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問有無大大,知道野生寵能力生成公式嗎?<br />
+因為我想計下,<br />
+一隻自練寵、成長系數0既寵、成長系數-5既寵,能力會差幾多<br />
+有無大大可以分享下?<br />
+唔該哂<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2022)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">2022</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 火焰之魂如何取得</span><span class="time">2010-01-16 12:29 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				如題?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2021)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-01-16 10:08 PM 回覆<br><br>
+					<div style="padding-left: 10px">家族寵物任務</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">小噗 於 2010-01-20 04:38 AM 回覆<br><br>
+					<div style="padding-left: 10px">傑村往打神獸路上的白狗會掉<br />
+往亞紀城路上的海豚跟螃蟹會掉<br />
+任務-魔物狩獵獎品之一<br />
+其他請其他大大補充吧</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2010-01-21 03:12 AM 回覆<br><br>
+					<div style="padding-left: 10px">還有期間任務 採集地獄</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2021</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-01-15 08:55 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問護士就職可以用變身卡來就職嗎!?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2020)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">阿k 於 2010-01-16 12:28 AM 回覆<br><br>
+					<div style="padding-left: 10px">以小弟所知,可以用心美及四色露比(按:黑色不能)</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-01-16 07:17 PM 回覆<br><br>
+					<div style="padding-left: 10px">所以是不能用變身卡是嗎!?</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">阿k 於 2010-01-16 08:45 PM 回覆<br><br>
+					<div style="padding-left: 10px">不是<br />
+能用限定的變身卡<br />
+１）心美<br />
+２）四色露比</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-01-17 05:01 AM 回覆<br><br>
+					<div style="padding-left: 10px">四色路比和心美有變身卡 = =?</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">阿k 於 2010-01-18 01:42 AM 回覆<br><br>
+					<div style="padding-left: 10px">沒有的話我回覆幹什麼..--&quot;?</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-01-18 10:11 PM 回覆<br><br>
+					<div style="padding-left: 10px">那請問要怎麼取得呢@@?!</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2010-01-21 03:10 AM 回覆<br><br>
+					<div style="padding-left: 10px">多年前GM派的</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">阿k 於 2010-01-21 11:18 AM 回覆<br><br>
+					<div style="padding-left: 10px">對..所以歷史留下來的應該沒有多少了...</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2020</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: bear</span><span class="time">2010-01-14 10:28 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問  硬殼龜 目前有人有捕抓到一等的嗎?!<br />
+<br />
+還有&quot;淚之珠&quot;從哪個任務可以拿到?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2019)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">SinG城 於 2010-01-17 08:18 PM 回覆<br><br>
+					<div style="padding-left: 10px">永恆之都<br />
+諾斯x拉特</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">小噗 於 2010-01-20 04:45 AM 回覆<br><br>
+					<div style="padding-left: 10px">淚之珠-諾斯非拉特島-永恆之都任務<br />
+需先解完主Puk4線任務1-4<br />
+5.0主線任務一 - 希望之子<br />
+5.0主線任務二 - 尋找樓蘭希亞<br />
+5.0主線任務三 - 沉默的龍<br />
+5.0主線任務四 - 禁忌之花</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2019</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 我沒有名子 </span><span class="time">2010-01-14 09:47 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>封印師</b></p>
+				封印師應該怎麼點數值 配技能呢??<br />
+請好心的大大們告訴我<br />
+(魔封)<br>
+				<br>
+				[最後於 2010-01-15 04:50 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2018)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">某星 於 2010-01-24 08:37 AM 回覆<br><br>
+					<div style="padding-left: 10px">其實看個人拉<br />
+<br />
+本人的魔封 初期15魔15敏<br />
+每生1等 2魔1敏1體 (魔封缺點體很低 還是建議力封)</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2018</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 大嘟</span><span class="time">2010-01-14 06:27 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>抓寵-布卡</b></p>
+				寵物圖鑑裡面沒寫他會護衛<br />
+<br />
+前天去抓布卡遇2.3小沒遇到<br />
+<br />
+今天去碰運氣第二場就遇到 開心了好幾下<br />
+<br />
+結果寵再清其他怪的時候<br />
+<br />
+布卡有換位子<br />
+<br />
+想說第二場放法打他還是打的到 寵繼續清其他怪<br />
+<br />
+結果布卡竟然護衛= =<br />
+<br />
+被我寵打飛 臉都綠了= =<br />
+<br />
+(更改一下布卡1等的技能吧!!<br />
+ 讓其他也對布卡有興趣的小心點別打飛他xD)<br />
+<br />
+謝摟<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2017)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">2017</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=274&amp;s=">上一頁</a>		<a href="guestbook.php?page=276&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

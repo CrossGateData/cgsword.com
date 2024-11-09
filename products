@@ -1,0 +1,3019 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>魔力寶貝產品包 - 御劍軒</title>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script>
+
+</script>
+<style>
+.product{margin-bottom:10px}
+table.product th,table.product td{text-align:left;}
+</style>
+</head>
+
+<body>
+<div class="head">魔力寶貝產品包</div>
+<div class="sub_head">
+    資料來源: <a href="http://forum.gamer.com.tw/C.php?bsn=02577&snA=121963&tnum=113" target="_blank">巴哈姆特 - 冰之雪</a>
+    <br>
+    本文內部份圖片由玩家提供，如尚未正確標明來源，請到 <a href="guestbook.php">留言板</a> 告知
+</div>
+<div id="base">
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.0超魅力上網包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/3beab-e47e554f0edfd600.png" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2001</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">49.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.0神獸傳奇<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/b0211-2ce400ea12872dd3.jpg" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2001-09-28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">49.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.0神獸傳奇攻略本<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/0c7b6-9a89e757b0b16cb4.jpg" style="width:178px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2001-09-28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">299.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.0神獸傳奇-發財包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/94ba6-e4a38d86d7e289b4.jpg" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2001-09-28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">999.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.0神獸傳奇-寶藏包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/7526f-1ac5cf66f96d8e26.jpg" style="width:168px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2001-09-28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">450.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.0 完全征服寶典<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/d275f-d5b3328d5bea3228.jpg" style="width:240px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2001-12</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">299.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.5魔弓傳奇新手包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/81a78-95ab738c5b2ae033.jpg" style="width:240px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2002-07-18</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">49.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.5 一週年生日蛋糕卡<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/0317b-cc670c19c43c4c84.jpg" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2002-09-28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.5 週年慶限量珍藏版<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/3e1de-4354240aa88f1f7a.jpg" style="width:240px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2002-09-28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.5黃金寵物包-大地鼠<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/26866-5afdfc0f487b6764.jpg" style="width:150px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2002-10-03</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">999.00</span> / HK: 258.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td>http://gnn.gamer.com.tw/1/6011.html</td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝1.5 魔力卡1代<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/153f9-00aca9fca8ba1606.jpg" style="width:175px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2002-10-30</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">29.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0正式珍藏版<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/69cde-a73f938b5392a91f.jpg" style="width:143px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0龍之沙漏<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/2f793-00a4c445b48da2e9.jpg" style="width:136px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-01-18</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">59.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0完全征服寶典<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/21119-f410cfcb01c5605a.jpg" style="width:240px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-01-18</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">299.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0御手包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/61a7b-1d09bfdbdaccfef0.gif" style="width:120px;height:158px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-03-27</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">450.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.350點點數卡<br />
+2.內附御守錦囊一只，內附櫻花和果子和魔幣<br />
+3.櫻花和果子(mp+100，一組10個)，補魔聖品、攜帶方便卡好用<br />
+4.魔力撲克牌一副，粉絲級收藏極品<br />
+5.可隨機獲得魔幣1-10萬，讓你敗家到手軟</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td>感謝露天拍賣waiwai70提供魔力撲克牌週邊產品圖</td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0 元氣一番包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/debc2-063b6b61a6edb34a.jpg" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-04</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">350點 點數卡<br />
+福袋虛寶卡</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0 黃金寵物包-火焰鼠<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/61287-9d7ca1fd5a8b711a.gif" style="width:63px;height:100px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-05-30</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">799.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.700點點數卡、可包雙月<br />
+2.火焰鼠福袋卡，可兌換魔力元素水晶、神奇藥水<br />
+3.魔力神奇藥水一組(補hp200，15個一組)，補血練功聖品。<br />
+4.魔力元素水晶，集滿同系列元素水晶可得魔幣2-6萬。<br />
+5.限量火焰鼠香水絨毛玩偶一隻，含出生證明卡一張。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0-專用點數卡<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/f7fca-f032052868a5e19a.gif" style="width:120px;height:215px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-06-25</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">200.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全家便利商店獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">200點/200元（加贈虛擬寶物一份）</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0-專用點數卡<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/db8d9-a0cadf5841d44643.gif" style="width:120px;height:215px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-06-25</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">350.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.全家便利商店獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">350點/350元（直接包月儲值）</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0 勇者武鬥場新手包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/5882a-078e18f88b007a5f.gif" style="width:120px;height:190px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-07-24</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">20.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1免費暢遊7天<br />
+2.2張遊戲光碟<br />
+3勇者武鬥手冊<br />
+4魔幣1000元</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0 夏祭海之戀包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/eb795-4fd22bc7d8bdbd84.gif" style="width:120px;height:162px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-07-30</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">799.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.全家便利商店.OK便利商店</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.770點遊戲點數<br />
+2.魔力沙灘巾<br />
+3.魔力元素水晶兌換卷<br />
+4.魔力日式烤肉1組<br />
+5.火焰鼠造型帽護身符</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0勇者勳章新手包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/6d450-b4707706e19603e8.gif" style="width:120px;height:170px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-09-25</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">59.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.萊爾富.OK便利商店.全省3C特大販賣場<br />
+香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.魔力寶貝VER2.0遊戲光碟2張<br />
+2.新手操作教學VCD1張<br />
+3.魔力寶貝全地圖1張<br />
+4.新手攻略手冊一本<br />
+5.勇者勳章虛擬一只<br />
+6.魔力勇者之藥一組 (加生命100，魔力30的藥水，一組五瓶<br />
+精美活動DM</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0勇者勳章紀念版9月號<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/5e538-90265063c5b60daa.gif" style="width:150px;height:150px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-10-09</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">400.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.全家便利商店.OK便利商店.全省3C販賣<br />
+香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.儲值點數350點一張<br />
+2.魔力寶貝全地圖一張<br />
+3.勇者勳章<br />
+4.勇者勳章<br />
+5.魔幣刮卡(1萬-5萬魔幣)<br />
+6.精美活動DM</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0-勇者勳章紀念版11月號<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/dc4cc-6e19794f57726d8c.gif" style="width:200px;height:135px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-11-06</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">400.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全省3C.萊爾富販賣<br />
+香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.內含點數350點，老手玩家專用<br />
+2.魔力寶貝全地圖，讓您遊戲不迷路<br />
+3.此產品包裝特別加贈魔幣與裝飾技能捲軸，玩家完成儲值動作後即可隨機獲得魔幣1萬至5萬或裝飾技能捲軸，憑裝飾技能捲軸即可習得加強裝備能力的技能<br />
+4.魔力勇者實體勳章一枚，超精美紀念勳章，集勳章還可得精美贈品喔<br />
+5.魔力勇者虛擬勳章一枚，憑包裝內的虛擬勇者勳章，就可以參加遊戲內每週更新一次的勇者勳章任務，完成最終任務後可得價值魔幣70萬的虛擬寶物。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0 自由飛行包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/d2b4d-82608db627d040f0.gif" style="width:234px;height:158px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-11-29~12-07</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">1299.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣資訊展獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.儲值點數888點一張(可包季)<br />
+2.特級勇者之藥一組(一組3瓶)(HP+300 MP+100)<br />
+3.飛龍之翼護身符<br />
+4.傳送優待券20張<br />
+5.絨毛四鼠組合一套</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0 水晶之戀包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/c6d4f-c911379253777c80.gif" style="width:160px;height:155px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-11-29~12-07</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">899.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台中資訊展獨家飯售</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.儲值點數350點兩張(可包雙月)<br />
+2.特級勇者之藥一組(一組3瓶)(HP+300 MP+100)<br />
+3.元素水晶一組3顆+日式烤肉一組3份<br />
+4.沙灘浴巾一件<br />
+5.台灣電訊電話卡一張(面額30元)</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0 勇者勳章紀念版12月號<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/6ac28-45867520b9cb4761.gif" style="width:183px;height:123px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2003-12-04</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">400.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣<br />
+香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.儲值點數350點一張<br />
+2.魔力聖誕年曆<br />
+3.勇者勳章<br />
+4.勇者勳章<br />
+5.聖誕娃娃</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝2.0勇者勳章新年紀念版<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/29e59-c6f45bb1ac993f0e.gif" style="width:185px;height:119px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-01-15</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">400.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣 光南3C販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.儲值點數350點一張<br />
+2.魔力平安年曆一份<br />
+3.勇者勳章兩只<br />
+4.紅包抽獎袋一只（可隨機隨得魔幣16800-88800）<br />
+5.魔力吉祥護身符一只（虛擬，裝備後可加魅力與稱號）<br />
+內附魔力情報資訊</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0樂園之卵搶先體驗包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/6b296-585cd069375e832b.jpg" style="width:240px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-03-</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣.</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0樂園之卵<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/a25df-d59aabfc2928b75f.gif" style="width:130px;height:194px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-03-18</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-OK便利商店<br />
+香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.新手暢遊30天序號(限新手帳號使用)<br />
+2.遊戲光碟三張<br />
+3.新手教學光碟一張<br />
+4.魔幣1000元(香港3000元)<br />
+5.超武俠大戰精美桌布<br />
+6.超武俠大戰遊戲動畫</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0樂園之卵老手歡樂包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/d3a38-bb3b1421e198ca9c.gif" style="width:133px;height:158px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-03-18</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">350.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣<br />
+香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.儲值點數350點一張<br />
+2.遊戲光碟3張<br />
+3.超武俠大戰精美桌布<br />
+4.超武俠大戰遊戲動畫</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0樂園之卵-限量精裝典藏版<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/40415-00360bacf96de5e1.gif" style="width:220px;height:164px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-03-18</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">888.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-光南獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.精裝版儲值點數700點一張<br />
+2.遊戲光碟3張<br />
+3.魔幣3萬（香港玩家魔幣5萬）<br />
+4.魔力精美地圖手繪記事本<br />
+5.樂園之卵虛擬飾品（台版稱號：通往樂園的曙光　港版：失序的樂園　因台港版的不同有不同的功能）<br />
+6.超武俠大戰精美桌布<br />
+7.超武俠大戰遊戲動畫</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td>感謝露天拍賣玩家kyo80287提供產品包內容圖</td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0樂園之卵-珍藏版限量光碟<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/949ae-361f26603310b0a8.jpg" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-03-25</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台中電腦展</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.「魔力寶貝3.0」珍藏版限量光碟 + 精美炫光吊帶」乙份</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0-皇家御用百科<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/50c65-4eda0f7f573d4f78.gif" style="width:180px;height:170px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-05-26</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">399.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.儲值點數150點一張<br />
+2.寵物與裝備道具攻略本<br />
+3.淨界寶石一顆（可增加裝備之特殊效果）</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0樂園之卵-光碟包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/0b22d-d9820916d7e4790e.gif" style="width:171px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-05-26</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">59.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-各大便利商店販賣<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0魔力卡2代<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/538e0-a29145306b326452.gif" style="width:240px;height:145px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-05-26</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">29.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11.OK便利商店<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.魔力寶貝精美塔羅牌一張<br />
+2.魔力卡一張<br />
+3.魔力卡說明書一份</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0家族新手包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/62459-b96f95c329164827.gif" style="width:156px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-08-03</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">59.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.遊戲光碟3張<br />
+2.新手教學光碟1張<br />
+3.魔幣3000元</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0-家族紀念包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/5b835-17d7113448c001ef.gif" style="width:180px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-08-03</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">450.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-ok.萊爾富.7-11.全家便利商店販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0-皇家御用百科<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/c22a8-e9761c8b99c227e8.gif" style="width:143px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-08-03</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">299.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-ok.萊爾富.7-11.全家便利商店販賣<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.儲值點數60點一張<br />
+2.職業技能與攻略任務攻略本一本<br />
+3.魔幣3萬(香港玩家魔幣5萬)</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0遊戲基地嘉年華紀念海報<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/d3061-973f175309abac1a.jpg" style="width:179px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-08-03</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0三週年紀念海報<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/8b5ad-7e479be9c2ad919e.png" style="width:160px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-09-28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td>沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0變身舞會<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/900df-2fba8c799bf7d566.jpg" style="width:198px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-10-28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">299.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.遊戲點數200點一張<br />
+2.魔力寶貝2005精美曆事本<br />
+3.變身舞會入場卷一張<br />
+4.夜光守護者兌換卷一張（集滿三張即可兌換＋魔1000的晴月守護神護身符一只）</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0月之祭典<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/b932a-388ace8638f4fe31.jpg" style="width:210px;height:239px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2004-12-02</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">299.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販售</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.遊戲點數200點一張（香港350點）<br />
+2. 水藍鼠手機擦吊飾一只<br />
+3. 月光寶盒一只</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0 愛炫筒<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/67ebc-5522d96693329147.jpg" style="width:240px;height:136px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">1200.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台北資訊展獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.魔力愛炫限量筒(每日限量一百組)<br />
+內含350點序號二組、龍型寵物(五款隨機之一)、T恤、收納筒<br />
+內容物說明：<br />
+◎展場獨家龍型寵(地、水、火、風、平均型五款隨機取得</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0狂戰包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/3200a-88252ccb12b581da.jpg" style="width:180px;height:182px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-02-25~28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">899.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台北國際電玩展獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.點數 700點<br />
+2.狂戰基金1-10萬or裝飾技能學習捲軸 <br />
+3.安產護身符 生產系專用,可檔30次傷害<br />
+4.鐵牛A100 10瓶 使用後可增加卡時(一瓶一小時)<br />
+5.水藍鼠手機擦拭布吊飾</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0鼠來寶包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/40238-b608175ca6095bbc.jpg" style="width:240px;height:225px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-02-25~28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">499.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台北國際電玩展獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">遊戲點數350點<br />
+1‧魔幣1-5萬or裝飾技能學習捲軸<br />
+2‧寶石鼠絨毛娃娃一只<br />
+3‧黃金寶石鼠一個(點選後可出現三顆金蛋)<br />
+4‧可參加魔力寶貝集字卡抽獎一次</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝3.0金雞報喜包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/2d94b-8d901bd654d61ac8.jpg" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-02-25~28</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">499.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台北國際電玩展獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">遊戲點數350點<br />
+1‧魔幣1-5萬or裝飾技能學習捲軸<br />
+2‧大公雞絨毛娃娃一只<br />
+3‧黃金大公雞一個(點選後可出現三顆金蛋)<br />
+4‧可參加魔力寶貝集字卡抽獎一次。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0暑假包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/72c9a-529d78b235087e00.jpg" style="width:240px;height:175px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-07-23~31</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">399.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-數位嘉年華獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1. 點數350點 <br />
+2. 魔力寶貝4.0資料光碟1張 <br />
+3. 魔力寶貝4.0簡易手冊 <br />
+4. 虛擬寶物序號一組：稱號卡盒/卡時鬧鐘</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0超值包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-07-23~31</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">499.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-數位娛樂嘉年華獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1. 點數350點 <br />
+2. 魔力寶貝4.0資料光碟1張 <br />
+3. 魔力寶貝4.0簡易手冊 <br />
+4. 虛擬寶物序號一組：魔力4.0紀念稱號/開運抽獎抽獎券/卡時1小時x6/寵物飼料包x3 <br />
+◎ 序號置於包裝內襯上。虛擬寶物請於2007/7/31前兌換，逾期無效。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0新手包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/7e924-b4cc1f98938404e0.jpg" style="width:240px;height:223px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-07-26</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">49.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11販賣<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.魔力寶貝完整安裝光碟3張<br />
+2.魔力寶貝4.0資料光碟1張<br />
+3.魔力寶貝4.0簡易手冊<br />
+4.虛擬寶物序號一組：魔力熱血勇者稱號</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0芙蕾雅的祝福<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/017fc-5ace0bf4b13a1d48.jpg" style="width:240px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-07-26</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">399.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.點數卡350點、<br />
+2.4.0光諜、<br />
+3.遊戲說明書<br />
+4.虛擬寶物 法蘭福袋</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0暑假包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-07-26</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">399.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-數位娛樂嘉年華獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1. 點數350點 <br />
+2. 魔力寶貝4.0資料光碟1張 <br />
+3. 魔力寶貝4.0簡易手冊 <br />
+4. 虛擬寶物序號一組：稱號卡盒/卡時鬧鐘</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0武器應援包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-08-26</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">450.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全省3C販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0防具應援包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-08-26</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">450.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全省3C販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0魔力酷搜包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/200c7-073953e6d883f425.gif" style="width:187px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-11-25</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">450.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台中資訊展獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">內含350點、<br />
+寵物警告器X1、替身娃娃X3、<br />
+肚子餓料理X3、<br />
+<br />
+內容物說明：<br />
+◎一級寵警告器一只，一級寵出現時音效警示<br />
+◎替身娃娃三枚，代替被打，人不會趴<br />
+◎肚子餓料理三個，使用此料理後可將飽食度降回0</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝4.0歌姬海報<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/136ff-72b53834e9aaec8b.jpg" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2005-11-25</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台中資訊展</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0砂之記憶與覺醒的光- 5.0改版測試體驗光碟<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/569f0-18c32b2e25995b3b.jpg" style="width:181px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2006-07-07</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台北小巨蛋贈品不賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0覺醒之光包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/5db01-b37bceea390249b3.jpg" style="width:240px;height:159px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2006-07-24</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全台灣光南獨家販賣</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.龍砂結晶<br />
+2.蕃茄炸彈二組<br />
+3.海賊銅鑰匙一把</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0砂之記憶包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2006-07-24</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">399.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">『砂之記憶』或『覺醒之光』一個(隨機獲得)、『蕃茄炸彈』二組、『海賊銀鑰匙』一把。憑包裝內附之『海賊銅鑰匙』或『海賊銀鑰匙』與亞諾曼城兌獎NPC對話後可傳送至海賊洞窟，然後將『鑰匙』交給你所想要的獎賞管理海賊，就能換到你想要的財寶喔！(『海賊銅鑰匙』可自由兌換4種獎項其中之1個，『海賊銀鑰匙』則可自由兌換4種獎項其中之二個)。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0海報圖<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/26148-849dda753beb15d4.jpg" style="width:179px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2006-07-24</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: 沒有資料 / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td></td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0驚色趴踢包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/3c4b6-5bdaf52454975083.jpg" style="width:240px;height:159px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2006-12</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全省光南<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">冬季限定包裝『驚色趴踢包』驚艷內容包含了趴踢變裝點數卡120點與可隨機兌換的龍神道具『趴踢白龍』─勇者必備超強防具『龍首』、人物屬性點數可大獲重置的劇藥『龍翼』以及可治癒高達一個等級傷勢的『龍骨』<br />
+12/13起至 12/24 前進行『驚色趴踢包』開卡，即還可獲得前所未有的飛機頭頭飾，只要裝備飛機頭頭飾到亞諾曼冒險者旅館前，即可兌換到神祕的特殊頭飾與聖誕小禮包，打開小禮包還有機會將未開放的雪人波波娶回家哦</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0鼠王筆記本<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/5f261-9f87a4f3c22aa309.jpg" style="width:179px;height:120px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2007-02-08~12</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">800.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台北電玩展獨家販售</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0-魔力酷炫袋<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/b9454-7086827d52bfa99d.jpg" style="width:88px;height:110px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2007-02-08~12</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">720.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台北電玩展獨家販售</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0-密傳收納盒<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/89af5-20f2c058abd6a091.jpg" style="width:114px;height:150px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2007-02-08~12</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">99.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-台北電玩展獨家販售</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description"></td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.0鼠王筆記本<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/0b416-c2b193654c7e5799.jpg" style="width:179px;height:120px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2007-03-02</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">800.00</span> / HK: 沒有資料</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全省光南獨家販售</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">「ＴＧＳ電玩展」熱鬧結束 ~ 許多魔力玩家當然也在這場盛會中滿載而歸，<br />
+為回饋中南部不方便北上參觀展場的玩家，「鼠王筆記本」將於下列門市銷售並加贈送「星星」動態頭飾，<br />
+「鼠王筆記本」產品得到「招財貓撲滿」</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5時空門扉神秘逆境<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/4c6c2-5fa293bc9284ad60.jpg" style="width:240px;height:159px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2007-05-07</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">299.00</span> / HK: 60.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全省萊爾富獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.魔力專用200點<br />
+2.小白龍設計圖 : 持有小白龍之玩家, 雙擊 小白龍設計圖後 可以隨機得到不同體型, 顏色,基本能力之成長中型寵物          <br />
+<br />
+3.替身娃娃b型x2: <br />
+可抵擋1次致死的魔法攻擊<br />
+4.贖魂笛x1: 室掉魂情況下使用可以招回一格靈魂, 使用後消耗1個<br />
+5.好食便當(400)x1:進行採集時, 當魔力達到0自動補魔400 , 使用後消耗1個<br />
+6.隨機補血e型x1: 隨機補血500-700<br />
+裝備反射鏡x1:<br />
+當裝備遭受破壞時, 消耗一張裝備破壞反射鏡, 並保留該裝備當時耐久值<br />
+落跑娃娃x2:</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5夏日妖精<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/0f361-9b2f316f58665b04.jpg" style="width:110px;height:110px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2007-07-25</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.妖精召喚書上捲：可裝備，反擊30~60，耐久10。<br />
+2.妖精召喚書中捲：雙點後，可恢復傷勢一級，使用後消失，集滿『妖精召喚書上捲』、『妖精召喚書中捲』、『妖精召喚書下捲』，雙點可得小妖精之卵。<br />
+3.妖精召喚書下捲：可裝備，敏捷30~60，耐久10。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5海豚物語<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/b9608-937139832b846cc1.jpg" style="width:110px;height:110px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2007-10-09</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販售<br />
+香港</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">購買包裝後可以物品序號兌換『陶土』。 <br />
+2. 雙點『陶土』後，可隨機得到『神奇水瓶』、『冰筒』、『海豚陶笛』。<br />
+10/29日前開卡，可得到另外取得水鼠的袋子，可搖出水鼠的骰子，依點數取得水鼠金幣1~6枚。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5雪之櫻<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/f536c-fbcdf8612b209575.jpg" style="width:110px;height:110px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2007-12-04</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">399.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-全省光南獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">點數卡：二合ㄧ點卡150點+200點3CD<br />
+購買包裝後可以物品序號兌換『雪人福袋』<br />
+雙點『雪人福袋』後，可得到<br />
+產品虛寶:<br />
+『鐵牛Ａ活力飲料』X3、裝飾技能捲軸、飾品技能學習捲軸、<br />
+另隨機取得『卡時小鬧鐘』或是『任意鑰匙』。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5神奇擦布包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/d6f5a-9561a57768f94f79.jpg" style="width:180px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2008-05-07</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">周邊商品</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.購買包裝後可以物品序號兌換『超級魔布箱』＊１、『卡時小噗滿1HR』＊３。<br />
+2.雙點『超級魔布箱』後，可得到『超級武器魔布』、『超級防具魔布』，各10塊。<br />
+3.├『超級武器魔布』可回復玩家所製的武器耐久10點，使用後消失。<br />
+4.└『超級防具魔布』可回復玩家所製的防具耐久10點，使用後消失。<br />
+5.雙點道具『卡時小噗滿1HR』，扣掉現有卡時１ＨＲ，存入噗滿中。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5春之旅<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/0f393-efe6deaf25a5a772.jpg" style="width:80px;height:94px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2008/12/31</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.魔力寶貝150點遊戲點數序號<br />
+2.春之旅行箱序號<br />
+雙點『春之旅行箱』後可隨機得到『採集傳送卷』25張或『練功場傳送卷』10張。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5時之塔<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/497a2-e8bfe175ce349066.jpg" style="width:98px;height:110px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2009-08-25</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span> / HK: 58.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-萊爾富獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">1.魔力寶貝簡易說明書JoyCard<br />
+2.150點與虛寶密貼(有銀漆 虛寶水瓶星不適用)DVD光碟片＊<br />
+3.1便條紙<br />
+1.虛擬道具－時之箱雙點“時之箱”可得到<br />
+2.封印工具箱＊3<br />
+3.雪人圖鑑卡隨機一張<br />
+4.嗶波鼠<br />
+5.魔物召喚瓶</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5純真年代包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/a2df2-87c7e814b77aec0d.jpg" style="width:240px;height:159px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2010-07-20</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">399.00</span> / HK: 58.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">200點遊戲點數與120點遊戲虛寶點數二合一卡(雙道銀漆) <br />
+1. 購買包裝後可以產品序號兌換『回憶之瓶』。<br />
+2. 雙點『回憶之瓶』後即可獲得水鼠D活力飲料*2、記憶之晶*50+超級武器魔布*3+超級防具魔布*3</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5夏の祭典<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/5ab04-791043ea74af1b70.jpg" style="width:206px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2011-07-15</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span> / HK: 30.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">DVD遊戲安裝光碟片乙張<br />
+Joycard 100點序號乙組（有銀漆）<br />
+Joycard 50點與虛寶二合一點卡乙組（有銀漆 二合一卡水瓶星不適用）<br />
+便條紙乙本<br />
+虛寶內含： <br />
+．螳螂類一級點傳卷 x 5 <br />
+．盾類一級點傳卷 x 5 <br />
+．菇類一級點傳卷 x 5 <br />
+．就職書屋進入證 x 3 <br />
+．記憶之城傳送卷 x 3</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝5.5夏の祭典感恩回饋包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/b8a6f-d99ba467ac5342e6.jpg" style="width:206px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2012-06-14</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">199.00</span> / HK: 30.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-光南.順發.三井販售</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">DVD遊戲安裝光碟片乙張<br />
+Joycard 100點序號乙組（有銀漆）<br />
+Joycard 50點與虛寶二合一點卡乙組（有銀漆 二合一卡水瓶星不適用）<br />
+便條紙乙本<br />
+虛寶內含： <br />
+．螳螂類一級點傳卷 x 5 <br />
+．盾類一級點傳卷 x 5 <br />
+．菇類一級點傳卷 x 5 <br />
+   「超級武器魔布*3」<br />
+「超級防具魔布*3」</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝-5.5伏月異聞包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/0e4d0-57992d38ffc1d769.jpg" style="width:240px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2012-06-21</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">149.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">遊戲光碟DVDX1<br />
+心美的首飾盒X1<br />
+玩家將隨機從心美首飾盒裡獲得:迅速之刀(果斷耗磨減半)<br />
+神聖之帽(單補耗磨減半)<br />
+裝備破壞反射鏡*3<br />
+卡時小噗滿(30min)*3 (魔力內實體獲得卡時1H撲滿)<br />
+魔封環100FP(200FP轉100FP)*3<br />
+1張精美悠遊卡貼</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝-5.5萌幻包新手包<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/7778f-362526a9a730bf6e.jpg" style="width:240px;height:180px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2012-06-27</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">49.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11獨家販售<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">遊戲光碟DVDX1<br />
+精美悠遊卡貼X1<br />
+新手免費七天序號卡+虛寶序號卡<br />
+就職書屋進入<br />
+新手背包<br />
+卡時小鬧鐘Mini<br />
+攜帶型阿繆、<br />
+初級練功指導書、1v10錦囊<br />
+魔幣25000G<br />
+新玩家進入新伺服器－櫻之舞，還可額外獲得「特級傷藥*3」及「贖魂笛*2」。</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝6.0輪迴之守<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/e637b-cb592a35668c4641.jpg" style="width:240px;height:216px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2013-02-05</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">149.00</span></td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11.全省3C販賣<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">安裝光碟DVD、卡貼、120點序號、二合一序號(20點+輪迴之守)<br />
+<br />
+輪迴之守：點擊後獲得<br />
+亞紀公主變身卡組(可獲得10張)<br />
+卡卡西變身卡組(可獲得10張)<br />
+新鮮人錦囊<br />
+大女神蘋果x10</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝6.0浪人の戀<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/a8336-094805c117bd47bb.jpg" style="width:240px;height:234px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2013-07-04</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">改版資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">149.00</span> / HK: 20.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td>臺灣-7-11<br />
+香港-</td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">◎魔力寶貝完整安裝DVD＊１<br />
+◎joycard ８０點序號＊１(有銀漆)<br />
+◎joycard ２０點與虛寶「水無月之袋」二合一序號＊１(有銀漆，水瓶星不適用)<br />
+<br />
+虛寶內容：<br />
+水無月之袋：雙點可得以下物品<br />
+<br />
+新鮮人錦囊及以下物品其中一個<br />
+神奇小花苗(植物系)<br />
+神秘的蟲卵(昆蟲系)<br />
+符紙人(人形系)<br />
+上列物品使用後可獲得該系Lv1寵物</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝 6.0 –永遠の友達<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/674eb-2756eccb1ae75e72.jpg" style="width:240px;height:237px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2013-12-20</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">149.00</span> / HK: 16.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td></td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">魔力寶貝完整安裝DVD*1<br />
+◎joycard 100點序號*1(有銀漆, 港版不包含)<br />
+◎joycard 20點與虛寶二合一序號*1(有銀漆，水瓶星不適用)<br />
+◎卡貼*1<br />
+<br />
+虛寶內容：<br />
+「兔子召喚證」：雙點可得以下其中一隻寵物<br />
+灰兔、雪兔、紅兔、黃兔、紳士兔、月兔、藥兔、雲兔、玉兔、鋼彈兔、圍巾兔<br />
+「金卡搜集冊」：雙點可得一張金卡寵的圖鑑卡</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<div>
+<table class="style product" itemscope itemtype="http://data-vocabulary.org/Product">
+    <tr>
+        <td colspan="3" itemprop="name">魔力寶貝7.0軍團の逆襲<meta itemprop="brand" content="大宇資訊"><meta itemprop="availability" content="instore_only"></td>
+    </tr>
+    <tr>
+        <td rowspan="6" style="width:250px">
+                        <img src="image/product/82662-361f1a9abf70dd1b.jpg" style="width:218px;height:240px" itemprop="image">
+                    </td>
+        <td style="width:80px">發售日期</td>
+        <td>2014-12-04</td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td itemprop="category">資料片</td>
+    </tr>
+    <tr>
+        <td>官方售價</td>
+        <td><meta itemprop="currency" content="NTD" />NT: <span itemprop="price">149.00</span> / HK: 15.00</td>
+    </tr>
+    <tr valign="top">
+        <td>販賣出處</td>
+        <td></td>
+    </tr>
+    <tr valign="top">
+        <td>內容</td>
+        <td itemprop="description">１、魔力寶貝完整安裝DVD*1<br />
+２、魔力寶貝點數100點與虛寶二合一序號乙組(有銀漆，水瓶星不適用)<br />
+虛寶「潘朵拉之盒」內容：雙點可得闇之龍、黃金龍、聖龍….等十九種寵物其中一種。<br />
+<br />
+港版額外送 秘傳漢堡盒(滿) x1</td>
+    </tr>
+    <tr valign="top">
+        <td>來源</td>
+        <td></td>
+    </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

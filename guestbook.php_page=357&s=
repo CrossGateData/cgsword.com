@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: karl</span><span class="time">2009-04-09 07:11 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>聲望問題</b></p>
+				1.如果13日無玩...之後可唔可以一日內拎到呢喃?(假設有辦法拎到5600聲望)<br />
+<br />
+2.如果一埸有3隻怪,魔c出3招技就殺晒佢地<br />
+咁係有2.5聲望 定係 4.5聲望?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1137)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-10 12:24 AM 回覆<br><br>
+					<div style="padding-left: 10px">這點我有試過.. 真係好睇運氣.. 有時得有時唔得 我都唔清楚原因</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1137</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2009-04-09 11:40 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>檸檬草...</b></p>
+				請問  檸檬草可以用換的嗎?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1136)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-09 02:48 PM 回覆<br><br>
+					<div style="padding-left: 10px">可在法蘭城東南面，科特利亞酒吧旁(216.141)找NPC 喜歡薄荷的安 以數量3蘋果薄荷交換數量1檸檬草</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1136</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 蚊囡  (傳c 問題)</span><span class="time">2009-04-09 12:30 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				我想問一問傳c要+到幾多點魔同敏就夠...??<br />
+我想+到 130 至140 點魔 之後升lv + 2體2敏  <br />
+&amp;  +到 80至90點敏 之後升lv +2體2魔 <br />
+&amp; +到80敏 ,130魔 之後升lv + 2體 1敏 1魔<br />
+ -____- &quot; 有冇傳c 高手俾d意見 &amp;教教我~thx...3q<br />
+<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1135)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-09 02:45 PM 回覆<br><br>
+					<div style="padding-left: 10px">建議傳教士先將血+滿 敏+到90 其他魔<br />
+升lv+2血2魔 應該較好用較襟打<br />
+<br />
+如果係lv1開人物的話 配點15血7敏8魔 升lv+2血1敏1魔<br />
+等敏到90再2血魔</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">蚊囡  (傳c 問題) 於 2009-04-09 07:44 PM 回覆<br><br>
+					<div style="padding-left: 10px">THX    Miracle嵐</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1135</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 3Q</span><span class="time">2009-04-08 09:52 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>海賊之島</b></p>
+				我是獵人我目前在海賊之島<br />
+我找不到牛奶ㄉ點<br />
+求助<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1134)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">1134</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 怎麼辦!!</span><span class="time">2009-04-08 08:54 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>寵物走失</b></p>
+				今天用寵物郵件寄礦給一個沒上線的朋友  打算等寄件失敗回傳  結果...  寵物一去不回  到各個伺服器的寵物走失中心去看  都沒有我的寵物耶  怎麼辦??<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1133)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-09 02:42 PM 回覆<br><br>
+					<div style="padding-left: 10px">可到即時回報器回報</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1133</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 凱</span><span class="time">2009-04-08 06:18 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>礦物價格</b></p>
+				其實礦物價有冇上升到??<br />
+點解依家既寵貴左咁多-.-閒閒地都幾萬....<br />
+我想知依家礦物既價錢係幾多...<br />
+可以的話例出來&gt;_&lt;<br />
+謝~<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1132)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">1132</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 司馬毛怪</span><span class="time">2009-04-08 09:59 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>寵物水晶</b></p>
+				請問要進去換寵物水晶的地方<br />
+要進去門口前不是有一個NPC要戰鬥或付500嗎?<br />
+我是50等獵人 跟那個NPC說完話 付完500塊<br />
+卻不能進入那個黃色的傳送石<br />
+進去傳送石 是不是要&quot;總部招待券&quot;?<br />
+可是那個女NPC都不給我怎麼辦?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1131)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-04-08 10:47 AM 回覆<br><br>
+					<div style="padding-left: 10px">必須和女npc戰鬥勝利才會有總部招待券喔</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1131</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 玄</span><span class="time">2009-04-08 12:25 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>可以提供在下鍊功資訊嗎？謝謝</b></p>
+				在下目前32等，剛轉格鬥‧...想請問，在下能去哪邊鍊技鍊寵方為適合?  感謝答覆，銘感萬分<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1130)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-04-08 10:49 AM 回覆<br><br>
+					<div style="padding-left: 10px">以我所知 32等並沒有一個很理想的練技環境<br />
+把等級衝一下到坎村練會比較好一點</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-08 03:05 PM 回覆<br><br>
+					<div style="padding-left: 10px">32級要練技的話可以到奇村村口，方便練技真要看職業而定，而且村口小惡魔有遺忘攻擊，有可能會令人物兩回合內不能使出要升的技能，除了小惡魔外還有火焰鼠，如果不怕被魔法傷害的話，可以打火焰鼠升技，較適合練的也就只有明鏡止水了<br />
+建議把等級先升高一點吧</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">玄 於 2009-04-10 11:07 AM 回覆<br><br>
+					<div style="padding-left: 10px">感謝 兩位 為在下解惑  銘府感謝</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1130</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 怎麼辦!!</span><span class="time">2009-04-08 12:12 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				迷你郵件是什麼?剛回鍋不知道，要怎麼使用呢?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1129)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2009-04-08 10:52 AM 回覆<br><br>
+					<div style="padding-left: 10px">是暫時的郵件<br />
+先要把別人找出來<br />
+到 利夏島 佈告欄(90.73)  or 佈告欄(116.99) or 佈告欄(100.124)<br />
+找出你想找的人<br />
+然後就可以寄信了喔<br />
+http://cgsword.myvnc.com/Mission731.htm</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1129</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 司馬毛怪</span><span class="time">2009-04-07 08:28 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>關於騎寵</b></p>
+				請問 關於人物騎寵<br />
+如果人物騎寵想要發揮最大的物理攻擊力<br />
+除了坐騎還得學些什麼??<br />
+<br />
+Q2:可是騎寵之後 合體攻擊力並沒有比較高阿<br />
+      只是可以打兩回合 有沒有什麼技能可以讓人物跟寵的攻擊力加成或明顯提高嗎@@?<br />
+Q3:騎寵寵物幫助 寵物水晶是配合寵的等級還是人物的技能等級?<br />
+<br />
+謝謝嵐大大幫解答^^<br>
+				<br>
+				[最後於 2009-04-08 08:05 AM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,1128)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-07 01:05 PM 回覆<br><br>
+					<div style="padding-left: 10px">有點看不明白..<br />
+<br />
+騎寵後想要高攻擊力的話，人物上加攻的裝備、騎一隻攻擊力高的寵物、寵物學高級的乾坤就好</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Miracle嵐 於 2009-04-08 02:59 PM 回覆<br><br>
+					<div style="padding-left: 10px">騎寵之後合體攻擊力會因人寵雙方能力提高而增加<br />
+要令攻擊力明顯提高用乾坤就好嘛..<br />
+<br />
+騎寵寵物幫助 寵物水晶要看你要造/修/獵多少級的物品，看物品等級選擇適合等級的寵物水晶，再找一隻能配合該等級的寵物</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">1128</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=356&amp;s=">上一頁</a>		<a href="guestbook.php?page=358&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

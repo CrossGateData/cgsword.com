@@ -1,0 +1,203 @@
+﻿<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>一級與野生寵物能力範圍預測公式與實作</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+</head>
+
+<body>
+
+<table class="style">
+	<tr>
+		<td width="21%"><a href="PetCalc1.htm">理論基礎</a></td>
+		<td width="22%"><a href="PetCalc2.htm">寵物能力理論</a></td>
+		<td width="22%"><a href="PetCalc3.htm">野生寵物理論</a></td>
+		<td width="35%"><a href="PetCalc4.htm">一級與野生寵物導論</a></td>
+	</tr>
+</table>
+<br>
+<table class="style">
+	<tr>
+		<th>一級與野生寵物能力範圍預測公式與實作</th>
+	</tr>
+	<tr>
+		<td class="head">(1)純白/兔耳/嚇人箱各等級理論最低血量公式</td>
+	</tr>
+	<tr>
+		<td>
+		<table class="style" style="80%">
+			<tr>
+				<td>嚇人每級最低可能血量 = (等級+4) * 9.16 + 20</td>
+			</tr>
+			<tr>
+				<td>純白每級最低可能血量 = (等級+4) * 8.76 + 20</td>
+			</tr>
+			<tr>
+				<td>兔耳每級最低可能血量 = (等級+4) * 8.48 + 20</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="head">(2)公式解析</td>
+	</tr>
+	<tr>
+		<td>中間這個參數是用該種寵的<font color="#FF0000">各項底段檔次* (8 2 3 3 1) * 0.04</font> 
+		去算的<br>
+		<br>
+		0.04等同除以25，是上一篇提過的野寵成長係數公式，因為現在是在計算下限，所以用最低的成長係數來計算。<br>
+		<br>
+		上面公式的+4是由寵物1級每檔的<font color="#FF0000"> 0.2 / 0.04 = (1 + 4)</font>得來的，35級就是用<font color="#FF0000">35 
+		+ 4 = 39</font><br>
+		<br>
+		檔次計算時把隨機檔全配在魔上面(加魔BP得到的血最少)<br>
+		<br>
+		例如說純白檔次是<font color="#FF0000">(9 24 29 11 37+10)</font>，全底檔次(每項BP成長各掉4檔)是<font color="#FF0000">(5 
+		20 25 7 43)</font><br>
+		<br>
+		<font color="#FF0000">　(5 20 25 7 43) * (8 2 3 3 1) / 25 = (5 * 8 + 20 * 
+		2 + 25 * 3 + 7 * 3 + 43 * 1) / 25<br>
+		= 219 / 25<br>
+		= 8.76</font><br>
+		<br>
+		龍城半路開箱遇到一隻70級純白的話可以算出最低血量是：<br>
+		<font color="#FF0000">(70+4) * 8.76 + 20 = 668.24</font><br>
+		<br>
+		要封印抓起來的話，打到接近這個數字時就可以不用再打了，用同樣的原理可以算出各級野生寵的所有能力下限。</td>
+	</tr>
+	<tr>
+		<td class="head">(3)野寵上限能力計算</td>
+	</tr>
+	<tr>
+		<td>要算上限也是可以的，不過這時要代入最高的成長係數5<br>
+		<br>
+		以算純白每級的最高血量為例：<br>
+		一級的基本每檔0.2除上成長係數公式的<font color="#FF0000">0.045 = 40/9 = 1 + 3.44444...</font><br>
+		<br>
+		檔次計算時把隨機檔全配在體上面(加體BP得到的血最多)<br>
+		<br>
+		純白全頂檔次是<font color="#FF0000">(9 + 10 24 29 11 37)</font><br>
+		<br>
+		<font color="#FF0000">　(19 24 29 11 37) * (8 2 3 3 1) * 0.045 = (19 * 8 
+		+ 24 * 2 + 29 * 3 + 11 * 3 + 37 * 1) 0.045<br>
+		= 357 * 0.045<br>
+		= 16.065</font><br>
+		<br>
+		純白每級最高可能血量 = <font color="#FF0000">(等級-1 + 40 / 9) * 16.065 + 20</font><br>
+		<br>
+		70級純白最高可能血量 = <font color="#FF0000">(69 + 40 / 9) * 16.065 + 20 = 1199.9</font><br>
+		<br>
+		所以70級野生純白血量介乎於 <font color="#FF0000">668 ~ 1199</font><br>
+		<br>
+		用同樣的原理可以算出所有一級 / 野生寵的能力範圍。</td>
+	</tr>
+	<tr>
+		<td class="head"><font color="#FF0000"><b>(4)</b></font>箱怪最低血量參考</td>
+	</tr>
+	<tr>
+		<td>以兔耳嚇人箱、純白嚇人箱、嚇人箱血量成長比較<table class="style" style="width: 46%">
+			<tr>
+				<th width="20%">等級</th>
+				<th width="27%">兔耳</th>
+				<th width="26%">純白</th>
+				<th width="27%">嚇人</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>62</td>
+				<td>63</td>
+				<td>65</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>70</td>
+				<td>72</td>
+				<td>74</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>79</td>
+				<td>81</td>
+				<td>84</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>87</td>
+				<td>90</td>
+				<td>93</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>96</td>
+				<td>98</td>
+				<td>102</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>104</td>
+				<td>107</td>
+				<td>111</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>113</td>
+				<td>116</td>
+				<td>120</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>121</td>
+				<td>125</td>
+				<td>129</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>130</td>
+				<td>133</td>
+				<td>139</td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td>138</td>
+				<td>142</td>
+				<td>148</td>
+			</tr>
+			<tr>
+				<td>20</td>
+				<td>223</td>
+				<td>230</td>
+				<td>239</td>
+			</tr>
+			<tr>
+				<td>30</td>
+				<td>308</td>
+				<td>317</td>
+				<td>331</td>
+			</tr>
+			<tr>
+				<td>60</td>
+				<td>562</td>
+				<td>580</td>
+				<td>606</td>
+			</tr>
+			<tr>
+				<td>90</td>
+				<td>817</td>
+				<td>843</td>
+				<td>881</td>
+			</tr>
+			<tr>
+				<td>120</td>
+				<td>1071</td>
+				<td>1106</td>
+				<td>1155</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>水果蝙蝠 - 魔物分布::魔力寶貝 - 御劍軒</title>
+<meta name="Description" content="水果蝙蝠 飛行系 地4風6 可封印 可座騎">
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script>
+$(function(){
+    $(window).on('resize', function(){
+        $('#menuroot li.sub ul').removeClass('offset').css('margin-top', 0);
+    });
+    (function(){
+        var closeTimer = null, closeFn = null;
+        $('#menuroot li.sub').on({
+            mouseover: function(event){
+                if( closeTimer ) {
+                    clearTimeout(closeTimer);
+                    closeTimer = null;
+                    if( closeFn ) { closeFn(); closeFn = null;}
+                }
+                var list = $(this).find('>ul').css('display', 'block');
+                if( list.hasClass('offset')) return;
+                var p = list.offset(), h = list.height(), w = $(window), wh = w.height() + w.scrollTop();
+                if( h > wh ) list.css('margin-top', -p.top);
+                else if( p.top + h > wh - 50 ) {
+                    list.css('margin-top', -((p.top + h) - (wh - 50)));
+                }
+                list.addClass('offset');
+            }
+            ,mouseleave: function(event){
+                var obj = $(this).find('>ul');
+                closeFn = function(){closeTimer=null;obj.css('display', '')};
+                closeTimer = setTimeout(closeFn, 300);
+            }
+        });
+    })();
+    (function(){
+        var closeTimer = null, closeFn = null;
+        $('.path span.sub').on({
+            mouseover: function(event){
+                if( closeTimer ) {
+                    clearTimeout(closeTimer);
+                    closeTimer = null;
+                    if( closeFn ) { closeFn(); closeFn = null;}
+                }
+                $(this).addClass('hover');
+            }
+            ,mouseleave: function(event){
+                var obj = $(this);
+                closeFn = function(){closeTimer=null;obj.removeClass('hover');};//.css('display', '')};
+                closeTimer = setTimeout(closeFn, 300);
+            }
+        });
+    })();
+    
+    $('.beastCell .beastImg.scaled').on({
+        mouseover:function(event){var t=$(this);t.data('tmpCSS', t.attr('style')).attr('style', t.data('op'));}
+        ,mouseleave:function(event){$(this).attr('style', $(this).data('tmpCSS'));}
+    });
+	
+	$.each($('.beastCell .imageparty'), function(){
+		var self = $(this), currentf = 0, totalf = self.data('frame'), width = self.width();
+		setInterval(function(){
+			self.css('background-position', '-'+(currentf*width)+'px 0px');
+			currentf++;
+			if( currentf >= totalf ) currentf = 0;
+		}, self.data('time')/totalf);
+	});
+});
+</script>
+<style>
+* {	font-size: 9pt;	font-family: "新細明體";}
+a {	cursor: url('../alink.cur'),auto;text-decoration: none;color: #0000FF;}
+html {cursor: url('../cursor.cur'),auto;}
+body {
+	width: 800px;
+	background: #e4e4cc url('../image/background.jpg') repeat fixed center center;
+	text-align: center;
+}
+div.head{width: 800px;color: #FFFFFF;padding: 5px 0px;margin: 5px 0px;border: 1px solid #403D2B;background-color: #604c40;}
+#base{width: 800px;margin: 0px;padding: 0px;}
+#left {float: left;padding: 55px 5px 10px 5px;margin: 5px 0px;width: 120px;z-index: 999;}
+#right {float: left;margin: 50px 0px 8px 0px;width: 658px;text-align: left}
+#menuroot a {display: block;color: #000;text-decoration: none;padding: 7px;background-color: #fef7e7;}
+#menuroot a:hover {background-color: #f0eee7;}
+#menuroot{position:relative;z-index:100}
+#menuroot, #menuroot ul{list-style: none;padding-left: 0px;;margin:0px}
+#menuroot ul{position: absolute;margin-left: 120px;display: none;}
+#menuroot li{width: 120px;border: 1px solid #aaa;margin-top: -1px;text-align: left;}
+#menuroot li.sub>a {background: #f0eee7 url('../image/arrow.gif') 110px 10px no-repeat;}
+#menuroot li:hover>a {background-color: #ffff00;}
+
+div.child {background-color: #FDFDEB;padding: 5px 5px 5px 10px;}
+div.child div {line-height: 20px;}
+div.child div.area {padding-left: 10px;}
+div.child div.area a {display: inline-block;width: 120px;padding-left: 4px;}
+div.child div.area a:hover {background-color: #F1EDDE;}
+div.listheadline {
+	background-image: url('../image/beastmap/right_hline.png');
+	background-repeat: no-repeat;
+	background-position: -200px 0px;
+	height:1px;
+	font-size:0;
+}
+#listlogo {
+	height: 25px;
+	background: #fdfdeb url('../image/beastmap/listlogo.png') no-repeat;
+}
+div#supplylogo {
+	height: 25px;
+	background: #fdfdeb url('../image/beastmap/supplylogo.png') no-repeat;
+}
+div.beast_separator {
+	margin: 5px;
+	padding: 5px;
+	background-image: url('../image/beastmap/right_hline.png');
+	background-repeat: no-repeat;
+	background-position: -10px top;
+}
+span.earth,span.water,span.fire,span.wind {font-weight: bold;}
+span.earth, span.catch {color: #008000;}
+span.water {color: #0000FF;}
+span.fire, span.uncatch {color: #FF0000;}
+span.wind {color: #FFC700;}
+.beastCell {background:white url('../image/beastmap/beastCellGrid.png') no-repeat center center;border:1px silver solid;width:120px;height:120px;margin:auto;text-align:center;position:relative}
+.beastCell.expand{background:white url('../image/beastmap/beastCellGridx.png') no-repeat center center;width:180px;height:180px;}
+.beastCell .beastImg{position:absolute;}
+.beastCell .prop{position:absolute;}
+.beastCell .propbar.normal .prop{bottom:-3px;height:3px;}
+.beastCell .propbar.surround .prop.earth{top:-2px;height:2px;}
+.beastCell .propbar.surround .prop.water{right:-2px;width:2px;}
+.beastCell .propbar.surround .prop.fire{bottom:-2px;right:0px;height:2px;}
+.beastCell .propbar.surround .prop.wind{left:-2px;bottom:0px;width:2px;}
+.beastCell .prop.earth{background:#008000;}
+.beastCell .prop.water{background:#0000FF;}
+.beastCell .prop.fire{background:#FF0000;}
+.beastCell .prop.wind{background:#FFC700;}
+
+span.star{background-image: url('../image/beast/star.gif');background-repeat: repeat;height: 14px;vertical-align: top;background-position: 0px -2px;display:inline-block;}
+
+.path>span{position:relative;}
+.path>span>ul{display:none;position:absolute;list-style:none;background:#FEFAED;margin:-1px 0px 0px -6px;padding:5px 0px 5px 0px;width:120px;z-index:99;border:1px silver solid}
+.path>span>ul>li>a{display:block;padding: 3px 5px}
+.path>span>ul>li:hover{background:#f0eee7 }
+.path>span.hover{margin-right:-6px;}
+.path>span.hover>a{position:relative;display:inline-block;z-index:100;border:1px silver solid;border-bottom:none;padding: 5px 5px 0px 5px;margin-left:-6px;margin-top:-6px;background:#FEFAED}
+.path>span.hover>ul{display:block}
+</style>
+</head>
+
+<body>
+<a href="../bm"><div class="head">魔物分布</div></a>
+<div id="base">
+<div id="left">
+    <div style="padding: 5px"><b>請選擇地點</b></div>
+        <ul id="menuroot" class="menu">
+            <li class="sub">
+            <ul>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="r0kly-靈堂">靈堂</a></li>
+                                            <li><a href="nlmku-城內的地下迷宮">城內的地下迷宮</a></li>
+                                            <li><a href="pbfbm-黃金通道">黃金通道</a></li>
+                                            <li><a href="5ue5h-地下競技場">地下競技場</a></li>
+                                            <li><a href="5wyyi-鏡中豪宅">鏡中豪宅</a></li>
+                                            <li><a href="q0yrb-暖爐之底">暖爐之底</a></li>
+                                            <li><a href="jahtj-龜裂的地下道">龜裂的地下道</a></li>
+                                            <li><a href="rv8ij-問答地獄">問答地獄</a></li>
+                                            <li><a href="ncavg-競技場">競技場</a></li>
+                                            <li><a href="391io-伏月之街">伏月之街</a></li>
+                                        </ul>
+                    <a href="1q2v2-法蘭城">法蘭城</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="pzv19-試煉之洞窟">試煉之洞窟</a></li>
+                                        </ul>
+                    <a href="b91lk-國營第24坑道">國營第24坑道</a>
+                </li>
+                            <li><a href="cpbkn-哈巴魯東邊洞窟">哈巴魯東邊洞窟</a></li>
+                            <li><a href="5fk0y-維諾亞洞窟">維諾亞洞窟</a></li>
+                            <li><a href="08s5r-哥布林之家">哥布林之家</a></li>
+                            <li><a href="4mdfu-黑暗醫生的巢穴">黑暗醫生的巢穴</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="9mii5-樹海">樹海</a></li>
+                                        </ul>
+                    <a href="k1yk0-土之洞窟">土之洞窟</a>
+                </li>
+                            <li><a href="9mii5-樹海">樹海</a></li>
+                            <li><a href="r7agr-牛鬼的洞窟">牛鬼的洞窟</a></li>
+                            <li><a href="2zeo7-莎蓮娜海底洞窟">莎蓮娜海底洞窟</a></li>
+                            <li><a href="2hnpi-迷路之穴">迷路之穴</a></li>
+                            <li><a href="sju4w-謎之迷宮">謎之迷宮</a></li>
+                            <li><a href="ue34t-奇怪的洞窟">奇怪的洞窟</a></li>
+                            <li><a href="ss6d8-佈滿青苔的洞窟">佈滿青苔的洞窟</a></li>
+                            <li><a href="ibud9-維諾亞海底洞窟">維諾亞海底洞窟</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="pz6jh-黑色的祈禱">黑色的祈禱</a></li>
+                                        </ul>
+                    <a href="gw0je-索奇亞海底洞窟">索奇亞海底洞窟</a>
+                </li>
+                            <li><a href="g3c2o-炎之洞窟">炎之洞窟</a></li>
+                            <li><a href="d5c3n-水之洞窟">水之洞窟</a></li>
+                            <li><a href="595yk-井底之道">井底之道</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="vhq0y-海邊的山谷">海邊的山谷</a></li>
+                                        </ul>
+                    <a href="r76yh-芙蕾亞">芙蕾亞</a>
+                </li>
+                            <li><a href="535yp-霞之洞窟">霞之洞窟</a></li>
+                        </ul>
+            <a href="dhstx-芙蕾雅島">芙蕾雅島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="pz6jh-黑色的祈禱">黑色的祈禱</a></li>
+                                        </ul>
+                    <a href="gw0je-索奇亞海底洞窟">索奇亞海底洞窟</a>
+                </li>
+                            <li><a href="6gi6m-流星山丘">流星山丘</a></li>
+                            <li><a href="zmm66-角笛大風穴">角笛大風穴</a></li>
+                            <li><a href="vye9d-風之洞窟">風之洞窟</a></li>
+                            <li><a href="w6j6r-獅子之穴">獅子之穴</a></li>
+                            <li><a href="dld1z-沙塵的洞窟">沙塵的洞窟</a></li>
+                            <li><a href="xixa1-羅連斯研究塔">羅連斯研究塔</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="g60bt-鯰魚大王的胃袋">鯰魚大王的胃袋</a></li>
+                                        </ul>
+                    <a href="ai3l4-鯰魚洞窟">鯰魚洞窟</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="gzjr2-峽之洞窟深處">峽之洞窟深處</a></li>
+                                            <li><a href="a3nqq-酒之殿堂">酒之殿堂</a></li>
+                                        </ul>
+                    <a href="3w8kk-岬之洞窟">岬之洞窟</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="5kgfp-風鳴之塔">風鳴之塔</a></li>
+                                        </ul>
+                    <a href="qe1tq-契約的海道">契約的海道</a>
+                </li>
+                            <li><a href="iht6o-沙漠之祠">沙漠之祠</a></li>
+                        </ul>
+            <a href="ccth9-索奇亞島">索奇亞島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="2zeo7-莎蓮娜海底洞窟">莎蓮娜海底洞窟</a></li>
+                            <li><a href="dg0po-莎蓮娜西邊洞窟">莎蓮娜西邊洞窟</a></li>
+                            <li><a href="gxkhu-參道">參道</a></li>
+                            <li><a href="36xr6-貝茲雷姆迷宮">貝茲雷姆迷宮</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="aoz0p-永久凍土">永久凍土</a></li>
+                                        </ul>
+                    <a href="osfh3-積雪的山路">積雪的山路</a>
+                </li>
+                            <li><a href="s7h97-詛咒的迷宮">詛咒的迷宮</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="wziw9-地下水脈">地下水脈</a></li>
+                                            <li><a href="iiyce-深淵">深淵</a></li>
+                                        </ul>
+                    <a href="src9k-奇怪的坑道">奇怪的坑道</a>
+                </li>
+                            <li><a href="cg85g-莎蓮娜東邊洞窟">莎蓮娜東邊洞窟</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="45f0a-冰之洞窟">冰之洞窟</a></li>
+                                            <li><a href="i3ury-冰雪的牢城">冰雪的牢城</a></li>
+                                        </ul>
+                    <a href="riu41-佛利波羅">佛利波羅</a>
+                </li>
+                            <li><a href="fphxg-聖壇">聖壇</a></li>
+                            <li><a href="7o1k9-青龍的洞窟">青龍的洞窟</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="gggd1-小菇村">小菇村</a></li>
+                                            <li><a href="pmj0m-山道">山道</a></li>
+                                            <li><a href="ryc0i-紙鳶山">紙鳶山</a></li>
+                                            <li><a href="2spix-紙鳶山頂">紙鳶山頂</a></li>
+                                            <li><a href="d4odj-絳月之林">絳月之林</a></li>
+                                            <li><a href="3n3n3-蘆韋谷">蘆韋谷</a></li>
+                                            <li><a href="yc7p8-芒之林">芒之林</a></li>
+                                            <li><a href="gnti0-百菇森">百菇森</a></li>
+                                            <li><a href="1vefg-水晶礦坑">水晶礦坑</a></li>
+                                        </ul>
+                    <a href="9rehv-記憶之土">記憶之土</a>
+                </li>
+                            <li><a href="a77lq-巴洛斯">巴洛斯</a></li>
+                            <li><a href="txm4n-地底湖">地底湖</a></li>
+                            <li><a href="m36k9-蜥蝪之巢">蜥蝪之巢</a></li>
+                            <li><a href="v7o26-被封閉的祭壇">被封閉的祭壇</a></li>
+                        </ul>
+            <a href="79egg-莎蓮娜島">莎蓮娜島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="p2736-南恰拉山第一通道">南恰拉山第一通道</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="dm75g-時波之祠">時波之祠</a></li>
+                                        </ul>
+                    <a href="xod8c-南恰拉山第二通道">南恰拉山第二通道</a>
+                </li>
+                            <li><a href="a63j0-街道旁的小路">街道旁的小路</a></li>
+                            <li><a href="n0ptd-布朗山新道">布朗山新道</a></li>
+                            <li><a href="u8kif-布朗山舊道">布朗山舊道</a></li>
+                            <li><a href="2gl0o-深綠的山道">深綠的山道</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="mtoo6-動物實驗室">動物實驗室</a></li>
+                                        </ul>
+                    <a href="8lj0n-地下遺跡">地下遺跡</a>
+                </li>
+                            <li><a href="5u3fe-王族用脫逃暗道">王族用脫逃暗道</a></li>
+                            <li><a href="11wel-萬聖南瓜園">萬聖南瓜園</a></li>
+                            <li><a href="4fbyx-時空之塔">時空之塔</a></li>
+                        </ul>
+            <a href="9osgg-米內葛爾島">米內葛爾島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="l54et-迴月之塔">迴月之塔</a></li>
+                                            <li><a href="08l18-試煉之塔">試煉之塔</a></li>
+                                        </ul>
+                    <a href="je6s5-哥拉爾鎮">哥拉爾鎮</a>
+                </li>
+                            <li><a href="k3m52-雷姆爾山新道">雷姆爾山新道</a></li>
+                            <li><a href="wd8oj-雷姆爾山舊道">雷姆爾山舊道</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="9y7uq-森之墓場">森之墓場</a></li>
+                                        </ul>
+                    <a href="u99y8-伊姆爾森林">伊姆爾森林</a>
+                </li>
+                            <li><a href="6m0oo-麥尼洞窟">麥尼洞窟</a></li>
+                            <li><a href="o8eey-伊利斯礦山">伊利斯礦山</a></li>
+                            <li><a href="muw5r-詛咒者之洞窟(地)">詛咒者之洞窟(地)</a></li>
+                            <li><a href="2a6bp-貝尼恰斯火山">貝尼恰斯火山</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="98dma-天之谷">天之谷</a></li>
+                                            <li><a href="hnca2-巴別塔盡頭">巴別塔盡頭</a></li>
+                                            <li><a href="9j1zl-巴別塔100F">巴別塔100F</a></li>
+                                        </ul>
+                    <a href="tqysy-巴別塔">巴別塔</a>
+                </li>
+                            <li><a href="eb9m9-魔導研究塔">魔導研究塔</a></li>
+                            <li><a href="mm7vm-冥府之道">冥府之道</a></li>
+                            <li><a href="qydax-精靈之谷">精靈之谷</a></li>
+                            <li><a href="skefw-朱雀之井">朱雀之井</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="m01mp-雲霧之湖">雲霧之湖</a></li>
+                                            <li><a href="p4glh-雲煙之谷2">雲煙之谷2</a></li>
+                                            <li><a href="ygjzt-雲煙山嶺">雲煙山嶺</a></li>
+                                        </ul>
+                    <a href="j47e0-雲煙之谷">雲煙之谷</a>
+                </li>
+                            <li><a href="ci7t0-神秘的墓地">神秘的墓地</a></li>
+                            <li><a href="k1tce-靜默谷">靜默谷</a></li>
+                        </ul>
+            <a href="z3ip4-庫魯克斯島">庫魯克斯島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="2x3n6-里歐波多的洞窟">里歐波多的洞窟</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="m1eeb-利利可洞窟">利利可洞窟</a></li>
+                                        </ul>
+                    <a href="oq990-通往摩頓村的通道">通往摩頓村的通道</a>
+                </li>
+                            <li><a href="m1eeb-利利可洞窟">利利可洞窟</a></li>
+                            <li><a href="rl911-翠格墓園">翠格墓園</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="jy0id-酒窖">酒窖</a></li>
+                                            <li><a href="am8nd-冰封的酒窖">冰封的酒窖</a></li>
+                                            <li><a href="iy4ju-史萊姆的住所">史萊姆的住所</a></li>
+                                        </ul>
+                    <a href="av9pg-達米達村">達米達村</a>
+                </li>
+                            <li><a href="5i08p-通道(亞城側)">通道(亞城側)</a></li>
+                            <li><a href="q1u4m-通道(鬧鐘)">通道(鬧鐘)</a></li>
+                            <li><a href="ch0cd-通道(民宅)">通道(民宅)</a></li>
+                            <li><a href="sf9v4-海底通道">海底通道</a></li>
+                            <li><a href="9qc28-海岸通道">海岸通道</a></li>
+                            <li><a href="h6i4l-德特威島山道">德特威島山道</a></li>
+                            <li><a href="qfql8-冰封之谷">冰封之谷</a></li>
+                            <li><a href="5dzo0-立葛曲洞">立葛曲洞</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="vf9d9-彩葉原">彩葉原</a></li>
+                                            <li><a href="vzi08-皇后陵寢">皇后陵寢</a></li>
+                                            <li><a href="r4qkk-墓道">墓道</a></li>
+                                        </ul>
+                    <a href="5jbte-殷紅的山谷">殷紅的山谷</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="hs3yb-浮空島">浮空島</a></li>
+                                            <li><a href="flwlw-通道">通道</a></li>
+                                        </ul>
+                    <a href="t69iz-時之塔">時之塔</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="flwlw-通道">通道</a></li>
+                                            <li><a href="0fsbe-青蓮之路">青蓮之路</a></li>
+                                            <li><a href="ppqlh-蓮華之道">蓮華之道</a></li>
+                                            <li><a href="g4cwc-蓮華之頂">蓮華之頂</a></li>
+                                            <li><a href="cn3cw-紅蓮之路">紅蓮之路</a></li>
+                                        </ul>
+                    <a href="hs3yb-浮空島">浮空島</a>
+                </li>
+                            <li><a href="yd2ji-艾莉的家">艾莉的家</a></li>
+                            <li><a href="97rxh-魔族領域">魔族領域</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="b2s88-心之湖">心之湖</a></li>
+                                        </ul>
+                    <a href="jqg7z-心之山">心之山</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="7plx0-鴨之居">鴨之居</a></li>
+                                        </ul>
+                    <a href="5c4iv-鴨之谷">鴨之谷</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="fjpxq-梟之山麓">梟之山麓</a></li>
+                                            <li><a href="gakq7-梟山通道">梟山通道</a></li>
+                                            <li><a href="1lut8-梟之山頂">梟之山頂</a></li>
+                                            <li><a href="mjj8d-飛沙洞窟">飛沙洞窟</a></li>
+                                        </ul>
+                    <a href="5chyd-梟山平原">梟山平原</a>
+                </li>
+                            <li><a href="1scjb-克瑞村‧北">克瑞村‧北</a></li>
+                            <li><a href="85chj-克瑞村通道">克瑞村通道</a></li>
+                            <li><a href="9ifmq-克瑞村‧東南">克瑞村‧東南</a></li>
+                            <li><a href="wqawm-聖誕迷宮">聖誕迷宮</a></li>
+                        </ul>
+            <a href="lstf7-德威特島">德威特島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="gqa7m-貝力斯遺跡">貝力斯遺跡</a></li>
+                        </ul>
+            <a href="qie92-傑諾姆島">傑諾姆島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="g7yym-冰之神殿地下">冰之神殿地下</a></li>
+                            <li><a href="op2od-砂之塔">砂之塔</a></li>
+                            <li><a href="abqh1-火炎之谷">火炎之谷</a></li>
+                            <li><a href="e162e-閣樓">閣樓</a></li>
+                            <li><a href="bah9x-庫德洞窟">庫德洞窟</a></li>
+                        </ul>
+            <a href="2c4mj-弗利德島">弗利德島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="1oubr-魯多特盆地">魯多特盆地</a></li>
+                                            <li><a href="olclb-盡頭的風穴">盡頭的風穴</a></li>
+                                            <li><a href="qhrez-熔岩地帶">熔岩地帶</a></li>
+                                            <li><a href="lytjw-路路耶的家">路路耶的家</a></li>
+                                        </ul>
+                    <a href="2q2bk-蓋雷布倫森林">蓋雷布倫森林</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="kw0v8-崩塌的入口">崩塌的入口</a></li>
+                                            <li><a href="s90lo-4000年後的冰室">4000年後的冰室</a></li>
+                                            <li><a href="axpoi-罪之房">罪之房</a></li>
+                                            <li><a href="zmual-夢魔的迷宮">夢魔的迷宮</a></li>
+                                        </ul>
+                    <a href="48r8x-梅布爾隘地">梅布爾隘地</a>
+                </li>
+                            <li><a href="u59eb-溫迪爾平原">溫迪爾平原</a></li>
+                            <li><a href="bkk84-法蘭城遺跡">法蘭城遺跡</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="6lit3-深草的綠洞">深草的綠洞</a></li>
+                                            <li><a href="9nlok-怨靈洞窟">怨靈洞窟</a></li>
+                                            <li><a href="jba4d-羽音洞窟">羽音洞窟</a></li>
+                                            <li><a href="k78lo-蟲洞">蟲洞</a></li>
+                                            <li><a href="graev-秘道">秘道</a></li>
+                                            <li><a href="f56gd-黑歷史之石洞">黑歷史之石洞</a></li>
+                                        </ul>
+                    <a href="ov3h5-布拉基姆高地">布拉基姆高地</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="eg19t-1-10">1-10</a></li>
+                                            <li><a href="8i9iz-11-20">11-20</a></li>
+                                            <li><a href="xhzyt-21-30">21-30</a></li>
+                                            <li><a href="45to8-31-40">31-40</a></li>
+                                            <li><a href="j01zn-41-55">41-55</a></li>
+                                            <li><a href="5h75f-56-70">56-70</a></li>
+                                            <li><a href="nl90c-71-94">71-94</a></li>
+                                        </ul>
+                    <a href="0w49d-雪拉威森塔">雪拉威森塔</a>
+                </li>
+                            <li><a href="rvv5w-通往頂層的階梯">通往頂層的階梯</a></li>
+                        </ul>
+            <a href="3ji7p-樂園之卵">樂園之卵</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="glz86-光之路">光之路</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="px9z5-黑迷宮">黑迷宮</a></li>
+                                        </ul>
+                    <a href="sbe8i-白迷宮">白迷宮</a>
+                </li>
+                            <li><a href="a0oj8-秘密迴廊">秘密迴廊</a></li>
+                        </ul>
+            <a href="p737d-辛梅爾">辛梅爾</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="g3iks-北方山道">北方山道</a></li>
+                            <li><a href="95bck-東南山道">東南山道</a></li>
+                            <li><a href="jx0vg-西方山道">西方山道</a></li>
+                            <li><a href="5hdhc-地下室">地下室</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="nar0u-永恆之都">永恆之都</a></li>
+                                            <li><a href="8lv8r-水之廊">水之廊</a></li>
+                                        </ul>
+                    <a href="kpshc-夕之湖">夕之湖</a>
+                </li>
+                            <li><a href="2osfh-書屋">書屋</a></li>
+                            <li><a href="e1kkt-艾汀之塔">艾汀之塔</a></li>
+                            <li><a href="it15y-杜瓦之塔">杜瓦之塔</a></li>
+                            <li><a href="2qqa5-諾利之塔">諾利之塔</a></li>
+                        </ul>
+            <a href="ax6id-諾斯菲拉特">諾斯菲拉特</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="68n8v-優紀斷堐">優紀斷堐</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="t8unr-司雲崖頂">司雲崖頂</a></li>
+                                            <li><a href="pwoc5-司雲崖洞窟">司雲崖洞窟</a></li>
+                                            <li><a href="52xft-司雲崖底">司雲崖底</a></li>
+                                        </ul>
+                    <a href="2r1fy-司雲崖">司雲崖</a>
+                </li>
+                            <li><a href="r5nvf-花之山谷">花之山谷</a></li>
+                            <li><a href="rv63u-寧心山谷">寧心山谷</a></li>
+                            <li><a href="rpe5b-邀月花谷">邀月花谷</a></li>
+                            <li><a href="7x4gr-樂遊原">樂遊原</a></li>
+                        </ul>
+            <a href="1uvk0-哈那可半島">哈那可半島</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="xhbl4-蘆葦之森">蘆葦之森</a></li>
+                            <li><a href="ohfw0-菇之森">菇之森</a></li>
+                            <li><a href="8tljq-罌粟花海">罌粟花海</a></li>
+                            <li><a href="5j2x7-馬斯大陸">馬斯大陸</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="zsuay-龍蜥巢穴">龍蜥巢穴</a></li>
+                                            <li><a href="sj0te-獅鷲山頂">獅鷲山頂</a></li>
+                                        </ul>
+                    <a href="1glgg-史萊姆聚落">史萊姆聚落</a>
+                </li>
+                        </ul>
+            <a href="s19x0-逆星">逆星</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="dko4c-旭日山">旭日山</a></li>
+                            <li><a href="k87om-蝕日之洞">蝕日之洞</a></li>
+                            <li><a href="51xn4-往朝日村通道">往朝日村通道</a></li>
+                            <li><a href="fltiy-神廟">神廟</a></li>
+                            <li><a href="al5ri-闇月之洞">闇月之洞</a></li>
+                            <li><a href="zk2xg-朝日山">朝日山</a></li>
+                            <li><a href="4h521-沙夜酒吧">沙夜酒吧</a></li>
+                            <li><a href="lglm3-大地鼠的農場">大地鼠的農場</a></li>
+                            <li><a href="3rvbg-種苗培育所">種苗培育所</a></li>
+                            <li><a href="7q3aw-神秘地宮">神秘地宮</a></li>
+                            <li><a href="b96j6-古墓">古墓</a></li>
+                        </ul>
+            <a href="4viz3-日耀之域">日耀之域</a>
+        </li>
+                <li class="sub">
+            <ul>
+                            <li><a href="7zpqq-通道">通道</a></li>
+                            <li><a href="x21te-通道">通道</a></li>
+                            <li><a href="xtg76-通道">通道</a></li>
+                            <li><a href="scdjo-地下水路">地下水路</a></li>
+                            <li><a href="n253t-通道">通道</a></li>
+                            <li><a href="s6zon-通道">通道</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="760fu-幽夜之谷">幽夜之谷</a></li>
+                                        </ul>
+                    <a href="pyiol-河底隧道">河底隧道</a>
+                </li>
+                            <li><a href="9cdh7-水底通道">水底通道</a></li>
+                            <li><a href="lgpa7-隱密的山谷">隱密的山谷</a></li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="k1cf3-神殿之路">神殿之路</a></li>
+                                        </ul>
+                    <a href="7mvhj-光之神殿入口">光之神殿入口</a>
+                </li>
+                            <li class="sub">
+                    <ul>
+                                            <li><a href="e89h4-古月祠">古月祠</a></li>
+                                            <li><a href="yd6rd-古月祠外苑">古月祠外苑</a></li>
+                                            <li><a href="x1hqb-古月祠內堂">古月祠內堂</a></li>
+                                        </ul>
+                    <a href="jj8on-古月祠入口">古月祠入口</a>
+                </li>
+                            <li><a href="vdge7-巫仙小月家&#32;地下">巫仙小月家 地下</a></li>
+                        </ul>
+            <a href="irg5t-水曜之域">水曜之域</a>
+        </li>
+            </ul>
+    </div>
+<div id="right">
+<div style="position: absolute;background-image: url('../image/beastmap/right_hline.png');background-repeat: no-repeat;background-position: -2px 49px;margin-left:-130px;margin-top:-50px; height: 50px; width: 790px;padding:0px">
+<div style="display:none;float: right;line-height: 20px;margin-top: 2px;text-align:right">請輸入搜尋字元(可使用通配符 "*" 或 "空格"，例: "伊 村") <form method="POST" action="https://cgsword.com/bm/049-%E6%B0%B4%E6%9E%9C%E8%9D%99%E8%9D%A0?act=search" style="margin:0px" onsubmit="searchform(this);return false"><input type="text" name="search" value=""> <input type="submit" value="搜尋地點" style="height: 25px"></form></div></div>
+<div style="position: absolute;background-image: url('../image/beastmap/right_vline.png');background-repeat: no-repeat;margin-top: -14px;height: 350px; width: 1px"></div>
+            <div style="position:absolute;margin: -50px 0px 0px -120px;height: 50px;padding:2px"><img src="../image/beastmap/pet/49.gif"></div>
+        <div style="background: #FFF;padding: 10px;">
+            <div style="margin-bottom:10px">
+                <span style="border:1px silver solid;display:inline-block;padding:2px">/bm/49-水果蝙蝠</span>
+            </div>
+            <div style="float:left;width:150px">
+                <div class="beastCell">
+                                        <div class="propbar normal">
+                        <div class="prop earth" style="width:48px"></div>
+                        <div class="prop water" style="width:0px;left:48px"></div>
+                        <div class="prop fire" style="width:0px;left:48px"></div>
+                        <div class="prop wind" style="width:72px;left:48px"></div>
+                    </div>
+                                        					<div class="imageparty beastImg" style="background-image:url(../image/anim/map/101243400.png);width:67px;height:115px;left:60px;top:105px;margin-left:-42px;margin-top:-102px" data-time="900" data-frame="6"></div>
+					                </div>
+                <div style="text-align:center;margin-top: 8px;">水果蝙蝠</div>
+            </div>
+            <div style="float:left;width:425px;line-height:15px">
+                <div><span class="earth">地4</span><span class="wind">風6</span> 飛行系(<span title="全剋昆蟲系 半剋不死系 龍系全剋 野獸系半剋">+昆蟲 不死,-龍系 野獸</span>)</div>
+                                    <div class="hr"></div>
+                    <div>卡片: 2級銀卡　                    <span class="catch">可封印</span>                    　<span class="ride">可座騎</span></div>
+                    <div>一級: 白色方舟4樓(43.106)</div>
+                                                    <div>備註:<div style="margin-left: 10px">霞之洞窟、里歐波多洞窟、詛咒的迷宮、 魯米那斯附近、白色挪亞</div></div>
+                                <div style="margin: 1px 0px;border-top: 1px #C0C0C0 solid;"></div>
+                <div>
+                    最高成長檔: 100<br>
+                    體　力　檔: <span style="display:inline-block;width:18px">17</span><span class="star" style="width: 24px"></span><br>
+                    力　量　檔: <span style="display:inline-block;width:18px">25</span><span class="star" style="width: 40px"></span><br>
+                    強　度　檔: <span style="display:inline-block;width:18px">15</span><span class="star" style="width: 24px"></span><br>
+                    速　度　檔: <span style="display:inline-block;width:18px">26</span><span class="star" style="width: 40px"></span><br>
+                    魔　法　檔: <span style="display:inline-block;width:18px">17</span><span class="star" style="width: 24px"></span>                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+                <div style="background:#FFFFDD;border:1px #888 solid;margin-bottom: 5px">
+            <div style="padding: 7px;background-color: #FEFAED;border-bottom:1px solid #382E05;margin-bottom: 10px">
+                            <div class="path">
+                                <span><a href="lstf7-德威特島">德威特島</a></span> »
+                                <span><a href="2x3n6-里歐波多的洞窟">里歐波多的洞窟</a></span> »
+                                <span>迷宮組別2</span>                </div>
+                        </div>
+            <div style="padding: 7px 10px">
+                        <div style="padding: 7px 7px 7px 25px;background-color: #FFE;border: 1px #888 dotted;">
+                <div>出現數量: 1-10隻</div>
+                            </div>
+                        <div>
+                <div><span>Lv20-24</span></div>
+                <div style="display:none">使用技能:<div style="margin-left: 10px"></div></div>
+                                                    <div class="hr"></div>
+                    <div>一級: 不在此區出現</div>
+                                            </div>
+            </div>
+        </div>
+                <div style="background:#FFFFDD;border:1px #888 solid;margin-bottom: 5px">
+            <div style="padding: 7px;background-color: #FEFAED;border-bottom:1px solid #382E05;margin-bottom: 10px">
+                            <div class="path">
+                                <span><a href="dhstx-芙蕾雅島">芙蕾雅島</a></span> »
+                                <span><a href="535yp-霞之洞窟">霞之洞窟</a></span> »
+                                                </div>
+                        </div>
+            <div style="padding: 7px 10px">
+                        <div style="padding: 7px 7px 7px 25px;background-color: #FFE;border: 1px #888 dotted;">
+                <div>出現數量: 1-6隻</div>
+                            </div>
+                        <div>
+                <div><span>Lv3-14</span></div>
+                <div style="display:none">使用技能:<div style="margin-left: 10px">32</div></div>
+                                                    <div class="hr"></div>
+                    <div>一級: 不在此區出現</div>
+                                            </div>
+            </div>
+        </div>
+                <div style="background:#FFFFDD;border:1px #888 solid;margin-bottom: 5px">
+            <div style="padding: 7px;background-color: #FEFAED;border-bottom:1px solid #382E05;margin-bottom: 10px">
+                            <div class="path">
+                                <span><a href="z3ip4-庫魯克斯島">庫魯克斯島</a></span> »
+                                                </div>
+                        </div>
+            <div style="padding: 7px 10px">
+                        <div style="padding: 7px 7px 7px 25px;background-color: #FFE;border: 1px #888 dotted;">
+                <div>出現數量: 1-7隻</div>
+                            </div>
+                        <div>
+                <div><span>Lv45-46</span></div>
+                <div style="display:none">使用技能:<div style="margin-left: 10px">25</div></div>
+                                                    <div class="hr"></div>
+                    <div>一級: 不在此區出現</div>
+                                            </div>
+            </div>
+        </div>
+                <div style="background:#FFFFDD;border:1px #888 solid;margin-bottom: 5px">
+            <div style="padding: 7px;background-color: #FEFAED;border-bottom:1px solid #382E05;margin-bottom: 10px">
+                            <div class="path">
+                                <span><a href="p737d-辛梅爾">辛梅爾</a></span> »
+                                <span><a href="sbe8i-白迷宮">白迷宮</a></span> »
+                                <span>藍線第4層(輔助系)</span>                </div>
+                        </div>
+            <div style="padding: 7px 10px">
+                        <div>
+                <div><span>Lv95</span></div>
+                <div style="display:none">使用技能:<div style="margin-left: 10px"></div></div>
+                                                    <div class="hr"></div>
+                    <div>一級: 不在此區出現</div>
+                                            </div>
+            </div>
+        </div>
+            </div>
+</div>
+</body>
+</html>

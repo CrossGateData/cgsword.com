@@ -1,0 +1,101 @@
+﻿<html>
+
+<head>
+<title>寵物販賣計算器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+<!--
+var lv=0,lb=0,money=0,cd=5;
+function sell()
+{
+        lv=Number(document.ptppt.flv.value);
+	lb=Number(document.ptppt.flb.value);
+	if(lv<1||lv>200)
+	{
+		alert("請正確輸入數據！");
+		return;
+	}
+	if(lb<1||lb>200||lb>lv)
+	{
+		alert("請正確輸入數據！");
+		return;
+	}
+	money=10*lv*lv-10*lb*lb+cd*lv+50;
+	document.ptppt.fmoney.value=money;
+}
+function level()
+{
+	lv=Number(document.ptppt.flv.value);
+	money=Number(document.ptppt.fmoney.value);
+	lb=1;
+	if(lv<1||lv>200)
+	{
+		alert("數據錯誤，請確認後再次輸入！");
+		return;
+	}
+	if(money<55||money>405040)
+	{
+		alert("數據錯誤，請確認後再次輸入！");
+		return;
+	}
+	if(lv==1)
+	{
+		alert("數據錯誤，請確認後再次輸入！")
+		return;
+	}
+	while(10*lv*lv-10*lb*lb+cd*lv+50!=money)
+	{
+		if(lb>=201)
+		{
+			alert("數據錯誤，請確認後再次輸入！");
+			document.ptppt.flb.value=0;
+			return;
+		}
+		lb++;
+		document.ptppt.flb.value=lb;
+	}
+	alert("捕捉等級為Lv"+lb);
+}
+//-->
+</script>
+<script type="text/javascript">
+window.ClearEvent=function(){event.cancelBubble=false;var sSrcTagName=event.srcElement.tagName.toLowerCase();
+return (sSrcTagName=="textarea" || sSrcTagName=="input" || sSrcTagName=="select");}
+window.ClearKey=function(){event.cancelBubble=false;var iKeyCode=event.keyCode;return !(iKeyCode==78 && event.ctrlKey);}
+with (window.document){oncontextmenu=onselectstart=ondragstart=window.ClearEvent;onkeydown=window.ClearKey;}
+</script>
+<link rel="stylesheet" type="text/css" href="css.css">
+</head>
+
+<body>
+
+<br>
+<table class="style" style="width: 66%">
+	<tr>
+		<th>寵物販賣計算器</th>
+	</tr>
+	<tr>
+		<td>
+		<form name="ptppt">
+			<img border="0" src="image/petsell/noka003.gif" width="500" height="16" alt=""><br>
+			<font color="#9999FF">目前等級：<input name="flv" type="text" size="3" value="0"><br>
+			入手等級：<input name="flb" type="text" size="3" value="0"><br>
+			寵物店報價：<input name="fmoney" type="text" size="6" value="0"><br>
+			<br>
+			<input type="radio" name="fcard" value="1" checked onclick="cd=5">普卡 
+			<input type="radio" name="fcard" value="2" onclick="cd=10">銀卡 
+			<input type="radio" name="fcard" value="5" onclick="cd=25">金卡
+			</font><br>
+			<br>
+			<input type="button" value="寵物賣店價格" onclick="sell()">
+			<input type="button" value="寵物等級推算" onclick="level()"><br>
+			<img border="0" src="image/petsell/noka005.gif" width="500" height="16" alt=""></form>
+		<font color="#FF0000">功能介紹<br>
+		1.寵價計算：計算寵物販賣給NPC的價格<br>
+		2.等級推算：根據寵物當前資料與NPC販賣所給的價格推算寵物的捕捉等級</font></td>
+	</tr>
+</table>
+
+</body>
+
+</html>

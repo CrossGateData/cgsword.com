@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 85</span><span class="time">2010-08-08 04:46 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問 56等傳教哪裡比較好練技能呢??<br />
+<br />
+我目前都蒂娜村 不過只能練早上不方便<br />
+<br />
+<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2494)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-08 09:13 PM 回覆<br><br>
+					<div style="padding-left: 10px">阿巴村</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-09 09:40 AM 回覆<br><br>
+					<div style="padding-left: 10px">56/2-3 = 25<br />
+<br />
+高地 打刀機<br />
+魔大外 打熊跟鳥</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2494</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-08-08 03:35 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				剛回鍋 很多東西都看不懂ORZ<br />
+請問一下:<br />
+很多買賣都用&quot;銀&quot;,請問是從哪取得的?<br />
+還有一些料理的單位用&quot;盒&quot;,又是代表幾個?我只知道以前是一組=3個...<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2493)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">85 於 2010-08-08 04:43 PM 回覆<br><br>
+					<div style="padding-left: 10px">銀=銀票 折合魔幣 約1:21~22萬<br />
+<br />
+3組料理可以用收納盒 收成一盒<br />
+節省空間 雙擊收納盒之後 出現料理 收納盒消失<br />
+價錢貴很多(把收納盒的價錢算進去)</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2493</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: MI</span><span class="time">2010-08-08 01:13 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問別人說的 只接大量訂單 那是多少組阿 <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2492)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-09 09:41 AM 回覆<br><br>
+					<div style="padding-left: 10px">就看那個玩家 要收多少組<br />
+<br />
+可能是 固定每天10組 20組 ...<br />
+<br />
+玩家需求不一樣<br />
+所以要直接向玩家詢問<br />
+</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2492</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-08-07 11:59 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問..<br />
+<br />
+忍者就職任務 打完忍王 拿嵐的祕傳書<br />
+之後 換 推薦信    那 嵐的祕傳書就不見了..<br />
+<br />
+那任務不是卡了嗎?<br />
+<br />
+現在打  竹林山水甲天下   也進不去  請問怎麼辦?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2491)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-09 09:34 AM 回覆<br><br>
+					<div style="padding-left: 10px">沒有卡<br />
+拿著推薦性<br />
+你要依照時間去<br />
+22.最後帶著&quot;忍者推薦信&quot;到烏克蘭村的民家(46.22)跟佐助說話，被傳送到佐助的家接受試練，依照時間的不同會有不同的問題<br />
+<br />
+白天時的問題：<br />
+<br />
+　　 問題一：謎之鳥．2一直說的是什麼水果？　　　　　  回答「柿...」<br />
+　　 問題二：從裡面數來的第一個招牌寫了些什麼？　　　回答「影...」<br />
+　　 問題三：寵物哥布林的名字叫什麼？　　　　　　　　回答「松...」<br />
+　　 問題四：哥布林的頭盔是什麼顏色？　　　　　　　　回答「綠...」<br />
+　　 問題五：有幾隻刀？　　　　　　　　　　　　　　　回答「五...」<br />
+　　 問題六：時鐘指著哪個時間？　　　　　　　　　　　回答「子...」<br />
+　　 問題七：櫃子裡放了什麼？　　　　　　　　　　　　回答「筆...」<br />
+　　 問題八：地板上總共有幾本書？　　　　　　　　　　回答「三...」<br />
+　　 問題九：總共有幾顆樹？　　　　　　　　　　　　　回答「八...」<br />
+　　 問題十：寵物幽靈的名字叫什麼？　　　　　　　　　回答「梅...」　　<br />
+<br />
+晚上時的問題：<br />
+<br />
+　　 問題一：坐墊總共有幾個？　　　　　　　　　　　　回答「十...」<br />
+　　 問題二：總共有幾扇窗戶？　　　　　　　　　　　　回答「八...」<br />
+　　 問題三：供奉在神明前的書是什麼顏色的？　　　　　回答「紅...」<br />
+　　 問題四：從最裡面開始數來第５個寶箱是什麼色的？　回答「藍...」<br />
+　　 問題五：有放一籃橘子的桌子是前面的還是後面的？　回答「後...」<br />
+　　 問題六：謎之鳥．１一直說的是什麼水果？　　　　　回答「桃...」<br />
+　　 問題七：正中央寫的字是什麼？　　　　　　　　　　回答「忍...」<br />
+　　 問題八：草鞋總共有幾雙？　　　　　　　　　　　　回答「三...」<br />
+　　 問題九：綠色的桶子是從裡面數來的第幾個？　　　　回答「五...」<br />
+　　 問題十：牆壁是什麼顏色的？　　　　　　　　　　　回答「白...」<br />
+<br />
+若全都答對後會被傳送到忍者公會會長前面，在此就職忍者<br />
+<br />
+<br />
+以上 是你的後續誰解的<br />
+<br />
+而 竹林山水甲天下 那是就職之後 要升階時去找NPC用的</div>
+					<p>[最後於 2010-08-09 09:35 AM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2491</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2010-08-07 10:46 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問&quot;冰樹&quot;區在哪呀<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2490)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">崴崴 於 2010-08-08 02:55 AM 回覆<br><br>
+					<div style="padding-left: 10px">往裡動路上<br />
+快到的時候會遇到一個石頭<br />
+往左走會到理動<br />
+往右上走是冰樹區<br />
+記得要帶手電筒</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-08 05:54 PM 回覆<br><br>
+					<div style="padding-left: 10px">達米達村的山谷下?<br />
+手電筒去哪買@@</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-09 09:36 AM 回覆<br><br>
+					<div style="padding-left: 10px">手電筒<br />
+<br />
+請參考 任務<br />
+德威特島 的 史萊姆的回憶不可思議任務系列三<br />
+取得</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2490</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: FX</span><span class="time">2010-08-07 06:13 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問有沒有18↑  25↓的怪<br />
+<br />
+是不會防禦的? (例如伊爾村外的黃蜂)<br>
+				<br>
+				[最後於 2010-08-07 06:14 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2489)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">路過 於 2010-08-07 06:23 PM 回覆<br><br>
+					<div style="padding-left: 10px">你是想練崩擊吧?</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">Juna 於 2010-08-07 06:51 PM 回覆<br><br>
+					<div style="padding-left: 10px">黃螳?<br />
+<br />
+不過可能會得不償失...</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">FX 於 2010-08-07 07:32 PM 回覆<br><br>
+					<div style="padding-left: 10px">對阿 我要練崩</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">多咀的人 於 2010-08-07 11:03 PM 回覆<br><br>
+					<div style="padding-left: 10px">那你崩自己的寵就可以啦,不要防而已</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">ABC 於 2010-08-12 04:41 PM 回覆<br><br>
+					<div style="padding-left: 10px">崩一定要中咩,你可以5中</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2489</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 路過</span><span class="time">2010-08-07 05:50 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>小鴨子</b></p>
+				lv1的在哪可以捉?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2488)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">多咀的人 於 2010-08-07 11:04 PM 回覆<br><br>
+					<div style="padding-left: 10px">小鴨子lv1的在哪可以捉?<br />
+</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-08 10:17 PM 回覆<br><br>
+					<div style="padding-left: 10px">不能抓呀！</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">普通人 於 2010-08-10 11:17 AM 回覆<br><br>
+					<div style="padding-left: 10px">那除了小鴨子,還有什麼寵能用氣功彈</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-10 02:37 PM 回覆<br><br>
+					<div style="padding-left: 10px">並沒有寵用氣功彈這招</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2488</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 阿佑</span><span class="time">2010-08-06 07:52 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				特殊寶箱鑰匙如何取得呢?<br />
+<br />
+<br />
+譬如 黑 白 寶箱<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2487)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-06 08:12 PM 回覆<br><br>
+					<div style="padding-left: 10px">開普通寶箱</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-09 09:38 AM 回覆<br><br>
+					<div style="padding-left: 10px">開普通寶箱<br />
+或是與賣家購買</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2487</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 阿佑</span><span class="time">2010-08-06 07:32 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問一下..<br />
+<br />
+亂敏的意思是..  ?<br />
+<br />
+是bug嗎?<br />
+<br />
+還是本來就會有?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2486)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2010-08-06 08:12 PM 回覆<br><br>
+					<div style="padding-left: 10px">本來就會有</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2486</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 小竹</span><span class="time">2010-08-06 05:19 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問創家族該怎麼做 ?<br />
+必要條件有哪些 ?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,2485)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">雷歐‧霍姆茲 於 2010-08-07 06:04 PM 回覆<br><br>
+					<div style="padding-left: 10px">請參閱御劍軒網站的任務詳解→樂園之卵→家族創立任務</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">2485</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=228&amp;s=">上一頁</a>		<a href="guestbook.php?page=230&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+﻿<html>
+
+<head>
+<title>原礦價格計算器</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript" src="js/jquery-1.7.1.min.js" /></script>
+<script type="text/javascript">
+var table,fieldList;
+var dataset = [{'name': '鈦石原礦','npcprice': [360]},{'name': '純銀原石','npcprice': [500]},{
+	'name': '金礦原石','npcprice': [600]},{'name': '白金原石','npcprice': [760]},{	'name': '鋼騎原礦','npcprice': [840]}];
+$(function(){
+	table = $('#calTable');
+	fieldList = [];
+	var rowTemp = $('#RowTemplate');
+	var lastRow = rowTemp;
+	for(var i=0,l=dataset.length;i<l;i++)
+	{
+		var data = dataset[i];
+		var row = rowTemp.clone(true).insertAfter(lastRow);
+		lastRow = row;
+
+		var name = row.find('.name');
+		if( name ) name.html(data.name);
+		var npcprice = row.find('.npcprice');
+		if( npcprice) npcprice.val(data.npcprice);
+		var durable = row.find('.durable');
+		if( durable) durable.bind('keyup', cal);
+		var subdurable = row.find('.subdurable');
+		var count = row.find('.count');
+		var total = row.find('.total');
+		fieldList.push({
+			'name': name,'durable': durable,'subdurable': subdurable
+			,'npcprice': npcprice,'count': count,'total': total
+		});
+	}
+	rowTemp.css('display','none');
+	
+	function cal(){
+		var totalprice = 0, totalcount = 0, totaldurable = 0;
+		for(var i in fieldList){
+			var list = fieldList[i];
+			var durables = $.trim(list.durable.val().replace(/ +/g,' ')).split(/ /);
+			var subdurable = 0, count = 0;
+			for(var i in durables) if(durables[i]>0) {subdurable+=durables[i]*1;count++;}
+			totalprice += subtotal = subdurable*list.npcprice.val();
+			totalcount += count;
+			totaldurable += subdurable;
+			list.count.html(count);
+			list.total.html(subtotal);
+			list.subdurable.html(subdurable);
+		}
+		var totalnpcdis = $('#npcdis').val()*totalcount;
+		$('#totalcount').html(totalcount);
+		$('#totalprice').html(totalprice);
+		$('#totalnpcdis').html(totalnpcdis);
+		$('#finalprice').html(totalprice-totalnpcdis);
+		$('#totaldurable').html(totaldurable);
+	}
+	cal();
+	
+	$('#npcdis').bind('keyup', cal);
+});
+</script>
+</head>
+
+<body>
+
+<br>
+<table class="style" style="line-height: 15px; width: 550px">
+	<tr>
+		<th>原礦價格計算器</th>
+	</tr>
+	<tr>
+		<td>
+		<img border="0" src="image/petsell/noka003.gif" width="500" height="16" alt="">
+		<form>
+			<table id="calTable" style="width: 100%">
+				<tr>
+					<td class="head">原礦名稱</td>
+					<td class="head">每耐久價格</td>
+					<td class="head">耐久(使用空格作分隔)</td>
+					<td class="head">總耐久</td>
+					<td class="head">數量</td>
+					<td class="head">總計</td>
+				</tr>
+				<tr id="RowTemplate">
+					<td><span class="name"></span></td>
+					<td><input type="text" size="4" class="npcprice" />G</td>
+					<td><input type="text" class="durable"/></td>
+					<td><span class="subdurable"></span></td>
+					<td><span class="count"></span></td>
+					<td><span class="total"></span>G</td>
+				</tr>
+				<tr>
+					<td colspan="3"></td>
+					<td><span id="totaldurable"></span></td>
+					<td><span id="totalcount"></span></td>
+					<td><span id="totalprice"></span>G</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="text-align:right">每顆 -<input id="npcdis" value="0" size="6" />G</td>
+					<td>-<span id="totalnpcdis"></span>G</td>
+					<td><span id="finalprice"></span>G</td>
+				</tr>
+			</table>
+		</form>
+		<img border="0" src="image/petsell/noka005.gif" width="500" height="16" alt="">
+		</td>
+	</tr>
+</table>
+<hr>
+<div class="author">
+	By 黑—=HyperDream非凡想像</div>
+<div id="update">
+	Last Update:12/02/2012</div>
+</body>
+
+</html>

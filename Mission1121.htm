@@ -1,0 +1,133 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>乞巧</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/mission.js"></script>
+</head>
+
+<body>
+
+<div class="head">乞巧</div>
+<table class="style mission">
+	<tr>
+		<td width="11%" class="head">職業限定</td>
+		<td width="39%">無</td>
+		<td width="12%" class="head">備註</td>
+		<td width="38%">&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="head">必要等級</td>
+		<td>Lv1</td>
+		<td class="head">推薦等級</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="head">時間限制</td>
+		<td>無</td>
+		<td class="head">起始地點</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td class="head">重複完成</td>
+		<td>可</td>
+		<td class="head">頭目戰</td>
+		<td>無</td>
+	</tr>
+	<tr>
+		<td class="head">任務獎賞</td>
+		<td colspan="3">時來運轉 Lv1 護身符 稱號︰幸運星<br>
+制約守護鏈 Lv1 項鍊 抗毒+5 抗昏睡 +5 抗石化 +5 抗酒醉 +5 抗混亂+5 抗遺忘 +5<br>
+海神笛聲 Lv1 樂器 生命+200 魔力+200 耐久 300<br>
+魔弓手印記 Lv6 護身符 亂射技能耗魔減半 耐久200</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+        <span class="missionhead">任務內容</span>
+        <span class="missionhead" id="logspan">對話內容(開/關)</span>
+	  <ol>
+		<li>在 <span class="place">亞諾曼城</span> 找 <span class="npc">手笨待嫁女</span>(63.127) 對話獲得情報<br>
+		  <span class="note">註︰可省略</span><br>
+		  <span class="log">手笨待嫁女︰準婆婆嫌我女紅差，<br>
+		　　　　　　出嫁後怎麼辦呀～～[下一步]<br>
+		　　　　　　聽說七夕在水邊，<br>
+		　　　　　　以香粉、胭脂、眉墨向織女乞巧，<br>
+		　　　　　　手藝就可以進步。[下一步]<br>
+		　　　　　　我晚上去伊爾村偷偷乞巧，<br>
+		　　　　　　準婆婆應該不會發現吧～[確定]</span></li>
+		<li>準備 <span class="item">百里香</span>、<span class="item">神聖醋</span>、<span class="item">鉛礦</span>、<span class="item">雞蛋</span> 各1 到 <span class="place">亞諾曼城</span> 找 <span class="npc">香粉製作師</span>(137.97) 換得 <span class="item">香粉</span><br>
+		  <span class="note">註︰鉛礦可到任務鬼之烏克蘭的陰森的山路前段以1等挖掘技能採得</span><span class="log">[未乎合材料要求時]<br>
+		香粉製作師︰我是香粉製作師，<br>
+		　　　　　　如果你有百里香、神聖醋、鉛礦、雞蛋，<br>
+		　　　　　　我可以幫你作香粉喔～[下一步]<br>
+		　　　　　　鉛礦在陰森的山路可以挖掘到。[確定]<br>
+		[持乎合材料要求時]<br>
+		　　　　　　我是香粉製作師，<br>
+		　　　　　　如果你有百里香、神聖醋、鉛礦、雞蛋，<br>
+		　　　　　　我可以幫你作香粉喔～[下一步]<br>
+		　　　　　　你要做香粉嗎？<br>
+		　　　　　　　　[否]鉛礦在陰森的山路可以挖掘到。[確定]<br>
+		　　　　　　　　[是]{交換道具}<br>
+		[持有香粉]<br>
+		香粉製作師︰我是香粉製作師，<br>
+		　　　　　　如果你有百里香、神聖醋、鉛礦、雞蛋，<br>
+		　　　　　　我可以幫你作香粉喔～[確定]</span></li>
+		<li>持 <span class="item">鮮豔紅玫瑰</span>、<span class="item">紫草</span>及<span class="item">高級奶油</span> 各1在 <span class="place">亞諾曼城</span> 找 <span class="npc">胭脂製作師</span>(173.95) 換得 <span class="item">胭脂</span><br>
+		  <span class="note">註︰鮮艷紅玫瑰及紫草可到聖拉魯卡後山的花圃(55.111)以1等伐木採得</span><span class="log">[未乎合材料要求時]<br>
+		  胭脂製作師︰我是胭脂製做師，<br>
+　　　　　　有鮮豔紅玫瑰與紫草，再加上高級奶油，<br>
+　　　　　　就可以做胭脂囉～～[下一步]<br>
+　　　　　　鮮豔紅玫瑰與紫草在聖拉魯卡後山的花圃可採到。[確定]<br>
+[持乎合材料要求時]<br>
+胭脂製作師︰我是胭脂製做師，<br>
+　　　　　　有鮮豔紅玫瑰與紫草，再加上高級奶油，<br>
+　　　　　　就可以做胭脂囉～～[下一步]<br> 
+　　　　　　你要做胭脂嗎？
+<br>
+　　　　　　　　[否]鮮豔紅玫瑰與紫草在聖拉魯卡後山的花圃可採到。[確定]
+		<br>
+		 　　　　　　　　[是]{交換道具}<br>
+		 [持有胭脂]<br>
+		 胭脂製作師︰我是胭脂製做師，<br>
+　　　　　　有鮮豔紅玫瑰與紫草，再加上高級奶油，<br>
+　　　　　　就可以做胭脂囉～～[確定]</span></li>
+		<li>
+		  持 <span class="item">螺黛</span> 及 <span class="item">神聖油</span> 各1 到 <span class="place">亞諾曼城</span> 找 <span class="npc">製墨作師</span>(157.94) 換得 <span class="item">眉墨</span><br>
+		  <span class="note">註︰螺黛可到任務鬼之烏克蘭的陰森的山路前段以1等挖掘採得</span>
+		  <span class="log"><br>[未乎合材料要求時]<br>
+		  製墨作師︰我是製墨師，<br>
+		  　　　　　如果你有螺黛與神聖油，<br>
+		  　　　　　我可以幫你做眉墨。[下一步]<br>
+		  　　　　　螺黛在陰森的山路可以挖掘到。[確定]<br>
+		  [持乎合材料要求時]<br>
+		  製墨作師︰我是製墨師，<br>
+　　　　　如果你有螺黛與神聖油，<br>
+　　　　　我可以幫你做眉墨。[下一步]<br>
+　　　　　　　[否]螺黛在陰森的山路可以挖掘到。[確定]<br>
+　　　　　　　[是]{交換道具}
+<br>
+		  [持有眉墨時]
+          <br>
+          製墨作師︰我是製墨師，<br>
+　　　　　如果你有螺黛與神聖油，<br>
+　　　　　我可以幫你做眉墨。[確定]</span></li>
+		<li>持有 <span class="item">香粉</span>、<span class="item">胭脂</span>及<span class="item">眉墨</span> 各1 於晚上時到 <span class="place">伊爾村</span> 找 <span class="npc">乞巧的待嫁女</span>(39.49) 換得以下獎品其中之一︰<br>
+		  <span class="item">時來運轉</span> Lv1 護身符 稱號︰幸運星<br>
+		  <span class="item">制約守護鏈</span> Lv1 項鍊 抗毒+5 抗昏睡 +5 抗石化 +5 抗酒醉 +5 抗混亂+5 抗遺忘 +5<br>
+		  <span class="item">海神笛聲</span> Lv1 樂器 生命+200 魔力+200 耐久 300<br>
+		  <span class="item">魔弓手印記</span> Lv6 護身符 亂射技能耗魔減半 耐久200<br>
+		  <span class="log">乞巧的的待嫁女︰糟了～～<br>
+		  　　　　　　　　我居然沒帶乞巧的香粉、胭脂、眉墨。[下一步]<br>
+		  　　　　　　　　您能送我一份香粉、胭脂、眉墨嗎？<br>
+		  　　　　　　　　　　[否]嗚～～～[確定]<br>
+		  　　　　　　　　　　[是]謝謝您的幫忙，這點禮物送給您。[確定]</span><br>
+		  </li>
+	  </ol></td>
+	</tr>
+</table>
+
+</body>
+
+</html>

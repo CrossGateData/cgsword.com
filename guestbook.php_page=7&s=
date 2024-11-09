@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2020-02-02 04:37 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>裝備能力計算有少裝備</b></p>
+				請問裝備能力計算是否有少風虎之盾?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4882)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">4882</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2020-01-27 11:05 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>如何找回失去的魂魄</b></p>
+				魂魄如何何以找回<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4881)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2020-01-29 01:42 PM 回覆<br><br>
+					<div style="padding-left: 10px">大聖堂</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2020-04-20 05:38 AM 回覆<br><br>
+					<div style="padding-left: 10px">大聖堂</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4881</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2019-11-15 06:04 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問如果我很久沒登入遊戲 <br />
+<br />
+他會扣減我的聲望嗎 <br />
+<br />
+會不會很久沒上線 結果稱號下降？<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4880)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-11-19 10:53 PM 回覆<br><br>
+					<div style="padding-left: 10px">會xDD  很久很久沒來看看 居然還有人在這邊問問題XD</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4880</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2019-10-27 10:36 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>升級問題</b></p>
+				等級相差多少才會由100%經驗獲得變為只獲得1點?<br />
+<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4879)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-10-28 09:36 AM 回覆<br><br>
+					<div style="padding-left: 10px">30</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4879</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2019-09-20 05:58 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>盜連的定義</b></p>
+				Atlantis Powered by HyperDream © 2007-2019<br />
+為免影響本站運作，本站所有圖片均可另存但不得盜連<br />
+<br />
+--------------------------------------------------------<br />
+<br />
+您好：請問一下，若我將寵物圖鑑擷取另存並放在公開的網路日誌上，有無違反上述之奇蹟Atlantis魔力寶貝資訊網站的頁面聲明？<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4878)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">4878</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2019-08-13 02:23 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				请问11级料理 海鲜锅 里的泡菜在哪获取？<br>
+				<br>
+				[最後於 2019-08-13 03:18 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4877)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-08-20 01:37 AM 回覆<br><br>
+					<div style="padding-left: 10px">請參考 任務-&gt;樂園之卵-&gt;冰室<br />
+<br />
+<br />
+http://cgsword.com/Mission713.htm</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4877</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2019-08-07 07:49 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>14B碧空機弩數據參考</b></p>
+				板主您好~小弟練了一隻造弓先前沒注意到這邊可以<br />
+留言~成長中11~15級的數據都不小心給留失了~最近<br />
+洗了6把讓您參考用~小弟因為是靈耐雙百+火卵精6<br />
+所以可能您秀出去的數據要保守些~小弟提供6把的<br />
+單精火卵6做出來的平均落點大概是430~46X不等<br />
+魔是固定240  敏18~30  命中也是18~25以上六把數據<br />
+是讓您參考用~目前小弟最高464那把+裝飾了Q寶<br />
+變成攻802敏+30命+44魔+412((自己保存紀念))<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4876)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-08-12 09:50 PM 回覆<br><br>
+					<div style="padding-left: 10px">自己洗了2把~精六火卵~攻442敏48命27魔240</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-08-13 09:02 AM 回覆<br><br>
+					<div style="padding-left: 10px">另一把是~精六火卵攻434敏44命27魔240</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4876</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2019-08-01 03:50 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>裝備配方有誤</b></p>
+				8C鎧甲 幻之銀和幻之鋼的數量反了<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4875)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">4875</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2019-07-15 02:50 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>技能問題</b></p>
+				請問現在所有職業的技能都能到LV15?<br />
+<br />
+還有每個人物最高能學到11個技能嗎?<br />
+<br />
+現在還有人物技能証獲得嗎?<br>
+				<br>
+				[最後於 2019-07-15 05:14 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4874)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-07-26 05:57 PM 回覆<br><br>
+					<div style="padding-left: 10px">技能開放到15<br />
+S階解兩次能開啟11格<br />
+人物技能證只能跟有庫存玩家購買，或是抽包、活動</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-07-29 02:00 PM 回覆<br><br>
+					<div style="padding-left: 10px">謝謝你回覆<br />
+<br />
+請問現在還會有再舉辦火柴活動嗎? 如果有活動, 大概是什麼時間?<br />
+<br />
+我剛回鍋, 現在人物有火焔鼠銀幣和水藍鼠金幣, 這些幣是在曼城旅館找誰換獎品? 因為我進入換品區, 但就沒有換這些幣的人物, 是已關閉了嗎?</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-07-31 02:45 PM 回覆<br><br>
+					<div style="padding-left: 10px">火柴去年開放大概在8月，今年不知道(看大宇心情)<br />
+<br />
+水藍鼠金幣目前算是變成垃圾，要去亞城旅館進去門口找NPC換成鼠王紀念幣，詳細位置你得自己找找<br />
+<br />
+火焰鼠幣目前也沒辦法轉換成水鼠幣<br />
+但是火柴活動有分魔幣版跟火鼠幣版<br />
+所以還是可以先留著，等活動出來能用</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-08-01 09:31 AM 回覆<br><br>
+					<div style="padding-left: 10px">謝謝你^^<br />
+<br />
+現在總算明白了~</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4874</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: janan</span><span class="time">2019-05-04 01:48 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>hello</b></p>
+				はじめまして、私は日本人です。<br />
+翻訳を使って書き込みさせて頂きます。<br />
+いつもホームページを使用させていただいております。<br />
+ありがとうございます。<br />
+宝石【超萬能長蔥】の効果が知りたいです。<br />
+もし知っていたら教えて下さい。<br />
+宜しくお願いいたします<br />
+<br />
+<br />
+很高興認識你，我是日本人。<br />
+我總是使用主頁。<br />
+非常感謝你。<br />
+我想知道寶石[超萬能長蔥]的效果。<br />
+如果你知道，請告訴我。<br />
+謝謝<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4873)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-05-04 03:54 PM 回覆<br><br>
+					<div style="padding-left: 10px">精神+15%<br />
+Sprit + 15%<br />
+<br />
+add:https://forum.gamer.com.tw/C.php?bsn=2577&amp;snA=159741</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">janan 於 2019-05-05 12:03 AM 回覆<br><br>
+					<div style="padding-left: 10px">謝謝你的親切^ ^<br />
+我會偷它，所以我馬上就把它（'ω'）</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2019-05-08 08:07 AM 回覆<br><br>
+					<div style="padding-left: 10px">jananさん!はじめまして!^^<br />
+今どの錆にいらっしゃいますか?<br />
+一緒に遊ぼうぜ( ＾ω＾ )</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">janan 於 2019-05-19 12:24 AM 回覆<br><br>
+					<div style="padding-left: 10px">はじめまして＾＾<br />
+遊んでるのは日本鯖なのです＠＠；<br />
+台湾鯖では、ペット装備など実装されてて羨ましいです('ω')ノ<br />
+こっちはＰＵＫ３までしかないので、サービス終了時の日本鯖とほぼ同じ仕様なのですｗ</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4873</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=6&amp;s=">上一頁</a>		<a href="guestbook.php?page=8&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

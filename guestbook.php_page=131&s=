@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: flo</span><span class="time">2011-07-07 08:56 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>菸捲? 練功卷?</b></p>
+				請問有菸捲這個東西嗎....? 它的功用是?<br />
+昨天跟朋友去練功他說用&quot;菸捲&quot;傳過去<br />
+後來去問賣菸捲的人他卻說菸捲不等於練功卷<br />
+有點被搞糊塗了....<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3519)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2011-07-08 01:18 AM 回覆<br><br>
+					<div style="padding-left: 10px">練功卷-----可以傳送去練功的地方 (某些可以練功的地方)<br />
+煙卷--------傳送去煙系怪物之1級出沒點<br />
+<br />
+通常玩家會用煙卷傳去綠煙的一級點 因為那是彩葉原<br />
+亦即是練功的地方<br />
+而練功卷甚至可以傳去彩葉原頂 所以價錢是練功卷較貴<br />
+<br />
+其實類似的卷還有雪人卷跟鼠卷  鼠卷可以傳送到水藍鼠一級點 巴別塔頂層 可以打10x的怪物 是去火谷跟彩葉原練功之間的過渡段~</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3519</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 鴻爺</span><span class="time">2011-07-06 09:15 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				那裡能夠販賣礦材 和 木材呢 ?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3518)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">＃ 於 2011-07-06 09:41 PM 回覆<br><br>
+					<div style="padding-left: 10px">1. 3.0傳法蘭的出口左上<br />
+2. 競技場往王宮的兩個賣平民武防的<br />
+3. 亞城(118.157)的工坊(多5%)<br />
+4. 賣玩家<br />
+.........<br />
+其實到處都有</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3518</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: CHI</span><span class="time">2011-07-06 08:22 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>寵物技能</b></p>
+				請問有人知道寵物技能是否可以遺忘嗎？<br />
+可以的話請告訴我去哪（區域＆座標）。<br />
+真的非常感謝^^<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3517)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">＃ 於 2011-07-06 09:06 AM 回覆<br><br>
+					<div style="padding-left: 10px">http://www.cgsword.com/petskillindex.htm<br />
+狀態攻擊技能裡面  等級不同學的地方不同</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3517</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 艾翔</span><span class="time">2011-07-05 04:16 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問誰可以告訴我去蒂那村的詳細走法<br />
+感激不盡<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3516)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">＃ 於 2011-07-06 09:04 AM 回覆<br><br>
+					<div style="padding-left: 10px">http://www.cgsword.com/image/map/map3.jpg<br />
+傑村往上過橋 右上 左上 右上 看到村子</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">艾翔 於 2011-07-06 04:10 PM 回覆<br><br>
+					<div style="padding-left: 10px">其實我是想問 怎麼從法蘭城&quot;完全用走的&quot;去莎蓮娜島<br />
+因為我幾乎沒去過什麼村子記過點= =</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">＃ 於 2011-07-06 09:35 PM 回覆<br><br>
+					<div style="padding-left: 10px">http://www.cgsword.com/Map1.htm<br />
+法蘭城南門 過橋 莎蓮娜海底洞窟<br />
+<br />
+進洞窟開小地圖 印象中每層樓都是一直左上 <br />
+往有雪的地方走就是 <br />
+出去右上角就是傑村</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3516</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2011-07-05 09:00 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問有人知道喜馬拉斯礦的純點在那嗎？<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3515)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">＃ 於 2011-07-06 09:07 AM 回覆<br><br>
+					<div style="padding-left: 10px">http://www.cgsword.com/Digores.htm<br />
+往下拉 看到10級礦<br />
+<br />
+礦山http://www.cgsword.com/Map5.htm</div>
+					<p>[最後於 2011-07-06 02:35 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3515</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 幫代工裝</span><span class="time">2011-07-03 10:00 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>裝備</b></p>
+				剛準備好8C裝材料<br />
+代工的才說那個需要解任務.....<br />
+有雙子人可以幫代工的嗎??<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3514)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">3514</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 阿米</span><span class="time">2011-07-03 11:48 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>樹海專家和熟知樹海的人有咩分別</b></p>
+				這兩個稱號如何取得<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3513)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">甜 於 2011-07-07 02:54 AM 回覆<br><br>
+					<div style="padding-left: 10px">解森羅萬象</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3513</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: ray</span><span class="time">2011-07-03 04:26 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>關於保存箱</b></p>
+				請問 裂物保存箱 要在哪裡取得阿??<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3512)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">＃ 於 2011-07-06 09:14 AM 回覆<br><br>
+					<div style="padding-left: 10px">聖誕節時限任務掛襪子<br />
+現在只能跟玩家收</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3512</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 鴻爺</span><span class="time">2011-07-03 12:48 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>失去靈魂~~</b></p>
+				想問下~~<br />
+如果失去左靈魂有冇得拎番....<br />
+姐係 狀態 健康 右手面 有個心心 x1 係到~~<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3511)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">桃子 於 2011-07-03 02:10 AM 回覆<br><br>
+					<div style="padding-left: 10px">到大聖堂回魂:)</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3511</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 老千</span><span class="time">2011-07-02 10:57 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>技能頁的全體魔法</b></p>
+				全體魔法10抖印象中還是攻擊全部敵人阿<br />
+怎麼會介紹寫說<br />
+ 攻擊一側全體的x屬性魔法呢<br />
+<br />
+還是什麼時候改版變成一側了?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,3510)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2011-07-05 10:08 PM 回覆<br><br>
+					<div style="padding-left: 10px">敵敵敵敵敵&lt;&lt;&lt;&lt;<br />
+敵敵敵敵敵&lt;&lt;&lt;&lt;另一側<br />
+<br />
+己己己己己&lt;&lt;&lt;&lt;<br />
+己己己己己&lt;&lt;&lt;&lt;一側</div>
+					<p>[最後於 2011-07-05 10:08 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">3510</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=130&amp;s=">上一頁</a>		<a href="guestbook.php?page=132&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

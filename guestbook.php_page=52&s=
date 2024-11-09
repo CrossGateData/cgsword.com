@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 新手回鍋</span><span class="time">2013-03-04 11:59 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				請問各位雙子區的獵人大大<br />
+<br />
+你們的獵物 1~10等 怎麼計算的  剛回鍋 想賺個小錢 謝<br />
+             礦物 1~10等<br />
+         花草木 1~10等<br>
+				<br>
+				[最後於 2013-03-05 12:05 AM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4350)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">4350</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 未來</span><span class="time">2013-03-03 09:59 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>格鬥家</b></p>
+				我是新手<br />
+想問問格鬥家怎麼轉職？秘笈裏沒有~<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4349)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2013-03-04 02:34 AM 回覆<br><br>
+					<div style="padding-left: 10px">不論轉職跟就職, 都需要打過格鬥士就職任務</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4349</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 斐恩</span><span class="time">2013-03-02 10:08 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>封印師技能與配點</b></p>
+				請問各位大大 我剛回鍋 玩魔力 封印師我是想練武封 想請問 技能要怎麼配 以前技能除了寵3技都有其他都亂配 配點素質是力93 體質47 速度46 強度跟魔法都0 請問往後要怎麼矯正回好得素質？？ 我看巴哈有偏體 說之後高等恢復比較快是？ 還有是力量滿 速度80～100 體質150～180 就點強度... 不知道怎配 有點混亂... 目前40等而已<br>
+				<br>
+				[最後於 2013-03-02 10:11 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4348)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2013-03-04 02:34 AM 回覆<br><br>
+					<div style="padding-left: 10px">其實真的 方便練功 跟 血夠撐 就好<br />
+抓寵都用魔法來扣1LV怪的血<br />
+滿力是沒問題的<br />
+<br />
+不過點魔的就不好吧<br />
+點魔較難抓寵</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">鬼達磨 於 2013-06-12 02:57 PM 回覆<br><br>
+					<div style="padding-left: 10px">魔封的話2魔1敏1體就好了<br />
+<br />
+抓寵用1級強法 就不怕趴<br />
+<br />
+1級寵血再少也有100<br />
+<br />
+強法屬性就算有剋到 1級強法頂多打到8x滴血</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4348</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 皮蛋</span><span class="time">2013-03-02 11:02 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>布拉姆高地的圖中座標有誤</b></p>
+				布拉姆高地的(蔥和青椒的混點)座標錯誤<br />
+圖上顯示的是(102.223),但是觀看圖上其他採集物的座標<br />
+不可能是這個 我推測應該是(72.223)的誤謬<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4347)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">4347</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: KK</span><span class="time">2013-03-01 09:31 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>魔法精神論</b></p>
+				http://cgsword.com/amagic.htm<br />
+<br />
+您好這有點不懂<br />
+<br />
+如果我現在拿LV9法帳 魔攻286<br />
+<br />
+使用LV9法術 是1.5倍   那如果使用LV8法術呢??<br />
+<br />
+<br />
+魔攻越高傷害會越高嘛?  還是在LV10杖320 以上都是沒有效果的?<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4346)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">路人甲 於 2013-03-02 10:22 PM 回覆<br><br>
+					<div style="padding-left: 10px">在精神足夠推動8級法情況下 ,<br />
+<br />
+魔攻只要達到252(含)以上 , 就可全推8級法 ,<br />
+<br />
+也就是說拿8級頂杖 跟拿魔攻1000的杖<br />
+<br />
+打出來的傷害值都一樣</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2013-03-04 02:31 AM 回覆<br><br>
+					<div style="padding-left: 10px">最多只是1.5倍</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4346</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 猴</span><span class="time">2013-02-28 09:54 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>寵物價格</b></p>
+				請問目前1級樹精能賣多少<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4345)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2013-03-04 02:28 AM 回覆<br><br>
+					<div style="padding-left: 10px">5百到2千魔幣吧我猜<br />
+<br />
+更正: 幾萬魔幣才對<br />
+來源由魔力某一老手提供</div>
+					<p>[最後於 2013-03-04 07:12 PM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4345</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 熙</span><span class="time">2013-02-25 09:28 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>大鯰魚王</b></p>
+				在任務最後看到這麼一句<br />
+&quot;在最後一個地圖採集的時候，可以把身上按照4個細菌的比例采好，然後設法把自己飛回城。然後去和 鯰魚大王 說話，這樣可以一次換取多個物品。&quot;<br />
+<br />
+請問一下...方法是什麼 ??<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4343)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2013-02-28 09:26 AM 回覆<br><br>
+					<div style="padding-left: 10px">1. 黃色傳送羽<br />
+2. 在戰鬥中被怪/人打飛</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4343</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 靜</span><span class="time">2013-02-23 07:35 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>新手幫助</b></p>
+				我有三個帳號  分別是<br />
+1:弓箭手.造弓師<br />
+2.製藥師.樵夫<br />
+3.廚師.獵人<br />
+我的造弓師  缺一個&quot;曠工&quot;   我在&quot;卡蓮1&quot;<br />
+我通常都會在東醫附近  晃來晃去  <br />
+不然就是在&quot;德威特島&quot;-&quot;冒險者旅館&quot;看有沒有東西檢<br />
+(因為我是檢垃圾的)<br />
+我叫做&quot;電眼小弓手&quot;    如果有&quot;曠工&quot;  可以來找我                    大月:310000  小月:300000    10組  10000元(一天)(很好賺喔)<br>
+				<br>
+				[最後於 2013-02-23 07:37 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4342)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">疾風 於 2013-02-24 01:30 AM 回覆<br><br>
+					<div style="padding-left: 10px">礦應該不止這個價錢吧 @@</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4342</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 昇</span><span class="time">2013-02-22 08:01 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				金　維諾亞洞窟地下2樓(61.40)(混合銀)<br />
+這個是會MISS 混點<br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4341)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">4341</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 獅子</span><span class="time">2013-02-21 07:48 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				我是回鍋玩家~<br />
+想問問現在有哪些不會太貴的魔寵可以推薦的??<br />
+我有看到雪兔~ 他適合當魔寵嗎?<br>
+				<br>
+				[最後於 2013-02-21 07:50 PM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,4340)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px">靜 於 2013-02-23 07:28 PM 回覆<br><br>
+					<div style="padding-left: 10px">想要不太貴的寵物嘛?<br />
+如果你是在&quot;卡蓮1&quot;<br />
+可以去找一個叫做&quot;呆小鴨o&quot;這個人<br />
+它是封印師    它現在最長抓的是&quot;大地鼠&quot;<br />
+它大約都只賣7000~8000以下<br />
+如果是雪兔的話   比較適合當&quot;招牌寵&quot;</div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px">獅子 於 2013-02-24 06:39 AM 回覆<br><br>
+					<div style="padding-left: 10px">喔好~~ 謝謝!!</div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">4340</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=51&amp;s=">上一頁</a>		<a href="guestbook.php?page=53&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>

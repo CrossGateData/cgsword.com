@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>屬性相剋計算器::魔力寶貝 - 御劍軒</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script src="js/jquery-1.10.2.min.js"></script>
+<script>
+$(function(){return;
+	function prop_score(ap,dp){for(var score=i=0;i<4;i++)score+=(ap[i]-dp[i])*10+ap[i]*(dp[i==3?0:i+1]-dp[i==0?3:i-1]);return 1+score*0.003;}
+	var prop_item = $('#prop_item').clone().removeAttr('id');
+	$('#prop_item').remove();
+	prop_item.find('input[type=number]').on({
+		change: function(e){
+			var prop_info = getPropInfo();
+			$('#prop_score').text(prop_score(prop_info[0],prop_info[1]));
+		}
+	});
+	var prop_a = $('#prop_a'), prop_d = $('#prop_d');
+	for(var i=0;i<4;i++){prop_item.clone(true).appendTo(prop_a);prop_item.clone(true).appendTo(prop_d);}
+	function getPropInfo(){var t='input[type=number]',a_prop=[],d_prop=[],ipa=prop_a.find(t),ipd=prop_d.find(t);for(var i=0;i<4;i++){a_prop.push(ipa.eq(i).val()*1);d_prop.push(ipd.eq(i).val()*1);}return [a_prop,d_prop];}
+});
+$(function(){
+	function prop_score(ap,dp){for(var score=i=0;i<4;i++)score+=(ap[i]-dp[i])*10+ap[i]*(dp[i==3?0:i+1]-dp[i==0?3:i-1]);return 100+score*0.3;}
+	var prop_itemList = [],prop_itemRow=[],prop_itemCol=[];
+	var tmpl = $('#prop_item').clone(true).removeAttr('id');
+	$('#prop_item').remove();
+	var propCon = tmpl.find('.propCon').data({prop_value:[0,0,0,0],prop_value_base:[0,0,0,0]});
+	var propline = tmpl.find('.propline').clone(true);
+	tmpl.find('.propline').remove();
+	var propBtn = propline.find('.propBtn').clone(true);
+	propline.find('.propBtn').remove();
+	propBtn.on({
+		click: function(e){
+			if($(this).hasClass('selected')) {
+				$(this).removeClass('selected').removeClass('hover');
+				return;
+			}
+			$(this).parent().find('.selected').removeClass('selected');
+			$(this).addClass('selected');
+		},mouseover: function(e){
+			$(this).addClass('hover');
+		},mouseout: function(e){
+			e.stopPropagation();
+			$(this).removeClass('hover');
+		}
+	});
+	propline.on({
+		click: function(e){
+			if($(this).find('.selected').length == 0) $(this).addClass('empty'); else $(this).removeClass('empty');
+		},mouseover: function(e){
+			if($(this).find('.selected').length == 0 && $(this).find('.hover').length == 0) $(this).addClass('empty');
+			else $(this).removeClass('empty');
+		},mouseout: function(e){
+			if($(this).find('.selected').length == 0 && $(this).find('.hover').length == 0) $(this).addClass('empty');
+			else $(this).removeClass('empty');
+		}
+	});
+	propCon.on({
+		click: function(e){
+			e.stopPropagation();
+			var prop = [0,0,0,0];
+			$.each($(this).find('.selected'), function(){prop[$(this).parent().data('val')]=$(this).data('val');});
+			$.each($(this).find('.hover'), function(){prop[$(this).parent().data('val')]=$(this).data('val');});
+			$(this).data('prop_value', prop);
+			$(this).data('prop_value_base', prop);
+			$(this).closest('.prop_item').trigger('update');
+		},mouseover: function(e){
+			if(!$(e.target).hasClass('propBtn')) return;
+			var prop = [0,0,0,0];
+			$.each($(this).find('.selected'), function(){prop[$(this).parent().data('val')]=$(this).data('val');});
+			$.each($(this).find('.hover'), function(){prop[$(this).parent().data('val')]=$(this).data('val');});
+			$(this).data('prop_value', prop);
+			$(this).closest('.prop_item').trigger('update');
+		},mouseout: function(e){
+			$(this).data('prop_value', $(this).data('prop_value_base')||[]);
+			$(this).closest('.prop_item').trigger('update');
+		}
+	});
+	tmpl.on({
+		update: function(e){
+			var prop = $(this).find('.propCon').data('prop_value') || [],prop_n = '地水火風',prop_txt = '';
+			prop.forEach(function(val,i){if(val<=0) return;prop_txt+=prop_n[i]+val;});
+			$(this).find('.prop_txt').text(prop_txt.length==0?'無屬性':prop_txt);
+			
+			switch($(this).data('type')){
+				case 'col':
+					var d_prop = prop;
+					for(var i=0;i<prop_itemRow.length;i++){
+						var obj = prop_itemRow[i];
+						var a_prop = obj.find('.propCon').data('prop_value');
+						table.find('tr').eq(obj.data('row')).find('td').eq($(this).data('col')).text(prop_score(a_prop,d_prop)+'%');
+					}
+					break;
+				case 'row':
+					var d_prop = prop;
+					for(var i=0;i<prop_itemCol.length;i++){
+						var obj = prop_itemCol[i];
+						var a_prop = obj.find('.propCon').data('prop_value');
+						table.find('tr').eq($(this).data('row')).find('td').eq(obj.data('col')).text(prop_score(d_prop,a_prop)+'%');
+					}
+					break;
+			}
+		}
+	}).trigger('update');
+	tmpl.find('.prop_txt').on({
+		click: function(e){
+			e.stopPropagation();
+			$('.propCon.showing').removeClass('showing');
+			$(this).closest('.prop_item').find('.propCon').addClass('showing');
+		}
+	});
+	for(var i=1;i<=10;i++) propBtn.clone(true).data({val:i}).appendTo(propline);
+	for(var i=0;i<4;i++) propline.clone(true).data({val:i}).appendTo(propCon);
+	
+	var table = $('#gridTable');
+	$('#addCol').on({
+		click: function(e){
+			var trs = table.find('tr');
+			var td = $('<td>').insertBefore(trs.eq(0).find('td').last());
+			var ntmpl = tmpl.clone(true).appendTo(td);
+			prop_itemCol.push(ntmpl);
+			ntmpl.data({'id':prop_itemList.length,col:td.get(0).cellIndex,type:'col'});
+			prop_itemList.push(ntmpl);
+			for(var i=1,l=trs.length-1;i<l;i++) $('<td>').appendTo(trs.eq(i));
+			ntmpl.trigger('update');
+		}
+	}).trigger('click');
+	$('#addRow').on({
+		click: function(e){
+			var tr = $('<tr>').insertBefore(table.find('tr').last());
+			var tds = table.find('tr').first().find('td');
+			var td = $('<td>').appendTo(tr);
+			var ntmpl = tmpl.clone(true).appendTo(td);
+			prop_itemRow.push(ntmpl);
+			ntmpl.data({'id':prop_itemList.length,row:tr.get(0).rowIndex,type:'row'});
+			prop_itemList.push(ntmpl);
+			for(var i=1,l=tds.length-1;i<l;i++){
+				$('<td>').appendTo(tr);
+			}
+			ntmpl.trigger('update');
+		}
+	}).trigger('click');
+});
+$(function(){
+	$(document).on({
+		click: function(e){
+			$('.propCon.showing').removeClass('showing');
+		}
+	});
+});
+</script>
+<style>
+.propline:nth-child(1) .propBtn{background: #0F0}
+.propline:nth-child(2) .propBtn{background: #00F}
+.propline:nth-child(3) .propBtn{background: #F00}
+.propline:nth-child(4) .propBtn{background: #FF0}
+.propline.empty .propBtn,.propline.empty:hover .propBtn,.propline:hover .propBtn.hover~.propBtn,.propBtn.selected~.propBtn {opacity: 0.2;}
+.propline:hover .propBtn{opacity:1}
+.propBtn {display: inline-block;height: 15px;width: 15px;margin: 1px;border-radius:2px;cursor:pointer}
+.propCon.showing{display:block;}
+.propCon {display:none;position:absolute;border: 1px solid #908860;background: #FEF7E7;padding: 5px;}
+tr:nth-child(1) .propCon{margin-left:90px}
+
+.prop_txt:hover{background:#D8CCA8}
+.prop_txt{padding:2px;cursor:pointer}
+
+table.style{width:auto}
+table.style td{width: 100px}
+</style>
+</head>
+<body>
+<div class="head">屬性相剋計算器</div>
+<label id="prop_item" class="prop_item">
+	<div><span class="prop_txt"></span></div>
+	<div class="propCon"><div class="propline empty"><span class="propBtn"></span></div></div>
+</label>
+<table id="gridTable" class="style">
+	<tr>
+		<td></td>
+		<td><a id="addCol">+增加防禦方</a></td>
+	</tr>
+	<tr>
+		<td><a id="addRow">+增加攻擊方</a></td>
+	</tr>
+</table>
+</body>
+</html>

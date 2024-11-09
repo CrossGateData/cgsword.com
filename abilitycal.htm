@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>人物能力計算器</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<style type="text/css">
+table.cal td {line-height: 22px;}
+table.style td input.text {width: 60px;text-align: right;padding-right: 2px;}
+</style>
+<script type="text/javascript">
+var abrec = new Array();
+var condition = false;
+
+function $(i){v = document.getElementById(i).value;if(v>=0) return v;else return 0;}	
+function set$(i,v){document.getElementById(i).value = v;}
+function sett(i,t){document.getElementById(i).innerHTML = t;}
+function sette(){sett('rlv','');sett('rlvp','');sett('rlvsp','');sett('rxp','');}
+function upcal(){set$('up',$('hp')*1+$('ap')*1+$('dp')*1+$('sp')*1+$('mp')*1)}//已配點數
+function xpcal(){set$('xp',$('lvp')-$('up'))}//剩餘點數
+function delrec(index){document.getElementById('rec').deleteRow(index);}
+function moverec(index){if(index >2) document.getElementById('rec').moveRow(index,index-1);}
+
+function lvcal(){ //預測等級
+	lv = $('lv');
+	if(lv > 0){
+		set$('lvp',(lv-1)*4+30);
+		set$('rlvp','');
+		set$('lvsp',$('lvp')/2);
+		xpcal();
+		if(condition == true) concal();
+	}
+}
+
+function lvpcal(){ //可配點數
+	lvp = $('lvp');
+	if(lvp >= 30){
+		lv = Math.ceil((lvp-30)/4) + 1;
+		rlvpv = (lv-1)*4 + 30;
+		if(lvp != rlvpv) sett('rlvp','('+rlvpv+')');
+		else sett('rlvp','');
+		set$('lv',lv);
+		set$('lvsp',rlvpv/2);
+	}
+}
+
+function lvspcal(){ //單項最高
+	lvsp = $('lvsp');
+	if(lvsp >=15){
+		set$('lvp',lvsp*2);
+		lvpcal();		
+	}
+}
+
+function xpcbl(){ //剩餘點數推算
+	tlvp = $('up')*1 + $('xp')*1;
+	tlv = Math.ceil((tlvp-30)/4) + 1;
+	tlvp = ((tlv-1)*4)+30;
+	set$('lv',tlv);
+	sett('rlv','');
+	set$('lvp',tlvp);
+	sett('rlvp','');
+	set$('lvsp',tlvp/2);
+	sett('rlvsp','');
+}
+
+function abcal(){ //計算能力值
+	upcal();
+	if($('up') < 30) return null;
+	xpcal();
+	hh = $('hp')*1;
+	aa = $('ap')*1;
+	dd = $('dp')*1;
+	ss = $('sp')*1;
+	mm = $('mp')*1;
+	
+	trlv = p2lvcal();
+	if(trlv != $('lv')){
+		trlvp = (trlv-1)*4+30;
+		sett('rlv','('+trlv+')');
+		sett('rlvp','('+trlvp+')');
+		sett('rlvsp','('+(trlvp/2)+')');
+		sett('rxp','('+(trlvp-$('up'))+')');
+	}else sette();
+	
+	set$('h', Math.floor(20+hh*8+aa*2+dd*3+ss*3+mm*1));
+	set$('m', Math.floor(20+hh*1+aa*2+dd*2+ss*2+mm*10));
+	set$('a', Math.floor(20+hh*0.1+aa*2+dd*0.2+ss*0.2+mm*0.1));
+	set$('d', Math.floor(20+hh*0.1+aa*0.2+dd*2+ss*0.2+mm*0.1));
+	set$('s', Math.floor(20+hh*0.1+aa*0.2+dd*0.2+ss*2+mm*0.1));
+	set$('t', Math.floor(100-hh*0.3-aa*0.1+dd*0.2-ss*0.1+mm*0.8));
+	set$('r', Math.floor(100+hh*0.8-aa*0.1-dd*0.1+ss*0.2-mm*0.3));
+}
+
+function p2lvcal(){ //計算目前基本數值預測等級
+	tlvp = $('up');
+	maxp = Math.max($('hp')*1,$('ap')*1);
+	maxp = Math.max(maxp,$('dp')*1);
+	maxp = Math.max(maxp,$('sp')*1);
+	maxp = Math.max(maxp,$('mp')*1);
+	if(maxp/tlvp >= 0.5){tlvp = maxp*2;} //頂項
+	tlv = Math.ceil((tlvp-30)/4) + 1;
+	return tlv > 0 ? tlv : '--';
+}
+
+function rec2table(){
+	ablist = new Array('h','m','a','d','s','t','r','hp','ap','dp','sp','mp','xp');
+	tlv = p2lvcal();
+	row = document.getElementById('rec').insertRow(document.getElementById('rec').rows.length);
+	row.id = index = abrec.length;
+	abrec[index] = new Array();
+	abrec[index][0] = row.insertCell(0).innerHTML = tlv;
+	for(i=0;i<7;i++) abrec[index][i+1] = row.insertCell(i+1).innerHTML = $(ablist[i]);
+	cell = row.insertCell(8);
+	for(i=7;i<12;i++){
+		abrec[index][i+1] = $(ablist[i]);
+		cell.innerHTML+= $(ablist[i])+' ';
+	}
+	row.insertCell(9).innerHTML = '<a onclick="moverec(this.parentNode.parentNode.sectionRowIndex)">[移上]</a> <a onclick="delrec(this.parentNode.parentNode.sectionRowIndex)">[刪除]</a>';
+}
+
+function style(){ //始初化
+	//設定輸入方塊格式
+	input = document.getElementsByTagName('input');
+	n = input.length;
+	for(i=0;i<n;i++){
+		switch(input[i].type){
+			case 'text' : input[i].className = 'text'; break;
+			case 'checkbox' :
+				input[i].style.border = '0px';
+				if(input[i].name == 'con'){
+					input[i].onclick = ccon;
+					input[i].checked = false;
+				}				
+			break;
+		}
+	}
+	//設定配點條件訊息
+	document.getElementById('conalert').style.visibility = 'hidden';
+}
+
+function ccon(){ //配點條件
+	con1 = con2 = false;
+	conlist = new Array('conh','cona','cond','cons','conm');
+	for(i=0;i<5;i++){if(document.getElementById(conlist[i]).checked == true){if(con1 == false) con1 = conlist[i];else{con2 = conlist[i];break;}}}
+	if(con2 == false){condition = false;document.getElementById('conalert').style.visibility = 'hidden';}
+	else{condition = true;document.getElementById('conalert').style.visibility = 'visible';concal();}
+	for(i=0;i<5;i++) document.getElementById(conlist[i]).disabled = (con2 != false && conlist[i] != con1 && conlist[i] != con2) ? true : false;
+}
+
+function concal(){
+	conlist2 = {'conh':'hp','cona':'ap','cond':'dp','cons':'sp','conm':'mp'};
+	lvsp = $('lvsp');
+	for(econ in conlist2) set$(conlist2[econ],((econ == con1 || econ == con2) ? lvsp : 0));
+	abcal();
+}
+
+function resetform(){
+	sette();
+	document.getElementById('conh').disabled = document.getElementById('cona').disabled = document.getElementById('cond').disabled = document.getElementById('cons').disabled = document.getElementById('conm').disabled = false;
+	document.getElementsByTagName('form')[0].reset();
+}
+</script>
+</head>
+
+<body onload="style()">
+
+<div class="head">
+	人物能力計算器</div>
+<form>
+	<table class="style cal">
+		<tr>
+			<td class="sub" style="width: 25%">等級 / 點數</td>
+			<td class="sub" style="width: 25%">配點條件</td>
+			<td class="sub" style="width: 25%">基本數值 / 配點</td>
+			<td class="sub" style="width: 25%">能力值</td>
+		</tr>
+		<tr>
+			<td style="text-align: left">預 測 等 級 <input id="lv" type="text" value="1" onkeyup="lvcal()"><span id="rlv"></span><br>
+			可 配 點 數 <input id="lvp" type="text" value="30" onkeyup="lvpcal()"><span id="rlvp"></span><br>
+			單 項 最 高 <input id="lvsp" type="text" value="15" onkeyup="lvspcal()"><span id="rlvsp"></span><br>
+			已 配 點 數 <input id="up" type="text" value="0" readonly></td>
+			<td>純加兩項<br>
+			<label for="conh"><input id="conh" name="con" type="checkbox" value="h">體 力</label><br>
+			<label for="cona"><input id="cona" name="con" type="checkbox" value="ap">力 量</label><br>
+			<label for="cond"><input id="cond" name="con" type="checkbox" value="dp">強 度</label><br>
+			<label for="cons"><input id="cons" name="con" type="checkbox" value="sp">速 度</label><br>
+			<label for="conm"><input id="conm" name="con" type="checkbox" value="mp">魔 法</label><br>
+			<span id="conalert">改變預測等級即可計算能力</span></td>
+			<td style="text-align: left">體 力 <input id="hp" type="text" value="0" onkeyup="abcal()"><br>
+			力 量 <input id="ap" type="text" value="0" onkeyup="abcal()"><br>
+			強 度 <input id="dp" type="text" value="0" onkeyup="abcal()"><br>
+			速 度 <input id="sp" type="text" value="0" onkeyup="abcal()"><br>
+			魔 法 <input id="mp" type="text" value="0" onkeyup="abcal()"><br>
+			剩 餘 <input id="xp" type="text" value="0" onkeyup="xpcbl()"><span id="rxp"></span></td>
+			<td>生 命 <input id="h" type="text" value="100" readonly><br>
+			魔 力 <input id="m" type="text" value="100" readonly><br>
+			攻 擊 <input id="a" type="text" value="20" readonly><br>
+			防 禦 <input id="d" type="text" value="20" readonly><br>
+			敏 捷 <input id="s" type="text" value="20" readonly><br>
+			精 神 <input id="t" type="text" value="20" readonly><br>
+			回 復 <input id="r" type="text" value="20" readonly></td>
+		</tr>
+		<tr>
+			<td colspan="4"><span style="padding: 5px;background-color: #FFFFCC;border: 1px #FF0000 solid">括號內的值為對應 基本數值/配點 的數值</span><br>
+			<input type="button" onclick="rec2table()" value="記錄">　　　　<input type="button" value="還原" onclick="resetform()">　　　　<input type="button" value="說明" onclick="document.getElementById('intro').style.display=document.getElementById('intro').style.display=='none'?'block':'none'"></td>
+		</tr>
+	</table>
+	<br>
+	<div id="intro" style="display: none">
+	<div class="head">人物能力計算器使用說明</div>
+	<div style="text-align: left" class="sub_head">
+			☆所有輸入欄只允許輸入正整數才會進行運算<ul>
+			<li>等級 / 點數<br>
+			　預測等級 - 計算 可配點數, 單項最高, 已配點數 (若有選擇配點條件自行運算出能力值), 剩餘點數<br>
+			　可配點數 - 反推 預測等級, 計算 該等級的可配點數, 單項最高及已配點數, 剩餘點數<br>
+			　單項最高 - 反推 預測等級, 可配點數<br>
+			　已配點數 - 無法輸入</li>
+			<li>配點條件<br>
+			　當選取兩項能力時 無法繼續選取<br>
+			　並自動計算 [預測等級] 的能力值<br>
+			　改變 [預測等級] 會自動運算出能力值<br>
+			　只選一項或沒選則無任何影響</li>
+			<li>基本數值 / 配點<br>
+			　於 體力, 力量, 強度, 速度, 魔法 輸入任何正整數<br>
+			　會即時運算出該配點的能力值, 已配點數, 剩餘點數<br>
+			　並會反推該能力值的對應 等級, 可配點數, 單項最高, 剩餘點數 (以 括號 表示)</li>
+			<li>記錄<br>
+			　將當時所計算出的能力值 記錄到下方的表格<br>
+			　能力記錄表格<br>
+			　　[移上] 將該列數據向上移一行, 以便排序<br>
+			　　[刪除] 將該列數據刪除 無法還原</li>
+			<li>還原<br>
+			　將計算器還原狀態至最初 [不會刪除記錄列表數據]</li>
+		</ul>
+	</div></div>
+</form>
+<table class="style" id="rec">
+	<tr>
+		<td colspan="10" class="sub">能力記錄表</td>
+	</tr>
+	<tr class="head">
+		<td>等級</td>
+		<td>生命</td>
+		<td>魔力</td>
+		<td>攻擊</td>
+		<td>防禦</td>
+		<td>敏捷</td>
+		<td>精神</td>
+		<td>回復</td>
+		<td>配點</td>
+		<td style="width: 100px">操作</td>
+	</tr>
+</table>
+<br>
+<table class="style">
+	<tr>
+		<td colspan="10" class="sub">配點能力表</td>
+	</tr>
+	<tr class="head">
+		<td>&nbsp;</td>
+		<td>生命</td>
+		<td>魔力</td>
+		<td>攻擊</td>
+		<td>防禦</td>
+		<td>敏捷</td>
+		<td>精神</td>
+		<td>回復</td>
+	</tr>
+	<tr>
+		<td>體力</td>
+		<td>+8</td>
+		<td>+1</td>
+		<td>+0.1</td>
+		<td>+0.1</td>
+		<td>+0.1</td>
+		<td>-0.3</td>
+		<td>+0.8</td>
+	</tr>
+	<tr>
+		<td>力量</td>
+		<td>+2</td>
+		<td>+2</td>
+		<td>+2</td>
+		<td>+0.2</td>
+		<td>+0.2</td>
+		<td>-0.1</td>
+		<td>-0.1</td>
+	</tr>
+	<tr>
+		<td>強度</td>
+		<td>+3</td>
+		<td>+2</td>
+		<td>+0.2</td>
+		<td>+2</td>
+		<td>+0.2</td>
+		<td>+0.2</td>
+		<td>-0.1</td>
+	</tr>
+	<tr>
+		<td>速度</td>
+		<td>+3</td>
+		<td>+2</td>
+		<td>+0.2</td>
+		<td>+0.2</td>
+		<td>+2</td>
+		<td>-0.1</td>
+		<td>+0.2</td>
+	</tr>
+	<tr>
+		<td>魔法</td>
+		<td>+1</td>
+		<td>+10</td>
+		<td>+0.1</td>
+		<td>+0.1</td>
+		<td>+0.1</td>
+		<td>+0.8</td>
+		<td>-0.3</td>
+	</tr>
+</table>
+<hr>
+<div class="author">
+	By 黑—=HyperDream非凡想像</div>
+<div id="update">
+	Last Update:09/09/2011</div>
+
+</body>
+
+</html>

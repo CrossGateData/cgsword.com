@@ -1,0 +1,1460 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>格鬥家 - 職業總覽::魔力寶貝 - 御劍軒</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<style type="text/css">
+table.style td {
+	padding: 3px;
+}
+table.style td.name div {
+	float: left;
+	line-height: 30px;
+	border: 1px solid #908860;
+}
+table.style td.name div.level {
+	width: 40px;
+	color: #FFFFFF;
+	margin-left: 5px;
+	border-right-width: 0px;
+	background-color: #663300;
+}
+table.style td.name div.name {
+	width: 100px;
+}
+table.rise {
+	margin: auto;
+}
+table.rise th {
+	width: 40px;
+	background-color: #663300;
+}
+table.rise td {
+	text-align: left;
+}
+table.rise td.sub {
+	width: 100px;
+	line-height: 20px;
+	text-align: center;
+	background-color: #737373;
+	text-shadow: 1px 1px #000;
+	color: #FF0;
+	font-size: 9pt;
+}
+div#menu {
+	position: fixed;
+	width: 600px;
+	height: 85px;
+	left: 50px;
+	top: 0px;
+}
+div#joblist {
+	position: relative;
+	width: 600px;
+	height: 60px;
+	left: 0px;
+	top: 0px;
+	background-image: url('image/job/menu.gif');
+	z-index: 1;
+}
+div#joblist div.joblist {
+	margin: 0px auto 0px auto;
+	width: 580px;
+	display: none;
+}
+div#joblist div.joblist div {
+	width: 540px;
+	margin: 0px auto 0px auto;
+	padding-top: 3px;
+}
+div#menu table, div#menu td {
+	margin: 0px auto 0px auto;
+	border-collapse: collapse;
+	padding: 0px;
+}
+div#menu td.job {
+}
+div#menu td.job a {
+	display: inline-block;
+	color: #FFFFFF;
+	width: 80px;
+	height: 20px;
+	background-image: url('image/job/menu.gif');
+	background-position: -480px -60px;
+	cursor: url('alink.cur'),auto;
+	line-height: 20px;
+}
+div#menu td.job a:hover {
+	background-position: -480px -80px;
+	border-bottom: none;
+}
+div.button {
+	float: left;
+	width: 80px;
+	height: 25px;
+	background-image: url('image/job/menu.gif');
+	cursor: pointer;
+}
+#button1{background-position: 0px -60px;}
+#button1:hover, #button1.selected{background-position: 0px -85px;}
+#button2{background-position: -80px -60px;}
+#button2:hover, #button2.selected{background-position: -80px -85px;}
+#button3{background-position: -160px -60px;}
+#button3:hover, #button3.selected{background-position: -160px -85px;}
+#button4{background-position: -240px -60px;}
+#button4:hover, #button4.selected{background-position: -240px -85px;}
+#button5{background-position: -320px -60px;}
+#button5:hover, #button5.selected{background-position: -320px -85px;}
+#button6{background-position: -400px -60px;}
+#button6:hover, #button6.selected{background-position: -400px -85px;}
+</style>
+<script type="text/javascript">
+var historylist = new Array();
+var defaultpage = 1;
+historylist['menu'] = 'button'+(defaultpage);
+historylist['interval'] = null;
+historylist['menutop'] = 0;
+function chmenu(id,fact){
+	orgh = 60;
+	h = historylist['menutop'];
+	if(fact > 0){
+		h+= fact;
+		document.getElementById('menu').style.top = -h+'px';
+		if(h == orgh){
+			clearInterval(historylist['interval']);
+			var dom = document.getElementById(historylist['menu']);
+			if(!dom.classList) {dom.className=dom.className.replace('selected','').split(' ').join(' ')}
+			else dom.classList.remove('selected');
+			dom = document.getElementById(id);
+			if(!dom.classList) {dom.className=dom.className.replace('selected','').split(' ').join(' ')}
+			else dom.classList.remove('selected');
+			document.getElementById(historylist['menu']+'_joblist').style.display = 'none';
+			document.getElementById(id+'_joblist').style.display = 'block';
+			historylist['menu'] = id;
+			historylist['interval'] = setInterval('chmenu(\''+id+'\',-'+fact+')',1);
+		}
+	}else if(fact <0){
+		h+= fact;
+		document.getElementById('menu').style.top = -h+'px';
+		if(h == 0) clearInterval(historylist['interval']);
+	}else historylist['interval'] = setInterval('chmenu(\''+id+'\',10)',1);
+	historylist['menutop'] = h;
+}
+function showjob(id){
+	document.location = '/jobs'+id.replace('job','');
+}
+</script>
+</head>
+
+<body oncopy="return false">
+
+<div id="menu">
+	<div id="joblist">
+		<div id="button1_joblist" class="joblist">
+			<div>
+				<table style="width: 100%">
+					<tr>
+						<td id="job01" class="job"><a href="jobs01">劍士</a></td>
+						<td>&nbsp;</td>
+						<td id="job02" class="job"><a href="jobs02">戰斧鬥士</a></td>
+						<td>&nbsp;</td>
+						<td id="job03" class="job"><a href="jobs03">騎士</a></td>
+						<td>&nbsp;</td>
+						<td id="job04" class="job"><a href="jobs04">弓箭手</a></td>
+						<td>&nbsp;</td>
+						<td id="job05" class="job"><a href="jobs05">士兵</a></td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin-left: 40px">
+				<table style="width: 100%">
+					<tr>
+						<td id="job06" class="job"><a href="jobs06">忍者</a></td>
+						<td>&nbsp;</td>
+						<td id="job07" class="job"><a href="jobs07">格鬥家</a></td>
+						<td>&nbsp;</td>
+						<td id="job08" class="job"><a href="jobs08">盜賊</a></td>
+						<td>&nbsp;</td>
+						<td id="job09" class="job"><a href="jobs09">舞者</a></td>
+						<td>&nbsp;</td>
+						<td id="job10" class="job"><a href="jobs10">爆彈師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button2_joblist" class="joblist">
+			<div style="padding-top: 15px">
+				<table style="width: 100%">
+					<tr>
+						<td id="job11" class="job"><a href="jobs11">魔術師</a></td>
+						<td>&nbsp;</td>
+						<td id="job12" class="job"><a href="jobs12">傳教士</a></td>
+						<td>&nbsp;</td>
+						<td id="job13" class="job"><a href="jobs13">巫師</a></td>
+						<td>&nbsp;</td>
+						<td id="job14" class="job"><a href="jobs14">咒術師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button3_joblist" class="joblist">
+			<div style="padding-top: 15px">
+				<table style="width: 80%">
+					<tr>
+						<td id="job15" class="job"><a href="jobs15">封印師</a></td>
+						<td>&nbsp;</td>
+						<td id="job16" class="job"><a href="jobs16">飼養師</a></td>
+						<td>&nbsp;</td>
+						<td id="job17" class="job"><a href="jobs17">馴獸師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button4_joblist" class="joblist">
+			<div style="padding-top: 15px">
+				<table style="width: 100%">
+					<tr>
+						<td id="job18" class="job"><a href="jobs18">樵夫</a></td>
+						<td>&nbsp;</td>
+						<td id="job19" class="job"><a href="jobs19">獵人</a></td>
+						<td>&nbsp;</td>
+						<td id="job20" class="job"><a href="jobs20">礦工</a></td>
+						<td>&nbsp;</td>
+						<td id="job21" class="job"><a href="jobs21">紡織工</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button5_joblist" class="joblist">
+			<div style="padding-top: 15px">
+				<table style="width: 100%">
+					<tr>
+						<td class="job" onmouseover="document.getElementById('makeweapon').style.display = 'block'" onmouseout="document.getElementById('makeweapon').style.display = 'none'">
+						<a>武器製造</a></td>
+						<td>&nbsp;</td>
+						<td class="job" onmouseover="document.getElementById('makedef').style.display = 'block'" onmouseout="document.getElementById('makedef').style.display = 'none'">
+						<a>防具製造</a></td>
+						<td>&nbsp;</td>
+						<td id="job37" class="job"><a href="jobs37">藥劑師</a></td>
+						<td>&nbsp;</td>
+						<td id="job38" class="job"><a href="jobs38">廚　師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="button6_joblist" class="joblist">
+			<div>
+				<table style="width: 100%">
+					<tr>
+						<td id="job39" class="job"><a href="jobs39">醫師</a></td>
+						<td>&nbsp;</td>
+						<td id="job40" class="job"><a href="jobs40">護士</a></td>
+						<td>&nbsp;</td>
+						<td id="job41" class="job"><a href="jobs41">仙人</a></td>
+						<td>&nbsp;</td>
+						<td id="job42" class="job"><a href="jobs42">偵探</a></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<table style="width: 80%">
+					<tr>
+						<td id="job43" class="job"><a href="jobs43">武器修理師</a></td>
+						<td>&nbsp;</td>
+						<td id="job44" class="job"><a href="jobs44">防具修理師</a></td>
+						<td>&nbsp;</td>
+						<td id="job45" class="job"><a href="jobs45">鑑定師</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div style="position: relative; width: 600px; height: 25px; z-index: 2; left: 30px; top: -1px;" id="button">
+		<div id="button1" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button2" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button3" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button4" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button5" class="button" onclick="chmenu(this.id,0)"></div>
+		<div id="button6" class="button" onclick="chmenu(this.id,0)"></div>
+	</div>
+	<div style="position: absolute; width: 80px; left: 55px; top: 35px; display: none; z-index: 3" id="makeweapon" onmouseover="this.style.display = 'block'" onmouseout="this.style.display = 'none'">
+		<table style="width: 100%">
+			<tr>
+				<td id="job22" class="job"><a href="jobs22">鑄劍師</a></td>
+			</tr>
+			<tr>
+				<td id="job23" class="job"><a href="jobs23">造斧師</a></td>
+			</tr>
+			<tr>
+				<td id="job24" class="job"><a href="jobs24">造槍師</a></td>
+			</tr>
+			<tr>
+				<td id="job25" class="job"><a href="jobs25">造弓師</a></td>
+			</tr>
+			<tr>
+				<td id="job26" class="job"><a href="jobs26">造杖師</a></td>
+			</tr>
+			<tr>
+				<td id="job27" class="job"><a href="jobs27">小刀師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job28" class="job"><a href="jobs28">投擲武器師傅</a></td>
+			</tr>
+		</table>
+	</div>
+	<div style="position: absolute; width: 80px; left: 191px; top: 35px; display: none; z-index: 3" id="makedef" onmouseover="this.style.display = 'block'" onmouseout="this.style.display = 'none'">
+		<table style="width: 100%">
+			<tr>
+				<td id="job29" class="job"><a href="jobs29">頭盔師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job30" class="job"><a href="jobs30">帽子師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job31" class="job"><a href="jobs31">鎧甲師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job32" class="job"><a href="jobs32">裁縫師</a></td>
+			</tr>
+			<tr>
+				<td id="job33" class="job"><a href="jobs33">長袍師傅</a></td>
+			</tr>
+			<tr>
+				<td id="job34" class="job"><a href="jobs34">製靴師</a></td>
+			</tr>
+			<tr>
+				<td id="job35" class="job"><a href="jobs35">製鞋師</a></td>
+			</tr>
+			<tr>
+				<td id="job36" class="job"><a href="jobs36">造盾師</a></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div style="height: 80px"></div>
+<script type="text/javascript">
+document.getElementById('button'+defaultpage+'_joblist').style.display = 'block';
+if(!document.getElementById('button'+defaultpage).classList) {document.getElementById('button'+defaultpage).className+=' selected';}
+else document.getElementById('button'+defaultpage).classList.add('selected');
+</script>
+<div class="head">格鬥家</div>
+<div class="sub_head">空手戰鬥的職業，能在攻擊中附加隨機狀態，並應用氣功，無視前後排對單一或複數敵人進行攻擊。</div>
+<table class="style">
+	<tr class="head">
+		<td>就職任務</td>
+	</tr>
+	<tr>
+		<td style="text-align: left"><ol>
+			<li>首先到洪恩大風洞加納側出口附近的獅子之穴(380,324)，</li>
+			<li>跟"櫃台小姐真奈美"說話，付44G可進入獅子之穴心之房。</li>
+			<li>擊敗四位測試官來通過戰鬥考驗，進入師範的房間。</li>
+			<li>在師範的房間與綠先生領取格鬥家推薦信，並與格鬥家馬辛交談即可就職。</li>
+			<li>和獅子之穴的綠獅子對話，可以傳送到房間找格鬥家馬辛提升階級。</li>
+		</ol></td>
+	</tr>
+	<tr>
+		<td class="head">晉升條件及任務</td>
+	</tr>
+	<tr>
+		<td>
+		<table class="rise">
+			<tr>
+								<th>D</th>
+				<td class="sub">見習格鬥士</td>
+								<th>C</th>
+				<td class="sub">格鬥士</td>
+								<th>B</th>
+				<td class="sub">格鬥專家</td>
+								<th>A</th>
+				<td class="sub">格鬥家師範</td>
+								<th>S</th>
+				<td class="sub">格鬥王</td>
+							</tr>
+			<tr>
+												<td style="width: 20%;vertical-align:top" colspan="2">人物等級: Lv 1<br>稱號: -<br>任務: 就職任務</td>
+				<td style="width: 20%" colspan="2">稱號: 呢喃的歌聲<br>任務: <a href="Mission39.htm">戰鬥系晉升任務I</a><br>技能: 混亂攻擊Lv4</td>
+				<td style="width: 20%" colspan="2">稱號: 蒼之風雲<br>任務: <a href="Mission301.htm">戰鬥系晉升任務II</a><br>技能: 混亂攻擊Lv6</td>
+				<td style="width: 20%" colspan="2">稱號: 歡喜的慈雨<br>任務: <a href="Mission311.htm">戰鬥系晉升任務III</a><br>技能: 混亂攻擊Lv8</td>
+				<td style="width: 20%" colspan="2">稱號: 敬畏的寂靜<br>任務: <a href="Mission811.htm">誓言之花</a><br>技能: 混亂攻擊Lv10</td>
+											</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<table class="style">
+  <tr>
+		<th colspan="16">裝備上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width:30px">裝備</td>
+				<td>長劍</td>
+				<td>手斧</td>
+				<td>槍矛</td>
+				<td>弓箭</td>
+				<td>法杖</td>
+				<td>小刀</td>
+				<td>投具</td>
+				<td>鎧甲</td>
+				<td>衣服</td>
+				<td>長袍</td>
+				<td>頭盔</td>
+				<td>帽子</td>
+				<td>鞋子</td>
+				<td>長靴</td>
+				<td>盾牌</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>4</td>
+				<td>-</td>
+				<td>-</td>
+				<td>4</td>
+				<td>4</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>6</td>
+				<td>-</td>
+				<td>-</td>
+				<td>6</td>
+				<td>6</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>8</td>
+				<td>-</td>
+				<td>-</td>
+				<td>8</td>
+				<td>8</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>10</td>
+				<td>-</td>
+				<td>-</td>
+				<td>10</td>
+				<td>10</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>15</td>
+				<td>-</td>
+				<td>-</td>
+				<td>15</td>
+				<td>15</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+	</table>
+<table class="style">
+	<tr>
+		<th colspan="17">戰鬥攻擊技能上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width: 30px">技能</td>
+				<td>連擊</td>
+				<td>諸刃</td>
+				<td>乾坤一擲</td>
+				<td>氣功彈</td>
+				<td>反擊</td>
+				<td>崩擊</td>
+				<td>一石二鳥</td>
+				<td>戒驕戒躁</td>
+				<td>迅速果斷</td>
+				<td>毒擊</td>
+				<td>一擊必中</td>
+				<td>因果報應</td>
+				<td>亂射</td>
+				<td>混亂攻擊</td>
+				<td>追月</td>
+				<td>投擲</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>-</td>
+				<td>4</td>
+				<td>3</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>4</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>6</td>
+				<td>6</td>
+				<td>6</td>
+				<td>-</td>
+				<td>6</td>
+				<td>4</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>6</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>8</td>
+				<td>8</td>
+				<td>8</td>
+				<td>-</td>
+				<td>8</td>
+				<td>5</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>8</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>10</td>
+				<td>10</td>
+				<td>10</td>
+				<td>-</td>
+				<td>10</td>
+				<td>6</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>10</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>15</td>
+				<td>15</td>
+				<td>15</td>
+				<td>-</td>
+				<td>10</td>
+				<td>7</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>15</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+	</table>
+<table class="style">
+	<tr>
+		<th colspan="6">戰鬥防禦技能上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width: 30px">技能</td>
+				<td>陽炎</td>
+				<td>護衛</td>
+				<td>聖盾</td>
+				<td>騎士之譽</td>
+				<td>攻擊魔法防禦</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>4</td>
+				<td>4</td>
+				<td>-</td>
+				<td>4</td>
+				<td>1</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>6</td>
+				<td>6</td>
+				<td>-</td>
+				<td>6</td>
+				<td>1</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>8</td>
+				<td>8</td>
+				<td>-</td>
+				<td>8</td>
+				<td>1</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>10</td>
+				<td>10</td>
+				<td>-</td>
+				<td>10</td>
+				<td>1</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>10</td>
+				<td>10</td>
+				<td>-</td>
+				<td>10</td>
+				<td>1</td>
+			</tr>
+	</table>
+<table class="style">
+	<tr>
+		<th colspan="18">戰鬥輔助技能上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width: 30px">技能</td>
+				<td>暗殺</td>
+				<td>抗毒</td>
+				<td>抗昏睡</td>
+				<td>抗石化</td>
+				<td>抗酒醉</td>
+				<td>抗混亂</td>
+				<td>抗遺忘</td>
+				<td>戰慄襲心</td>
+				<td>明鏡止水</td>
+				<td>跳舞</td>
+				<td>黏巴達舞</td>
+				<td>捷舞</td>
+				<td>啪啦啪啦舞</td>
+				<td>竊盜</td>
+				<td>騎乘</td>
+				<td>虛死為上</td>
+				<td>羊頭狗肉</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>-</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>4</td>
+				<td>4</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>1</td>
+				<td>1</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>-</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>6</td>
+				<td>6</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>2</td>
+				<td>1</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>-</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>8</td>
+				<td>8</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>4</td>
+				<td>1</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>-</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>4</td>
+				<td>10</td>
+				<td>10</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>8</td>
+				<td>1</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>-</td>
+				<td>5</td>
+				<td>5</td>
+				<td>5</td>
+				<td>5</td>
+				<td>5</td>
+				<td>5</td>
+				<td>15</td>
+				<td>15</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>10</td>
+				<td>1</td>
+				<td>3</td>
+			</tr>
+	</table>
+<table class="style">
+	<tr>
+		<th colspan="15">屬性攻擊魔法上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width: 30px">技能</td>
+				<td>隕石魔法</td>
+				<td>冰凍魔法</td>
+				<td>火焰魔法</td>
+				<td>風刃魔法</td>
+				<td>強力隕石魔法</td>
+				<td>強力冰凍魔法</td>
+				<td>強力火焰魔法</td>
+				<td>強力風刃魔法</td>
+				<td>超強隕石魔法</td>
+				<td>超強冰凍魔法</td>
+				<td>超強火焰魔法</td>
+				<td>超強風刃魔法</td>
+				<td>吸血魔法</td>
+				<td>精神衝擊波</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>-</td>
+			</tr>
+	</table>
+<table class="style">
+	<tr>
+		<th colspan="24">狀態變化魔法上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width: 30px">技能</td>
+				<td>中毒魔法</td>
+				<td>昏睡魔法</td>
+				<td>石化魔法</td>
+				<td>酒醉魔法</td>
+				<td>混亂魔法</td>
+				<td>遺忘魔法</td>
+				<td>強力中毒魔法</td>
+				<td>強力昏睡魔法</td>
+				<td>強力石化魔法</td>
+				<td>強力酒醉魔法</td>
+				<td>強力混亂魔法</td>
+				<td>強力遺忘魔法</td>
+				<td>超強中毒魔法</td>
+				<td>超強昏睡魔法</td>
+				<td>超強石化魔法</td>
+				<td>超強酒醉魔法</td>
+				<td>超強混亂魔法</td>
+				<td>超強遺忘魔法</td>
+				<td>屬性反轉</td>
+				<td>大地的祈禱</td>
+				<td>海洋的祈禱</td>
+				<td>火焰的祈禱</td>
+				<td>雲群的祈禱</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+			</tr>
+	</table>
+<table class="style">
+	<tr>
+		<th colspan="15">戰鬥輔助魔法上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width: 30px">技能</td>
+				<td>補血魔法</td>
+				<td>強力補血魔法</td>
+				<td>超強補血魔法</td>
+				<td>氣絕回復</td>
+				<td>潔淨魔法</td>
+				<td>恢復魔法</td>
+				<td>強力恢復魔法</td>
+				<td>超強恢復魔法</td>
+				<td>攻擊吸收</td>
+				<td>魔法吸收</td>
+				<td>攻擊反彈</td>
+				<td>魔法反彈</td>
+				<td>攻擊無效</td>
+				<td>魔法無效</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+			</tr>
+	</table>
+<table class="style">
+	<tr>
+		<th colspan="13">其他特殊技能上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width: 30px">技能</td>
+				<td>調教</td>
+				<td>寵物強化</td>
+				<td>精靈的盟約</td>
+				<td>急救</td>
+				<td>治療</td>
+				<td>修理武器</td>
+				<td>修理防具</td>
+				<td>鑑定</td>
+				<td>刻印</td>
+				<td>裝飾</td>
+				<td>變裝</td>
+				<td>變身</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>3</td>
+				<td>3</td>
+				<td>3</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+	</table>
+<table class="style">
+	<tr>
+		<th colspan="29">生產製作技能上限</th>
+	</tr>
+	<tr class="head">
+		<td style="width: 30px">技能</td>
+				<td>挖掘體驗</td>
+				<td>伐木體驗</td>
+				<td>狩獵體驗</td>
+				<td>剪取體驗</td>
+				<td>鍛造體驗</td>
+				<td>挖掘</td>
+				<td>伐木</td>
+				<td>狩獵</td>
+				<td>剪取</td>
+				<td>製藥</td>
+				<td>料理</td>
+				<td>鑄劍</td>
+				<td>造槍</td>
+				<td>造斧</td>
+				<td>造杖</td>
+				<td>造弓</td>
+				<td>造小刀</td>
+				<td>造投擲武器</td>
+				<td>造頭盔</td>
+				<td>製帽子</td>
+				<td>造鎧</td>
+				<td>製衣服</td>
+				<td>製長袍</td>
+				<td>製長靴</td>
+				<td>製鞋</td>
+				<td>造盾</td>
+				<td>炸彈轉化</td>
+				<td>飾品鑄造</td>
+			</tr>
+		<tr>
+		<td class="head">見習</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">正式</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">王宮</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">師範</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+		<tr>
+		<td class="head">大師</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>-</td>
+				<td>-</td>
+			</tr>
+	</table>
+
+</body>
+
+</html>

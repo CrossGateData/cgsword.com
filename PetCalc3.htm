@@ -1,0 +1,226 @@
+﻿<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>野生寵的能力產生與成長預測</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+</head>
+
+<body>
+
+<table class="style">
+	<tr>
+		<td width="21%"><a href="PetCalc1.htm">理論基礎</a></td>
+		<td width="22%"><a href="PetCalc2.htm">寵物能力理論</a></td>
+		<td width="22%"><a href="PetCalc3.htm">野生寵物理論</a></td>
+		<td width="35%"><a href="PetCalc4.htm">一級與野生寵物導論</a></td>
+	</tr>
+</table>
+<br>
+<table class="style">
+	<tr>
+		<th>野生寵的能力產生與成長預測</th>
+	</tr>
+	<tr>
+		<td class="head">(1)野生寵能力產生公式</td>
+	</tr>
+	<tr>
+		<td style="text-align: left">上一篇提到了這個公式：單項BP能力 = 0.2 * 
+		(該能力成長檔次)，五項BP都產生以後，系統會再配上0.2BP * 十檔，配的位置是隨機的，配上的這十檔只對一級能力有影響，而完全不影響成長。<br>
+		<br>
+		其實只是一個特殊情況的表現，其他的情況就是我們所說的&quot;野生寵&quot;<br>
+		<br>
+		完整的公式應該是：單項BP能力 = 每檔能力 * (該能力成長檔次)<br>
+		每檔能力是 = <font color="#FF0000">[0.2 + ( 40 + 成長係數) / 1000 * (入手等級 - 1)]</font><br>
+		隨機檔次是有10檔隨機分配：<br>
+		隨機檔次總合 = 每檔能力 * 10<br>
+		<br>
+		當入手等級是1的時候, 這部份<font color="#FF0000">[0.2 + (40 + 成長係數) / 1000 * (入手等級 - 
+		1)] = 0.2</font><br>
+		所以完全不用考慮成長係數。<br>
+		<br>
+		成長係數是新引進的參數，目前只有0,1,2,3,4,5這六種，這個數字只會影響野生寵剛抓來時的能力，並不影響自練時的成長，越低時代表野生時的能力被扣越多，0被扣最多，5被扣最少。<br>
+		<br>
+		範例:<font color="#FF0000"> 8938 03/09/15 b123456789</font>＋ 兔耳嚇人箱成長紀錄<font color="#FF0000">14 
+		- 70</font><br>
+		<br>
+		這隻兔耳的入手等級與能力如下:<font color="#FF0000"> Lv14 249 389 84 95 59 118 98 BP 8 
+		17 19 14 25</font><br>
+		<br>
+		隨機抽幾筆成長以後的紀錄資料:<table class="style" style="width: 66%">
+			<tr>
+				<td width="7%" class="head">Lv19</td>
+				<td width="7%">310</td>
+				<td width="7%">535</td>
+				<td width="7%">101</td>
+				<td width="7%">115</td>
+				<td width="7%">69</td>
+				<td width="7%">128</td>
+				<td width="7%">95</td>
+				<td width="7%" class="head">BP</td>
+				<td width="7%">10</td>
+				<td width="7%">22</td>
+				<td width="7%">24</td>
+				<td width="8%">17</td>
+				<td width="8%">37</td>
+			</tr>
+			<tr>
+				<td class="head">Lv37</td>
+				<td>527</td>
+				<td>1062</td>
+				<td>165</td>
+				<td>185</td>
+				<td>105</td>
+				<td>160</td>
+				<td>87</td>
+				<td class="head">BP</td>
+				<td>16</td>
+				<td>38</td>
+				<td>41</td>
+				<td>29</td>
+				<td>80</td>
+			</tr>
+			<tr>
+				<td class="head">Lv53</td>
+				<td>720</td>
+				<td>1531</td>
+				<td>221</td>
+				<td>247</td>
+				<td>137</td>
+				<td>190</td>
+				<td>79</td>
+				<td class="head">BP</td>
+				<td>22</td>
+				<td>53</td>
+				<td>57</td>
+				<td>40</td>
+				<td>118</td>
+			</tr>
+			<tr>
+				<td class="head">Lv65</td>
+				<td>865</td>
+				<td>1882</td>
+				<td>263</td>
+				<td>294</td>
+				<td>161</td>
+				<td>212</td>
+				<td>74</td>
+				<td class="head">BP</td>
+				<td>27</td>
+				<td>64</td>
+				<td>68</td>
+				<td>48</td>
+				<td>147</td>
+			</tr>
+			<tr>
+				<td class="head">Lv70</td>
+				<td>925</td>
+				<td>2028</td>
+				<td>281</td>
+				<td>314</td>
+				<td>171</td>
+				<td>221</td>
+				<td>71</td>
+				<td class="head">BP</td>
+				<td>29</td>
+				<td>68</td>
+				<td>73</td>
+				<td>51</td>
+				<td>159</td>
+			</tr>
+		</table>
+		經過排列組合後，可分析出這隻寵的BP成長檔次是：<font color="#FF0000">(9 22 23 16 33)</font>，隨機十檔掉在<font color="#FF0000">(2 
+		1 3 3 1)</font>，成長係數為3。<br>
+		<br>
+		因為有限的排列組合，所以找到任一符合紀錄的Lv14能力就停手了，這隻應該是只有一組解存在。<br>
+		<br>
+		<font color="#0000FF">以這些數字，可算出14級能力是：(9 + 2) (22 + 1) (23 + 3) (16 + 3) 
+		(33 + 1)<br>
+		　　　　　　　　　每檔能力是：[0.2 + (40 + 成長係數) / 1000 * (入手等級 - 1)]<br>
+		　　　　　 　　　　　　　　　= 0.2+(40+3)/1000*(14-1) = 0.759</font><br>
+		<br>
+		<font color="#FF0000">0.759 * (11 23 26 19 34) = (8.349 17.457 19.734 
+		14.421 25.806)</font><br>
+		配合BP =&gt; 五圍對應表，可算出14級全能力是：<table class="style" style="width: 70%">
+			<tr>
+				<td width="9%">HP249.977</td>
+				<td width="9%">MP389.633</td>
+				<td width="9%">攻84.2114</td>
+				<td width="9%">防95.5964</td>
+				<td width="9%">敏59.6957</td>
+				<td width="10%">精118.8991</td>
+				<td width="9%">回98.1025</td>
+			</tr>
+			<tr>
+				<td width="9%">BP</td>
+				<td width="9%">8.349</td>
+				<td width="9%">17.457</td>
+				<td width="9%">19.734</td>
+				<td width="9%">14.421</td>
+				<td width="10%">25.806</td>
+				<td width="9%">&nbsp;</td>
+			</tr>
+		</table>
+		與紀錄完全符合。<br>
+		<br>
+		每一級的成長是<font color="#FF0000">(9 22 23 16 33)</font>，對照檔次表得出：<font color="#FF0000">(0.37 
+		0.92 0.96 0.67 1.38)</font><br>
+		全加魔的話每級魔成長就是<font color="#FF0000">1.38 + 1 = 2.38</font><br>
+		<br>
+		以BP成長轉換成七圍成長可知成長率是：<font color="#FF0000">HP12.07 MP29.27 攻3.523 防3.907 
+		敏1.991 精1.826 回-0.472</font><br>
+		<br>
+		所以預測19級的能力可以很簡單的這樣算：<font color="#FF0000">19級HP = (19級 - 14級) * HP成長率 + 
+		14級HP<br>
+		　　　　　　　　　　　　　　　　　　　　　　 = 5 * 12.07 + 249.977 = 310.327<br>
+		</font><br>
+		跟成長紀錄比較後會發現一字不錯, 從14級到70級能力通通完全符合.<br>
+		<br>
+		更可以進一步算出這隻兔耳120級能力是：<font color="#FF0000">1529 3492 457 509 270 312 48</font><br>
+		<br>
+		不排除這篇是紀錄跟預測比對後直接從計算機貼上來的，所以接下來用純白嚇人箱 7 -&gt; 3級成長來比對，這隻每級加點前後能力都有圖可證明。<br>
+		<br>
+		純白嚇人箱全頂檔次是：<font color="#FF0000">(9 24 29 11 37)</font><br>
+		入手等級與能力：<font color="#FF0000">Lv7 152 267 55 72 37 114 96 4 9 14 5 18</font><br>
+		每檔能力是：<font color="#FF0000">[0.2+(40+成長係數)*(入手等級-1)]</font><br>
+		<font color="#FF0000">　　　　　 = 0.2 + (40 + 0 ~ 5) / 1000 * (7-1)<br>
+		　　　　　 = 0.2 + (0.04 ~ 0.045) * 6<br>
+		　　　　　 = 0.44 </font><font color="#0000FF">0.446</font><font color="#FF0000"> 
+		0.452 </font><font color="#0000FF">0.458</font><font color="#FF0000"> 
+		0.464
+		</font><font color="#0000FF">0.47</font> 其中一種<br>
+		<br>
+		以全頂檔次配上隨機0檔成長係數0來計算，全頂7級能力至少會有，<font color="#FF0000">141.88 243.08 57.84 
+		66.948 36.368</font>，可知這隻至少在力BP有掉2檔以上<br>
+		<br>
+		再去排列組合後，可得解<font color="#FF0000">(9 + 1) (20 + 0) (29 + 2) (11 + 0) (37 
+		+ 3)</font>，成長係數4，<font color="#FF0000">1 + 2 + 3 = 6</font>，至少四檔掉在力，四檔隨機檔跟頂級檔次混在一起，所以可判斷出這隻悲慘的掉了8檔<br>
+		<br>
+		由於不能知道掉在那裡，能判斷的只有因為力至少掉4檔，而且不可能更低了，另外4檔在體強速魔之間分配。<br>
+		<br>
+		實際去練了以後，可以得出檔次分配為<font color="#FF0000">(7 20 29 9 37)</font>，反推出一開始隨機檔的分配是<font color="#FF0000">(3 
+		0 2 2 3)</font>：<br>
+		<font color="#FF0000">HP152.704 MP267.776 攻55.5424 防72.1072 敏37.2608 
+		精114.8944 回96.7984</font><br>
+		<br>
+		純白嚇人箱體掉了2檔，攻掉了4檔，防掉0檔，敏掉2檔，魔掉0檔，很標準的防魔寵。<br>
+		<br>
+		全加魔能力七圍成長分別是：<font color="#FF0000">HP11.28 MP30.62 攻3.2965 防4.5595 
+		敏1.433 精2.0745 回-0.6635 <br>
+		</font><br>
+		如果體跟敏再多掉2檔就可以達到極品精神成長<font color="#FF0000">2.108</font>了，可是相對來說精神以外能力也會犧牲的更多。</td>
+	</tr>
+	<tr>
+		<td class="head">(2)成長紀錄驗證</td>
+	</tr>
+	<tr>
+		<td style="text-align: left">
+		用這些成長作出跟實際成長紀錄作比較，可以發現結果非常相近，在1057個七圍數字裡只有39個地方預測比實際低了1點。<br>
+		因為檔次表還有改進的空間，具體來說，表中是*.**5形式的數字可能可以更準確一點。<br>
+		另外野生公式對某些寵(差不多1x%)無解，一級則是100%存在合理的解，公式可以再改進。</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

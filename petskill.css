@@ -1,0 +1,26 @@
+﻿table.style tr.turn{
+	height: 10px;
+}
+table.mp, table.mp td, table.mp th {
+	border: 1px solid #908860;
+}
+table.mp {
+	width: 800px;
+	text-align: center;
+	border: 1px solid #908860;
+	border-collapse: collapse;
+	border-style: none solid none solid;
+}
+table.mp td {
+	border-bottom-style: none;
+	background-color: #f0eee7;
+}
+table.mp tr.bottom td {
+	border-bottom-style: solid;
+}
+table.mp th {
+	border-style: none;
+	background-color: #886d5d;
+	font-weight: normal;
+	color: #FFFFFF;
+}

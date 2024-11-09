@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>留言板</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+function newthread_submit_check(s){
+	var str = document.getElementById('newthread_'+s).value;
+	var len = 0;
+	for(var i = 0; i < str.length; i++) len += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? (document.charset == 'utf-8' ? 3 : 2) : 1;
+	document.getElementById('newthread_'+s+'_check').innerHTML= len;
+	document.getElementById('newthread_submit').disabled=(document.getElementById('newthread_name').value.length>50 || document.getElementById('newthread_contact').value.length>50)?true:false;
+}
+function addreply(table,tid){
+	i=0;
+	while(i<2){
+		table = table.parentNode;
+		if(table.tagName.match(/table/i)) i++;
+	}
+	if(table.rows.length == 2){
+		cell = table.insertRow(2).insertCell(0);
+		cell.className = 'content';
+		cell.innerHTML = document.getElementById('replyformat').innerHTML.replace(/<TID>/i,'<input name="tid" type="hidden" value="'+tid+'">').replace(/<img>/,'<img src="guestbook.php?a=v">');
+		table.rows[2].insertCell(1).className="threadmenu";
+	}else table.rows[2].style.display = '';
+}
+window.onscroll = function(){
+	document.getElementById('contralbar').style.top = document.documentElement.scrollTop + 'px';
+}
+</script>
+<style type="text/css">
+a img {
+	border: 0px transparent none;
+	margin: 1px;
+}
+hr {
+	border: 1px dotted #663300;
+	width: 95%;
+	height: 1px;
+}
+textarea {
+	overflow: auto;
+}
+#newthread table {
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	background: #F8F0E9 url('image/guestbook/CG0011926.gif') no-repeat right bottom;
+}
+#newthread td {
+	padding: 2px 2px 2px 5px;
+}
+table.thread {
+	border: 1px solid #8C7D52;
+	border-collapse: collapse;
+	width: 600px;
+	text-align: left;
+	line-height: 18px;
+}
+table.thread td.head {
+	border-bottom: 1px #8C7D52 solid;
+	background-color: #DECFAD;
+	padding: 5px;
+}
+table.thread td.content {
+	background-color: #FFF7E7;
+	width: 480px;
+	padding-left: 10px;
+	background-image: url('image/guestbook/title.gif');
+	background-repeat: repeat-x;
+}
+table.thread td.threadmenu {
+	width: 120px;
+	border-left: 1px #8C7D52 solid;
+	background: #EEE7D5;
+	color: #EEE7D5;
+}
+table.thread span.name {
+	float: left;
+}
+table.thread span.time {
+	float: right;
+}
+div#threadlist {
+	width: 600px;
+	float: left;
+}
+div#contralbar {
+	float: right;
+	width: 125px;
+	position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="head">
+	留言板</div>
+<form id="newthread" method="post" action="https://cgsword.com/guestbook.php?a=newthread" style="display: none">
+	<table style="text-align: left">
+		<tr>
+			<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff" colspan="2">發新留言</td>
+		</tr>
+		<tr valign="top">
+			<td>名稱: <input id="newthread_name" name="name" type="text" style="width: 200px; height: 18px" onkeyup="newthread_submit_check('name')">
+			(<span id="newthread_name_check" style="vertical-align:top">0</span>/50字元)</td>
+		</tr>
+		<tr>
+			<td>標題: <input name="title" type="text" style="width: 250px; height: 18px"></td>
+		</tr>
+		<tr>
+			<td>內容: <textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+		</tr>
+		<tr>
+			<td>驗證: <input type="text" name="verify" style="height: 18px"><img id="newthreadvimg" style="vertical-align:bottom"></td>
+		</tr>
+		<tr>
+			<td style="text-align: center">
+			<input id="newthread_submit" type="submit" value="發出留言" style="width: 80px; height: 35px" onclick="this.style.display='none'"><br><br>
+			如需附圖，可到<a href="https://www.facebook.com/page.cgsword" target="_blank">Facebook專頁</a>發訊息或帖子，專頁只會回應需新增或更新的情報</td>
+		</tr>
+	</table>
+</form>
+<div id="replyformat" style="display: none">
+	<form method="post" action="https://cgsword.com/guestbook.php?a=reply" style="margin: 0px">
+		<table>
+			<tr>
+				<td style="background: #804000; padding: 5px; text-align: center; color: #ffffff">
+				回覆<tid></td>
+			</tr>
+			<tr>
+				<td>名稱: <input name="name" type="text" style="width: 200px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>聯絡: <input name="contact" type="text" style="width: 250px; height: 18px"></td>
+			</tr>
+			<tr>
+				<td>內容:
+				<textarea name="contents" style="width: 300px; height: 120px"></textarea></td>
+			</tr>
+			<tr>
+				<td>驗證: <input type="text" name="verify" style="height: 18px"><img></td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+				<input type="submit" value="發送留言" style="width: 80px; height: 25px" onclick="this.style.display='none'">　　　　<input type="button" value="取消" style="width: 80px; height: 25px" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display='none'"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div style="width: 750px; margin: auto">
+		<div id="threadlist">
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: -V-"</span><span class="time">2008-07-01 01:44 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>忍者暗殺率</b></p>
+				忍者暗殺率個表<br />
+最多都係得 99 LV<br />
+那10技對 100LV 以上的機會率係幾多<br />
+都是 50 % 嗎 @    @ ? <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,29)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2008-07-01 01:47 PM 回覆<br><br>
+					<div style="padding-left: 10px">你問得好好<br />
+跟據個表咁睇<br />
+機率照道理會依比例下降<br />
+但有人指忍者用暗十在彩葉[即過百等的怪物]<br />
+暗殺率九成至十成<br />
+<br />
+所以我都不能確定嚕 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">29</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-07-01 11:57 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>紅利兌換清單</b></p>
+				水鼠金幣兌換獎品如下:<br />
+<br />
+1枚 薯餅 認錯棒棒糖 攜帶型小護士<br />
+<br />
+10枚 魚翅湯1組 鱉料理1組 +1000水1組 樹苗?<br />
+<br />
+20枚 10B曲刀 10B處刑斧 10B異型槍 10B星屑短杖 天秤回力鏢<br />
+10B聖龍頭盔 10B騎士鎧甲 10B龍之靴 魔族原石(可分割出20個魔族水晶)<br />
+<br />
+30枚 完美的水龍寶石 武器耐久擦拭布 暴怒之心<br />
+<br />
+40枚 弗旦之戒(耐久300) 技能屋進入証 金剛不壞安全帽 豆籽包<br />
+<br />
+50枚 黃金寶石鼠 驚天機會盒 動地命運袋<br />
+<br />
+60枚 赤目黑熊召喚書 蜥蜴戰士召喚書 利牙召喚書<br />
+<br />
+80枚 跑步花妖召喚書<br />
+<br />
+100枚 火焰牛頭怪召喚書 寒冰牛頭怪召喚書 烈風牛頭怪召喚書 大地牛頭怪召喚書<br />
+<br />
+120枚 骷髏海盜召喚書<br />
+<br />
+130枚 冥界死神召喚書<br />
+<br />
+250枚 麒麟<br />
+<br />
+280枚 鼠王<br />
+<br />
+300枚　寵物技能屋進入證<br />
+<br />
+350枚 再生劇藥 一等鼠王寶石<br />
+<br />
+1000枚 二等鼠王寶石 魔龍 招財貓撲滿<br />
+<br />
+1200枚 無頭騎士 狂戰將軍 血腥騎士 地獄騎士 地獄將軍<br />
+<br />
+1500枚 時雨 梅茲<br />
+<br />
+2000枚 沉默之龍 盲目之龍 失翼之龍<br />
+<br />
+3000枚 露比 歌姬<br />
+<br />
+有複數選項會有 是跟否兩個選項選是即換到該物品選否則換下一樣物品<br />
+以100枚金幣來說選是即換到火焰牛頭怪召喚書 選否後下個選項是寒冰牛頭怪召喚書<br />
+在選否就換成烈風牛頭怪召喚書   <br />
+1000枚的魔龍是什麼東西<br />
+ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,28)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2008-07-01 12:43 PM 回覆<br><br>
+					<div style="padding-left: 10px">... 紅利兌換 早就收在任務詳解的 德威特島了<br />
+你花了三篇篇幅留言…<br />
+最後才有一條問題…<br />
+我差點想略過你這三篇文章的了 =0=<br />
+魔龍是寵物圖鑑中龍系 4.0 那些有翼的龍 囧<br />
+詳細情況我也不太知道了<br />
+<br />
+若有甚麼資料遺漏…那煩請指出來啊<br />
+那麼多字我會看漏眼的唷 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">28</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-07-01 11:56 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>紅利兌換清單</b></p>
+				1枚<br />
+薯餅--HP.MP回覆100<br />
+認錯棒棒糖--精神-3~+3 耐久100/100 稱號:我好慚愧<br />
+攜帶小護士--花1000元 補HP500 MP1000 耐久10/10<br />
+<br />
+10枚<br />
+魚翅湯一組<br />
+鱉料理一組<br />
+1000水一組<br />
+樹苗--跟NPC買清水澆2次 會長出櫻桃(補HP200 MP50) 隨機長3-10個<br />
+<br />
+30枚<br />
+水龍寶石--+武器 攻擊+150敏+35 +防具 防+100敏+5 耐久均扣90%<br />
+武器耐久擦布--回覆武器耐久100<br />
+暴怒之心--增加攻擊力上限1.2倍<br />
+<br />
+40枚<br />
+弗旦戒--耐300/300 體魔攻防敏+99 全抗性+10 必反命+20 閃精回+10 魔攻+10<br />
+抗魔+35<br />
+技能屋進入證<br />
+金剛不壞安全帽<br />
+豆籽包--雙點產生豆子1個 營養注射器1個(耐3/3) 可注射3次 之後便可以採收<br />
+(就是可以種出全補豆的那個東西)<br />
+<br />
+50枚<br />
+黃金寶石鼠--得到3個黃金蛋<br />
+驚天機會盒--丟骰子 丟多少便得到多少鐵牛<br />
+<br />
+動地命運袋--丟骰子 丟多少便得到多少魔幣(骰子點數*50000)<br />
+<br />
+<br />
+ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,27)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">27</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-07-01 11:55 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>紅利兌換清單 </b></p>
+				兌換npc位於亞諾曼城旅館(151 151)內的紅利點數招待員(11 16)，持有銀幣對話進入的兌換所內<br />
+<br />
+100個火焰鼠銀幣可以兌換1個水鼠金幣<br />
+<br />
+火鼠銀幣兌換獎品如下:<br />
+<br />
+5枚 麵包1組 +100水1組 1B勇氣之斧 1B威力短弓<br />
+1B權杖 1B銳刃小刀 1B銅製頭盔 1B保護衣<br />
+<br />
+50枚 蛋包飯1組 +150水1組 2B火舌劍 2B激流權杖<br />
+追跡者(不知道是什麼) 2B銅鐵皮盔 2B皮裝 2B安全鞋<br />
+<br />
+100枚 炒麵1組 +200水1組 3B鋼斧 3B殺敵回力鏢<br />
+3B可愛的帽子 3B環甲 3B環袍 3B戰鞋<br />
+<br />
+150枚 燒雞1組 +250水1組 4B雙叉戟 4A賢者手杖<br />
+4B金屬皮甲 4B鎖鏈靴<br />
+<br />
+200枚 星鰻飯糰1組 +300水1組 長顎劍 衝擊弓<br />
+琥珀權杖 高級帽子 士兵護衣 維京鞋<br />
+<br />
+250枚 炒麵麵包1組 +400水1組 6B長尖槍 6A元素之杖<br />
+6B觸角小刀 6B青銅帽子 6B獅子盾<br />
+<br />
+300枚 咖哩飯1組 +500水1組 8C月光之弓 7A怒音之杖<br />
+7B銅製頭盔 7B黃金鎧甲<br />
+<br />
+350枚 螃蟹鍋1組 +600水1組 8B細柄短劍 8B惡魔之杖<br />
+8B古傳小刀 8A疾風之衣<br />
+<br />
+400枚 豪華壽司1組 +800水1組 5C黑作太刀 5C魔晶之杖<br />
+5C劍客帽 5C特製舞鞋 5C功夫裝<br />
+<br />
+450枚 9B剛硬巨劍 9B原始槍 9B天使之杖 9B手裡劍<br />
+9B龍盔 9B亡靈鎧甲 9B鑽石長靴    <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,26)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">26</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: ar  朗</span><span class="time">2008-07-01 11:29 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>不明和技能分別</b></p>
+				如題唷 <br>
+				<br>
+				[最後於 2008-07-01 11:33 AM 編輯]								<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,25)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2008-07-01 11:45 AM 回覆<br><br>
+					<div style="padding-left: 10px">~.~ 嗯<br />
+你的題目…我無法理解喔<br />
+不明 和 技能 的分別<br />
+「技能」我明白…「不明」是甚麼？ </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">25</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-06-30 07:08 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>井之迷任務上線(精靈之卵4) </b></p>
+				必要條件:飄風之蘭 跟 精靈之卵3<br />
+<br />
+任務起點:亞紀城<br />
+<br />
+1.跟&quot;沙耶&quot;探聽情報 (可省略)<br />
+<br />
+2.到井[64-45]點擊左鍵選&quot;是&quot;進入<br />
+<br />
+3.選&quot;是&quot;交出精靈之卵<br />
+<br />
+4.共分&quot;地水火風&quot;水晶<br />
+<br />
+5樓梯層共&quot;15層&quot;<br />
+*樓梯有分真偽,遇怪率算高*<br />
+<br />
+6.抵達頂樓&quot;(?)精靈結界&quot;<br />
+<br />
+7選&quot;是&quot;開打-贏後交談取得&quot;精靈之卵4&quot;傳出迷宮<br />
+*王血應該都不到&quot;2000&quot;,因為一擊就飛掉王嚕@.@*<br />
+地:頑皮炸彈 妖草 小惡魔<br />
+怪物等級:39~44<br />
+ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,24)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2008-06-30 07:14 PM 回覆<br><br>
+					<div style="padding-left: 10px">感謝提供怪物資訊^^ </div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><i>No Author Name</i> 於 2008-07-01 10:27 AM 回覆<br><br>
+					<div style="padding-left: 10px">4屬迷宮的怪都同4鬥神的怪一樣<br />
+地-&gt;頑皮炸彈 妖草 小惡魔<br />
+水-&gt;惡魔貓 水藍鳥魔 水晶蟹<br />
+火-&gt;火鼠 果凍史來姆 迷你蝙蝠<br />
+風-&gt; (唔記得左) </div>
+														</div>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2008-07-01 11:01 AM 回覆<br><br>
+					<div style="padding-left: 10px">都感謝你提供資訊<br />
+水屬性有惡魔貓嗎？....<br />
+<br />
+風洞有人提供了<br />
+有虎人,  迷你石像怪, 漂浮炸彈<br />
+重有一隻名為戰貓(優奈樣) </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">24</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-06-30 11:56 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b> 灰熊厲害任務完整攻略:</b></p>
+				簡單來說就是在競技場啦 5個為一組打灰熊 獎品有O零件 Q零件 閃電符 必殺符 神準符 反擊符 希望水晶 10:10完美水晶 1級海賊王寵物 1級盲目之龍巨龍艾汀!!<br />
+<br />
+任務流程:<br />
+1.首先先到競技場找管理員報名 報名費5000元並獲得一個參賽証 挑戰擂台主D強化雄第<br />
+<br />
+2.擂台主D強化雄第 頭目為40及強化雄第第(雄哥外型)HP約3500帶有九之雄寵物 雄寵物HP約1500 強化雄第可能會用的技能有攻擊 防禦 氣功彈 崩擊 揚炎 明鏡止水 反擊 聖盾 打到後可以獲得D勳章 D勳5個可以換種子福袋 50個可以O零件 150個可以換Q零件<br />
+<br />
+3.擂台主C強化雄妹 等級60 HP5000 (露比外型) 其他強化熊寵物HP2000 C勳章5個可以換閃電符 必殺符 神準符 反擊符其中之一 40個可以換一整套能力護符<br />
+<br />
+4.擂台主B強化雄哥 頭目為90級的強化雄大哥(李貝留斯外型) 80級強化雄二哥(佛利波羅外型) 80級強化雄三哥(阿卡斯外型) 80級強化雄四哥(巴洛斯造型) 成功打倒後可獲得B~D徽章 B勳滿5個可以換任一個九級寶石 40個可以換全套九級寶石<br />
+<br />
+5.擂台主A熊氏一族 頭目是B+C+D全家福+鐵熊*2 武鬥熊*2 等級高了十級左右 建議戰術:先清熊 先戰慄雄妹妹 然後在解決雄第 再一隻一隻殺熊哥 成功打倒後得到A~D徽章 A勳5個可以換水火或火風的希望水晶 10個可以換10:10完美水晶<br />
+<br />
+6.擂台主S灰熊厲害GM 連二戰 第二戰頭目等級140 帶者130級里雍 120級帕魯凱斯 120級耶卡 120級阿夏芙*4 另外會招喚99級的法師雄和傳教雄 里雍乾坤或諸刃可以輕易突破1500 血量不足千萬別硬稱不喝水 S勳滿5個可以換一級海賊王寵物 25個可以換得一級寵物盲目之龍巨龍艾汀 <br />
+<br />
+S級榮譽勳章 攻擊+100 防禦+100 敏捷+50 精神+20 回復+20 稱號:灰雄厲害殺熊者<br />
+<br />
+A級榮譽勳章 攻擊+50 防禦+50 敏捷+25 精神+10 回復+10 稱號:擂臺王者<br />
+<br />
+B級榮譽勳章 攻擊+20 防禦+20 敏捷+10 精神+5 回復+5 稱號:擂臺強者<br />
+<br />
+C級榮譽勳章 攻擊+10 防禦+10 敏捷+5 稱號:擂臺試練者<br />
+<br />
+D級榮譽勳章 攻擊+5 防禦+5 稱號:擂臺初心者  <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,23)"></div></td></tr></table>
+				</td>
+				<td class="threadmenu">23</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: <i>No Author Name</i></span><span class="time">2008-06-30 11:55 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b></b></p>
+				百人道場任務流程:<br />
+<br />
+1.玩家到競技場治癒廣場26.28 與石像對話 可以進入百人道場大廳 道場分別為1~100層 以10層為一個組別 挑戰成功可以選擇下一個組別挑戰或是取得本組獎品 如果繼續挑戰 則可以獲得可傳送回百人道場的&quot;道場記憶&quot; 並且送回法蘭城補給 最後5層 美曾打完可以獲得道場記憶 讓隊伍保持最佳狀況!!<br />
+<br />
+百人道場最後20個頭目等級一覽表:<br />
+<br />
+81樓:山賊(LV50)<br />
+82樓:伊瓦希米滋(LV75)<br />
+83樓:海賊德奇(LV60)<br />
+84樓:頭目(LV70)<br />
+85樓:露比(LV80)<br />
+86樓:山吹(LV85)<br />
+87樓:噴火獸蓋美拉(LV75)<br />
+88樓:米特拉將軍(LV78)<br />
+89樓:奇美拉(LV68)<br />
+90樓:阿魯巴斯(LV83)<br />
+91樓:4鬥神(LV99)<br />
+92樓:人類?(LV120)<br />
+93樓:李貝留斯(LV90)<br />
+94樓:帕魯凱斯(LV90)<br />
+95樓:里雍(LV100)<br />
+96樓:冰龍(LV85)<br />
+97樓:海神(LV99)<br />
+98樓:牛鬼公主(LV85)<br />
+99樓:地博靈羅連斯<br />
+100樓:回來報仇的牛鬼<br />
+<br />
+<br />
+第一組獎品:大地鼠 寶石鼠 火焰屬彩券及殘念獎<br />
+<br />
+第二組獎品:鼠王驚奇蛋 殘念獎<br />
+<br />
+第三組獎品:深藍九號 哈密瓜麵包 漂浮的葉子 漂浮的果實 殘念獎<br />
+<br />
+第四組獎品:鋼琦之礦 誓言之証 火焰之魂<br />
+<br />
+第五組獎品:魔族水晶 從來的種子 十全十美安全帽<br />
+<br />
+第六組獎品:寵物卡片 黑暗之戒<br />
+<br />
+第七組獎品:速食調理包 水分補充包<br />
+<br />
+第八組獎品:重擊之符 迴避之符<br />
+<br />
+第九組獎品:技能耗魔減半護符:諸刃.崩擊.吸血.潔淨<br />
+<br />
+第十組獎品:天空之槍 帕魯凱斯的斧 村正 金剛不壞安全帽 8級寶石<br />
+<br />
+特別獎: 100道場獎品 王者守護神(R10 耐100 可以增加偷襲機率)<br />
+<br />
+ <br />
+ <br />
+ <br />
+ <br />
+<br />
+ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,22)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2008-06-30 04:18 PM 回覆<br><br>
+					<div style="padding-left: 10px">已增加任務 </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">22</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 真幻`奏</span><span class="time">2008-06-30 12:22 AM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>精波</b></p>
+				點解技能個到搵唔到精神衝擊波既資料既??<br />
+係咪未搵齊D數據@@??? <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,21)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2008-06-30 07:12 AM 回覆<br><br>
+					<div style="padding-left: 10px">係<br />
+d數據未有人確實咁比出黎<br />
+雖然我已經見到有公式<br />
+但係冇乜人去確認呢條式<br />
+<br />
+不過應該都可以先整左個表出黎先既 a__a </div>
+					<p>[最後於 2008-06-30 07:13 AM 編輯]</p>									</div>
+				<hr>
+				</td>
+				<td class="threadmenu">21</td>
+			</tr>
+		</table>
+		<br>
+				<table class="thread">
+			<tr>
+				<td class="head" colspan="2"><span class="name">Name: 飼c問題急問</span><span class="time">2008-06-29 10:40 PM</span></td>
+			</tr>
+			<tr valign="top">
+				<td class="content"><br>
+				<p><b>斧士一問~</b></p>
+				我想知一開始果15點要+咩, 升lv果4點又+咩???<br />
+ <br>
+				<br>
+												<table><tr><td>
+				<div style="width: 100px; height: 20px; background-image: url('image/guestbook/threadmenu.gif'); background-position: -100px 20px; margin: 5px" onmouseover="this.style.backgroundPosition='-100px 0px'" onmouseout="this.style.backgroundPosition='-100px -20px'" onclick="addreply(this,20)"></div></td></tr></table>
+				<hr>
+				<div style="padding-left: 7px"><b>站長</b> 於 2008-06-29 11:17 PM 回覆<br><br>
+					<div style="padding-left: 10px">斧士攻擊比較緊要<br />
+所以通常爆攻為主<br />
+即 一開始配十五點攻 升lv +2攻<br />
+其餘既 多數配落血同敏<br />
+至於比例係幾多 就因人而異了<br />
+嫌血小就加血 嫌慢加敏… </div>
+														</div>
+				<hr>
+				</td>
+				<td class="threadmenu">20</td>
+			</tr>
+		</table>
+		<br>
+		</div>
+		<div id="contralbar">
+		<button onclick="document.getElementById('newthread').style.display = 'block';document.documentElement.scrollTop='0px';document.getElementById('newthreadvimg').src='guestbook.php?a=v'" style="width: 100px; height: 40px">
+		發新留言</button><br>
+		<br>
+		 留言總數 4591<br>
+		<br>
+		<a href="guestbook.php?page=456&amp;s=">上一頁</a>		<a href="guestbook.php?page=458&amp;s=">下一頁</a>		<form method="POST" action="guestbook.php">
+			<input name="s" value=""><input type="submit" value="搜尋">
+		</form>
+	</div>
+</div>
+
+</body>
+
+</html>
